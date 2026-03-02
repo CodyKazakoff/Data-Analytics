@@ -1,0 +1,4 @@
+relationship c99c3c1e-28cb-3599-69b5-2079133c0015
+	fromColumn: 'Data Analytics Child'.'Parent Work Item Id'
+	toColumn: 'Data Analytics Parent'.'Work Item Id'
+

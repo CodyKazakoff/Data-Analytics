@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Cost Savings Updated Model"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "600c2805-d9a7-b73a-408b-ba58bbfa8bc2"
+  }
+}

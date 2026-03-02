@@ -1,0 +1,52 @@
+relationship e0d2f2bd-1a8d-4ae1-a53c-b3a6044529f7
+	fromColumn: 'zChange Log'.'Release Index'
+	toColumn: 'zRelease Information'.'Release Index'
+
+relationship 670e429c-db28-6b02-7ba7-5e78467ba071
+	fromColumn: AR_DAILY_OPEN_INVOICES.GPC_DUE_DATE
+	toColumn: D_Calendar.CALENDAR_DATE
+
+relationship AutoDetected_bfab80fe-dc50-44f3-8255-d5f7e9996880
+	fromColumn: AR_DAILY_OPEN_INVOICES.MI_LOC
+	toColumn: D_Location.MI_LOC
+
+relationship 0733f4eb-afe1-168b-85d7-70788d99ce4f
+	fromColumn: AR_DAILY_OPEN_INVOICES.BILLING_CUST_KEY
+	toColumn: D_Customer.BILLING_CUST_KEY
+
+relationship d9201954-bf5a-139f-e36b-32b9662ddc01
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_slicer_USD_BASE.INDEX
+	toColumn: z_prm_Outstanding_Amount.Value4
+
+relationship 6b5bf2da-9c09-4038-4949-9e1e0e62242c
+	fromColumn: z_prm_%_$_USD_BASE.Currency
+	toColumn: z_slicer_USD_BASE.INDEX
+
+relationship 130c4377-22b0-e33e-880a-24c2080b12f1
+	fromColumn: z_prm_%_$_USD_BASE.$_%
+	toColumn: z_slicer_$_%.INDEX
+
+relationship 7f54fa33-8401-52dd-9ce3-bb0d691995fc
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_prm_coming_due_30.'z_prm_coming_due_30 Order'
+	toColumn: z_slicer_USD_BASE.INDEX
+
+relationship bce391db-c98b-c1a5-acc6-b1e9dd056b7d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_slicer_USD_BASE.INDEX
+	toColumn: z_prm_Current_Total.Value4
+
+relationship 7687328a-011e-2e3e-50f5-2da5b5d8203d
+	fromColumn: z_prm_Past_Due_days.Value4
+	toColumn: z_slicer_USD_BASE.INDEX
+
+relationship a9de49bf-7a1c-3e00-73b2-3102badaf6ef
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_slicer_USD_BASE.INDEX
+	toColumn: z_prm_Past_Due_Total.Value4
+

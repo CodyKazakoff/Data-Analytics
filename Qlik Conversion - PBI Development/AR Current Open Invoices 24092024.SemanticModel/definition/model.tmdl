@@ -1,0 +1,91 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Metadata
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Dimensions
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Facts
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Metadata\Parameters
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Metadata\Functions
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Metadata\Profiling
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Metadata\Queries
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup Metadata\Axis
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup 'Conversion Information'
+
+	annotation PBI_QueryGroupOrder = 9999
+
+/// Errors in queries that were loaded on 9/18/2024 2:43:18 PM.
+queryGroup 'Query Errors - 9/18/2024 2:43:18 PM'
+
+	annotation PBI_QueryGroupOrder = 11
+
+annotation PBIDesktopVersion = 2.135.7627.0 (24.08)
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Today","zLast Refresh Datetime","RangeStart","RangeEnd","zChange Log","zRelease Information","zData Dictionary","Measure","fx_CreateCalendar","fx_AddYearIndex","fx_AddQuarterIndex","fx_AddMonthIndex","fx_AddWeekIndex","fx_AddDateIndex","fx_CreateDimDate","fx_CreateDimWeek","fx_CreateDimMonth","fx_CreateDimQuarter","fx_CreateDimYear","zMeasure Definitions","Errors in AR_DAILY_OPEN_INVOICES (2)","zTime Series Definitions","fx_Loop","fx_TableProfile","fx_DistinctKeyChecker","fx_TestRelationship","fx_ConditionallyLimitRows","LimitRecordCount","RecordCountToKeep","zDataset Information","fx_FilterDimByFact","fx_LoadData","DatasourceFolderLocation","Vortex - Data Connections","Vortex - Data Source Script","Vortex - Data Source Script Groups","Vortex - Variables","Vortex - Notes","D_Calendar","D_Customer","D_Location","AR_DAILY_OPEN_INVOICES","RLS_HR_HIERARCHY"]
+
+annotation TabularEditor_SerializeOptions = {"IgnoreInferredObjects":false,"IgnoreInferredProperties":false,"IgnoreTimestamps":false,"SplitMultilineStrings":true,"PrefixFilenames":false,"LocalTranslations":false,"LocalPerspectives":false,"LocalRelationships":false,"Levels":[]}
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'zLast Refresh Datetime'
+ref table 'zChange Log'
+ref table 'zData Dictionary'
+ref table 'zRelease Information'
+ref table Measure
+ref table 'zTime Series Definitions'
+ref table 'zMeasure Definitions'
+ref table 'zDataset Information'
+ref table 'zRunbook Config'
+ref table 'zRunbook Section Config'
+ref table D_Calendar
+ref table D_Customer
+ref table D_Location
+ref table AR_DAILY_OPEN_INVOICES
+ref table z_slicer_USD_BASE
+ref table z_prm_coming_due_30
+ref table z_prm_Outstanding_Amount
+ref table z_prm_Current_Total
+ref table z_prm_Past_Due_Total
+ref table z_prm_Past_Due_days
+ref table z_slicer_$_%
+ref table z_prm_%_$_USD_BASE
+ref table RLS_HR_HIERARCHY
+ref table z_prm_test_table
+
+ref role GLOBAL
+ref role RESTRICTED
+
+ref cultureInfo en-US
+

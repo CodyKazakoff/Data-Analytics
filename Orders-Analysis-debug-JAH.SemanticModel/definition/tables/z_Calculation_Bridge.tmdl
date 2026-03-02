@@ -1,0 +1,39 @@
+table z_Calculation_Bridge
+	lineageTag: f9b16fbf-f5b5-48ce-a756-2f747e9cc597
+
+	column Condition
+		dataType: string
+		lineageTag: d865a3c9-592f-4ba7-b8c5-45560d252601
+		summarizeBy: none
+		sourceColumn: Condition
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Key
+		dataType: int64
+		formatString: 0
+		lineageTag: 4936c901-8051-4319-813c-7ed7cad04fd6
+		summarizeBy: none
+		sourceColumn: Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition z_Calculation_Bridge = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCs7IL1fSUTJUitWJVvLITEkFcoyUYmMB", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Condition = _t, Key = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Condition", type text}, {"Key", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

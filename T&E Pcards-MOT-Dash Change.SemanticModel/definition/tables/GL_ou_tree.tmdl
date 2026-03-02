@@ -1,0 +1,107 @@
+table GL_ou_tree
+	lineageTag: da808efe-3b9c-44c3-90c9-23fc450dfbe6
+
+	column ou_tree
+		dataType: string
+		lineageTag: b92258d8-b059-48f6-b498-d499c45a68da
+		summarizeBy: none
+		sourceColumn: ou_tree
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_unit
+		dataType: string
+		lineageTag: e761d815-67ab-47f3-b1d0-9a53f43421f2
+		summarizeBy: none
+		sourceColumn: operating_unit
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_unit_desc
+		dataType: string
+		lineageTag: 39c5ebb8-12b5-438b-95f8-49d0c8e5e7e6
+		summarizeBy: none
+		sourceColumn: operating_unit_desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column surviving_operating_unit
+		dataType: string
+		lineageTag: 853c54fd-10d6-413e-9255-9978e371a4a8
+		summarizeBy: none
+		sourceColumn: surviving_operating_unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column surviving_operating_unit_desc
+		dataType: string
+		lineageTag: 9766575d-58e8-4544-ac66-f9202e1d7a2e
+		summarizeBy: none
+		sourceColumn: surviving_operating_unit_desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: 71e16b01-5884-46ee-b439-2775128c5c9f
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column ps_group
+		dataType: string
+		lineageTag: 6fa9af1c-c9ab-4c3a-ae07-17542b44a31b
+		summarizeBy: none
+		sourceColumn: ps_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column division
+		dataType: string
+		lineageTag: e51b8602-daf2-4a2d-8383-fd9a7529d523
+		summarizeBy: none
+		sourceColumn: division
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: ada061c2-2268-4aeb-a18b-8805ebcba7d8
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment
+		dataType: string
+		lineageTag: dcd340c1-dde9-47fd-ab0b-8bf02b2a4596
+		summarizeBy: none
+		sourceColumn: segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_segment
+		dataType: string
+		lineageTag: aa4e7ecf-47bb-42de-a89b-a247fc046e68
+		summarizeBy: none
+		sourceColumn: sub_segment
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GL_ou_tree = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-6tjjeksqmezuxazcnu5cqu5pg4.datawarehouse.fabric.microsoft.com", "FinLake"),
+				    dbo_GL_ou_tree = Source{[Schema="dbo",Item="GL_ou_tree"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(dbo_GL_ou_tree,{{"operating_unit", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

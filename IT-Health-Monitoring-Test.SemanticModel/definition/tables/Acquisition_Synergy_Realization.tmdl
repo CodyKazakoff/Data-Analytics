@@ -1,0 +1,120 @@
+table Acquisition_Synergy_Realization
+	lineageTag: fd291982-128a-4799-b986-c0d8cb97702f
+
+	column 'Acquisition ID'
+		dataType: string
+		lineageTag: 542239f5-1cde-4240-9ae3-362f59bbcdf4
+		summarizeBy: none
+		sourceColumn: Acquisition ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Synergy ID'
+		dataType: string
+		lineageTag: af22aac8-0eb2-44cc-ae3f-e6a76ee3a775
+		summarizeBy: none
+		sourceColumn: Synergy ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Acquired'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 2fdb9e0b-e1aa-42fb-a1fe-685f9c6727cc
+		summarizeBy: none
+		sourceColumn: Date Acquired
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Company Name'
+		dataType: string
+		lineageTag: ddfe7e7a-4a0e-42f7-9185-7f2ccd8a8e91
+		summarizeBy: none
+		sourceColumn: Company Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Acquisition Amount'
+		dataType: string
+		lineageTag: d5ebdfbd-3dd4-46f4-9c5d-13d8ecc3ca14
+		summarizeBy: none
+		sourceColumn: Acquisition Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Target Savings'
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 61ddc924-df75-4e05-bf46-820c010f3c66
+		summarizeBy: sum
+		sourceColumn: Target Savings
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Realization Time Horizon'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 16a71cc6-f1e8-4f53-837f-244c177c0e3b
+		summarizeBy: none
+		sourceColumn: Realization Time Horizon
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Savings Realized to Date'
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: a0e548e6-9907-4f2e-a8a6-0717da1e9eed
+		summarizeBy: sum
+		sourceColumn: Savings Realized to Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 910268cb-424e-45d9-904c-a27bcc7ba7bb
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Unrealized_Savings = 'Acquisition_Synergy_Realization'[Target Savings] - Acquisition_Synergy_Realization[Savings Realized to Date]
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 96412d95-1f22-49c6-b935-e41569af4b42
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Format_Flag =
+			IF(
+			    DATEVALUE('Acquisition_Synergy_Realization'[Realization Time Horizon]) >= TODAY() &&
+			    'Acquisition_Synergy_Realization'[Unrealized_Savings] / Acquisition_Synergy_Realization[Target Savings] > 0.75,
+			    1,
+			    0
+			)
+		formatString: 0
+		lineageTag: e52a7421-954f-4d18-94b1-dab61abcd691
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Acquisition_Synergy_Realization = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared%20Documents/MOT%20-%20Enterprise%20Analytics/Power%20BI%20Files/IT%20Health%20Monitoring%20PBI%20Report/Acquisition_Synergy_Realization.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Acquisition ID", type text}, {"Synergy ID", type text}, {"Date Acquired", type date}, {"Company Name", type text}, {"Acquisition Amount", type any}, {"Target Savings", Int64.Type}, {"Realization Time Horizon", type date}, {"Savings Realized to Date", Int64.Type}, {"Description", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

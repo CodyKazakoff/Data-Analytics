@@ -1,0 +1,48 @@
+table z_Param_Current_Order_Amount_KPI
+	lineageTag: 651becb3-1d39-4566-98ff-a43274ac229b
+
+	column zParamCurrentTS
+		lineageTag: 58dce852-e460-4d9a-abc8-367be363a40f
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParamCurrentTS Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParamCurrentTS Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamCurrentTS Fields'
+		lineageTag: 0a65d0d5-e289-4628-9026-a13619304454
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParamCurrentTS Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamCurrentTS Order'
+		formatString: 0
+		lineageTag: a252a963-51fb-419c-93cc-b158d5a1d9dd
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Current_Order_Amount_KPI = calculated
+		mode: import
+		source =
+				{
+				    ("Order $ CYTD", NAMEOF('Measure Table'[Order $ CYTD]), 0),
+				    ("Order $ CMTD", NAMEOF('Measure Table'[Order $ CMTD]), 1),
+				    ("Order $ CQTD", NAMEOF('Measure Table'[Order $ CQTD]), 2),
+				    ("Order $ Rolling 12", NAMEOF('Measure Table'[Order $ Rolling 12M]), 3)
+				}
+
+	annotation PBI_Id = 5e72434ca7e046d49e280079ca545f9b
+

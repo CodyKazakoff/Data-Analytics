@@ -1,0 +1,43 @@
+/// *Metadata*
+table 'zDataset Information'
+	isHidden
+	lineageTag: 221857b9-db70-4dc4-9794-3ac7944d62c5
+
+	column Label
+		dataType: string
+		isHidden
+		lineageTag: 654f541f-4106-4022-9244-2f189b017032
+		summarizeBy: none
+		sourceColumn: Label
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 32c249a4-6ff4-41c9-a42f-1800fa67b1c8
+		summarizeBy: none
+		sourceColumn: Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition 'zDataset Information-9c07c2f8-7e36-4ae5-9e51-8965214de3a4' = m
+		mode: import
+		queryGroup: Metadata\Axis
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W8i/PSy1S0lEyUIrViVZySSxJLM4vLUpO1SjWBIoagkWDUtOKUoszFIISS1KBgkZgwZDM3FSFgNSizPwUoJixUmwsAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Label = _t, Id = _t]),
+				    // Change output type
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Label", type text}, {"Id", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

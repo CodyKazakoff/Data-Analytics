@@ -1,0 +1,73 @@
+table TEMP_Corp_Industry_Mapping
+	lineageTag: fa86c185-e100-4764-b262-1df2a53be2fb
+
+	column NA_KEY
+		dataType: string
+		lineageTag: ff72bc1b-63d0-4034-9142-37d38878a41e
+		summarizeBy: none
+		sourceColumn: NA_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAICS_CD_LOWEST
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ab7984b-88ce-4f19-8d22-f61acbadde22
+		summarizeBy: sum
+		sourceColumn: NAICS_CD_LOWEST
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_MODIFIED_DATE
+		dataType: string
+		lineageTag: c6782ceb-b755-4404-b796-94c999bb1e02
+		summarizeBy: none
+		sourceColumn: LAST_MODIFIED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_MODIFIED_EMP
+		dataType: string
+		lineageTag: 6808339b-8274-4c35-9949-444eac19a148
+		summarizeBy: none
+		sourceColumn: LAST_MODIFIED_EMP
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAICS6_CD
+		dataType: string
+		lineageTag: fedfdda3-7fbe-40a5-aa10-92a51f146e6e
+		summarizeBy: none
+		sourceColumn: NAICS6_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Corp Industry'
+		dataType: string
+		lineageTag: 9f121780-4ba8-4802-ac67-eba0e8e97b84
+		summarizeBy: none
+		sourceColumn: Corp Industry
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TEMP_Corp_Industry_Mapping = m
+		mode: import
+		queryGroup: 'Temp tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "TEMP_IND_FIN_SOURCE.csv")),
+				    #"TEMP_IND_FIN_SOURCE csv_https://genparts sharepoint com/sites/MOT-AnalyticsDocumentation/Shared Documents/MOT - Enterprise Analytics/Power BI Files/Excel Lookups/" = #"Filtered Rows"{[Name="TEMP_IND_FIN_SOURCE.csv",#"Folder Path"="https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared Documents/MOT - Enterprise Analytics/Power BI Files/Excel Lookups/"]}[Content],
+				    #"Imported CSV" = Csv.Document(#"TEMP_IND_FIN_SOURCE csv_https://genparts sharepoint com/sites/MOT-AnalyticsDocumentation/Shared Documents/MOT - Enterprise Analytics/Power BI Files/Excel Lookups/",[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"NAICS_CD_LOWEST", Int64.Type}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"NAICS6_CD"}, TEMP_NAICS, {"NAICS6_CD"}, "NAICS_2022", JoinKind.LeftOuter),
+				    #"Expanded NAICS_2022" = Table.ExpandTableColumn(#"Merged Queries", "NAICS_2022", {"Corp Industry"}, {"Corp Industry"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Expanded NAICS_2022", {"NA_KEY"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,103 @@
+table DORA_Matrix
+	lineageTag: 792e0829-2b81-4626-9121-e5c4f2b3ed3f
+
+	column PI
+		lineageTag: dc8e8260-4f57-4004-9cf8-9e4c86619d4c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [PI]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MetricName
+		lineageTag: 0a1666c1-fc4b-4751-a023-a1201e7cdf9a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MetricName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		lineageTag: 591c4a67-7307-4fbf-aaa0-5fb8015b2ceb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PI_Number = RIGHT(DORA_Matrix[PI], 1)
+		lineageTag: 1535d3e2-e124-450f-814b-385d6eabd204
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DORA_Matrix = calculated
+		mode: import
+		source = ```
+				
+				VAR FilteredPIs = 
+				    FILTER(
+				        DISTINCT('_Date_Table'[PI]),
+				        NOT(ISBLANK('_Date_Table'[PI])) && '_Date_Table'[PI] >= "PI 2"
+				    )
+				RETURN 
+				UNION(
+				    SELECTCOLUMNS(
+				        FilteredPIs,
+				        "MetricName", "Stories",
+				        "PI", [PI],
+				        "Value", FORMAT(CALCULATE([Story Measure]), "#,##0") 
+				    ),
+				    SELECTCOLUMNS(
+				        FilteredPIs,
+				        "MetricName", "Bugs",
+				        "PI", [PI],
+				        "Value", FORMAT(CALCULATE([Bug Measure]), "#,##0")  
+				    ),
+				    SELECTCOLUMNS(
+				        FilteredPIs,
+				        "MetricName", "PIRs",
+				        "PI", [PI],
+				        "Value", FORMAT(CALCULATE([PIR Measure]), "#,##0")
+				    ),
+				    SELECTCOLUMNS(
+				        FilteredPIs,
+				        "MetricName", "Change Failure Rate",
+				        "PI", [PI],
+				        "Value", FORMAT(CALCULATE([CFRP Measure]), "0.0%")
+				    ),
+				    SELECTCOLUMNS(
+				        FilteredPIs,
+				        "MetricName", "Story Active to PIR Close - Days",
+				        "PI", [PI],
+				        "Value", FORMAT(CALCULATE([ActiveToClosed]), "#,##0")
+				    ),
+				    SELECTCOLUMNS(
+				        FilteredPIs,
+				        "MetricName", "Average MTTR (Sev 2) - Days",
+				        "PI", [PI],
+				        "Value", FORMAT(CALCULATE([Avg. MTTR]), "#,##0")
+				    ),
+				    SELECTCOLUMNS(
+				        FilteredPIs,
+				        "MetricName", "Average MTTR (Sev 1) - Hours",
+				        "PI", [PI],
+				        "Value", IF(ISBLANK(CALCULATE([Avg. S1-2 MTTR])), "< 1 HR",  FORMAT(CALCULATE([Avg. S1-2 MTTR]), "#,##0.00"))
+				    ),
+				    SELECTCOLUMNS(
+				        FilteredPIs,
+				        "MetricName", "Story Created to PIR Close - Days",
+				        "PI", [PI],
+				        "Value", FORMAT(CALCULATE([CreatedToClosed]), "#,##0")
+				    ),
+				    SELECTCOLUMNS(
+				        FilteredPIs,
+				        "MetricName", "Difference - Story Created/Active to PIR Close - Days",
+				        "PI", [PI],
+				        "Value", FORMAT(CALCULATE([Difference]), "#,##0")
+				    )
+				)
+				```
+
+	annotation PBI_Id = dff89d8956d24e5b9293fbe757c6bad0
+

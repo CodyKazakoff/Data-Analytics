@@ -1,0 +1,206 @@
+table F_P21_Shipper_Component
+	lineageTag: 472c915a-96b8-4cc8-b57b-60c3cebfbab4
+
+	column BUSINESS
+		dataType: string
+		lineageTag: 40404a87-a8e5-498c-98ce-d432b2f44227
+		summarizeBy: none
+		sourceColumn: BUSINESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 5a6c3115-25b2-4807-90fc-b552ae591f50
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPPER_CTL_NO
+		dataType: string
+		lineageTag: fb5b730a-87d9-4b00-b7f1-d2635fec690b
+		summarizeBy: none
+		sourceColumn: SHIPPER_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CMPNT_LINE_NO
+		dataType: double
+		lineageTag: ab1da75e-ce67-4b56-a14a-da5a14ba58a2
+		summarizeBy: sum
+		sourceColumn: CMPNT_LINE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITEM_NO
+		dataType: string
+		lineageTag: ae4a11b6-e4f3-4a75-965e-90d478e928d6
+		summarizeBy: none
+		sourceColumn: ITEM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXTENDED_DESCR
+		dataType: string
+		lineageTag: 08251736-a6bf-4dbf-a7c6-e78e3a01040f
+		summarizeBy: none
+		sourceColumn: EXTENDED_DESCR
+
+		annotation SummarizationSetBy = Automatic
+
+	column CMPNT_QTY
+		dataType: double
+		lineageTag: 9ec3a197-367d-4918-8f42-ac307dc9261f
+		summarizeBy: sum
+		sourceColumn: CMPNT_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SUPPLIER_PART_NO
+		dataType: string
+		lineageTag: b12e6a5f-cdb7-4993-91f2-5394297f9989
+		summarizeBy: none
+		sourceColumn: SUPPLIER_PART_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MFG_PART_NO
+		dataType: string
+		lineageTag: 92d971d8-2ba7-44c3-8faf-bdda7b9fc39e
+		summarizeBy: none
+		sourceColumn: MFG_PART_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column U_OF_M_CD
+		dataType: string
+		lineageTag: a5874fee-d598-41d2-85a1-18d718a49dd3
+		summarizeBy: none
+		sourceColumn: U_OF_M_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPPLIER
+		dataType: double
+		lineageTag: 2ee4558c-9d3e-4e4e-bc6c-cad06b1768b7
+		summarizeBy: sum
+		sourceColumn: SUPPLIER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIPPER_LINE_NO
+		dataType: double
+		lineageTag: 563a373f-0be2-4622-9fbc-a4017b7b9642
+		summarizeBy: sum
+		sourceColumn: SHIPPER_LINE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALES_POSTED_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 68134b7b-73cc-4852-89af-683353abc54b
+		summarizeBy: none
+		sourceColumn: SALES_POSTED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CMPNT_ITM_KEY
+		dataType: string
+		lineageTag: 4db3dda6-990a-4576-a9e5-cd710abf7339
+		summarizeBy: none
+		sourceColumn: CMPNT_ITM_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MFR_KEY
+		dataType: string
+		lineageTag: d6074954-c1c8-4eec-8862-e2fc3ad2e548
+		summarizeBy: none
+		sourceColumn: MFR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPPER_COMPONENT_UNIT_COST
+		dataType: double
+		lineageTag: 079bdc0b-584a-4994-ae68-fe0bcec7b452
+		summarizeBy: sum
+		sourceColumn: SHIPPER_COMPONENT_UNIT_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column order_no
+		dataType: string
+		lineageTag: 1268749a-a25a-47bc-8110-f43a965c38e0
+		summarizeBy: none
+		sourceColumn: order_no
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPPER_COMPONENT_UNIT_SELL_PRICE
+		dataType: double
+		lineageTag: 7e67106f-09fa-4c5f-8663-211d8242851c
+		summarizeBy: sum
+		sourceColumn: SHIPPER_COMPONENT_UNIT_SELL_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPONENT_EXTENDED_SELL_PRICE
+		dataType: double
+		lineageTag: d9240ec4-7f73-41da-b2e5-5b07adf4834d
+		summarizeBy: sum
+		sourceColumn: COMPONENT_EXTENDED_SELL_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIPPER_COMPONENT_EXTENDED_UNIT_COST
+		dataType: double
+		lineageTag: c573d480-280a-4a27-96f1-6de82b2529a8
+		summarizeBy: sum
+		sourceColumn: SHIPPER_COMPONENT_EXTENDED_UNIT_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUST_KEY
+		dataType: string
+		lineageTag: bda01470-f8b9-46ce-b163-059fe9f45a94
+		summarizeBy: none
+		sourceColumn: CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_P21_Shipper_Component = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4" = Workspaces{[workspaceId="8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"]}[Data],
+				    #"7e2fb5fe-63dd-4d18-8b6c-81f96104c415" = #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"{[dataflowId="7e2fb5fe-63dd-4d18-8b6c-81f96104c415"]}[Data],
+				    F_P21_Shipper_Component_ = #"7e2fb5fe-63dd-4d18-8b6c-81f96104c415"{[entity="F_P21_Shipper_Component",version=""]}[Data]
+				in
+				    F_P21_Shipper_Component_
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

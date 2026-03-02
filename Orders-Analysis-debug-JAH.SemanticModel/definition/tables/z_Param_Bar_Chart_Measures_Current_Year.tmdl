@@ -1,0 +1,59 @@
+table z_Param_Bar_Chart_Measures_Current_Year
+	lineageTag: 5a540c91-8d26-47b3-8df0-b47e7acd05d3
+
+	column zParam
+		lineageTag: e0f6a46c-bb90-4055-8f36-c5d3291f1de0
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Fields'
+		lineageTag: 6b225b37-20e5-4a75-837b-4279b0b0b7d0
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Order'
+		formatString: 0
+		lineageTag: b1ec9f79-e291-44ce-b3b5-bb712ab9d088
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	column 'Measure Index'
+		formatString: 0
+		lineageTag: 663458c4-b26f-4c0c-b6e1-08e04b43c61d
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_Param_Bar_Chart_Measures_Current_Year = calculated
+		mode: import
+		source =
+				{
+				    ("Order Amount YTD", NAMEOF('Measure Table'[Total $ CYTD]), 0, 1),
+				    ("Order Amount MTD", NAMEOF('Measure Table'[Total $ CMTD]), 1, 1),
+				    ("Order Amount QTD", NAMEOF('Measure Table'[Total $ CQTD]), 2, 1),
+				
+				    ("ADO YTD", NAMEOF('Measure Table'[ADO CYTD]), 0, 2),
+				    ("ADO MTD", NAMEOF('Measure Table'[ADO CMTD]), 1, 2),
+				    ("ADO QTD", NAMEOF('Measure Table'[ADO CQTD]), 2, 2)
+				}
+
+	annotation PBI_Id = 377207b48d684d858c722b36e6d94171
+

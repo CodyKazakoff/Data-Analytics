@@ -1,0 +1,109 @@
+table Competitor_Sales_New
+	lineageTag: c5844f7e-2513-4ac0-86a0-12a8622ba368
+
+	column Company
+		dataType: string
+		lineageTag: f631ba12-a1f3-4418-a3a7-8c17f39fb409
+		summarizeBy: none
+		sourceColumn: Company
+		sortByColumn: Company_Sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reporting_Date
+		dataType: dateTime
+		formatString: m/d/yyyy
+		lineageTag: 0d079312-178a-47d4-bda0-36b78334bb1d
+		summarizeBy: none
+		sourceColumn: Reporting_Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Sales
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 764ca9ec-93d4-452a-9005-55f01498c8fb
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = YEAR(Competitor_Sales_New[Reporting_Date])
+		formatString: 0
+		lineageTag: e97c6947-ebeb-40dd-ad45-713adc8cfb93
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter = QUARTER(Competitor_Sales_New[Reporting_Date])
+		formatString: 0
+		lineageTag: 33429b36-6cf3-4edc-8a74-872b03018dc0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Growth_Change = ```
+			
+			VAR CurrentSales = Competitor_Sales_New[Sales]
+			VAR PriorSales = 
+			    LOOKUPVALUE(
+			        Competitor_Sales_New[Sales],
+			        Competitor_Sales_New[Company], Competitor_Sales_New[Company],
+			        Competitor_Sales_New[Year], IF(Competitor_Sales_New[Quarter] = 1, Competitor_Sales_New[Year] - 1, Competitor_Sales_New[Year]),
+			        Competitor_Sales_New[Quarter], IF(Competitor_Sales_New[Quarter] = 1, 4, Competitor_Sales_New[Quarter] - 1)
+			    )
+			RETURN
+			    DIVIDE(
+			        (CurrentSales - PriorSales),
+			        PriorSales,
+			        BLANK()
+			    )
+			
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 70468454-5797-4ad0-b56d-8f4c2bd5eaa2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year_Quarter = FORMAT('Competitor_Sales_New'[Year], "0000") & " Q" & FORMAT('Competitor_Sales_New'[Quarter], "0")
+		lineageTag: 85d67fd2-8c70-4219-8951-9430ed635dee
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company_Sort
+		dataType: string
+		lineageTag: 80c42a55-612f-4706-a289-c083b74654e2
+		summarizeBy: none
+		sourceColumn: Company_Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Competitor_Sales_New = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared%20Documents/MOT%20-%20Enterprise%20Analytics/Power%20BI%20Files/IT%20Health%20Monitoring%20PBI%20Report/Competitor_Sales.xlsx"), null, true),
+				    Sheet3_Sheet = Source{[Item="Sheet3",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Sheet3_Sheet,{{"Column1", type text}, {"Column2", type any}, {"Column3", type any}, {"Column4", type any}, {"Column5", type any}, {"Column6", type any}, {"Column7", type any}, {"Column8", type any}, {"Column9", type any}, {"Column10", type any}, {"Column11", type any}, {"Column12", type any}, {"Column13", type any}, {"Column14", type any}, {"Column15", type any}, {"Column16", type any}, {"Column17", type any}, {"Column18", type any}, {"Column19", type any}, {"Column20", type any}, {"Column21", type any}, {"Column22", type any}, {"Column23", type any}, {"Column24", type any}, {"Column25", type any}}),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"Company", type text}, {"3/31/2019", Int64.Type}, {"6/30/2019", Int64.Type}, {"9/30/2019", Int64.Type}, {"12/31/2019", Int64.Type}, {"3/31/2020", Int64.Type}, {"6/30/2020", Int64.Type}, {"9/30/2020", Int64.Type}, {"12/31/2020", Int64.Type}, {"3/31/2021", Int64.Type}, {"6/30/2021", Int64.Type}, {"9/30/2021", Int64.Type}, {"12/31/2021", Int64.Type}, {"3/31/2022", Int64.Type}, {"6/30/2022", Int64.Type}, {"9/30/2022", Int64.Type}, {"12/31/2022", Int64.Type}, {"3/31/2023", Int64.Type}, {"6/30/2023", Int64.Type}, {"9/30/2023", Int64.Type}, {"12/31/2023", Int64.Type}, {"3/31/2024", Int64.Type}, {"6/30/2024", Int64.Type}, {"9/30/2024", Int64.Type}, {"12/31/2024", Int64.Type}}),
+				    #"Unpivoted Other Columns" = Table.UnpivotOtherColumns(#"Changed Type1", {"Company"}, "Attribute", "Value"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Other Columns",{{"Attribute", "Reporting_Date"}, {"Value", "Sales"}}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Renamed Columns",{{"Reporting_Date", type date}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type2", "Custom", each if [Company] = "Motion" then 1 else 0),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Added Custom",{{"Custom", "Company_Sort"}})
+				in
+				    #"Renamed Columns1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

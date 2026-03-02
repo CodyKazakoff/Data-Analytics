@@ -1,0 +1,42 @@
+{
+  "config": "{\"version\":\"5.68\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY25SU11\",\"version\":{\"visual\":\"2.4.0\",\"report\":\"3.0.0\",\"page\":\"2.3.0\"},\"type\":2}},\"activeSectionIndex\":0,\"modelExtensions\":[{\"name\":\"extension\",\"entities\":[{\"name\":\"__Measure\",\"extends\":\"__Measure\",\"measures\":[{\"name\":\"test-count-customers\",\"dataType\":3,\"expression\":\"COUNT(D_Customer_BillTo[BILLING_CUST_KEY])\",\"errorMessage\":null,\"hidden\":false,\"formulaOverride\":null,\"formatInformation\":{\"formatString\":\"G\",\"format\":\"General\",\"thousandSeparator\":false,\"currencyFormat\":null,\"dateTimeCustomFormat\":null}}]}]}],\"defaultDrillFilterOtherVisuals\":true,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY25SU11",
+            "path": "BaseThemes/CY25SU11.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "4c9139d77a445e799ab4",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"8fd4ed55c0b37d529086\",\"layouts\":[{\"id\":0,\"position\":{\"x\":275.2899253478879,\"y\":144.11150454453193,\"z\":0,\"width\":526.5612666050205,\"height\":293.7657592638535}}],\"singleVisual\":{\"visualType\":\"clusteredColumnChart\",\"projections\":{\"Y\":[{\"queryRef\":\"__Measure.test-sum-customers\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"_\",\"Entity\":\"__Measure\",\"Schema\":\"extension\",\"Type\":0}],\"Select\":[{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"_\"}},\"Property\":\"test-count-customers\"},\"Name\":\"__Measure.test-sum-customers\",\"NativeReferenceName\":\"test-count-customers\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 293.77,
+          "width": 526.56,
+          "x": 275.29,
+          "y": 144.11,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

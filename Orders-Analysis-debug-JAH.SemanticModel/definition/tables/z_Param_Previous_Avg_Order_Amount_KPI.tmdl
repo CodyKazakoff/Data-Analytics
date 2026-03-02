@@ -1,0 +1,47 @@
+table z_Param_Previous_Avg_Order_Amount_KPI
+	lineageTag: b947f0c3-5ba3-47f4-8981-81a9225755eb
+
+	column Parameter
+		lineageTag: cb6df3de-cd0a-43e4-801d-7e0c18c778ae
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		lineageTag: fa020d14-3ba1-4ec3-9525-0d455206daee
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		formatString: 0
+		lineageTag: 2a6f3931-8ba8-4659-81d6-d479808386d2
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Previous_Avg_Order_Amount_KPI = calculated
+		mode: import
+		source =
+				{
+				    ("PYTD", NAMEOF('Measure Table'[Average Order $ PYTD]), 0),
+				    ("PMTD", NAMEOF('Measure Table'[Average Order $ PMTD]), 1),
+				    ("PQTD", NAMEOF('Measure Table'[Average Order $ PQTD]), 2)
+				}
+
+	annotation PBI_Id = ac6f77af5cb04754b83c3dd69e5e4c2b
+

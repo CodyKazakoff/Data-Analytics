@@ -1,0 +1,53 @@
+table GL_operating_unit
+	lineageTag: dad01a35-3752-43a9-881f-0d32ad192492
+
+	column operating_unit
+		dataType: string
+		lineageTag: 8e64e11e-e615-42a1-80af-fd8dca9a3f8d
+		summarizeBy: none
+		sourceColumn: operating_unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_unit_desc
+		dataType: string
+		lineageTag: 2081d613-3b22-44ea-98ee-004bd77ed5e2
+		summarizeBy: none
+		sourceColumn: operating_unit_desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column kaman_location
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c028954a-1341-4079-b9d3-d6e7b244743c
+		summarizeBy: none
+		sourceColumn: kaman_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 7a44fcc2-6dcb-4c58-825e-29f6bed7accc
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column acqusition
+		dataType: string
+		lineageTag: 364476a6-f535-41a4-9c4c-2c20bcaa452d
+		summarizeBy: none
+		sourceColumn: acqusition
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GL_operating_unit = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-6tjjeksqmezuxazcnu5cqu5pg4.datawarehouse.fabric.microsoft.com", "FinLake"),
+				    dbo_GL_operating_unit = Source{[Schema="dbo",Item="GL_operating_unit"]}[Data]
+				in
+				    dbo_GL_operating_unit
+

@@ -1,0 +1,64 @@
+table zzCMvs3M
+	lineageTag: a3ef7b85-e541-4785-aa5a-2f436d34ac08
+
+	column zzCMvs3M
+		lineageTag: 18a6f81f-8ef5-4fe9-b559-fda96a621155
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zzCMvs3M Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zzCMvs3M Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zzCMvs3M Fields'
+		isHidden
+		lineageTag: 4104cd7b-d06d-487b-8d03-d9bf7e504f3b
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zzCMvs3M Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zzCMvs3M Order'
+		isHidden
+		formatString: 0
+		lineageTag: 73bd0314-c887-4e4a-ab19-0490f3bad42e
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type = SWITCH(TRUE(), CONTAINSSTRING('zzCMvs3M'[zzCMvs3M], "3MA"), "Prior 3MA vs 3MA", "Prior 3MA vs CM")
+		lineageTag: 958cde83-2752-4615-a082-4c2837e72aa4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Colortype.CM' = [zzCMvs3M]
+		lineageTag: 7c3ea6f1-1b6e-4135-9cce-21840dde64bf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition zzCMvs3M = calculated
+		mode: import
+		source =
+				{
+				    ("CM Amount", NAMEOF('Measure Table'[CM Amount]), 0),
+				    ("$Change.CM", NAMEOF('Measure Table'[$Change.CM]), 1),
+				    ("%Change.CM", NAMEOF('Measure Table'[%Change.CM]), 2),
+				    ("3MA", NAMEOF('Measure Table'[3MA]), 3),
+				    ("$Change.3MA", NAMEOF('Measure Table'[$Change.3MA]), 4),
+				    ("%Change.3MA", NAMEOF('Measure Table'[%Change.3MA]), 5)
+				}
+
+	annotation PBI_Id = bc5dc17d20cf485084b3f04ad146ce94
+

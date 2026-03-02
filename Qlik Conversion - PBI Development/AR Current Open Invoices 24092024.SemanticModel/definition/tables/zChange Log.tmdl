@@ -1,0 +1,107 @@
+/// *Metadata*
+table 'zChange Log'
+	lineageTag: 934140aa-a62b-4512-b1e4-23c5370008e9
+
+	column 'Change Index'
+		dataType: string
+		isHidden
+		lineageTag: 28eb70c0-f0b9-49f5-b410-b263caadd120
+		summarizeBy: none
+		sourceColumn: Change Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Change Date'
+		dataType: dateTime
+		isHidden
+		lineageTag: 453fb670-6a53-4bc2-a7c1-5e5da7561936
+		summarizeBy: none
+		sourceColumn: Change Date
+
+		changedProperty = IsHidden
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Changed By'
+		dataType: string
+		isHidden
+		lineageTag: 0285d69f-e269-4460-9dee-dd0e3ffeedc2
+		summarizeBy: none
+		sourceColumn: Changed By
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Change Comment'
+		dataType: string
+		isHidden
+		lineageTag: 79570586-4e04-4360-b478-76e3fa24463d
+		summarizeBy: none
+		sourceColumn: Change Comment
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Change Dependent Files'
+		dataType: string
+		isHidden
+		lineageTag: 9ef5d596-4b20-4817-b303-3b7fba58370f
+		summarizeBy: none
+		sourceColumn: Change Dependent Files
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Change Time'
+		dataType: dateTime
+		isHidden
+		lineageTag: 724e82e6-2714-46ae-a6a7-de293797ab48
+		summarizeBy: none
+		sourceColumn: Change Time
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'Release Index'
+		dataType: int64
+		isHidden
+		lineageTag: e988fa61-1f63-48bd-965c-161ca16eb97c
+		summarizeBy: none
+		sourceColumn: Release Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'zChange Log-e92b209c-7780-41fb-9eed-7ed4a3a15e04' = m
+		mode: import
+		queryGroup: Metadata\Queries
+		source =
+				let
+				    //Create internal source
+				    Source                                          = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("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", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Release Index" = _t, #"Change Date" = _t, #"Change Time" = _t, #"Changed By" = _t, #"Change Comment" = _t, #"Change Dependent Files" = _t]),
+				    // Change type for output
+				    #"Changed Type"                                 = Table.TransformColumnTypes(Source,{{"Release Index", Int64.Type}, {"Change Date", type date}, {"Change Time", type time}, {"Changed By", type text}, {"Change Comment", type text}, {"Change Dependent Files", type text}}),
+				    // Create change index field
+				    #"Added Change Index"                           = Table.AddColumn(#"Changed Type", "Change Index", each Text.Combine({Date.ToText([Change Date], "yyyyMMdd"),Time.ToText([Change Time], "HHmm")}), type text)
+				in
+				    #"Added Change Index"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

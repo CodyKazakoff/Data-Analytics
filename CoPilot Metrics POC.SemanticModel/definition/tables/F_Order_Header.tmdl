@@ -1,0 +1,93 @@
+table F_Order_Header
+	lineageTag: 4d1e81ef-d835-4bd9-8a81-409966bcae02
+
+	column ORD_HDR_KEY
+		dataType: string
+		lineageTag: 37699878-0294-4cb0-b01b-f16fb9d759fd
+		summarizeBy: none
+		sourceColumn: ORD_HDR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: 9dd03fd2-1292-47d6-afcb-ecc70d6f3547
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 0f9dd231-37ec-4452-adb1-04c3904f4f0c
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONVERTED_TO_ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 40eadc66-9646-4fe5-b947-bd91c988501f
+		summarizeBy: none
+		sourceColumn: CONVERTED_TO_ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SOURCE_DESC
+		dataType: string
+		lineageTag: dcede70e-e4e5-4f89-b0a7-3e65ffbb3fde
+		summarizeBy: none
+		sourceColumn: ORDER_SOURCE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG
+		dataType: string
+		lineageTag: 442601c5-6f97-49ef-8002-9a2b24d7762c
+		summarizeBy: none
+		sourceColumn: AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG
+		dataType: string
+		lineageTag: 36e8a408-d1d4-4c5e-9cda-59aa3ac1e007
+		summarizeBy: none
+		sourceColumn: AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_CREATED_EDI_QUOTE_FLAG
+		dataType: string
+		lineageTag: 5306761a-387b-43cd-a048-76519acefeb6
+		summarizeBy: none
+		sourceColumn: AGENT_CREATED_EDI_QUOTE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_Order_Header = m
+		mode: import
+		queryGroup: Facts
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_F_Order_Item = Value.NativeQuery(Source, "        
+				    SELECT
+				    HDR.*
+				    FROM F_Order_Header AS HDR
+				        INNER JOIN (SELECT DISTINCT LOC_KEY FROM F_ECOS_CoPilot_Agent_Actions_Header) AS CoPilot 
+				            ON HDR.LOC_KEY = CoPilot.LOC_KEY
+				    WHERE 1=1
+				        AND CONVERTED_TO_ORDER_DATE >= '2025-11-01'
+				        ", null, [EnableFolding = true]),
+				    #"Filtered Rows" = Table.SelectRows(dbo_F_Order_Item, each true),
+				#"Removed Unused Columns"= Table.SelectColumns(#"Filtered Rows",{"AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG","ORD_HDR_KEY","AGENT_CREATED_EDI_QUOTE_FLAG","SHIP_TO_CUST_KEY","CONVERTED_TO_ORDER_DATE","ORDER_SOURCE_DESC","MI_LOC","AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG"})
+				in
+				#"Removed Unused Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

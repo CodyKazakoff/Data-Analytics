@@ -1,0 +1,469 @@
+/// Range start date to set incremental refresh
+expression RangeStart = #datetime(2023, 1, 1, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: 24ec84b8-2a05-4e4d-b84a-af328f69bf5f
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = DateTime
+
+/// Range end date to set incremental refresh
+expression RangeEnd = #datetime(2023, 1, 31, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: 986c1add-4e03-4a82-bee3-239f77190ad2
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = DateTime
+
+/// Excel file path parameter to load external data from a network drive across different enviornments.
+expression FilePath = "\\apgqliksandev\apgqliksandev\" meta [IsParameterQuery=true, List={"\\apgqliksandev\apgqliksandev\", "\\apgqliksandev\apgqliksandr\", "\\apgqliksan\apg_qlik\"}, DefaultValue="\\apgqliksandev\apgqliksandev\", Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 476c1ae9-79c4-4b98-a668-4460b1bd91a6
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+/// Parameter to set record limit to True/False when querying data from Dataflows
+expression Dataflow_LimitRecordCount = true meta [IsParameterQuery=true, Type="Logical", IsParameterQueryRequired=false]
+	lineageTag: 8558941c-2b30-4070-b5ca-d5c7e777f2e6
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Logical
+
+/// Parameter to limit number of rows when querying data from Dataflows
+expression Dataflow_RecordCountLimit = 5000 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=false]
+	lineageTag: 49216bc4-29cb-4bb5-a4d6-d5325a29807a
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Number
+
+expression fx_ConditionallyLimitRows = ```
+		let
+		  fx = (p_Table as table, p_LimitRecords as logical, p_RecordCount as number) => let
+		        Output                          = if p_LimitRecords
+		                                            then Table.FirstN(p_Table, p_RecordCount)
+		                                            else p_Table
+		    in
+		        Output,
+		  fx_Type = type function
+		        (
+		            p_Table as table
+		            , p_LimitRecords as logical
+		            , p_RecordCount as number
+		        ) as table meta
+		        [
+		            Documentation.Name          = "fx_ConditionallyLimitRows"
+		            , Documentation.Description = "This function will conditionally limit the records based on the logical p_LimitRecords. This function is foldable, you'll see the native query for this step in your query's applied steps."
+		            , Documentation.Examples    = 
+		            {
+		                [
+		                    Description         = "Example usage of fx_ConditionallyLimitRows, limiting record to the first 10."
+		                    , Code              = "fx_ConditionallyLimitRows(#""Table"", true, 10)"
+		                    , Result            = "The top 10 records for table ""#Table"""
+		                ]
+		            }
+		        ],
+		  fx_Output = Value.ReplaceType(fx, fx_Type)
+		in
+		  fx_Output
+		```
+	lineageTag: a3a57874-4c40-496c-a968-c37bac4cf686
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_Loop = ```
+		let
+		    fx = (
+		            p_startIteration as number
+		            , p_endIteration as number
+		            , p_increment as number
+		            //Function to be called on each iteration. This function should be expecting a numeric iteration paramter
+		            , p_function as function
+		            , optional p_combineresultsets as logical
+		            , optional p_result as table
+		            , optional p_currentIteration as number) =>
+		    let
+		        currentIteration =              if p_currentIteration = null
+		                                            then p_startIteration
+		                                            else p_currentIteration,
+		        //Run function that gets table for current iterations min/max dates
+		        currentResultSet =              @p_function(currentIteration, p_result),
+		        //Combine current table with prior iterations (if there are prior iterations)
+		        fullResultTable =               if p_result = null or p_combineresultsets = false
+		                                                then currentResultSet
+		                                                else Table.Combine({p_result, currentResultSet}),
+		        //Increment loop
+		        nextIteration = currentIteration + p_increment,
+		        //If there are still iterations to run, call this function again and pass the next iteration and the current table to append to
+		        //Otherwise, return the current output.
+		        Output = 
+		        if nextIteration <= p_endIteration
+		            then @fx_Loop(p_startIteration, p_endIteration, p_increment, p_function, p_combineresultsets, fullResultTable, nextIteration)
+		            else fullResultTable
+		    in
+		    Output
+		    , fx_Type = type function
+		    (
+		        p_startIteration as number
+		        , p_endIteration as number
+		        , p_increment as number
+		        //Function to be called on each iteration. This function should be expecting a numeric iteration paramter
+		        , p_function as function
+		        , optional p_combineresultsets as logical
+		        , optional p_result as table
+		        , optional p_currentIteration as number
+		    ) as any meta
+		    [
+		        Documentation.Name = "fx_Loop"
+		        , Documentation.Description = "This function provides a facility to iterate over a list of values and exucute a user defined function in each iteration. When invoking this function, you should never need to define p_result or p_currentIteration, those are defined as part of the fx_Loop itself."
+		        , Documentation.Examples = 
+		        {
+		            [
+		                Description = "Iterate from 0 to 9 by 1 and add each number to a table. Return a table with values 0 to 9."
+		                , Code = 
+		"fx_Loop(
+		    0
+		    , 9
+		    , 1
+		    , (p_iteration as number, optional p_result as table) => let
+		        //Logic that uses current iteration
+		        loopOutput          = #table({""Column""}, {{p_iteration}})
+		    in
+		        //Output that will be used as result.
+		        loopOutput
+		)"
+		                , Result = 
+		"{
+		    [Column = 0]
+		    , [Column = 1]
+		    , [Column = 2]
+		    , [Column = 3]
+		    , [Column = 4]
+		    , [Column = 5]
+		    , [Column = 6]
+		    , [Column = 7]
+		    , [Column = 8]
+		    , [Column = 9]
+		}"
+		            ]
+		            , [
+		                Description = "Iterate from 0 to 9 by 1 and add each number to a table. Return with only the last result."
+		                , Code = 
+		"fx_Loop(
+		    0
+		    , 9
+		    , 1
+		    , (p_iteration as number, optional p_result as table) => let
+		        //Logic that uses current iteration
+		        loopOutput          = #table({""Column""}, {{p_iteration}})
+		    in
+		        //Output that will be used as result.
+		        loopOutput
+		    , false
+		)"
+		                , Result = 
+		"{
+		    [Column = 0]
+		    , [Column = 1]
+		    , [Column = 2]
+		    , [Column = 3]
+		    , [Column = 4]
+		    , [Column = 5]
+		    , [Column = 6]
+		    , [Column = 7]
+		    , [Column = 8]
+		    , [Column = 9]
+		}"
+		            ]
+		        }
+		    ]
+		    
+		in
+		Value.ReplaceType(fx, fx_Type)
+		```
+	lineageTag: 82f4a47e-7d67-449a-a44e-1f169ae0ccf1
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_TableProfile = ```
+		let
+		    //This is a comment
+		    fx = (p_SourceTable as table, optional p_ColumnName as text, optional p_TableName as text) => let
+		        filteredSouceTable              = if p_ColumnName <> null
+		                                            then Table.SelectColumns(p_SourceTable,{p_ColumnName})
+		                                            else p_SourceTable,
+		
+		        //Get the base profile table for the table we want to profile
+		        tempProfile                     = Table.Profile(
+		                                            filteredSouceTable,
+		                                            {
+		                                                {"Median", each Type.Is(_, type number), List.Median}
+		                                                , {"Mode", each Type.Is(_, type number), List.Mode}
+		                                            }
+		                                        ),
+		        tempProfileRemovedColumns       = Table.RemoveColumns(tempProfile,
+		                                            {
+		                                                "DistinctCount"
+		                                            }),
+		        tempProfileRenamedColumns       = Table.RenameColumns(tempProfileRemovedColumns,
+		                                            {
+		                                                {"Count", "Row Count"}
+		                                            }),
+		        //Add an index column that we can use to loop over rows.
+		        Profile                         = Table.AddIndexColumn(tempProfileRenamedColumns, "Column Index", 0, 1, Int64.Type),
+		
+		        //Add % of values in column that are null & flag columns that are 100% null
+		        #"% Null"                       = Table.AddColumn(Profile, "% Null", each [NullCount] / [Row Count], Percentage.Type),
+		        #"Flag.Contains Nulls"              = Table.AddColumn(#"% Null", "Flag.Contains Nulls", each if [NullCount] > 0 then true else false, type logical),
+		   
+		        //Start loop function
+		        LoopOutput = fx_Loop(
+		            //Loop params
+		            //Loop Start
+		            0
+		            //Loop End
+		            , (Table.RowCount(Profile) - 1)
+		            //Loop Increment
+		            , 1
+		            //Create function that will be looped over
+		            , (p_iteration as number, optional p_result as table) => let
+		
+		                //Get the row that we're interested in, based on the iteration
+		                fieldRow                = Table.SelectRows(#"Flag.Contains Nulls", each [Column Index] = p_iteration),
+		
+		                //Get column name for use in later steps
+		                columnName              = fieldRow{0}[Column],
+		                
+		                //Get a list of all the values for a field so we can interrogate it.
+		                fieldValues         = Table.Column(filteredSouceTable, columnName),
+		    
+		                //Add % of values in column that are Distinct
+		                //Recalculating Distinct count because the default method that comes out of Table.Profile throws an error if there are nulls in the column
+		                DistinctValues          = List.Count(List.Distinct(fieldValues)),
+		                AddDistinctValues       = Table.AddColumn(fieldRow, "Distinct Values", each DistinctValues, type number),
+		                #"% Distinct"           = Table.AddColumn(AddDistinctValues, "% Distinct", each [Distinct Values] / [Row Count], Percentage.Type),
+		                #"Flag.100% Distinct"   = Table.AddColumn(#"% Distinct", "Flag.100% Distinct", each if [#"% Distinct"] = 1 then true else false, type logical),
+		
+		                BlankCount              = List.Count(List.Select(fieldValues, each Text.Trim(Text.From(_)) = "")),
+		                AddBlankCount           = Table.AddColumn(#"Flag.100% Distinct", "BlankCount", each BlankCount, type number),
+		                
+		                //Add % of values in column that are Blank
+		                #"% Blank"              = Table.AddColumn(AddBlankCount, "% Blank", each [BlankCount] / [Row Count], Percentage.Type),
+		                #"Flag.Contains Blanks" = Table.AddColumn(#"% Blank", "Flag.Contains Blanks", each if [BlankCount] > 0 then true else false, type logical),
+		
+		                BlankError              = if BlankCount > 0 then Text.Combine({columnName, " Contains Blanks"}) else null,
+		                NullError               = if fieldRow{0}[NullCount] > 0 then Text.Combine({columnName, " Contains Nulls"}) else null,
+		
+		                Errors                  = if
+		                                            BlankError <> null
+		                                            or NullError <> null
+		                                            //or TestError <> null
+		                                            then 
+		                                                error Error.Record(Text.Combine({"Errors were found in ", columnName})
+		                                                , "Check this column for errors"
+		                                                , Text.Combine(
+		                                                    {
+		                                                        "#(tab)"
+		                                                        , if BlankError <> null then Text.Combine({BlankError, "#(cr,tab)"}) else null
+		                                                        , if NullError <> null then Text.Combine({NullError, "#(cr,tab)"}) else null
+		                                                    })
+		                                                )
+		                                            else null,
+		
+		                AddErrorColumn          = Table.AddColumn(#"Flag.Contains Blanks", "Errors", each Errors, type logical),
+		
+		                //Add table name. This is useful when we're profiling the whole dataset, rather than just an individual table.
+		                TableName               = if p_TableName = null
+		                                            then "Table"
+		                                            else p_TableName,
+		                
+		                //Add table name column, and send output to next iteration
+		                loopOutput              = Table.AddColumn(AddErrorColumn, "Table Name", each TableName, type text)
+		            in
+		                //Output that will be used as result.
+		                loopOutput),
+		        LoopOutputRemoveColumns         = Table.RemoveColumns(LoopOutput,
+		                                            {
+		                                                "Column Index"
+		                                            }),
+		        
+		        #"Reorder Columns"              = Table.ReorderColumns(LoopOutputRemoveColumns,
+		            {
+		                "Column"
+		                , "Errors"
+		                , "Flag.100% Distinct"
+		                , "Flag.Contains Nulls"
+		                , "Flag.Contains Blanks"
+		                , "Distinct Values"
+		                , "Row Count"
+		                , "% Distinct"
+		                , "NullCount"
+		                , "% Null"
+		                , "BlankCount"
+		                , "% Blank"
+		                , "Min"
+		                , "Max"
+		                , "Average"
+		                , "Median"
+		                , "Mode"
+		                , "StandardDeviation"
+		            }),
+		
+		        Output                          = #"Reorder Columns"
+		    in
+		        Output
+		        , fx_Type = type function
+		        (
+		            p_SourceTable as table
+		            , optional p_ColumnName as text
+		            , optional p_TableName as text
+		        ) as table meta
+		        [
+		            Documentation.Name          = "fx_TableProfile"
+		            , Documentation.Description = "This function takes a tabe, runs the Table.Profile function against it, and adds some additional profiling information.<br>Optionally add a column name p_ColumnName to only run profiling against that column.<br>p_TableName is not required and is only included to support fx_DatasetProfile. <br><br> This function relies on the function fx_Loop existing in the dataset."
+		            , Documentation.Examples    = 
+		            {
+		                [
+		                    Description         = "Example usage of fx_TableProfile against an entire table."
+		                    , Code              = "fx_TableProfile(Sales)"
+		                    , Result            = "A table containing the result of Table.Profile(Sales), plus % Null, % Distinct, % Blank, and an errors column calling out the errors found for each column."
+		                ],
+		                [
+		                    Description         = "Example usage of fx_TableProfile against the Order Number column from the Sales table."
+		                    , Code              = "fx_TableProfile(Sales, ""Order Number"")"
+		                    , Result            = "A table containing the result of Table.Profile(Sales) for the Order Number column, plus % Null, % Distinct, % Blank, and an errors column calling out the errors found for the Order Number column."
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		```
+	lineageTag: 09a9f9fe-63d4-45e4-b351-11c46a8b1a61
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_DistinctKeyChecker = ```
+		let
+		    //This is a comment
+		    fx = (p_KeyField as list) => let
+		        #"Converted to Table"            = Table.FromList(p_KeyField, Splitter.SplitByNothing(), {"Key"}, null, ExtraValues.Error),
+		        #"Grouped Rows"                  = Table.Group(#"Converted to Table", {"Key"}, {{"Count", each Table.RowCount(_), Int64.Type}}),
+		        #"Select Rows"                   = Table.SelectRows(#"Grouped Rows", each [Count] > 1),
+		        Error                            = error Error.Record(
+		                                                "Errors were found in a key field"
+		                                                , "Key field exists on multiple records"
+		                                                , "Check key field for duplicates"
+		                                                ),
+		        #"Add Error Column"             = Table.AddColumn(#"Select Rows", "Error", each Error),
+		        Output                          = #"Add Error Column"
+		    in
+		        Output
+		        , fx_Type = type function
+		        (
+		            p_KeyField as list
+		        ) as table meta
+		        [
+		            Documentation.Name          = "fx_DistinctKeyChecker"
+		            , Documentation.Description = "This function is intended to identify key values that are expected to be unique to each row and determine if it is truly unique. If it is not, this function will generate a table with the key values that are in violation, and throw an error in the data refresh"
+		            , Documentation.Examples    = 
+		            {
+		                [
+		                    Description         = "Example usage of fx_DistinctKeyChecker"
+		                    , Code              = "fx_DistinctKeyChecker(Sales[Order Number])"
+		                    , Result            = "A table with all the Order Numbers that appear on multiple records in the Sales table."
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		```
+	lineageTag: 14271e23-7b3d-4466-b5c0-65fafe0d1fce
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_FilterDimByFact = ```
+		let
+		  fx = (p_FactTable as table, p_FactForeignKeyFieldName as text, p_DimTable as table, p_DimTableKeyFieldName as text) => let
+		        #"Fact Joined Table Name" = Text.Combine({p_FactForeignKeyFieldName, " - Joined"}),
+		        #"Get Distinct Keys from Fact" = Table.Distinct(Table.SelectColumns(p_FactTable, {p_FactForeignKeyFieldName})),
+		        #"Merged Queries" = Table.NestedJoin(p_DimTable, {p_DimTableKeyFieldName}, #"Get Distinct Keys from Fact", {p_FactForeignKeyFieldName}, #"Fact Joined Table Name", JoinKind.Inner),
+		        #"Expanded Foreign Key - Joined" = Table.ExpandTableColumn(#"Merged Queries", #"Fact Joined Table Name", {p_FactForeignKeyFieldName}, {#"Fact Joined Table Name"}),
+		        Output = Table.RemoveColumns(#"Expanded Foreign Key - Joined",{#"Fact Joined Table Name"})
+		    in
+		        Output,
+		  fx_Type = type function
+		        (
+		            p_FactTable as table
+		            , p_FactForeignKeyFieldName as text
+		            , p_DimTable as table
+		            , p_DimTableKeyFieldName as text
+		        ) as table meta
+		        [
+		            Documentation.Name          = "fx_FilterDimByFact"
+		            , Documentation.Description = "This function will filter a dimension table based on the unique list of key values from an associated fact table. This function is foldable."
+		            , Documentation.Examples    = 
+		            {
+		                [
+		                    Description         = "Example usage of fx_FilterDimByFact."
+		                    , Code              = "fx_FilterDimByFact(#""FactInternestSales"", ""CustomerKey"", ""dbo_DimCustomer"", ""CustomerKey"")"
+		                    , Result            = "A filtered down version of dbo_DimCustomer to only the matching values between #""dbo_DimCustomer""[CustomerKey] in #""FactInternestSales""[CustomerKey]"
+		                ]
+		            }
+		        ],
+		  fx_Output = Value.ReplaceType(fx, fx_Type)
+		in
+		  fx_Output
+		```
+	lineageTag: 362f170d-b6c5-43b9-8cb4-632b64f52e54
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_ConvertUTCtoET = ```
+		(datetimecolumn as datetime) => let
+		 
+		date = DateTime.Date(datetimecolumn),
+		time = DateTime.Time(datetimecolumn),
+		firstSundayOfNovember = Date.StartOfWeek(#date(Date.Year(date), 11, 7), Day.Sunday),
+		SecondSundayOfMarch = Date.StartOfWeek(#date(Date.Year(date), 3, 14), Day.Sunday),
+		 
+		isSummerTime =	(date = SecondSundayOfMarch and time >= #time(1,0,0))
+			        or
+				(date > SecondSundayOfMarch and date < firstSundayOfNovember) 
+				or 
+				(date = firstSundayOfNovember and time >= #time(1,0,0)),
+		 
+		 
+		timeZone = (5 - Number.From(isSummerTime))*-1,
+		 
+		ET = 
+		            DateTime.From(date) 
+		            + #duration(0,Time.Hour(time),Time.Minute(time),Time.Second(time))  
+		            + #duration(0, timeZone, 0, 0)
+		 
+		in
+		    ET
+		```
+	lineageTag: 89543bd7-0ddb-49c2-85a6-f340e1780b46
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression Workspace = "MOT-Enterprise Data [Dev]" meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+	lineageTag: c053e38b-8133-4053-8bf6-0eef6478851d
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+

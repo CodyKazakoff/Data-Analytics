@@ -1,0 +1,88 @@
+relationship 41b9556b-350e-4f92-ba79-96e41d833385
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Tiers.'Solution ID'
+	toColumn: activity_index.'User-facing App Id'
+
+relationship 3be06def-daf9-40fc-88d9-44fb68f655f7
+	fromColumn: 'Script Chunk Tag'.SectionId
+	toColumn: 'Script Chunk'.SectionId
+
+relationship e8e5e659-2bef-4644-8c67-26fb023d3449
+	fromColumn: 'Page Object Dimension'.PageObjectKey
+	toColumn: 'Page Object'.PageObjectKey
+
+relationship ee3c6055-55f6-4fa6-b644-9736f1c3db34
+	fromColumn: 'Page Object Measure'.PageObjectKey
+	toColumn: 'Page Object'.PageObjectKey
+
+relationship 4252feee-46b6-42a5-b89a-dc730a9fbeec
+	fromColumn: 'Page Object'.PageKey
+	toColumn: Page.PageKey
+
+relationship ab7422dc-c975-4787-ab1c-37acc23628ff
+	fromColumn: Page.AppKey
+	toColumn: App.AppKey
+
+relationship 7cbd5887-75d4-4ccd-a0d5-c329b3d6e90f
+	fromColumn: 'App Measure'.AppKey
+	toColumn: App.AppKey
+
+relationship 93a47223-4982-4ed9-a1fb-430605b43400
+	fromColumn: 'Script Lines'.AppKey
+	toColumn: App.AppKey
+
+relationship 8d859798-1236-449d-8942-7c432bd3f11c
+	fromColumn: Variables.AppKey
+	toColumn: App.AppKey
+
+relationship b4387ef9-ee34-4281-8449-dde72a22c97d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: activity_index.'User-facing App Id'
+	toColumn: App.'Solution ID'
+
+relationship 34c22d14-f720-450c-8f55-3d628c825f61
+	fromColumn: Relationship.AppKey
+	toColumn: App.AppKey
+
+relationship ba6da646-0352-40d4-b283-64b40a895d94
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: App.'Solution ID'
+	toColumn: 'Automation Ratio Calculations'.'Solution ID'
+
+relationship 13455075-ae33-4ceb-847f-2980651b408e
+	fromColumn: 'App Usage'.AppId
+	toColumn: App.'Solution ID'
+
+relationship 85efa351-dc32-46da-be6f-d9113615837c
+	fromColumn: 'App Owners'.'User Id'
+	toColumn: App.'Solution ID'
+
+relationship d691552a-53a6-4063-b2e5-f79e020cf6ea
+	fromColumn: Export.'App Id'
+	toColumn: App.'Solution ID'
+
+relationship d3b5f8f1-b417-4e46-a198-8dba49e4cc04
+	fromColumn: 'Script Chunk'.AppKey
+	toColumn: App.AppKey
+
+relationship e1c94b60-b87a-4098-bf88-29f1d8732e2a
+	fromColumn: Table.AppKey
+	toColumn: App.AppKey
+
+relationship 04c2307a-b53c-4a5d-9d0a-88b1fa92e0a6
+	fromColumn: Column.TableKey
+	toColumn: Table.TableKey
+
+relationship fbfb9a9d-8159-4ad3-8035-8b9a4cdb7e3f
+	fromColumn: Dependency.AppKey
+	toColumn: App.AppKey
+
+relationship 49d85ffd-e772-4b25-b099-3bb2ed231fce
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'App Measure'.AppMeasureKey
+	toColumn: 'App Measure Tag'.AppMeasureKey
+

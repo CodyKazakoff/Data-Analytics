@@ -1,0 +1,50 @@
+table z_Param_Date_Dim
+	lineageTag: b5c6a49e-c252-4b69-a354-8529c053520c
+
+	column zDateDimParam
+		lineageTag: fbafdcc2-b353-4f3a-a318-bb4b300838f3
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zDateDimParam Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zDateDimParam Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zDateDimParam Fields'
+		lineageTag: 77472064-ec03-462d-962f-76e570e7d76b
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zDateDimParam Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zDateDimParam Order'
+		formatString: 0
+		lineageTag: 17b0eebd-8249-4dcc-be4b-de9d7befcd63
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Date_Dim = calculated
+		mode: import
+		source =
+				{
+				    ("Year", NAMEOF('D_Calendar_Visual'[YEAR]), 0),
+				    ("Quarter-Year", NAMEOF('D_Calendar_Visual'[Year Quarter]), 1),
+				    ("Month-Year", NAMEOF('D_Calendar_Visual'[Month Year]), 2),
+				    ("Week Ending Date", NAMEOF('D_Calendar_Visual'[Week End Date]), 3),
+				    ("Calendar Date", NAMEOF('D_Calendar_Visual'[Calendar Date]), 4),
+				    ("Workday of Month", NAMEOF('D_Calendar_Visual'[Workday Of Month]), 4)
+				}
+
+	annotation PBI_Id = 6884ae9bc9be42f0bcfab86349b32b2a
+

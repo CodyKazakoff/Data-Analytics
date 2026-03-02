@@ -1,0 +1,1231 @@
+/// *Metadata*
+table Measure
+	lineageTag: a8294757-b64b-4c53-b5ab-01126ae532a5
+
+	measure 'Template Measure' = 1
+		formatString: 0
+		isHidden
+		lineageTag: f96c9c7b-562c-48cb-b7a8-fb53daee41e4
+
+	/// Current Release
+	measure 'Current Release' = ```
+			
+			VAR v_MaxReleaseDate = 
+			CALCULATE(
+			    MAX('zChange Log'[Release Index])
+			    , ALL('zChange Log')
+			)
+			
+			VAR vResult = 
+			CALCULATE(
+			    SELECTEDVALUE('zRelease Information'[Release])
+			    , 'zRelease Information'[Release Index] = v_MaxReleaseDate
+			    , ALL('zChange Log')
+			)
+			
+			RETURN vResult
+			```
+		formatString: Text
+		isHidden
+		displayFolder: Metadata
+		lineageTag: 8a15a564-3711-45de-b006-d4120de86d40
+
+		annotation Annotation = Current Release
+
+	/// Last Refresh Datetime
+	measure 'Last Refresh Datetime' =
+			
+			Max('zLast Refresh Datetime'[Last Refresh Datetime])
+		formatString: mm/dd/yyyy hh:nn:ss AM/PM
+		isHidden
+		displayFolder: Metadata
+		lineageTag: fcd2d4e0-e91e-4856-a765-3d9c3c9b4e69
+
+		annotation Annotation = Last Refresh Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	/// Latest Change Index
+	measure 'Latest Change Index' =
+			
+			Max('zChange Log'[Change Index])
+		formatString: Text
+		isHidden
+		displayFolder: Metadata
+		lineageTag: 996fd5ed-7d91-40de-b07a-4aca819a5599
+
+	/// Dataset information updated based on information from Axis Accelerator Suite Documentation Generator module.
+	measure 'Dataset Information' =
+			
+			VAR vSelectedLabel = SELECTEDVALUE('zDataset Information'[Id], 0)
+			
+			VAR vDatasetDatasource = LASTNONBLANK('zRunbook Config'[Data Sources], 0)
+			VAR vDatasetOwner = LASTNONBLANK('zRunbook Config'[Data Owner], 0)
+			VAR vDatasetTimePeriod = LASTNONBLANK('zRunbook Config'[Time Period], 0)
+			VAR vDatasetRefreshRate = LASTNONBLANK('zRunbook Config'[Refresh Rate], 0)
+			
+			VAR vResult = SWITCH(vSelectedLabel
+			    , 0, vDatasetDatasource
+			    , 1, vDatasetOwner
+			    , 2, vDatasetTimePeriod
+			    , 3, vDatasetRefreshRate
+			)
+			
+			RETURN vResult
+		formatString: Text
+		isHidden
+		displayFolder: Metadata
+		lineageTag: 6f1fd2a2-122a-4022-86b7-62c858718ebd
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.6e05fcfb-2609-4df0-8572-52d77a5f3ec8.0})
+	/// AI Generated Description:
+	/// This Qlik expression is summing the values of either the OUTSTGAMT field or the UNCONV_OUTSTGAMNT field, depending on whether the variable vCurr is equal to 1.
+	measure 'Unnamed Measure' =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX(FILTER('PROD', $(vCurr) = 1), 'PROD'[OUTSTGAMT]) + SUMX(FILTER('PROD', $(vCurr) <> 1), 'PROD'[UNCONV_OUTSTGAMNT])
+			*/
+			Sum(IF($(vCurr) = 1, OUTSTGAMT, 'PROD'[UNCONV_OUTSTGAMNT]))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			Sum(IF(vCurr = 1, OUTSTGAMT, 'PROD'[UNCONV_OUTSTGAMNT]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			Sum(IF($(vCurr) = 1, OUTSTGAMT, UNCONV_OUTSTGAMNT))
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\High Level Overview\Oustanding Amount (6e05fcfb-2609-4df0-8572-52d77a5f3ec8)
+		lineageTag: 47df26d0-62b7-4a8e-b5fa-35a6306416e3
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.b08053f7-006a-4ee2-bf64-8606f356f840.0})
+	/// AI Generated Description:
+	/// This Qlik expression is summing the values of either OUTSTGAMT or UNCONV_OUTSTGAMNT based on certain conditions. The conditions are that the field [Past Due] must equal 1 and the variable vCurr must equal 1. If both conditions are met, the expression will sum the values in the OUTSTGAMT field. If the conditions are not met, the expression will sum the values in the UNCONV_OUTSTGAMNT field.
+	measure 'Past Due Amount' =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX(FILTER('PROD', 'PROD'[Past Due] = 1), IF($(vCurr) = 1, 'PROD'[OUTSTGAMT], 'PROD'[UNCONV_OUTSTGAMNT]))
+			*/
+			Sum(IF('PROD'[Past Due] = 1, IF($(vCurr) = 1, OUTSTGAMT, 'PROD'[UNCONV_OUTSTGAMNT])))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			Sum(IF('PROD'[Past Due] = 1, IF(vCurr = 1, OUTSTGAMT, 'PROD'[UNCONV_OUTSTGAMNT])))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			Sum(IF([Past Due] = 1, IF($(vCurr) = 1, OUTSTGAMT, UNCONV_OUTSTGAMNT)))
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\High Level Overview\='Past Due' (b08053f7-006a-4ee2-bf64-8606f356f840)
+		lineageTag: 78f74ef8-7ae7-41b5-b5ee-3e5093afabb1
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.0bcd2cc2-368b-4c7c-9512-9fac6db63137.1})
+	/// AI Generated Description:
+	/// This Qlik expression is calculating the sum of the field NO_INVOICES.
+	measure #Invoices =
+			
+			SUM ( 'PROD'[NO_INVOICES] )
+			
+			/********Expanded Definition:********/
+			/*
+			SUM('PROD'[NO_INVOICES])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			SUM(NO_INVOICES)
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\High Level Overview\(0bcd2cc2-368b-4c7c-9512-9fac6db63137)
+		lineageTag: 83222621-d860-46b1-8b82-b936d4877682
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.63fc745d-1400-4c5a-ad30-6f76207ea170.1})
+	/// AI Generated Description:
+	/// This Qlik expression calculates the ratio of the sum of past due amounts to the sum of outstanding amounts. The set expression is not present in this expression.
+	measure '%Past Due' =
+			
+			DIVIDE ( SUM ( 'PROD'[PAST_DUE_AMT] ), SUM ( 'PROD'[OUTSTGAMT] ) )
+			
+			/********Expanded Definition:********/
+			/*
+			SUM('PROD'[PAST_DUE_AMT])/SUM('PROD'[OUTSTGAMT])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			SUM(PAST_DUE_AMT)/SUM(OUTSTGAMT)
+			*/
+		formatString: #,##0.00%
+		displayFolder: Converted Measures\Object Specific Measures\High Level Overview\(63fc745d-1400-4c5a-ad30-6f76207ea170)
+		lineageTag: fb8b2dc5-8de3-4b43-84f8-ce9ae809a50b
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.jZckWv.0})
+	/// AI Generated Description:
+	/// This Qlik expression is calculating the sum of the field OUTSTGAMT.
+	measure Amount =
+			
+			SUM ( 'PROD'[OUTSTGAMT] )
+			
+			/********Expanded Definition:********/
+			/*
+			Sum('PROD'[OUTSTGAMT])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			Sum(OUTSTGAMT)
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\Aging (jZckWv)
+		lineageTag: d8809784-3102-4751-b9af-f9e8f064b7cf
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.UydnXW.0})
+	/// AI Generated Description:
+	/// This Qlik expression is summing the values of either the field AMT_1_30 or UNCONV_AMT_1_30, depending on whether the variable vCurr is equal to 1.
+	measure 1-30 =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX('PROD', IF($(vCurr) = 1, 'PROD'[AMT_1_30], 'PROD'[UNCONV_AMT_1_30]))
+			*/
+			SUM(IF($(vCurr) = 1, AMT_1_30, 'PROD'[UNCONV_AMT_1_30]))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF(vCurr = 1, AMT_1_30, 'PROD'[UNCONV_AMT_1_30]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF($(vCurr) = 1, AMT_1_30, UNCONV_AMT_1_30))
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\(UydnXW)
+		lineageTag: 1a54fa13-b067-429b-bdb1-357b2f43f771
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.UydnXW.1})
+	/// AI Generated Description:
+	/// This Qlik expression is calculating the ratio of the sum of AMT_1_30 field from one table to the sum of OUTSTGAMT field from another table.
+	measure 'Unnamed Measure (UydnXW, 1)' =
+			
+			DIVIDE ( SUM ( 'PROD'[AMT_1_30] ), SUM ( 'PROD'[OUTSTGAMT] ) )
+			
+			/********Expanded Definition:********/
+			/*
+			SUM('PROD'[AMT_1_30])/SUM('PROD'[OUTSTGAMT])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			SUM(AMT_1_30)/SUM(OUTSTGAMT)
+			*/
+		formatString: #,##0.0%
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\(UydnXW)
+		lineageTag: b3d96209-bb58-41ad-81ff-2b64bc9758a0
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.ZSefEd.0})
+	/// AI Generated Description:
+	/// This Qlik expression is summing the values of either the field AMT_31_60 or UNCONV_AMT_31_60, depending on whether the variable vCurr is equal to 1.
+	measure 31-60 =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX('PROD', IF($(vCurr) = 1, 'PROD'[AMT_31_60], 'PROD'[UNCONV_AMT_31_60]))
+			*/
+			SUM(IF($(vCurr) = 1, AMT_31_60, 'PROD'[UNCONV_AMT_31_60]))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF(vCurr = 1, AMT_31_60, 'PROD'[UNCONV_AMT_31_60]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF($(vCurr) = 1, AMT_31_60, UNCONV_AMT_31_60))
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\(ZSefEd)
+		lineageTag: 46068991-a9c3-4b8c-b2d9-2851ca685dcc
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.ZSefEd.1})
+	/// AI Generated Description:
+	/// This Qlik expression is calculating the ratio of the sum of AMT_31_60 field values to the sum of OUTSTGAMT field values.
+	measure 'Unnamed Measure (ZSefEd, 1)' =
+			
+			DIVIDE ( SUM ( 'PROD'[AMT_31_60] ), SUM ( 'PROD'[OUTSTGAMT] ) )
+			
+			/********Expanded Definition:********/
+			/*
+			SUM('PROD'[AMT_31_60])/SUM('PROD'[OUTSTGAMT])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			SUM(AMT_31_60)/SUM(OUTSTGAMT)
+			*/
+		formatString: #,##0.0%
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\(ZSefEd)
+		lineageTag: 5c206053-31af-4e6f-a4b6-6cf80cdea485
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.KPgbPrm.0})
+	/// AI Generated Description:
+	/// This Qlik expression is summing the values of either the field AMT_61_90 or UNCONV_AMT_61_90, depending on whether the variable vCurr is equal to 1.
+	measure 61-90 =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX('PROD', IF($(vCurr) = 1, 'PROD'[AMT_61_90], 'PROD'[UNCONV_AMT_61_90]))
+			*/
+			SUM(IF($(vCurr) = 1, AMT_61_90, 'PROD'[UNCONV_AMT_61_90]))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF(vCurr = 1, AMT_61_90, 'PROD'[UNCONV_AMT_61_90]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF($(vCurr) = 1, AMT_61_90, UNCONV_AMT_61_90))
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\(KPgbPrm)
+		lineageTag: 9634e87f-f6bf-438a-b5dc-a3fcda549feb
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.KPgbPrm.1})
+	/// AI Generated Description:
+	/// This Qlik expression is calculating the ratio of the sum of AMT_61_90 field values to the sum of OUTSTGAMT field values.
+	measure 'Unnamed Measure (KPgbPrm, 1)' =
+			
+			DIVIDE ( SUM ( 'PROD'[AMT_61_90] ), SUM ( 'PROD'[OUTSTGAMT] ) )
+			
+			/********Expanded Definition:********/
+			/*
+			SUM('PROD'[AMT_61_90])/SUM('PROD'[OUTSTGAMT])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			SUM(AMT_61_90)/SUM(OUTSTGAMT)
+			*/
+		formatString: #,##0.0%
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\(KPgbPrm)
+		lineageTag: c442578d-b9ec-424f-a060-7e7011d59d8d
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.Gcvam.0})
+	/// AI Generated Description:
+	/// This Qlik expression is calculating the sum of either the AMT_90 field or the UNCONV_AMT_90 field, depending on whether the variable vCurr is equal to 1. The IF function is used to conditionally select which field to sum.
+	measure 90+ =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX('PROD', IF($(vCurr) = 1, 'PROD'[AMT_90], 'PROD'[UNCONV_AMT_90]))
+			*/
+			SUM(IF($(vCurr) = 1, AMT_90, 'PROD'[UNCONV_AMT_90]))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF(vCurr = 1, AMT_90, 'PROD'[UNCONV_AMT_90]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF($(vCurr) = 1, AMT_90, UNCONV_AMT_90))
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\(Gcvam)
+		lineageTag: 742311ad-d751-4eed-8a4b-5a8ff638f561
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.Gcvam.1})
+	/// AI Generated Description:
+	/// This Qlik expression is calculating the ratio of the sum of AMT_90 field from one table to the sum of OUTSTGAMT field from another table.
+	measure 'Unnamed Measure (Gcvam, 1)' =
+			
+			DIVIDE ( SUM ( 'PROD'[AMT_90] ), SUM ( 'PROD'[OUTSTGAMT] ) )
+			
+			/********Expanded Definition:********/
+			/*
+			SUM('PROD'[AMT_90])/SUM('PROD'[OUTSTGAMT])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			SUM(AMT_90)/SUM(OUTSTGAMT)
+			*/
+		formatString: #,##0.0%
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\(Gcvam)
+		lineageTag: 3565ce75-d326-4058-a6bb-93e124ec91c7
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.CJmZPP.1})
+	/// AI Generated Description:
+	/// This Qlik expression is calculating the sum of the DUE_IN_30_COUNT field.
+	measure '# Invoices' =
+			
+			SUM ( 'PROD'[DUE_IN_30_COUNT] )
+			
+			/********Expanded Definition:********/
+			/*
+			SUM('PROD'[DUE_IN_30_COUNT])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			SUM(DUE_IN_30_COUNT)
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\(CJmZPP)
+		lineageTag: afe0263e-9d0a-483c-b682-8f13ea94f54a
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.vvpdyGB.1})
+	/// AI Generated Description:
+	/// This Qlik expression is summing the values of either the ORIGAMT or UNCONV_ORIGAMT fields, depending on whether the variable vCurr is equal to 1.
+	measure 'Orig Amt' =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX(FILTER('PROD', $(vCurr) = 1), 'PROD'[ORIGAMT]) + SUMX(FILTER('PROD', $(vCurr) <> 1), 'PROD'[UNCONV_ORIGAMT])
+			*/
+			Sum(IF($(vCurr) = 1, ORIGAMT, 'PROD'[UNCONV_ORIGAMT]))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			Sum(IF(vCurr = 1, ORIGAMT, 'PROD'[UNCONV_ORIGAMT]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			Sum(IF($(vCurr) = 1, ORIGAMT, UNCONV_ORIGAMT))
+			*/
+		formatString: $#,##0.00
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\Open Invoices (vvpdyGB)
+		lineageTag: 67d1268c-751a-4195-be9e-bd9639039e3e
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.vvpdyGB.2})
+	/// AI Generated Description:
+	/// This Qlik expression is summing the PAID_AMOUNT field if the variable vCurr is equal to 1, otherwise it is summing the UNCONV_PAID_AMOUNT field.
+	measure Diff =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX(FILTER('PROD', $(vCurr) = 1), 'PROD'[PAID_AMOUNT]) + SUMX(FILTER('PROD', $(vCurr) <> 1), 'PROD'[UNCONV_PAID_AMOUNT])
+			*/
+			Sum(IF($(vCurr) = 1, PAID_AMOUNT, 'PROD'[UNCONV_PAID_AMOUNT]))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			Sum(IF(vCurr = 1, PAID_AMOUNT, 'PROD'[UNCONV_PAID_AMOUNT]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			Sum(IF($(vCurr) = 1, PAID_AMOUNT, UNCONV_PAID_AMOUNT))
+			*/
+		formatString: $#,##0
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoices\Open Invoices (vvpdyGB)
+		lineageTag: a5a72835-db2c-43e1-b1d0-d7a799f9e7d7
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.LWgpmWH.0})
+	/// AI Generated Description:
+	/// This Qlik expression is calculating the ratio of the sum of OUTSTGAMT or UNCONV_OUTSTGAMNT (depending on the value of vCurr) to the total sum of OUTSTGAMT or UNCONV_OUTSTGAMNT (again, depending on the value of vCurr).
+	measure '% of AR' = ```
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			DIVIDE(
+			    SUMX(
+			        FILTER(
+			            'PROD',
+			            $(vCurr) = 1
+			        ),
+			        'PROD'[OUTSTGAMT]
+			    ) + 
+			    SUMX(
+			        FILTER(
+			            'PROD',
+			            $(vCurr) <> 1
+			        ),
+			        'PROD'[UNCONV_OUTSTGAMNT]
+			    ),
+			    CALCULATE(
+			        SUMX(
+			            'PROD',
+			            'PROD'[OUTSTGAMT] + 'PROD'[UNCONV_OUTSTGAMNT]
+			        ),
+			        ALL('PROD')
+			    )
+			)
+			*/
+			SUM(IF($(vCurr) = 1, OUTSTGAMT, 'PROD'[UNCONV_OUTSTGAMNT]))/SUM(TOTAL(IF($(vCurr) = 1, OUTSTGAMT, 'PROD'[UNCONV_OUTSTGAMNT])))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF(vCurr = 1, OUTSTGAMT, 'PROD'[UNCONV_OUTSTGAMNT]))/SUM(TOTAL(IF(vCurr = 1, OUTSTGAMT, 'PROD'[UNCONV_OUTSTGAMNT])))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF($(vCurr) = 1, OUTSTGAMT, UNCONV_OUTSTGAMNT))/SUM(TOTAL(IF($(vCurr) = 1, OUTSTGAMT, UNCONV_OUTSTGAMNT)))
+			*/
+			```
+		formatString: #,##0.0%
+		displayFolder: Converted Measures\Object Specific Measures\Summary Totals\Dynamic Pivot Table (LWgpmWH)
+		lineageTag: 0cf3cd35-882f-4b10-a16f-d7070bf68868
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.LWgpmWH.12})
+	/// AI Generated Description:
+	/// This Qlik expression is summing either the PAST_DUE_AMT or UNCONV_PAST_DUE_AMT field based on the value of the vCurr variable. If vCurr equals 1, it will sum the PAST_DUE_AMT field, otherwise it will sum the UNCONV_PAST_DUE_AMT field.
+	measure 'Past Due' =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX('PROD', IF($(vCurr) = 1, 'PROD'[PAST_DUE_AMT], 'PROD'[UNCONV_PAST_DUE_AMT]))
+			*/
+			SUM(IF($(vCurr) = 1, PAST_DUE_AMT, 'PROD'[UNCONV_PAST_DUE_AMT]))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF(vCurr = 1, PAST_DUE_AMT, 'PROD'[UNCONV_PAST_DUE_AMT]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF($(vCurr) = 1, PAST_DUE_AMT, UNCONV_PAST_DUE_AMT))
+			*/
+		formatString: $#,##0
+		displayFolder: Converted Measures\Object Specific Measures\Summary Totals\Dynamic Pivot Table (LWgpmWH)
+		lineageTag: 009548d1-5bd1-41c9-b2fa-f523f29fe9a4
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.1772729a-00bb-4102-9666-ba67fcefa6cd.2})
+	/// AI Generated Description:
+	/// This Qlik expression calculates the sum of the SALES_TAX_TOTAL field.
+	measure Tax =
+			
+			SUM ( 'PROD'[SALES_TAX_TOTAL] )
+			
+			/********Expanded Definition:********/
+			/*
+			Sum('PROD'[SALES_TAX_TOTAL])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			Sum(SALES_TAX_TOTAL)
+			*/
+		formatString: $#,##0.00
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoice Report\All Open Invoices (1772729a-00bb-4102-9666-ba67fcefa6cd)
+		lineageTag: 70eb68d0-ef90-45f9-8fdd-b2a105d2295d
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.1772729a-00bb-4102-9666-ba67fcefa6cd.3})
+	/// AI Generated Description:
+	/// The Qlik expression is calculating the total sum of the field "TOTAL_FRT".
+	measure 'Total Frt' =
+			
+			SUM ( 'PROD'[TOTAL_FRT] )
+			
+			/********Expanded Definition:********/
+			/*
+			Sum('PROD'[TOTAL_FRT])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			Sum(TOTAL_FRT)
+			*/
+		formatString: $#,##0.00
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoice Report\All Open Invoices (1772729a-00bb-4102-9666-ba67fcefa6cd)
+		lineageTag: d430fe84-63a6-41b4-8fca-c0dd168c43c3
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.58dd68e1-39bd-44b2-bf89-fd8d3b5a6fb9.0})
+	/// AI Generated Description:
+	/// This Qlik expression is counting the distinct values of the field ITEMID.
+	measure '# Invoices (58dd68e1-39bd-44b2-bf89-fd8d3b5a6fb9, 0)' =
+			
+			DISTINCTCOUNT ( 'PROD'[ITEMID] )
+			
+			/********Expanded Definition:********/
+			/*
+			COUNT(DISTINCT('PROD'[ITEMID]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			COUNT(DISTINCT(ITEMID))
+			*/
+		displayFolder: Converted Measures\Object Specific Measures\Open Invoice Report\='Open Invoices by Natl Acct' (58dd68e1-39bd-44b2-bf89-fd8d3b5a6fb9)
+		lineageTag: 19520fe4-2dbf-4ee4-b013-c039190c3a66
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.50bd75a6-0ed3-490e-a88a-47906952d4c9.6})
+	/// AI Generated Description:
+	/// The Qlik expression is calculating the ratio of the sum of PAST_DUE_AMT to the sum of OUTSTGAMT, and if the result is null, it returns 0. The ALT function is used to handle null values.
+	measure 'Past Due %' =
+			
+			IF (
+			    DIVIDE ( SUM ( 'PROD'[PAST_DUE_AMT] ), SUM ( 'PROD'[OUTSTGAMT] ), 0 ) = 0,
+			    0,
+			    DIVIDE ( SUM ( 'PROD'[PAST_DUE_AMT] ), SUM ( 'PROD'[OUTSTGAMT] ), 0 )
+			)
+			
+			/********Expanded Definition:********/
+			/*
+			ALT(Sum('PROD'[PAST_DUE_AMT])/Sum('PROD'[OUTSTGAMT]),0)
+			*/
+			
+			/********Original Definition:********/
+			/*
+			ALT(Sum(PAST_DUE_AMT)/Sum(OUTSTGAMT),0)
+			*/
+		formatString: 0.0%
+		displayFolder: Converted Measures\Object Specific Measures\Projected AR Admin Fee\Projected AR Admin Fee (50bd75a6-0ed3-490e-a88a-47906952d4c9)
+		lineageTag: 5fb70e82-26cc-498f-990e-5cf644d19d8f
+
+	/// 
+	/// 
+	/// (QlikId:{c16c9bb1-62b8-4f31-af39-2dbac267c9e3.50bd75a6-0ed3-490e-a88a-47906952d4c9.7})
+	/// AI Generated Description:
+	/// This Qlik expression is summing the values of either the FINAL_AR_FEE or UNCONV_FINAL_AR_FEE fields, depending on whether the variable vCurr is equal to 1.
+	measure 'Projected AR Admin Fee' =
+			
+			
+			VAR vCurr = 1
+			RETURN
+			/*Syntax errors were found when converting this measure:
+			SUMX(FILTER('PROD', 'PROD'[UNCONV_FINAL_AR_FEE] <> BLANK()), IF($(vCurr) = 1, 'PROD'[FINAL_AR_FEE], 'PROD'[UNCONV_FINAL_AR_FEE]))
+			*/
+			SUM(IF($(vCurr) = 1, FINAL_AR_FEE, 'PROD'[UNCONV_FINAL_AR_FEE]))
+			
+			/********Expanded Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF(vCurr = 1, FINAL_AR_FEE, 'PROD'[UNCONV_FINAL_AR_FEE]))
+			*/
+			
+			/********Original Definition:********/
+			/*
+			VAR vCurr = 1
+			RETURN
+			SUM(IF($(vCurr) = 1, FINAL_AR_FEE, UNCONV_FINAL_AR_FEE))
+			*/
+		formatString: $#,##0;-$#,##0.
+		displayFolder: Converted Measures\Object Specific Measures\Projected AR Admin Fee\Projected AR Admin Fee (50bd75a6-0ed3-490e-a88a-47906952d4c9)
+		lineageTag: b85bf5f8-4991-4c94-a9ef-baa0f81a1e8a
+
+	/// The Qlik expression is using a variable named vRollup to dynamically generate a set expression. The set expression is then evaluated and the resulting value is returned.
+	measure Customer =
+			
+			$(vRollup)
+			
+			/********Expanded Definition:********/
+			/*
+			$(vRollup)
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=$(vRollup)
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: e3511aeb-c16e-452b-a7a6-3c3bce2089f3
+
+	/// The Qlik expression is using a variable named vRollup to dynamically generate a set expression. The set expression is then evaluated and the resulting value is returned.
+	measure Group =
+			
+			$(vRollup)
+			
+			/********Expanded Definition:********/
+			/*
+			$(vRollup)
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=$(vRollup)
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: 53982fac-ecc7-4505-8cef-283fdb5c6961
+
+	/// The Qlik expression is using the LEFT function to extract the first 20 characters from the CUSTNAME field.
+	measure Name =
+			
+			LEFT ( 'Table'[CUSTNAME], 20 )
+			
+			/********Expanded Definition:********/
+			/*
+			LEFT(CUSTNAME,20)
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=LEFT(CUSTNAME,20)
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: bba75f4c-bb84-4df2-b58a-378bfc9b56a2
+
+	/// The Qlik expression concatenates the values from the "National Acct" field and the "NAME" field, separated by a hyphen if the "NAME" field is not null.
+	measure 'Natl Account' =
+			
+			CONCATENATE (
+			    'PROD'[National Acct],
+			    IF ( NOT ( ISBLANK ( 'PROD'[NAME] ) ), " - " & 'PROD'[NAME] )
+			)
+			
+			/********Expanded Definition:********/
+			/*
+			'PROD'[National Acct] & IF(NOT(ISNULL(NAME)), ' - ' & 'PROD'[NAME])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=[National Acct] & IF(NOT(ISNULL(NAME)), ' - ' & NAME)
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: d618a6be-fe75-4cc5-b25c-b76922982384
+
+	/// The Qlik expression is using a variable named vRollup to dynamically generate a set expression. The set expression is then evaluated and the resulting value is returned.
+	measure Dropdown =
+			
+			$(vRollup)
+			
+			/********Expanded Definition:********/
+			/*
+			$(vRollup)
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=$(vRollup)
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: f904822e-3144-4bb0-9431-c4807c7fc622
+
+	/// This Qlik expression is using an IF statement to check if the length of the National Acct No field is less than 2. If it is, the expression returns 'Local Account'. If not, it concatenates the National Acct No and National Acct Name fields with a hyphen in between.
+	measure 'National Account' =
+			
+			IF (
+			    LEN ( TRIM ( 'PROD'[National Acct No] ) ) < 2,
+			    "Local Account",
+			    'PROD'[National Acct No] & " - " & 'PROD'[National Acct Name]
+			)
+			
+			/********Expanded Definition:********/
+			/*
+			IF(LEN(TRIM('PROD'[National Acct No])) < 2, 'Local Account',
+			
+			'PROD'[National Acct No] & ' - ' & 'PROD'[National Acct Name])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=IF(LEN(TRIM([National Acct No])) < 2, 'Local Account',
+			
+			[National Acct No] & ' - ' & [National Acct Name])
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: 13dbca98-1f70-4c76-8aeb-b073918415b7
+
+	/// This Qlik expression uses an IF statement to check if the TTL_PAST_DUE field equals 'Y'. If it does, the expression returns the value of the BU field.
+	measure BU =
+			
+			BLANK()
+			
+			/*Expression definition commented to avoid cirular reference.
+			
+			
+			
+			IF ( 'TOTAL_PAST_DUE'[TTL_PAST_DUE] = "Y", 'PROD'[BU] )
+			
+			/********Expanded Definition:********/
+			/*
+			IF('TOTAL_PAST_DUE'[TTL_PAST_DUE] = 'Y', 'PROD'[BU])
+			*/
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=IF(TTL_PAST_DUE = 'Y', BU)
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: 9a7fd1a3-5029-4909-8599-14318993c418
+
+	/// The Qlik expression is using the LEFT function to extract the first 20 characters from the CUSTNAME field.
+	measure 'Cust Name' =
+			
+			LEFT ( 'Table'[CUSTNAME], 20 )
+			
+			/********Expanded Definition:********/
+			/*
+			LEFT(CUSTNAME,20)
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=LEFT(CUSTNAME,20)
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: 11ba2ab4-9c17-4e57-9a0e-53737b684b47
+
+	/// This Qlik expression is creating an empty string.
+	measure Comments =
+			
+			' '
+			
+			/********Expanded Definition:********/
+			/*
+			' '
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=' '
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: be0ebf58-cbd2-4851-b74d-af475c8209d8
+
+	/// This Qlik expression uses an IF statement with a set expression to evaluate whether the PAST_DUE_AMT field is greater than 5000. If it is, the expression returns the ITEMID field.
+	measure Invoice =
+			
+			IF ( 'PROD'[PAST_DUE_AMT] > 5000, 'PROD'[ITEMID] )
+			
+			/********Expanded Definition:********/
+			/*
+			IF('PROD'[PAST_DUE_AMT] > 5000, 'PROD'[ITEMID])
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=IF(PAST_DUE_AMT > 5000, ITEMID)
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: 3c78f23f-cdc3-4816-a193-1211215b0c99
+
+	/// This Qlik expression is using an IF statement with a set expression to determine whether to exclude credits or not. If the variable vExcludeCredits is equal to 1, it will check if the OUTSTGAMT_CREDIT_BALANCE field is equal to 'N' and return the CUSTACCTNO field. Otherwise, it will return the CUSTACCTNO field.
+	measure 'Branch Acct' = ```
+			
+			/*Syntax errors were found when converting this measure:
+			IF('$(vExcludeCredits)' = "1", 
+				IF('PROD'[OUTSTGAMT_CREDIT_BALANCE] = "N", 'CUST_AGGR'[CUSTACCTNO]),
+				'CUSTACCTNO')
+			*/
+			IF($(vExcludeCredits) = 1, 
+				IF('PROD'[OUTSTGAMT_CREDIT_BALANCE] = 'N', 'CUST_AGGR'[CUSTACCTNO])
+			,
+				CUSTACCTNO)
+			
+			/********Expanded Definition:********/
+			/*
+			IF($(vExcludeCredits) = 1, 
+				IF('PROD'[OUTSTGAMT_CREDIT_BALANCE] = 'N', 'CUST_AGGR'[CUSTACCTNO])
+			,
+				CUSTACCTNO)
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=IF($(vExcludeCredits) = 1, 
+				IF(OUTSTGAMT_CREDIT_BALANCE = 'N', CUSTACCTNO)
+			,
+				CUSTACCTNO)
+			*/
+			```
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: 108df0b2-1053-45ac-ace3-c2b2b14aeca2
+
+	/// This Qlik expression checks if the value in the field MI_GROUP_LOC is equal to a blank space. If it is, it returns NULL. Otherwise, it returns the value in MI_GROUP_LOC. The key concepts used in this expression are the IF statement, the comparison operator "=", and the NULL value.
+	measure Grp =
+			
+			/*Syntax errors were found when converting this measure:
+			IF(MI_GROUP_LOC="    ", BLANK(), MI_GROUP_LOC)
+			*/
+			if(MI_GROUP_LOC='    ',NUll(),MI_GROUP_LOC)
+			
+			/********Expanded Definition:********/
+			/*
+			if(MI_GROUP_LOC='    ',NUll(),MI_GROUP_LOC)
+			*/
+			
+			/********Original Definition:********/
+			/*
+			=if(MI_GROUP_LOC='    ',NUll(),MI_GROUP_LOC)
+			*/
+		displayFolder: Converted Measures\Calculated Dimensions
+		lineageTag: c49d7657-b425-45d1-aba9-3ed29075f541
+
+	measure 'Outstanding Amount' = ```
+			[Current Total] + [Past Due Total]
+			  
+			```
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 4c3bfd08-3729-45b8-a8cc-90568efcdf8f
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Current Total' =
+			CALCULATE(
+			                        SUMX(AR_DAILY_OPEN_INVOICES,AR_DAILY_OPEN_INVOICES[GPC_ORIG_AMT_USD]),AR_DAILY_OPEN_INVOICES[PAST_DUE_FLAG] = "N")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: a4bd8225-e560-4378-80a5-72858b610899
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Past Due Total' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_ORIG_AMT_USD]),AR_DAILY_OPEN_INVOICES[PAST_DUE_FLAG] = "Y")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: b1758b48-cb4d-4b5b-ac8e-5e531e17c39e
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Past Due 1-30' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_ORIG_AMT_USD]),AR_DAILY_OPEN_INVOICES[PAST_DUE_DAYS] = "1-30")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: ceb4adae-b950-4e03-a617-af7808bd45d0
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Past Due 31-60' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_ORIG_AMT_USD]),AR_DAILY_OPEN_INVOICES[PAST_DUE_DAYS] = "31-60")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: c4de2888-8714-417c-a04c-e16a79d737eb
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Past Due 61-90' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_ORIG_AMT_USD]),AR_DAILY_OPEN_INVOICES[PAST_DUE_DAYS] = "61-90")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 181f2f23-00af-49a1-bdfa-4237c74ffe50
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Past Due 90+' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_ORIG_AMT_USD]),AR_DAILY_OPEN_INVOICES[PAST_DUE_DAYS] = "90+")
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: d817df27-c28d-4d1d-b8ea-b1314ea00096
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Coming Due < 30 USD' =
+			
+			CALCULATE(
+			    SUM(AR_DAILY_OPEN_INVOICES[GPC_ORIG_AMT_USD]),
+			    AR_DAILY_OPEN_INVOICES[PAST_DUE_FLAG] = "N",
+			    DATEDIFF(AR_DAILY_OPEN_INVOICES[GPC_DUE_DATE], TODAY(), DAY) <= 30,
+			    DATEDIFF(AR_DAILY_OPEN_INVOICES[GPC_DUE_DATE], TODAY(), DAY) >= 0
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: df0ae54f-b7f1-48ba-94e7-f75f12f9a455
+
+	measure 'No of Invoices' = COUNTROWS(AR_DAILY_OPEN_INVOICES)
+		formatString: 0
+		lineageTag: 7e7a3a58-4b20-42dc-b56a-0ca83ed45049
+
+	measure 'Coming Due < 30 BASE' =
+			
+			CALCULATE(
+			    SUM(AR_DAILY_OPEN_INVOICES[GPC_AMOUNT_1]),
+			    AR_DAILY_OPEN_INVOICES[PAST_DUE_FLAG] = "N",
+			    DATEDIFF(AR_DAILY_OPEN_INVOICES[GPC_DUE_DATE], TODAY(), DAY) <= 30,
+			    DATEDIFF(AR_DAILY_OPEN_INVOICES[GPC_DUE_DATE], TODAY(), DAY) >= 0
+			)
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 0ba235dd-9869-47f6-bcf5-066f7519fabd
+
+	measure 'No of Past Due' =
+			CALCULATE(
+			    COUNTROWS(AR_DAILY_OPEN_INVOICES),
+			    AR_DAILY_OPEN_INVOICES[PAST_DUE_FLAG] = "Y"
+			)
+		formatString: 0
+		lineageTag: 092bd314-5a81-4370-8821-0cb949b405bf
+
+	measure '% No of Past Due' = DIVIDE([No of Past Due], CALCULATE(COUNTROWS(AR_DAILY_OPEN_INVOICES),ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b8607193-ba2e-4f08-be8d-dc7cc6e3904e
+
+	measure 'Report Refresh Date' = ```
+			
+			"Report as of: "
+			& 
+			FORMAT
+			(
+			Max
+			('zLast Refresh Datetime'[Last Refresh Datetime]),
+			"mm/dd/yyyy"
+			)
+			```
+		lineageTag: 125071cf-dc96-4ed8-ba16-1e73b29eee54
+
+	measure 'Current Total BASE' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_BASE]),AR_DAILY_OPEN_INVOICES[PAST_DUE_FLAG] = "N")
+		formatString: 0
+		lineageTag: 1c4fc09b-9f26-49ea-9f86-985508b61141
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Past Due Total BASE' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_BASE]),AR_DAILY_OPEN_INVOICES[PAST_DUE_FLAG] = "Y")
+		formatString: 0
+		lineageTag: a875c7eb-7cec-4648-aa9e-154e681805cb
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Outstanding Amount BASE' = [Current Total BASE] + [Past Due Total BASE]
+		formatString: 0
+		lineageTag: a5f70edd-ae63-4c55-9306-e1d376b42582
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Past Due 1-30 BASE' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_BASE]),AR_DAILY_OPEN_INVOICES[PAST_DUE_DAYS] = "1-30")
+		formatString: 0
+		lineageTag: 3b8bfcb9-7959-4cdb-8f91-64b62702cdf4
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Past Due 31-60 BASE' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_BASE]),AR_DAILY_OPEN_INVOICES[PAST_DUE_DAYS] = "31-60")
+		formatString: 0
+		lineageTag: c04e1474-00e4-4d6b-9382-242f1a5aeab1
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Past Due 61-90 BASE' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_BASE]),AR_DAILY_OPEN_INVOICES[PAST_DUE_DAYS] = "61-90")
+		formatString: 0
+		lineageTag: 168d7730-5b17-47fa-a888-826d66ed2b22
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Past Due 90+ BASE' =
+			CALCULATE(
+			                        SUM(AR_DAILY_OPEN_INVOICES[GPC_BASE]),AR_DAILY_OPEN_INVOICES[PAST_DUE_DAYS] = "90+")
+		formatString: 0
+		lineageTag: 5cea93e6-89a7-4a29-a813-14f7d12bda5c
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '# Invoices <30' =
+			CALCULATE(
+			    COUNTROWS(AR_DAILY_OPEN_INVOICES),
+			    AR_DAILY_OPEN_INVOICES[PAST_DUE_FLAG] = "N",
+			    DATEDIFF(AR_DAILY_OPEN_INVOICES[GPC_DUE_DATE], TODAY(), DAY) <= 30,
+			    DATEDIFF(AR_DAILY_OPEN_INVOICES[GPC_DUE_DATE], TODAY(), DAY) >= 0)
+		formatString: 0
+		lineageTag: 4b305767-44c0-45ab-a0ef-4884232c48e7
+
+	measure 'No of Current' =
+			CALCULATE(
+			    COUNTROWS(AR_DAILY_OPEN_INVOICES),
+			    AR_DAILY_OPEN_INVOICES[PAST_DUE_FLAG] = "N"
+			)
+		formatString: 0
+		lineageTag: d921c1ac-df6e-4310-8b25-e541f7e063fc
+
+	measure '% No of Current' = DIVIDE([No of Current], [No of Invoices])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f6f3d366-ff85-44c8-8523-7633678fa5c5
+
+	measure '% AR' =
+			DIVIDE(
+			    [No of Invoices],CALCULATE(COUNTROWS(AR_DAILY_OPEN_INVOICES), ALL(AR_DAILY_OPEN_INVOICES)
+			    ))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 73cc44a6-00c4-424a-9e46-a11c4059b8ce
+
+	measure 'test invoices' = CALCULATE(COUNTROWS(AR_DAILY_OPEN_INVOICES), AR_DAILY_OPEN_INVOICES[GPC_NAME] = "MOSAIC POTASH ESTERHAZY")
+		formatString: 0
+		lineageTag: 9d7ec59f-7445-4d83-a09a-3e11b08f974c
+
+	measure '% Outstanding' =
+			DIVIDE(
+			    [Outstanding Amount],CALCULATE([Current Total] + [Past Due Total], ALL(AR_DAILY_OPEN_INVOICES)
+			    ))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: dcfde4ea-4ccf-49ca-9920-04df12c739f1
+
+	measure '% Current' = ```
+			
+			DIVIDE(
+			    [Current Total], 
+			    CALCULATE([Outstanding Amount], ALL(AR_DAILY_OPEN_INVOICES))
+			)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d24079e4-9cef-488e-b55c-785f059de14b
+
+	measure '% Current BASE' = DIVIDE([Current Total BASE], CALCULATE([Outstanding Amount BASE], ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f699c6c9-6d24-4301-b98f-7a814dc523e8
+
+	measure '% Outstanding BASE' =
+			DIVIDE(
+			    [Outstanding Amount BASE],CALCULATE([Current Total BASE] + [Past Due Total BASE], ALL(AR_DAILY_OPEN_INVOICES)
+			    ))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f21371da-1a0f-41dc-9e2b-8673954826b3
+
+	measure '% Past Due 1-30' = DIVIDE([Past Due 1-30], CALCULATE([Outstanding Amount],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 716a04b2-4f90-4d4c-9d9f-d6aa61ce5b30
+
+	measure '% Past Due 1-30 BASE' = DIVIDE([Past Due 1-30 BASE], CALCULATE([Outstanding Amount BASE],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e3b0bac8-ff39-43bf-805b-81f757adcb33
+
+	measure '% Past Due 31-60' = DIVIDE([Past Due 31-60], CALCULATE([Outstanding Amount],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 465c0aa2-3942-4c15-9411-c1a8f30aeea4
+
+	measure '% Past Due 31-60 BASE' = DIVIDE([Past Due 31-60 BASE], CALCULATE([Outstanding Amount BASE],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0d3b8940-0686-465f-a848-b8c25330c571
+
+	measure '% Past Due 61-90' = DIVIDE([Past Due 61-90], CALCULATE([Outstanding Amount],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 8259486e-828d-4250-9399-6b2d9df1655a
+
+	measure '% Past Due 61-90 BASE' = DIVIDE([Past Due 61-90 BASE], CALCULATE([Outstanding Amount BASE],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 8ddeb3c5-9684-469b-9f5f-2d19f7f6f0b7
+
+	measure '% Past Due 90+' = DIVIDE([Past Due 90+], CALCULATE([Outstanding Amount],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: ed424bc2-19b1-4d8e-9d85-6fbfe6ae6c58
+
+	measure '% Past Due 90+ BASE' = DIVIDE([Past Due 90+ BASE], CALCULATE([Outstanding Amount BASE],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 978eb991-870f-4917-b77b-10181c30affe
+
+	measure '% Past Due Total' = DIVIDE([Past Due Total], CALCULATE([Outstanding Amount],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 8e232cad-159c-4009-97a3-f7bc797df145
+
+	measure '% Past Due Total BASE' = DIVIDE([Past Due Total BASE], CALCULATE([Outstanding Amount BASE],ALL(AR_DAILY_OPEN_INVOICES)))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b1524046-10db-4967-9133-0b5f7f251340
+
+	partition Measure-a580f112-e526-4cb4-9c6d-43e4a740badd = m
+		mode: import
+		queryGroup: Metadata\Queries
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    // Change type for column, which will be deleted in next step.
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

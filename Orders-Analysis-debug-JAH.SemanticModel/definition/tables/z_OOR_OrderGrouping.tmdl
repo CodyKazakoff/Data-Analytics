@@ -1,0 +1,51 @@
+table z_OOR_OrderGrouping
+	lineageTag: 655f1be3-4d75-4bea-9f05-1836444ac8ea
+
+	column z_OOR_OrderGrouping
+		lineageTag: c1faf62f-7388-4379-bb18-b0c01f81bb0d
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_OOR_OrderGrouping Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_OOR_OrderGrouping Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_OOR_OrderGrouping Fields'
+		lineageTag: 7be5ed46-ca76-4834-8cf6-cac50c0c4131
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_OOR_OrderGrouping Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_OOR_OrderGrouping Order'
+		isHidden
+		formatString: 0
+		lineageTag: 9f1ff564-534e-49c1-9ce1-a8633886b456
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_OOR_OrderGrouping = calculated
+		mode: import
+		source =
+				{
+				    ("Group", NAMEOF('D_Location'[MI Group No & Name]), 0),
+				    ("Division", NAMEOF('D_Location'[Division No & Name]), 1),
+				    ("Region", NAMEOF('D_Location'[MI Region Loc]), 2),
+				    ("Branch", NAMEOF('D_Location'[MI Loc  Location Name]), 3),
+				    ("Acct Rep", NAMEOF('F_Order_Item'[Territory Full Name]), 4),
+				    ("Order Writer", NAMEOF('F_Order_Item'[Order Writer]), 5)
+				}
+
+	annotation PBI_Id = bed8d87c73784875bc16edf2c9d5d8b4
+

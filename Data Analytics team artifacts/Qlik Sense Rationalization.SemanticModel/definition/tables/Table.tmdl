@@ -1,0 +1,119 @@
+table Table
+	lineageTag: 85a085b4-f618-4560-93fd-26073269b493
+
+	column Id
+		dataType: string
+		lineageTag: 94d84e43-82b7-4b7d-947b-4efb05f5b33a
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 973b7c8d-b3a4-4b82-98a2-f96734b62059
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Descrpition
+		dataType: string
+		lineageTag: bf81b1d5-8486-4007-b6be-cc4cb8b9375c
+		summarizeBy: none
+		sourceColumn: Descrpition
+
+		annotation SummarizationSetBy = Automatic
+
+	column RowCount
+		dataType: int64
+		formatString: #,0
+		lineageTag: d82e7e98-3811-406c-8c02-476451e19144
+		summarizeBy: none
+		sourceColumn: RowCount
+
+		annotation SummarizationSetBy = User
+
+	column Data
+		dataType: string
+		lineageTag: d8f956be-8304-439c-8387-e02fee655c11
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: b8bec5f5-2d71-4e78-a5aa-6b445e801eb5
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Complexity
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 0b169a22-54fa-454f-8e68-557fb4aa204d
+		summarizeBy: sum
+		sourceColumn: Complexity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 2d33df7f-8753-4ef3-9a35-0d454fc22179
+		summarizeBy: sum
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: 5f728cdf-0e0c-4e80-92f5-e026350256da
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Id - Case Insensitive'
+		dataType: string
+		lineageTag: bfe1f0fd-5e12-4725-8cdb-247d656759f1
+		summarizeBy: none
+		sourceColumn: Id - Case Insensitive
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppKey
+		dataType: string
+		lineageTag: 5c5172da-4fa0-45d2-82cc-8ab649d6f1ca
+		summarizeBy: none
+		sourceColumn: AppKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TableKey
+		dataType: string
+		lineageTag: b7dd514e-1b86-4846-885c-0cff1371f573
+		summarizeBy: none
+		sourceColumn: TableKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Table = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_table"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Solution_ID", "Solution ID"}, {"Id_Case_Insensitive", "Id - Case Insensitive"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Solution ID", type text}, {"Id", type text}, {"Name", type text}, {"Descrpition", type text}, {"RowCount", Int64.Type}, {"Data", type text}, {"Notes", type text}, {"Complexity", type number}, {"Index", Int64.Type}, {"Id - Case Insensitive", type text}})
+				
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

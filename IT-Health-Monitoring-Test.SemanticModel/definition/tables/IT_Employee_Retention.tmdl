@@ -1,0 +1,28 @@
+table IT_Employee_Retention
+	lineageTag: d1e00502-a662-4d64-8caf-d760ceefcafd
+
+	column Category
+		lineageTag: 1b346b75-35b2-412d-bd66-d57578a28a45
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Category]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition IT_Employee_Retention = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE(
+				    "Category", STRING, 
+				    {
+				        {"Previous Year Count"},
+				        {"New Hires"},
+				        {"Exits"}//,
+				        //{"Employee_Count_Current"}
+				    }
+				)
+				```
+
+	annotation PBI_Id = 4e736dcc977742d0bbb985a9796b6cf3
+

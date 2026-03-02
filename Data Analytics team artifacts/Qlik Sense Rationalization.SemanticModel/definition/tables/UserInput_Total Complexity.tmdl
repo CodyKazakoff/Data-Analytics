@@ -1,0 +1,28 @@
+table 'UserInput_Total Complexity'
+	lineageTag: 50d9faea-d29e-4fea-b5ed-e5ce6d748c2b
+
+	measure 'Total Complexity Value' = SELECTEDVALUE('UserInput_Total Complexity'[Total Complexity], 0.18)
+		lineageTag: 183c29c2-830b-4af5-82fd-ef5091d27a16
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Complexity'
+		lineageTag: 9a3b8d31-b414-4e4f-a572-f3252c88f982
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'UserInput_Total Complexity' = calculated
+		mode: import
+		source = GENERATESERIES(0, 1, 0.01)
+
+	annotation PBI_Id = b128bfc7f63244d48aabfd71febd6495
+

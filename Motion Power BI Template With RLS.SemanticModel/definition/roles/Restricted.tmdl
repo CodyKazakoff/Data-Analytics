@@ -1,0 +1,16 @@
+role Restricted
+	modelPermission: read
+
+	tablePermission Sales =
+			Var vEmployeeAccessList = SELECTCOLUMNS(
+			    FILTER(
+			        RLS_HR_HIERARCHY,
+			        RLS_HR_HIERARCHY[SUPERVISOR_EMAIL]=USERPRINCIPALNAME()),
+			        "Security Employee ID", RLS_HR_HIERARCHY[EMPLOYEE_DISPLAY_NAME])
+			
+			Var vEmployeeAccess = Sales[ISR] in vEmployeeAccessList || "*" in vEmployeeAccessList
+			
+			Return vEmployeeAccess
+
+	annotation PBI_Id = 4ffd82203c7747d48df5b4c5fa3333f4
+

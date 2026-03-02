@@ -1,0 +1,50 @@
+table 'Page Object Measure'
+	lineageTag: 974e666b-4120-4b23-a91c-f6899908d68c
+
+	column Name
+		dataType: string
+		lineageTag: 3cfd40b2-8d0b-4fb4-be67-9e952a9275ef
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		dataType: string
+		lineageTag: ca6b4ba3-ec48-43d8-adc1-794935455961
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Page Object Id'
+		dataType: string
+		lineageTag: 45b1272a-9b20-4f17-9766-c8c3fde6200f
+		summarizeBy: none
+		sourceColumn: Page Object Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column PageObjectKey
+		dataType: string
+		lineageTag: 17a7f10c-bf23-47d2-b3ea-55fb531fabe0
+		summarizeBy: none
+		sourceColumn: PageObjectKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Page Object Measure' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex\Page Queries'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_page_object_measure"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Page_Object_Id", "Page Object Id"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

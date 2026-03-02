@@ -1,0 +1,21 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Qlik App Migration Progress Temp","Stream Order","Qlik App Migration Progress","App Order","Qlik App GBQ Table Detail"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.141.1451.0 (25.03)+5007b75f0f7edbed506e31fcb76584cd6d711788
+
+ref table DateTableTemplate_72a53258-f230-449a-9c78-29bffecef238
+ref table Range
+ref table 'Qlik App Migration Progress'
+ref table 'Qlik App GBQ Table Detail'
+
+ref cultureInfo en-US
+

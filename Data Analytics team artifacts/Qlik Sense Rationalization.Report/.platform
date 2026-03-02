@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Qlik Sense Rationalization"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2c08f09d-924c-854c-460a-cbd69c6f8148"
+  }
+}

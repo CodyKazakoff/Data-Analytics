@@ -1,0 +1,188 @@
+table z_Param_Point_In_Time_Metric_Table
+	lineageTag: 587b87c2-ce1c-44ac-8a03-de02f7b6a114
+
+	column 'zTime Intelligence'
+		lineageTag: 7de08818-1b1d-4a01-899d-27d82d03d20c
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		lineageTag: d29a04f1-2a78-43ed-9b51-5fe76540fe6a
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		formatString: 0
+		lineageTag: d2159c64-7088-41ba-915a-32a3ff8e3a6d
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	column 'Time Intelligence Index'
+		formatString: 0
+		lineageTag: 44208f66-1f99-4018-ace6-e8907acfe60f
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure Index'
+		formatString: 0
+		lineageTag: d5af6831-4e56-41a7-bfc6-9adbdb9af1aa
+		summarizeBy: none
+		sourceColumn: [Value5]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value6
+		lineageTag: 8ca4e9d5-4e2c-4ac4-8a5f-3d82824e304e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value6]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value7
+		lineageTag: 0d89c221-7536-4582-9d5a-bc14aa3ab76d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value7]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_Param_Point_In_Time_Metric_Table = calculated
+		mode: import
+		source =
+				{//ADO
+				    ("CMTD ADO", NAMEOF('Measure Table'[ADO CMTD]), 0, 1, 1,"Show","Current Period"),
+				    ("CQTD ADO", NAMEOF('Measure Table'[ADO CQTD]), 1, 2, 1,"Show","Current Period"),
+				    ("CYTD ADO", NAMEOF('Measure Table'[ADO CYTD]), 2, 0, 1,"Show","Current Period"),
+				    ("ADO Rolling 12", NAMEOF('Measure Table'[ADO Rolling 12M]), 3, 3, 1,"Show","Current Period"),
+				    ("CMTD ADO", NAMEOF('Measure Table'[ADO CMTD]), 0, 1, 1,"Show","Vs. Prior"),
+				    ("CQTD ADO", NAMEOF('Measure Table'[ADO CQTD]), 1, 2, 1,"Show","Vs. Prior"),
+				    ("CYTD ADO", NAMEOF('Measure Table'[ADO CYTD]), 2, 0, 1,"Show","Vs. Prior"),
+				    ("ADO Rolling 12", NAMEOF('Measure Table'[ADO Rolling 12M]), 3, 3, 1,"Show","Vs. Prior"),
+				    ("PMTD ADO", NAMEOF('Measure Table'[ADO PMTD]), 3, 1, 1,"Show","Vs. Prior"),
+				    ("PQTD ADO", NAMEOF('Measure Table'[ADO PQTD]), 4, 2, 1,"Show","Vs. Prior"),
+				    ("PYTD ADO", NAMEOF('Measure Table'[ADO PYTD]), 5, 0, 1,"Show","Vs. Prior"),
+				    ("ADO Prior Rolling 12", NAMEOF('Measure Table'[ADO Rolling P12M]), 6, 3, 1,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[ADO MTD Var]), 6, 1, 1,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[ADO QTD Var]), 7, 2, 1,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[ADO YTD Var]), 8, 0, 1,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[ADO Rolling 12M Var]), 9, 3, 1,"Show","Vs. Prior"),
+				    //("", NAMEOF([Blank Measure]), 55, 1, 1,"Show","Vs. Prior"),
+				    //("", NAMEOF([Blank Measure]), 55, 2, 1,"Show","Vs. Prior"),
+				    //("", NAMEOF([Blank Measure]), 55, 0, 1,"Show","Vs. Prior"),
+				    //("", NAMEOF([Blank Measure]), 55, 3, 1,"Show","Vs. Prior"),
+				
+				    //Orders
+				    ("CMTD Total $", NAMEOF('Measure Table'[Total $ CMTD]), 9, 1, 2,"Show","Current Period"),
+				    ("CQTD Total $", NAMEOF('Measure Table'[Total $ CQTD]), 10, 2, 2,"Show","Current Period"),
+				    ("CYTD Total $", NAMEOF('Measure Table'[Total $ CYTD]), 11, 0, 2,"Show","Current Period"),
+				    ("Total $ Rolling 12", NAMEOF('Measure Table'[Total $ Rolling 12M]), 12, 3, 2,"Show","Current Period"),
+				    ("CMTD Total $", NAMEOF('Measure Table'[Total $ CMTD]), 9, 1, 2,"Show","Vs. Prior"),
+				    ("CQTD Total $", NAMEOF('Measure Table'[Total $ CQTD]), 10, 2, 2,"Show","Vs. Prior"),
+				    ("CYTD Total $", NAMEOF('Measure Table'[Total $ CYTD]), 11, 0, 2,"Show","Vs. Prior"),
+				    ("Total $ Rolling 12", NAMEOF('Measure Table'[Total $ Rolling 12M]), 12, 3, 2,"Show","Vs. Prior"),
+				    ("PMTD Total $", NAMEOF('Measure Table'[Total $ PMTD]), 12, 1, 2,"Show","Vs. Prior"),
+				    ("PQTD Total $", NAMEOF('Measure Table'[Total $ PQTD]), 13, 2, 2,"Show","Vs. Prior"),
+				    ("PYTD Total $", NAMEOF('Measure Table'[Total $ PYTD]), 14, 0, 2,"Show","Vs. Prior"),
+				    ("Total $ Prior Rolling 12", NAMEOF('Measure Table'[Total $ Rolling P12M]), 15, 3, 2,"Show","Vs. Prior"),
+				
+				    ("Var %", NAMEOF('Measure Table'[Total $ MTD Var]), 15, 1, 2,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Total $ QTD Var]), 16, 2, 2,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Total $ YTD Var]), 17, 0, 2,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Total $ Rolling 12M Var]), 18, 3, 2,"Show","Vs. Prior"),
+				
+				    //Final Cost
+				    //("CMTD Costs", NAMEOF('Measure Table'[Total Final Cost CMTD]), 18, 1, 3),
+				    //("CQTD Costs", NAMEOF('Measure Table'[Total Final Cost CQTD]), 19, 2, 3),
+				    //("CYTD Costs", NAMEOF('Measure Table'[Total Final Cost CYTD]), 20, 0, 3),
+				    //("PMTD Costs", NAMEOF('Measure Table'[Total Final Cost PMTD]), 21, 1, 3),
+				    //("PQTD Costs", NAMEOF('Measure Table'[Total Final Cost PQTD]), 22, 2, 3),
+				    //("PYTD Costs", NAMEOF('Measure Table'[Total Final Cost PYTD]), 23, 0, 3),
+				    //("Var %", NAMEOF('Measure Table'[Total Final Cost MTD Variance]), 24, 1, 3),
+				    //("Var %", NAMEOF('Measure Table'[Total Final Cost QTD Variance]), 25, 2, 3),
+				    //("Var %", NAMEOF('Measure Table'[Total Final Cost YTD Variance]), 26, 0, 3),
+				
+				    //Order Count
+				    ("CMTD Total #", NAMEOF('Measure Table'[Total # CMTD]), 27, 1, 4,"Show","Current Period"),
+				    ("CQTD Total #", NAMEOF('Measure Table'[Total # CQTD]), 28, 2, 4,"Show","Current Period"),
+				    ("CYTD Total #", NAMEOF('Measure Table'[Total # CYTD]), 29, 0, 4,"Show","Current Period"),
+				    ("Total # Rolling 12", NAMEOF('Measure Table'[Total # Rolling 12M]), 30, 3, 4,"Show","Current Period"),
+				    ("CMTD Total #", NAMEOF('Measure Table'[Total # CMTD]), 27, 1, 4,"Show","Vs. Prior"),
+				    ("CQTD Total #", NAMEOF('Measure Table'[Total # CQTD]), 28, 2, 4,"Show","Vs. Prior"),
+				    ("CYTD Total #", NAMEOF('Measure Table'[Total # CYTD]), 29, 0, 4,"Show","Vs. Prior"),
+				    ("Total # Rolling 12", NAMEOF('Measure Table'[Total # Rolling 12M]), 30, 3, 4,"Show","Vs. Prior"),
+				    ("PMTD Total #", NAMEOF('Measure Table'[Total # PMTD]), 30, 1, 4,"Show","Vs. Prior"),
+				    ("PQTD Total #", NAMEOF('Measure Table'[Total # PQTD]), 31, 2, 4,"Show","Vs. Prior"),
+				    ("PYTD Total #", NAMEOF('Measure Table'[Total # PYTD]), 32, 0, 4,"Show","Vs. Prior"),
+				    ("Total # Prior Rolling 12", NAMEOF('Measure Table'[Total # Rolling P12M]), 33, 3, 4,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Total # MTD Var]), 33, 1, 4,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Total # QTD Var]), 34, 2, 4,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Total # YTD Var]), 35, 0, 4,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Total # Rolling 12M Var]), 36, 3, 4,"Show","Vs. Prior"),
+				
+				    //Open Order Amount
+				    ("CMTD Open Order $", NAMEOF('Measure Table'[Open Order $ CMTD]), 36, 1, 5,"Show","Current Period"),
+				    ("CQTD Open Order $", NAMEOF('Measure Table'[Open Order $ CQTD]), 37, 2, 5,"Show","Current Period"),
+				    ("CYTD Open Order $", NAMEOF('Measure Table'[Open Order $ CYTD]), 38, 0, 5,"Show","Current Period"),
+				    ("Open Order $ Rolling 12", NAMEOF('Measure Table'[Open Order $ Rolling 12M]), 38, 3, 5,"Show","Current Period"),
+				    ("CMTD Open Order $", NAMEOF('Measure Table'[Open Order $ CMTD]), 36, 1, 5,"Show","Vs. Prior"),
+				    ("CQTD Open Order $", NAMEOF('Measure Table'[Open Order $ CQTD]), 37, 2, 5,"Show","Vs. Prior"),
+				    ("CYTD Open Order $", NAMEOF('Measure Table'[Open Order $ CYTD]), 38, 0, 5,"Show","Vs. Prior"),
+				    ("Open Order $ Rolling 12", NAMEOF('Measure Table'[Open Order $ Rolling 12M]), 38, 3, 5,"Show","Vs. Prior"),
+				    ("PMTD Open Order $", NAMEOF('Measure Table'[Open Order $ PMTD]), 39, 1, 5,"Show","Vs. Prior"),
+				    ("PQTD Open Order $", NAMEOF('Measure Table'[Open Order $ PQTD]), 40, 2, 5,"Show","Vs. Prior"),
+				    ("PYTD Open Order $", NAMEOF('Measure Table'[Open Order $ PYTD]), 41, 0, 5,"Show","Vs. Prior"),
+				    ("Open Order $ Prior Rolling 12", NAMEOF('Measure Table'[Open Order $ Rolling P12M]), 41, 3, 5,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Open Order $ MTD Var]), 42, 1, 5,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Open Order $ QTD Var]), 43, 2, 5,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Open Order $ YTD Var]), 44, 0, 5,"Show","Vs. Prior"),
+				    ("Var %", NAMEOF('Measure Table'[Open Order $ Rolling 12M Var]), 44, 3, 5,"Show","Vs. Prior"),
+				
+				     //Gross Profit %
+				    ("CMTD GP %", NAMEOF('Measure Table'[Total GP % CMTD]), 45, 1, 6,"Show","Current Period"),
+				    ("CQTD GP %", NAMEOF('Measure Table'[Total GP % CQTD]), 46, 2, 6,"Show","Current Period"),
+				    ("CYTD GP %", NAMEOF('Measure Table'[Total GP % CYTD]), 47, 0, 6,"Show","Current Period"),
+				    ("GP % Rolling 12", NAMEOF('Measure Table'[Total GP % Rolling 12M]), 48, 3, 6,"Show","Current Period"),
+				    ("CMTD GP %", NAMEOF('Measure Table'[Total GP % CMTD]), 45, 1, 6,"Show","Vs. Prior"),
+				    ("CQTD GP %", NAMEOF('Measure Table'[Total GP % CQTD]), 46, 2, 6,"Show","Vs. Prior"),
+				    ("CYTD GP %", NAMEOF('Measure Table'[Total GP % CYTD]), 47, 0, 6,"Show","Vs. Prior"),
+				    ("GP % Rolling 12", NAMEOF('Measure Table'[Total GP % Rolling 12M]), 48, 3, 6,"Show","Vs. Prior"),
+				    ("PMTD GP %", NAMEOF('Measure Table'[Total GP % PMTD]), 48, 1, 6,"Show","Vs. Prior"),
+				    ("PQTD GP %", NAMEOF('Measure Table'[Total GP % PQTD]), 49, 2, 6,"Show","Vs. Prior"),
+				    ("PYTD GP %", NAMEOF('Measure Table'[Total GP % PYTD]), 50, 0, 6,"Show","Vs. Prior"),
+				    ("GP % Prior Rolling 12", NAMEOF('Measure Table'[Total GP % Rolling P12M]), 51, 3, 6,"Show","Vs. Prior"),
+				    ("BPS", NAMEOF('Measure Table'[Total GP BPS MTD]), 51, 1, 6,"Show","Vs. Prior"),
+				    ("BPS", NAMEOF('Measure Table'[Total GP BPS QTD]), 52, 2, 6,"Show","Vs. Prior"),
+				    ("BPS", NAMEOF('Measure Table'[Total GP BPS YTD]), 53, 0, 6,"Show","Vs. Prior"),
+				    ("BPS", NAMEOF('Measure Table'[Total GP BPS Rolling 12M]), 54, 3, 6,"Show","Vs. Prior")
+				    //("", NAMEOF([Blank Measure]), 55, 1, 6,"Hide","Current Period"),
+				    //("", NAMEOF([Blank Measure]), 55, 2, 6,"Hide","Vs. Prior"),
+				    //("", NAMEOF([Blank Measure]), 55, 0, 6,"Hide","Vs. Prior"),
+				    //("", NAMEOF([Blank Measure]), 55, 3, 6,"Hide","Vs. Prior")
+				
+				
+				
+				
+				}
+
+	annotation PBI_Id = 300a6b30fe8141f685365137ce299e57
+

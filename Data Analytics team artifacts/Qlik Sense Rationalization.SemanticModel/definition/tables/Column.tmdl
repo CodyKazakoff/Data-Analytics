@@ -1,0 +1,127 @@
+table Column
+	lineageTag: f71b4bbd-2505-4079-9672-d4cb92e1a801
+
+	column Name
+		dataType: string
+		lineageTag: 0ce2c6db-817e-4849-8ee2-5cc43fe5cc7d
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column QualifiedName
+		dataType: string
+		lineageTag: af0f950e-afda-476d-bff7-9164f3f487ed
+		summarizeBy: none
+		sourceColumn: QualifiedName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MinNumericValue
+		dataType: string
+		lineageTag: a5ca8a26-ae64-442f-9515-dce5d287c049
+		summarizeBy: none
+		sourceColumn: MinNumericValue
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaxNumericValue
+		dataType: string
+		lineageTag: 20932df3-e8cd-4f84-9ec2-9f490eecbabd
+		summarizeBy: none
+		sourceColumn: MaxNumericValue
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstSortedTextValue
+		dataType: string
+		lineageTag: 4a8beeeb-f0a4-40d2-b231-e66faefd2f98
+		summarizeBy: none
+		sourceColumn: FirstSortedTextValue
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastSortedTextValue
+		dataType: string
+		lineageTag: 362f5213-4e4e-451e-a62f-e7694590bca4
+		summarizeBy: none
+		sourceColumn: LastSortedTextValue
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsHidden
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e84f773b-167e-4e4e-911b-03c456666ae8
+		summarizeBy: none
+		sourceColumn: IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UniqueValueCount
+		dataType: int64
+		formatString: 0
+		lineageTag: e5ebeb5d-defb-435e-91c1-87fc7b10e506
+		summarizeBy: none
+		sourceColumn: UniqueValueCount
+
+		annotation SummarizationSetBy = User
+
+	column Type
+		dataType: int64
+		formatString: 0
+		lineageTag: ffe79508-ba81-47bf-a915-6cb167cc6eaa
+		summarizeBy: sum
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: 272dcd6f-2305-4222-b6f3-f3559d23a0b0
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		dataType: string
+		lineageTag: 54425c5d-e354-4421-80d3-64b60c69db04
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Table Id'
+		dataType: string
+		lineageTag: e7a23cb0-86d2-4fce-b99b-bf0ca5de72cd
+		summarizeBy: none
+		sourceColumn: Table Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column TableKey
+		dataType: string
+		lineageTag: 9e01a009-5d42-4305-a01e-94280706c409
+		summarizeBy: none
+		sourceColumn: TableKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Column = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_column"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Table_Id", "Table Id"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Table Id", type text}, {"Id", type text}, {"Name", type text}, {"QualifiedName", type text}, {"MinNumericValue", type text}, {"MaxNumericValue", type text}, {"FirstSortedTextValue", type text}, {"LastSortedTextValue", type text}, {"IsHidden", type logical}, {"UniqueValueCount", Int64.Type}, {"Type", Int64.Type}, {"Notes", type text}})
+				
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

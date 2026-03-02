@@ -1,0 +1,4 @@
+relationship c3b8f135-0af8-bbce-ed28-0af428523a6e
+	fromColumn: F_Cost_Savings_Details.DATE_OF_SERVICE
+	toColumn: D_Calendar.CALENDAR_DATE
+

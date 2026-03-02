@@ -1,0 +1,43 @@
+table Team_Names
+	lineageTag: c579d1b2-8b99-440a-ab20-bea3d4bb95c0
+
+	column 'Area Path'
+		dataType: string
+		lineageTag: 82f4e845-4973-4361-a722-ab2ebb8e5b72
+		summarizeBy: none
+		sourceColumn: Area Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaSK
+		dataType: string
+		lineageTag: 48df2283-27b3-46f2-920f-d1b985127a02
+		summarizeBy: none
+		sourceColumn: AreaSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Team Name'
+		dataType: string
+		lineageTag: 668fa12e-177e-4b0d-a888-282a1823a182
+		summarizeBy: none
+		sourceColumn: Team Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Team_Names = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\661195\OneDrive - Genuine Parts Company\PBI_Projects\SVP_Health_Monitoring\Team_Names.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Sheet1_Sheet,{{"Column1", type text}, {"Column2", type text}}),
+				    #"Removed Top Rows" = Table.Skip(#"Changed Type",1),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Top Rows",{{"Column1", "Area Path"}, {"Column2", "AreaSK"}, {"Column3", "Team Name"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

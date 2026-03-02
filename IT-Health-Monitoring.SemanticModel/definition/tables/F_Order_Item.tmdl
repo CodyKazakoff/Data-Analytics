@@ -1,0 +1,563 @@
+table F_Order_Item
+	lineageTag: 5bae2879-2288-45ec-9196-f052b38ccc91
+
+	column ORD_LN_KEY
+		dataType: string
+		lineageTag: 1ad57f3c-35b0-4845-b0d7-aeb835330866
+		summarizeBy: none
+		sourceColumn: ORD_LN_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORD_HDR_KEY
+		dataType: string
+		lineageTag: 9b5deaef-135e-4b51-99c5-62fa394c52d8
+		summarizeBy: none
+		sourceColumn: ORD_HDR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_KEY
+		dataType: string
+		lineageTag: b84fe70a-b191-4fef-9c12-e7a873a60637
+		summarizeBy: none
+		sourceColumn: ITM_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MFR_KEY
+		dataType: string
+		lineageTag: c96c8793-6634-4f0b-a727-3b26bca260a6
+		summarizeBy: none
+		sourceColumn: MFR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: 22babf8e-ed01-4e63-b800-8c466eddc918
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILL_TO_CUST_KEY
+		dataType: string
+		lineageTag: f5113333-ddca-4731-9db0-9fcafdf5db39
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_PGC_KEY
+		dataType: string
+		lineageTag: 6acc67d2-cacc-49b2-a580-9ead3366aa6c
+		summarizeBy: none
+		sourceColumn: ITM_PGC_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 35a0ec08-1425-4f11-a9f1-291787dba534
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_CORP_LOC
+		dataType: string
+		lineageTag: cade1fc0-5e2b-4f3f-89cd-802620946e39
+		summarizeBy: none
+		sourceColumn: MI_CORP_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_CTL_NO
+		dataType: string
+		lineageTag: 6b4f2789-6bc6-4ea5-99ba-3701d2d29d2e
+		summarizeBy: none
+		sourceColumn: ORDER_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC__ORDER_CTL_NO__ORDER_LINE_NO
+		dataType: string
+		lineageTag: f2200e5b-d852-4625-9ecb-dc0a49af3568
+		summarizeBy: none
+		sourceColumn: MI_LOC__ORDER_CTL_NO__ORDER_LINE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_NO
+		dataType: string
+		lineageTag: 268b1888-3e95-4f7e-94d9-d8d1fef6e5b3
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC__BILL_TO_CUST_NO
+		dataType: string
+		lineageTag: 785c93e6-4cae-4358-808c-03fe6aa3f46f
+		summarizeBy: none
+		sourceColumn: MI_LOC__BILL_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_LOC_NO
+		dataType: string
+		lineageTag: a8f562e4-5909-478e-b844-5763d3239026
+		summarizeBy: none
+		sourceColumn: SUP_LOC_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_LOC_NAME
+		dataType: string
+		lineageTag: 2cb1356c-ce66-41a2-9103-500f20b27e23
+		summarizeBy: none
+		sourceColumn: SUP_LOC_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_LOC_NO__SUP_LOC_NAME
+		dataType: string
+		lineageTag: 987d4b13-782e-40be-9fd4-915084dd0378
+		summarizeBy: none
+		sourceColumn: SUP_LOC_NO__SUP_LOC_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUP_LOC_NAME_DETAIL
+		dataType: string
+		lineageTag: 53266111-a0cc-4597-be9f-2a236a28c846
+		summarizeBy: none
+		sourceColumn: SUP_LOC_NAME_DETAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column DCBO_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bc3d2c3f-f59e-4479-9c67-1f0538b0b207
+		summarizeBy: none
+		sourceColumn: DCBO_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column DCBO_FULFILL_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b3b63e6c-c425-44e9-abaa-e2eebb4d32a9
+		summarizeBy: none
+		sourceColumn: DCBO_FULFILL_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROCESS_STATUS_DESC
+		dataType: string
+		lineageTag: bdde1cfe-eebe-43e7-bfde-b222656f11a0
+		summarizeBy: none
+		sourceColumn: PROCESS_STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SOURCE_DESC
+		dataType: string
+		lineageTag: 4f7e1e2a-bb1d-4e08-9e65-933edefd611b
+		summarizeBy: none
+		sourceColumn: ORDER_SOURCE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SOURCE_CD
+		dataType: string
+		lineageTag: fa363115-3cde-41da-a44c-da935d06d645
+		summarizeBy: none
+		sourceColumn: ORDER_SOURCE_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_METHOD_DESC
+		dataType: string
+		lineageTag: d143a5ed-b968-4a7a-a7e7-71b0dbfc9213
+		summarizeBy: none
+		sourceColumn: SHIP_METHOD_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_METHOD_DIRECT_FLAG
+		dataType: string
+		lineageTag: e22c489c-9d64-4ac3-abc7-eff9e751d31f
+		summarizeBy: none
+		sourceColumn: SHIP_METHOD_DIRECT_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 59b0a1b0-4029-4e71-aca2-3a275cac6151
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DUE_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3630b11b-d43a-447c-955b-6d2590f96a9a
+		summarizeBy: none
+		sourceColumn: DUE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_MINO
+		dataType: string
+		lineageTag: ae00a2b9-6316-4cb4-82a6-cb2105ee03fb
+		summarizeBy: none
+		sourceColumn: ITM_MINO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_ITEM_NO__MGF_PART_NO
+		dataType: string
+		lineageTag: 7e0fecc3-ee0e-4908-8bfe-a9978b6c5909
+		summarizeBy: none
+		sourceColumn: ITM_ITEM_NO__MGF_PART_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_PROD_GROUP_NO
+		dataType: string
+		lineageTag: 981b1605-ee2d-441d-8ef5-48c29e5438eb
+		summarizeBy: none
+		sourceColumn: ITM_PROD_GROUP_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column IN_STOCK_QTY
+		dataType: double
+		lineageTag: 9040db3f-38e8-4717-9196-c203b1679e4c
+		summarizeBy: sum
+		sourceColumn: IN_STOCK_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_OP_QTY_ORDERED
+		dataType: double
+		lineageTag: ea83902c-c1a6-4adb-8bdc-62534b5c8ee5
+		summarizeBy: sum
+		sourceColumn: ITM_OP_QTY_ORDERED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_OP_QTY_SHIPPED
+		dataType: double
+		lineageTag: 39d80a2d-f712-4036-b7df-a6838c511070
+		summarizeBy: sum
+		sourceColumn: ITM_OP_QTY_SHIPPED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_OP_QTY_BILLED
+		dataType: double
+		lineageTag: b6de1615-f1b6-4174-8e02-c89479e353df
+		summarizeBy: sum
+		sourceColumn: ITM_OP_QTY_BILLED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_UNIT_SELL_PRICE
+		dataType: double
+		lineageTag: 786d0c70-1a1d-4377-b97a-cce91a37d3b8
+		summarizeBy: sum
+		sourceColumn: ITM_UNIT_SELL_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_OPEN_ORDER_QTY
+		dataType: double
+		lineageTag: a14ca1ba-675f-4aa9-a03b-f738d27c82c4
+		summarizeBy: sum
+		sourceColumn: ITM_OPEN_ORDER_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DC_FULFILL_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 64a69509-e61e-457b-ad27-a73c78491fd5
+		summarizeBy: none
+		sourceColumn: DC_FULFILL_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_OPEN_ORDER_AMT_LOCAL
+		dataType: double
+		lineageTag: 6552ba93-ceda-4ba9-b12b-5db2c6b4f0a1
+		summarizeBy: sum
+		sourceColumn: ITM_OPEN_ORDER_AMT_LOCAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_OPEN_ORDER_AMT_USD
+		dataType: double
+		lineageTag: d659d3fa-467f-4b6e-b001-73bd40e5b01e
+		summarizeBy: sum
+		sourceColumn: ITM_OPEN_ORDER_AMT_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_ORDER_SIZE_BUCKET
+		dataType: string
+		lineageTag: e72e2000-5379-427e-9344-47a97a82f4fa
+		summarizeBy: none
+		sourceColumn: ITM_ORDER_SIZE_BUCKET
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_UNIT_COST
+		dataType: double
+		lineageTag: 33945557-a10d-47f8-b5d2-66dc44e6856d
+		summarizeBy: sum
+		sourceColumn: ITM_UNIT_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_ORDER_DUE_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bea8f3c8-df97-4066-80db-269df897c9f8
+		summarizeBy: none
+		sourceColumn: ITM_ORDER_DUE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_ORDER_DUE_MONTH
+		dataType: string
+		lineageTag: 08999430-eb85-48de-a007-ef451acf24db
+		summarizeBy: none
+		sourceColumn: ITM_ORDER_DUE_MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column LATE_LINE
+		dataType: string
+		lineageTag: 7f13b501-7566-4b16-8539-b506f185394b
+		summarizeBy: none
+		sourceColumn: LATE_LINE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LATE_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d4bfe56-46a4-460a-b45a-4e1e967b68f7
+		summarizeBy: sum
+		sourceColumn: LATE_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column LATE_LINE_BUCKET
+		dataType: string
+		lineageTag: 215fc181-93be-4d1b-8603-0aab87f7e1b4
+		summarizeBy: none
+		sourceColumn: LATE_LINE_BUCKET
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_ITEM_STATUS_CD
+		dataType: string
+		lineageTag: 78aaa622-f0cf-4378-bb0d-588549aa45f8
+		summarizeBy: none
+		sourceColumn: ITM_ITEM_STATUS_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_ALLOCATED_QTY
+		dataType: double
+		lineageTag: 5da0dd93-2741-4355-8279-3347d030cd7c
+		summarizeBy: sum
+		sourceColumn: ITM_ALLOCATED_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_ALLOCATED_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bb431938-3159-4a12-a525-6c113aaf0f75
+		summarizeBy: none
+		sourceColumn: ITM_ALLOCATED_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_ITEM_NO
+		dataType: string
+		lineageTag: bd43af29-1c1b-4085-8016-bad8ff94269b
+		summarizeBy: none
+		sourceColumn: ITM_ITEM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MFR_CTL_NO
+		dataType: string
+		lineageTag: 1a6c4bb2-e8c3-4dc7-852d-f41974afc3b0
+		summarizeBy: none
+		sourceColumn: MFR_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROCESSED_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 82f3af3d-52ae-46b7-809e-0129e3ad9745
+		summarizeBy: none
+		sourceColumn: PROCESSED_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_FINAL_COST
+		dataType: double
+		lineageTag: 05f7b0e9-ab34-4c1b-9e2e-d3ed19cdb337
+		summarizeBy: sum
+		sourceColumn: ITM_FINAL_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_FINAL_COST_AMT_LOCAL
+		dataType: double
+		lineageTag: 778e2256-e933-4e91-b5e2-db32bba5c34e
+		summarizeBy: sum
+		sourceColumn: ITM_FINAL_COST_AMT_LOCAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_FINAL_COST_AMT_USD
+		dataType: double
+		lineageTag: 9648ee6b-7039-40ec-90d5-c77d6fc51729
+		summarizeBy: sum
+		sourceColumn: ITM_FINAL_COST_AMT_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_SHIP_COMPLETE
+		dataType: string
+		lineageTag: f1b80ce5-3d25-4d86-938a-42bfb4493ec9
+		summarizeBy: none
+		sourceColumn: ITM_SHIP_COMPLETE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_SHIP_METHOD_DESC
+		dataType: string
+		lineageTag: 49007378-6fec-4e28-a9ab-ab15b1d03004
+		summarizeBy: none
+		sourceColumn: ITM_SHIP_METHOD_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_SHIP_METHOD_CD
+		dataType: string
+		lineageTag: 9be455b9-5574-433c-b03f-d72eb266a829
+		summarizeBy: none
+		sourceColumn: ITM_SHIP_METHOD_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column ENTERED_BY_NAME
+		dataType: string
+		lineageTag: 5c76a676-255a-4470-b048-0552fd8ccc5e
+		summarizeBy: none
+		sourceColumn: ENTERED_BY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_CREATION_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 392ed707-afbe-42bd-bd69-26f958ec203f
+		summarizeBy: none
+		sourceColumn: ITM_CREATION_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column LOC_KEY
+		dataType: string
+		lineageTag: cf39cc8d-305e-4ff3-9d8f-1d998506a744
+		summarizeBy: none
+		sourceColumn: LOC_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column KAMAN_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 26fb21c7-4056-4636-aa2b-2d26639a0045
+		summarizeBy: none
+		sourceColumn: KAMAN_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_PROD_GROUP_NO_ALL_ITEMS
+		dataType: string
+		lineageTag: 6d53ebf1-1855-44c4-957a-56770158d387
+		summarizeBy: none
+		sourceColumn: ITM_PROD_GROUP_NO_ALL_ITEMS
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_Order_Item = m
+		mode: import
+		source = ```
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-255cr47brb7ubl4dmbam3tblom.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_F_Order_Item = Source{[Schema="dbo",Item="F_Order_Item"]}[Data],
+				    // Add a step to convert ITM_CREATION_DATE to a date
+				    #"Converted ITM_CREATION_DATE to Date" = Table.TransformColumns(dbo_F_Order_Item, {{"ITM_CREATION_DATE", each Date.From(_), type date}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Converted ITM_CREATION_DATE to Date", each (
+				            [ORDER_TYPE_CD] = "O") and 
+				            ([ITM_ITEM_STATUS_CD] <> "CL") and 
+				            ([PROCESS_STATUS_DESC] <> "CLOSED") and 
+				            ([ITM_UNIT_COST] <> 0) and 
+				            ([MI_LOC] <> "AL98") and 
+				            ([ITM_CREATION_DATE] >= #date(2023, 1, 1))
+				            ),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"ORD_LN_KEY", "ORD_HDR_KEY", "ITM_KEY", "MFR_KEY", "SHIP_TO_CUST_KEY", "BILL_TO_CUST_KEY", "ITM_PGC_KEY", "MI_LOC", "MI_CORP_LOC", "ORDER_CTL_NO", "MI_LOC__ORDER_CTL_NO__ORDER_LINE_NO", "SHIP_TO_CUST_NO", "MI_LOC__BILL_TO_CUST_NO", "SUP_LOC_NO", "SUP_LOC_NAME", "SUP_LOC_NO__SUP_LOC_NAME", "SUP_LOC_NAME_DETAIL", "DCBO_FLAG", "DCBO_FULFILL_FLAG", "PROCESS_STATUS_DESC", "ORDER_SOURCE_DESC", "ORDER_SOURCE_CD", "SHIP_METHOD_DESC", "SHIP_METHOD_DIRECT_FLAG", "ORDER_DATE", "DUE_DATE", "ITM_MINO", "ITM_ITEM_NO__MGF_PART_NO", "ITM_PROD_GROUP_NO", "IN_STOCK_QTY", "ITM_OP_QTY_ORDERED", "ITM_OP_QTY_SHIPPED", "ITM_OP_QTY_BILLED", "ITM_UNIT_SELL_PRICE", "ITM_OPEN_ORDER_QTY", "DC_FULFILL_FLAG", "ITM_OPEN_ORDER_AMT_LOCAL", "ITM_OPEN_ORDER_AMT_USD", "ITM_ORDER_SIZE_BUCKET", "ITM_UNIT_COST", "ITM_ORDER_DUE_DATE", "ITM_ORDER_DUE_MONTH", "LATE_LINE", "LATE_DAYS", "LATE_LINE_BUCKET", "ITM_ITEM_STATUS_CD", "ITM_ALLOCATED_QTY", "ITM_ALLOCATED_FLAG", "ITM_ITEM_NO", "MFR_CTL_NO", "PROCESSED_FLAG", "ITM_FINAL_COST", "ITM_FINAL_COST_AMT_LOCAL", "ITM_FINAL_COST_AMT_USD", "ITM_SHIP_COMPLETE", "ITM_SHIP_METHOD_DESC", "ITM_SHIP_METHOD_CD", "ENTERED_BY_NAME", "ITM_CREATION_DATE", "LOC_KEY", "KAMAN_FLAG", "ITM_PROD_GROUP_NO_ALL_ITEMS"})
+				in
+				    #"Removed Other Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

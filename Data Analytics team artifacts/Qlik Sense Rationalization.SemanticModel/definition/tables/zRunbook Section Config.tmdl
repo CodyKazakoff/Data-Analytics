@@ -1,0 +1,298 @@
+/// *Metadata*
+table 'zRunbook Section Config'
+	isHidden
+	lineageTag: 49e654c6-108d-47e3-b3c5-b1faab5a7c3b
+
+	column Index
+		lineageTag: 6f0028c6-0c8f-4528-a77d-526c7c1deb8c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Index]
+
+	column 'Section Id'
+		lineageTag: fd5d99e8-f036-473f-a8e2-752c9a9b4ce9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Section Id]
+
+	column 'Section Name'
+		lineageTag: 1fa71fbb-c812-42bb-9f5d-625a7620f817
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Section Name]
+
+	column 'Section Is Expanded'
+		lineageTag: 0a2aac87-b8f2-47e8-9580-b5a2bfa141cc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Section Is Expanded]
+
+	column 'Section Item Id'
+		lineageTag: e36547ef-8dc6-49da-a8c2-e18c71dc34b4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Section Item Id]
+
+	column 'Section Item Type'
+		lineageTag: 169bb04c-462f-4f8f-9405-face600eadae
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Section Item Type]
+
+	column 'Section Item Value 1'
+		lineageTag: aad88e1c-3836-4e91-adab-5383d3f9f8a7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Section Item Value 1]
+
+	column 'Section Item Value 2'
+		lineageTag: 4e6cc254-2218-4dc6-ad7a-aee55ff709ba
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Section Item Value 2]
+
+	partition 'zRunbook Section Config' = calculated
+		mode: import
+		source =
+				DATATABLE("Index", INTEGER, "Section Id", STRING, "Section Name", STRING, "Section Is Expanded", STRING, "Section Item Id", STRING, "Section Item Type", STRING, "Section Item Value 1", STRING, "Section Item Value 2", STRING,{
+				{
+				0
+				, "51cf9f10-5793-4977-807a-5dc0016298c9"
+				, "Introduction"
+				, "False"
+				, "5c581bfe-424b-4333-8202-033eec929fd1"
+				, "Text"
+				, "Introduction"
+				, "Heading 1"
+				},
+				{
+				1
+				, "51cf9f10-5793-4977-807a-5dc0016298c9"
+				, "Introduction"
+				, "False"
+				, "f79caa7e-f7ba-4af1-87ee-fff0e47ee353"
+				, "Text"
+				, "This document is designed to be the starting point for the runbook documentation for a Power BI dataset and / or Report. It is pre-configured with sections that can be modified to suit documentation needs."
+				, "Body"
+				},
+				{
+				2
+				, "ebb3cd9c-6ed1-4312-906f-7f6ca656b616"
+				, "Data Model"
+				, "False"
+				, "32f83262-b6c3-4988-ac5e-4eefe69e207c"
+				, "Text"
+				, "Data Model"
+				, "Heading 1"
+				},
+				{
+				3
+				, "ebb3cd9c-6ed1-4312-906f-7f6ca656b616"
+				, "Data Model"
+				, "False"
+				, "40a7aebd-eb98-4923-bd3a-a66d5c4b931d"
+				, "File"
+				, "Z:\Shared\Projects\.Axis\.Axis Development Foundation (ADF)\Power BI\Axis Tools for Power BI\Run Book\Data Model.png"
+				, ""
+				},
+				{
+				4
+				, "ebb3cd9c-6ed1-4312-906f-7f6ca656b616"
+				, "Data Model"
+				, "False"
+				, "f2aafd58-fc10-44d9-9a75-f2f5abd789c0"
+				, "Text"
+				, "This section provides a space to describe the data model of your Dataset or Report. Typically this will contain a screen shot of the data model in Power BI"
+				, "Body"
+				},
+				{
+				5
+				, "ffebc22c-a86c-4c2d-9772-e0f0245276a5"
+				, "Data Model Tables"
+				, "False"
+				, "35ce4b18-a9a9-4594-9b75-efbde19df551"
+				, "Text"
+				, "Data Model Tables"
+				, "Heading 1"
+				},
+				{
+				6
+				, "ffebc22c-a86c-4c2d-9772-e0f0245276a5"
+				, "Data Model Tables"
+				, "False"
+				, "7e2ffd49-0e71-4c26-b2bc-e0654e9f4a41"
+				, "Text"
+				, "This section lists all the tables in the data model, as well as some metadata about each table."
+				, "Body"
+				},
+				{
+				7
+				, "ffebc22c-a86c-4c2d-9772-e0f0245276a5"
+				, "Data Model Tables"
+				, "False"
+				, "ba62abe6-1cbf-4270-8718-285a8debee9d"
+				, "Internal Table"
+				, "Table"
+				, ""
+				},
+				{
+				8
+				, "a0b97974-877a-44dc-94ec-2dc6acc58cad"
+				, "Data Model Relationships"
+				, "False"
+				, "8e3385b2-2649-4d8e-b89e-e53fa57dd134"
+				, "Text"
+				, "Data Model Relationships"
+				, "Heading 1"
+				},
+				{
+				9
+				, "a0b97974-877a-44dc-94ec-2dc6acc58cad"
+				, "Data Model Relationships"
+				, "False"
+				, "2302928b-18c7-49c0-b192-42348185681c"
+				, "Text"
+				, "This section lists all the relationships in the data model, as well as some metadata about each table."
+				, "Body"
+				},
+				{
+				10
+				, "a0b97974-877a-44dc-94ec-2dc6acc58cad"
+				, "Data Model Relationships"
+				, "False"
+				, "ba994a85-4e8e-4b87-a07d-fe0402a3f6df"
+				, "Internal Table"
+				, "Relationship"
+				, ""
+				},
+				{
+				11
+				, "27eb4910-d35d-4234-9797-d9361e29fca3"
+				, "Data Model Columns"
+				, "False"
+				, "662f2f2d-2367-4b0b-88e7-bb6412438ce0"
+				, "Text"
+				, "Data Model Columns"
+				, "Heading 1"
+				},
+				{
+				12
+				, "27eb4910-d35d-4234-9797-d9361e29fca3"
+				, "Data Model Columns"
+				, "False"
+				, "d809b397-6d02-4878-ac4d-1cfe1ca34355"
+				, "Text"
+				, "This section lists all the columns in the data model, as well as some metadata about each table."
+				, "Body"
+				},
+				{
+				13
+				, "27eb4910-d35d-4234-9797-d9361e29fca3"
+				, "Data Model Columns"
+				, "False"
+				, "996d97cd-391d-4471-b4e7-f431ebc987d4"
+				, "Internal Table"
+				, "Column"
+				, ""
+				},
+				{
+				14
+				, "c282b5ff-00ae-4800-ab67-1f50d65f694a"
+				, "Data Model Measures"
+				, "False"
+				, "67a40fce-2d62-439e-a8e9-8e22c8491c97"
+				, "Text"
+				, "Data Model Measures"
+				, "Heading 1"
+				},
+				{
+				15
+				, "c282b5ff-00ae-4800-ab67-1f50d65f694a"
+				, "Data Model Measures"
+				, "False"
+				, "bd1b246f-de97-4d3a-bdc1-5a4e28b0e466"
+				, "Text"
+				, "This section lists all the measures in the data model, as well as some metadata about each table."
+				, "Body"
+				},
+				{
+				16
+				, "c282b5ff-00ae-4800-ab67-1f50d65f694a"
+				, "Data Model Measures"
+				, "False"
+				, "7b09cf67-24a8-4243-a98b-ddde0df855fd"
+				, "Internal Table"
+				, "Measure"
+				, ""
+				},
+				{
+				17
+				, "6bc4e6ed-4b1a-4f5f-b97c-d8143df9d4e9"
+				, "Data Model Roles"
+				, "False"
+				, "0995cb61-d942-4c26-98bb-1f5c147900ad"
+				, "Text"
+				, "Data Model Roles"
+				, "Heading 1"
+				},
+				{
+				18
+				, "6bc4e6ed-4b1a-4f5f-b97c-d8143df9d4e9"
+				, "Data Model Roles"
+				, "False"
+				, "c0cb0965-02dd-4b00-a5d8-0865772d2ac3"
+				, "Text"
+				, "This section lists all the roles in the data model, as well as some metadata about each table."
+				, "Body"
+				},
+				{
+				19
+				, "6bc4e6ed-4b1a-4f5f-b97c-d8143df9d4e9"
+				, "Data Model Roles"
+				, "False"
+				, "b239e541-c819-4cd6-85dc-bfd150f9dcd9"
+				, "Internal Table"
+				, "Role"
+				, ""
+				},
+				{
+				20
+				, "acc8f118-7053-41c4-80b3-6a98854330ea"
+				, "Resources"
+				, "False"
+				, "67c621b2-0686-49f2-afb9-0f403ac7de7b"
+				, "Text"
+				, "Resources"
+				, "Heading 1"
+				},
+				{
+				21
+				, "acc8f118-7053-41c4-80b3-6a98854330ea"
+				, "Resources"
+				, "False"
+				, "94f918e7-1b4c-4fec-9f05-89ce0940078c"
+				, "Text"
+				, "This section provides an opportunity to call out resources responsible for maintaining this Dataset / Report."
+				, "Body"
+				},
+				{
+				22
+				, "d063d1bf-8cce-4d98-8d58-5d41c2c4bc36"
+				, "FAQ"
+				, "False"
+				, "6dbae828-aa76-4435-ad40-baef609984c5"
+				, "Text"
+				, "FAQ"
+				, "Heading 1"
+				},
+				{
+				23
+				, "d063d1bf-8cce-4d98-8d58-5d41c2c4bc36"
+				, "FAQ"
+				, "False"
+				, "e13e9626-b260-4348-85aa-27b633f09d83"
+				, "Text"
+				, "This section provides an opportunity to list any frequently asked questions about the Dataset or Report. Consider grouping FAQ questions using subheadings."
+				, "Body"
+				}})
+

@@ -1,0 +1,90 @@
+table 'App Owners'
+	lineageTag: 3827ae2b-d99c-4d0b-b106-5e6ae89b03c8
+
+	column 'User-facing App Id'
+		dataType: string
+		lineageTag: 0d216592-2cd6-4725-9b4f-379def85ad26
+		summarizeBy: none
+		sourceColumn: User-facing App Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User-facing App'
+		dataType: string
+		lineageTag: f229653f-009b-4fd6-bda0-732de77bb3ad
+		summarizeBy: none
+		sourceColumn: User-facing App
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User-facing App Owner'
+		dataType: string
+		lineageTag: 0cdf9b34-1530-4530-a934-cd454f7e83d7
+		summarizeBy: none
+		sourceColumn: User-facing App Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User-facing App Workspace'
+		dataType: string
+		lineageTag: f2a38fbf-29f9-4eae-b534-03d88a5aa319
+		summarizeBy: none
+		sourceColumn: User-facing App Workspace
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Name'
+		dataType: string
+		lineageTag: 35160f7a-0f43-4509-87e5-2952d2873c4f
+		summarizeBy: none
+		sourceColumn: User Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Id'
+		dataType: string
+		lineageTag: ad511b80-13b0-44dd-82e2-ae5e75366eca
+		summarizeBy: none
+		sourceColumn: User Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Type'
+		dataType: string
+		lineageTag: 2f1b3927-0885-40c8-8d28-5f8abe291376
+		summarizeBy: none
+		sourceColumn: User Type
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'User Type Hierarchy'
+		lineageTag: 62c6f102-249c-4522-94f8-e8bd58d6e042
+
+		level 'User Type'
+			lineageTag: d2305a4c-4d5e-4c25-bd89-9e0ffaecde80
+			column: 'User Type'
+
+		level 'User Name'
+			lineageTag: 87589495-1b75-403c-a853-eefcb866f83c
+			column: 'User Name'
+
+	partition 'App Owners' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SupportingFiles & "\zQlikUserData.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Filtered Rows" = Table.SelectRows(#"Promoted Headers", each ([#"User-facing App Workspace"] <> "-" and [#"User-facing App Workspace"] <> "Unpublished")),
+				    #"Merged Queries" = Table.NestedJoin(#"Filtered Rows", {"User-facing App Owner"}, UsernameConversions, {"User Id"}, "UsernameConversions", JoinKind.LeftOuter),
+				    #"Expanded UsernameConversions" = Table.ExpandTableColumn(#"Merged Queries", "UsernameConversions", {"User Name"}, {"User Name"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Expanded UsernameConversions", {"User-facing App Owner"}, #"Power Users", {"User Id"}, "Power Users", JoinKind.LeftOuter),
+				    #"Expanded Power Users" = Table.ExpandTableColumn(#"Merged Queries1", "Power Users", {"User Id"}, {"User Id"}),
+				    #"Added Custom" = Table.AddColumn(#"Expanded Power Users", "User Type", each if [User Id] is null then "Civilian Developer" else "Power Users")
+				in
+				    #"Added Custom"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,37 @@
+table RLS_Customer_ShipTo
+	lineageTag: 3578e749-17bc-49c3-bb91-339e74e4bf74
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: 8b2166bc-8496-44b3-8c14-518de598abf3
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPERVISOR_UPN
+		dataType: string
+		lineageTag: f7a2a32a-607e-4c98-a793-cb1861f2c23b
+		summarizeBy: none
+		sourceColumn: SUPERVISOR_UPN
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RLS_Customer_ShipTo = m
+		mode: import
+		queryGroup: Security
+		source =
+				let
+				    Source = Sql.Database(Lakehouse&".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_RLS_Customer_ShipTo = Value.NativeQuery(Source,
+				    "SELECT DIM.* FROM V_RLS_Customer_ShipTo DIM
+				    INNER JOIN (SELECT DISTINCT SHIP_TO_CUST_KEY FROM dbo.F_Shipper_Item
+				    WHERE ORIGINAL_SOURCE_SYSTEM <> 'Intercompany Transfers') FAC
+				    ON FAC.SHIP_TO_CUST_KEY = DIM.SHIP_TO_CUST_KEY", null, [EnableFolding = false])
+				in
+				    dbo_RLS_Customer_ShipTo
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

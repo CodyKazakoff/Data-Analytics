@@ -1,0 +1,140 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Dimensions
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Facts
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Metadata
+
+	annotation PBI_QueryGroupOrder = 6
+
+/// Workspace names for dataflows are referenced
+queryGroup Parameters
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup Functions
+
+	annotation PBI_QueryGroupOrder = 5
+
+/// Row Level Security tables and dependencies
+queryGroup Security
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Temp tables'
+
+	annotation PBI_QueryGroupOrder = 7
+
+annotation PBI_QueryOrder = ["Measure Table","Past Due","Due Date Order","z_KPI_Slicer","z_KPI_Slicer_Line_Chart_2","z_Customer_Summary_Slicer","z_Time_Series_Measure_Selector","z_Time_Series_Measure_Selector_2","z_Bar_Chart_Measures_Slicer","z_Bridge_Metric_Table","z_Calculation_Bridge","z_Currency_Slicer","LimitRecordCount","RecordCountLimit","Lakehouse","Fact Table Date Range","Temp_Fin_Ind_Mapping","zLast Refresh Datetime","fx_ConditionallyLimitRows","D_Customer_BillTo","D_Customer_ShipTo","D_Calendar_Filter","D_Calendar_w_Future","D_Calendar_Visual","D_Location","D_Manufacturer","D_Product_Group","D_Supplier_Location","F_Order_Item","RLS_HR_Hierarchy","RLS_Customer_BillTo","RLS_Customer_ShipTo","RLS_Customer_BillTo_AVP","FieldAnalyticsLakehouse","TEMP_Corp_Industry_Mapping","TEMP_NAICS"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["CalcGroup","TMDLView_Desktop"]
+
+ref table 'Measure Table'
+ref table 'zLast Refresh Datetime'
+ref table z_Param_Dim_Rollup_Dimension
+ref table 'Time Intelligence'
+ref table D_Calendar_Filter
+ref table D_Customer_BillTo
+ref table D_Customer_ShipTo
+ref table D_Manufacturer
+ref table D_Product_Group
+ref table F_Order_Item
+ref table D_Location
+ref table z_Param_Date_Dim
+ref table D_Calendar_Visual
+ref table z_Param_Current_Order_Amount_KPI
+ref table z_KPI_Slicer
+ref table z_Param_Prev_Order_Amount_KPI
+ref table z_Param_Current_ADO_KPI
+ref table z_Param_Prev_ADO_KPI
+ref table z_Param_Current_Order_Count_KPI
+ref table z_Param_Prev_Order_Count_KPI
+ref table z_Param_Current_Final_Cost_KPI
+ref table z_Param_Prev_Final_Cost_KPI
+ref table z_Param_Customer_Summary
+ref table z_Param_Point_In_Time_Metric_Table
+ref table z_Time_Series_Measure_Selector
+ref table z_Param_Point_In_Time_Metric_Table_2
+ref table z_Param_Dim_Rollup_Dimension_2
+ref table z_Time_Series_Measure_Selector_2
+ref table z_Param_Current_Open_Order_Amount_KPI
+ref table z_Param_Previous_Open_Order_Amount_KPI
+ref table z_Param_Current_GP%
+ref table z_Param_Bar_Chart_Date
+ref table z_Param_Bar_Chart_Measures_Current_Year
+ref table z_Param_Bar_Chart_Measures_Previous_Year
+ref table z_Bar_Chart_Measures_Slicer
+ref table z_Param_Previous_GP%
+ref table z_Param_Current_Avg_Order_Amount_KPI
+ref table z_Param_Previous_Avg_Order_Amount_KPI
+ref table z_Param_Bar_Chart_Date_2
+ref table z_Param_Calc_Condition_Details
+ref table z_Param_Current_Order_Amount_Var
+ref table z_Param_Current_Order_Count_Var
+ref table z_Param_GP%_Var
+ref table z_Param_ADO_Var
+ref table z_Param_Avg_Order_Amount_Var
+ref table z_Param_Bar_Chart_Location
+ref table z_Param_Point_In_Time_Metric_Line_Chart_2
+ref table z_KPI_Slicer_Line_Chart_2
+ref table z_Currency_Slicer
+ref table z_Param_Point_In_Time_Metric_Line_Chart
+ref table z_Param_Current_Period
+ref table z_Param_Prior_Period
+ref table RLS_HR_Hierarchy
+ref table z_Param_Order_Amount_Line_Chart
+ref table z_Param_Quotes_Open_Orders
+ref table z_Param_Date
+ref table z_Calculation_Bridge
+ref table z_Param_Order_Amount_Line_Chart_Prev
+ref table z_Param_Latest_Order_Quote
+ref table 'Due Date Order'
+ref table z_donut_chart
+ref table z_param_dashboard_table
+ref table z_param_details_table
+ref table RLS_Customer_BillTo
+ref table RLS_Customer_ShipTo
+ref table RLS_Customer_BillTo_AVP
+ref table 'Past Due'
+ref table z_max_order_amt
+ref table z_min_order_amt
+ref table D_Calendar_w_Future
+ref table z_builder_metrics
+ref table z_builder_columns
+ref table z_builder_rows
+ref table TEMP_Corp_Industry_Mapping
+ref table TEMP_NAICS
+ref table D_Supplier_Location
+ref table z_OOR_OrderGrouping
+ref table z_builder_metrics_2
+
+ref role 'Acct Lvl (Terr Emp ID)'
+ref role 'Loc Lvl (Loc Mgr Emp ID)'
+ref role 'Loc Lvl (Ops Mgr Emp ID)'
+ref role 'Loc Lvl (Div Loc)'
+ref role 'Loc Lvl (Grp Loc)'
+ref role Global
+ref role 'Acct Lvl (AVP Emp ID)'
+ref role 'Corp Acct - Global'
+ref role 'Acct Lvl (CAM Emp ID)'
+ref role 'Loc Lvl (Rgn Loc)'
+
+ref cultureInfo en-US
+

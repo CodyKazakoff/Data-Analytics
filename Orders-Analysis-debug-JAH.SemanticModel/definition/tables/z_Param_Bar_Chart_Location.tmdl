@@ -1,0 +1,49 @@
+table z_Param_Bar_Chart_Location
+	lineageTag: 5d38ce48-30f7-45ca-b61d-cfd2781fd9eb
+
+	column 'zParam BarChart - Location'
+		lineageTag: 800087ef-9612-46d5-863c-acb7dd763d6b
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam BarChart - Location Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam BarChart - Location Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam BarChart - Location Fields'
+		lineageTag: 023cce5b-fdba-4e99-b5fe-2db7a47a5ea7
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam BarChart - Location Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam BarChart - Location Order'
+		formatString: 0
+		lineageTag: 79702e99-9c05-4b60-9e87-86973cf404d3
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Bar_Chart_Location = calculated
+		mode: import
+		source =
+				{
+				    ("Corporate Location", NAMEOF(D_Location[MI Corp Loc]), 0),
+				    ("Division Location", NAMEOF(D_Location[Division No & Name]), 2),
+				    ("Group Location", NAMEOF(D_Location[MI Group No & Name]), 1),
+				    ("National Account Parent", NAMEOF(D_Customer_BillTo[Natl Acct Parent Company Name]), 3),
+				    ("National Account Name", NAMEOF('D_Customer_BillTo'[Natl Acct Name]), 4)
+				}
+
+	annotation PBI_Id = ed287f61355c4595ae04eb1dd3e9d968
+

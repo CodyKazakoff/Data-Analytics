@@ -1,0 +1,492 @@
+table Delivery_Details
+	lineageTag: 4124a9fc-5326-40c0-8aa5-d6920c505343
+
+	column 'Area Path'
+		dataType: string
+		lineageTag: 637900fe-65c4-4286-9ada-9cb103d0dc19
+		summarizeBy: none
+		sourceColumn: Area Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned To'
+		dataType: string
+		lineageTag: ad1ac593-ee1d-4aac-9fe7-119a7fc9dd74
+		summarizeBy: none
+		sourceColumn: Assigned To
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed By'
+		dataType: string
+		lineageTag: 23bbd7c7-e369-4534-a9b5-3079c309c61f
+		summarizeBy: none
+		sourceColumn: Closed By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Iteration Path'
+		dataType: string
+		lineageTag: f9b6cc8e-5fdc-44d9-81e2-77e976349f79
+		summarizeBy: none
+		sourceColumn: Iteration Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Item Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: be34c4ca-fab8-47c8-aa13-17362f7349dc
+		summarizeBy: count
+		sourceColumn: Work Item Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: ef81e85b-e0f0-49f2-9369-b80f8e6e4fd5
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Activated Date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: c4ec3816-32e4-401b-82b0-9ff0e9aacb5a
+		summarizeBy: none
+		sourceColumn: Activated Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Created Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e2bf1289-5d0b-4c78-b3a6-ccfac14a3814
+		summarizeBy: none
+		sourceColumn: Created Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual End'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ad6c5aad-b128-47a7-9575-78eac36297a3
+		summarizeBy: none
+		sourceColumn: Actual End
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual Start'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1cc44d57-a366-4423-84f8-c0e00a4cf71a
+		summarizeBy: none
+		sourceColumn: Actual Start
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Completed Effort'
+		dataType: int64
+		formatString: 0
+		lineageTag: cbfd6130-1f2d-4279-9438-75c49009168a
+		summarizeBy: sum
+		sourceColumn: Completed Effort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expense Type'
+		dataType: string
+		lineageTag: 88e1638c-0f1a-431f-bcae-3944c697504d
+		summarizeBy: none
+		sourceColumn: Expense Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Requested By'
+		dataType: string
+		lineageTag: b58c816b-2bdc-47b6-9120-3c2aea697b37
+		summarizeBy: none
+		sourceColumn: Requested By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'InProgress Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8925fd1b-1ce9-4016-8c86-e91c6d1d0f0e
+		summarizeBy: none
+		sourceColumn: InProgress Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Original Estimate'
+		dataType: double
+		lineageTag: 39b2f752-f717-4b11-b842-ba8e65580aa5
+		summarizeBy: sum
+		sourceColumn: Original Estimate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Parent Work Item Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: b6fa0eaf-dd35-4219-b0d3-5ded5a5a18ec
+		summarizeBy: count
+		sourceColumn: Parent Work Item Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 5451dee6-a1b9-4752-bbaf-3c7025c60a6e
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Change Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6ca40f97-fdbd-438e-83ab-4026f8ddedfa
+		summarizeBy: none
+		sourceColumn: State Change Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Story Points'
+		dataType: double
+		lineageTag: 5083f89b-2dd6-419f-9596-928779a8c670
+		summarizeBy: sum
+		sourceColumn: Story Points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Work Item Type'
+		dataType: string
+		lineageTag: f48ed423-6c0a-4781-9065-6302d93511ee
+		summarizeBy: none
+		sourceColumn: Work Item Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Committed Objective'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 23b2ba7d-bede-4710-8dec-8ef123b954b1
+		summarizeBy: none
+		sourceColumn: Committed Objective
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Risk Owner'
+		dataType: string
+		lineageTag: 8559a45c-4347-4891-812b-219387f548c7
+		summarizeBy: none
+		sourceColumn: Risk Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: b9644ed9-df58-4c77-87f7-6d6fd6927ea8
+		summarizeBy: sum
+		sourceColumn: Business Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Risk
+		dataType: string
+		lineageTag: 865b8142-dbd1-4e88-8464-dc8280a57ee1
+		summarizeBy: none
+		sourceColumn: Risk
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Risk Assignment'
+		dataType: string
+		lineageTag: 87ee5fd4-d32a-4428-a2a8-88d852725adc
+		summarizeBy: none
+		sourceColumn: Risk Assignment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Risk Reduction'
+		dataType: int64
+		formatString: 0
+		lineageTag: d6bedecd-2480-4ce2-a694-eb60d4bd1d7e
+		summarizeBy: sum
+		sourceColumn: Risk Reduction
+
+		annotation SummarizationSetBy = Automatic
+
+	column PI = VALUE(RIGHT('Delivery_Details'[PI_Extract], 1))
+		dataType: int64
+		formatString: 0
+		lineageTag: 37418ccf-9812-43b0-b961-7d429841a855
+		summarizeBy: sum
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Iteration Start Date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 8609c83e-b8ff-4eff-ad36-5ef5e9f3cea1
+		summarizeBy: none
+		sourceColumn: Iteration Start Date
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Iteration End Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7e08186b-0ea3-4c24-9d0d-9c88db995218
+		summarizeBy: none
+		sourceColumn: Iteration End Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Original Iteration Path'
+		dataType: string
+		lineageTag: 967b0c40-7087-4201-8656-b2912f9f7175
+		summarizeBy: none
+		sourceColumn: Original Iteration Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivatedDateSK
+		dataType: int64
+		formatString: 0
+		lineageTag: 985f957e-4686-46b9-bfd1-de197c516fcf
+		summarizeBy: sum
+		sourceColumn: ActivatedDateSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1a28842d-f2ee-4f89-843c-ede01515e513
+		summarizeBy: none
+		sourceColumn: Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: c0e2897a-4a68-4744-bf36-259e208a50cb
+		summarizeBy: sum
+		sourceColumn: Actual Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tags
+		dataType: string
+		lineageTag: 4813bd90-256e-4a64-8e21-a182dbc231dc
+		summarizeBy: none
+		sourceColumn: Tags
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team
+		dataType: string
+		lineageTag: bbb68890-f58d-4bb8-ac2a-452c47e33ce9
+		summarizeBy: none
+		sourceColumn: Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column PI_Text = FORMAT('Delivery_Details'[PI], "0")
+		lineageTag: 09408605-eb7d-4ab1-8dd5-8a9d4bcf2eb0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column PI_Extract
+		dataType: string
+		lineageTag: bea0e48f-da18-43d9-9ee4-faaebb620512
+		summarizeBy: none
+		sourceColumn: PI_Extract
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 319aaf29-f2f6-4b42-8ae5-33ba5d4033ec
+		summarizeBy: none
+		sourceColumn: Closed Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Committed_Objective_Text = IF('Delivery_Details'[Committed Objective] = TRUE(), "Committed", "Uncommitted")
+		lineageTag: a614226c-eb35-4ae0-9b8c-82b6a0f0e26b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Is_Max_PI = ```
+			IF(
+			    Delivery_Details[PI] = [PI_Current], 
+			    TRUE(), 
+			    FALSE()
+			    )
+			```
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 0e489f94-a9ed-4ef3-a2d9-24d9e649b8ba
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column At_Risk = ```
+			IF(
+			    CONTAINSSTRING('Delivery_Details'[Tags], "At Risk"),
+			    "At Risk", 
+			    "On-Track"
+			)
+			```
+		lineageTag: 366bde19-f94c-4a60-b93b-7ffe1590835e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Committed_PI
+		dataType: string
+		lineageTag: c583ff66-a859-48c2-b73c-1e3aa00f5cd8
+		summarizeBy: none
+		sourceColumn: Committed_PI
+
+		annotation SummarizationSetBy = Automatic
+
+	column Closed_PI =
+			
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(Delivery_Details[Closed Date]), "",
+			    AND(Delivery_Details[Closed Date] >= DATE(2024,6,20), Delivery_Details[Closed Date] <= DATE(2024,9,11)), "PI 3",
+			    AND(Delivery_Details[Closed Date] >= DATE(2024,9,19), Delivery_Details[Closed Date] <= DATE(2024,12,4)), "PI 4",
+			    AND(Delivery_Details[Closed Date] >= DATE(2024,12,12), Delivery_Details[Closed Date] <= DATE(2025,2,26)), "PI 5",
+			    FORMAT(Delivery_Details[Closed Date], "yyyy-MM-dd")
+			)
+		lineageTag: 549cd040-f449-40c2-8f34-01e4c26cd013
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Committed_PI_Int
+		dataType: int64
+		formatString: 0
+		lineageTag: e7938152-c1f2-410d-8406-f9456bb98db2
+		summarizeBy: sum
+		sourceColumn: Committed_PI_Int
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaSK
+		dataType: string
+		lineageTag: d23ef11d-5756-445e-a086-eaf74ef5bf78
+		summarizeBy: none
+		sourceColumn: AreaSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: d6af73c1-d848-4b46-b147-6e80af000551
+		summarizeBy: sum
+		sourceColumn: Customer Score
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Delivery_Details = m
+		mode: import
+		source = ```
+				let
+				    Source = VSTS.AnalyticsViews("https://dev.azure.com/Motion-IT", "MI-Dev", []),
+				    #"Private Views_Folder" = Source{[Id="Private Views",Kind="Folder"]}[Data],
+				    #"84bf7497-d0a0-489e-a8a0-a27afe584147_Table" = #"Private Views_Folder"{[Id="84bf7497-d0a0-489e-a8a0-a27afe584147",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(#"84bf7497-d0a0-489e-a8a0-a27afe584147_Table",{{"Activated Date", type date}}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Changed Type", "Temp Column", each if [Title] = "Certify Tax " then "At Risk" else [Tags]),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"Tags"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Temp Column", "Tags"}}),
+				    #"Added Conditional Column1" = Table.AddColumn(#"Renamed Columns", "Team", each if [Area Path] = "MI-Dev\Data Solutions\Analytics" then "Data & Analytics" else if [Area Path] = "MI-Dev\Cloud Services" then "Cloud Services" else if [Area Path] = "" then "Data Integration" else if [Area Path] = "MI-Dev\E-Apps\eCOS-Finance" then "Finance" else [Area Path]),
+				    ExtractPI = (path) => let 
+				       parts = Text.Split(path, "\"),  
+				       piPart = List.Select(parts, each Text.Contains(_, "PI ")),  
+				       cleanedPI = if List.Count(piPart) > 0 then  
+				           let  
+				               pi = piPart{0},  
+				               piNumber = Text.Select(Text.AfterDelimiter(pi,"PI "), {"0".."9"}),  
+				               result = "PI " & piNumber  
+				               in  
+				                   result  
+				       else  
+				           null  
+				   in
+				       cleanedPI,
+				   #"Added PI Column" = Table.AddColumn(#"Added Conditional Column1", "PI_Extract_Function", each ExtractPI([Iteration Path])),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Added PI Column",{{"PI_Extract_Function", "PI_Extract"}}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Renamed Columns1", each ([PI_Extract] <> null)),
+				    ExtractCommittedPI = (path, piExtract) => let
+				        committedPI = if path = null then
+				            piExtract
+				        else
+				            let
+				                parts = Text.Split(path, "\"),
+				                sprintPart = List.Select(parts, each Text.StartsWith(_, "Sprint ")),
+				                result = if List.Count(sprintPart) > 0 then
+				                    let
+				                        sprint = sprintPart{0},
+				                        sprintNumber = Text.Select(Text.AfterDelimiter(sprint, "Sprint "), {"0".."9", "."}),
+				                        firstNumber = Text.BeforeDelimiter(sprintNumber, ".")
+				                    in
+				                        "PI " & firstNumber
+				                else
+				                    piExtract
+				            in
+				                result
+				    in
+				        committedPI,
+				    #"Added Committed PI" = Table.AddColumn(#"Filtered Rows1", "Committed_PI", each if [Committed Objective] = false then "" else ExtractCommittedPI([Original Iteration Path], [PI_Extract])),
+				    #"Added Custom" = Table.AddColumn(#"Added Committed PI", "Custom", each if Text.Contains([Committed_PI], " ") then
+				    let
+				        part = Text.AfterDelimiter([Committed_PI], " "),
+				        num = try Number.From(part) otherwise null
+				    in
+				        num
+				  else
+				    let
+				        digits = Text.Select([Committed_PI], {"0".."9"}),
+				        num = try Number.From(digits) otherwise null
+				    in
+				        num),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Added Custom",{{"Custom", "Committed_PI_Int"}})
+				in 
+				    #"Renamed Columns2"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

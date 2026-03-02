@@ -1,0 +1,162 @@
+table 'Script Chunk'
+	lineageTag: 9ea75fc1-4bd3-404f-b508-3ea5aca85c0b
+
+	column AppId
+		dataType: string
+		lineageTag: 3ddd5962-38fa-4046-b952-a4fd29738ac5
+		summarizeBy: none
+		sourceColumn: AppId
+
+		annotation SummarizationSetBy = User
+
+	column ParentAppId
+		dataType: string
+		lineageTag: 2d9af10c-e4d5-4e76-9a94-c8904d09c892
+		summarizeBy: none
+		sourceColumn: ParentAppId
+
+		annotation SummarizationSetBy = User
+
+	column SectionId
+		dataType: string
+		lineageTag: 15bbf2ee-699b-48a8-9444-2f4fc1c59239
+		summarizeBy: none
+		sourceColumn: SectionId
+
+		annotation SummarizationSetBy = User
+
+	column GroupState
+		dataType: int64
+		formatString: 0
+		lineageTag: 8bb7d56b-b9fa-4066-9555-d81d38805a0c
+		summarizeBy: sum
+		sourceColumn: GroupState
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExplicitSectionName
+		dataType: string
+		lineageTag: 4f42cd92-1123-4129-9dd8-1cfbc11343bf
+		summarizeBy: none
+		sourceColumn: ExplicitSectionName
+
+		annotation SummarizationSetBy = User
+
+	column DerivedSectionName
+		dataType: string
+		lineageTag: a9c46a0e-c281-426b-976e-a9bc633607a0
+		summarizeBy: none
+		sourceColumn: DerivedSectionName
+
+		annotation SummarizationSetBy = User
+
+	column CurrentlyActiveConnection
+		dataType: string
+		lineageTag: 5761e2c9-465d-4bb5-a301-2a42d913d921
+		summarizeBy: none
+		sourceColumn: CurrentlyActiveConnection
+
+		annotation SummarizationSetBy = User
+
+	column ConcatenatedLineText
+		dataType: string
+		lineageTag: 00bd7851-2d90-4334-8a68-2ef6895fc86f
+		summarizeBy: none
+		sourceColumn: ConcatenatedLineText
+
+		annotation SummarizationSetBy = User
+
+	column CleanScript
+		dataType: string
+		lineageTag: f0a39a4b-1c41-4c18-b083-443e7e19e855
+		summarizeBy: none
+		sourceColumn: CleanScript
+
+		annotation SummarizationSetBy = User
+
+	column RowsFetched
+		dataType: int64
+		formatString: 0
+		lineageTag: 35574b1e-de4f-406c-9394-4d7b1e6cf736
+		summarizeBy: none
+		sourceColumn: RowsFetched
+
+		annotation SummarizationSetBy = User
+
+	column StartIndex
+		dataType: int64
+		formatString: 0
+		lineageTag: 50d94dfb-2994-479b-a30a-ee05b97d22a4
+		summarizeBy: none
+		sourceColumn: StartIndex
+
+		annotation SummarizationSetBy = User
+
+	column EndIndex
+		dataType: int64
+		formatString: 0
+		lineageTag: cbad55aa-4c57-493c-b6a5-e8eeebd866c7
+		summarizeBy: none
+		sourceColumn: EndIndex
+
+		annotation SummarizationSetBy = User
+
+	column LoadType
+		dataType: int64
+		formatString: 0
+		lineageTag: 6fb4bd74-408b-44ab-a0e7-8497bd1ba905
+		summarizeBy: none
+		sourceColumn: LoadType
+
+		annotation SummarizationSetBy = User
+
+	column Depth
+		dataType: int64
+		formatString: 0
+		lineageTag: 65bbcd4b-15f8-42e1-83be-58b2691098fe
+		summarizeBy: none
+		sourceColumn: Depth
+
+		annotation SummarizationSetBy = User
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: 3f9aaa4f-7acb-4cc7-aa42-9ed2044226fa
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppKey
+		dataType: string
+		lineageTag: 070dd3d9-103a-44dc-8502-91a2df9fa3e5
+		summarizeBy: none
+		sourceColumn: AppKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ScriptChunkKey
+		dataType: string
+		lineageTag: 098187f4-d9f9-405d-b272-3526c3521a73
+		summarizeBy: none
+		sourceColumn: ScriptChunkKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Script Chunk' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex\Script Queries'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_script_chunk"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Solution_ID", "Solution ID"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Solution ID", type text}, {"AppId", type text}, {"ParentAppId", type text}, {"SectionId", type text}, {"GroupState", Int64.Type}, {"ExplicitSectionName", type text}, {"DerivedSectionName", type text}, {"CurrentlyActiveConnection", type text}, {"ConcatenatedLineText", type text}, {"CleanScript", type text}, {"RowsFetched", Int64.Type}, {"StartIndex", Int64.Type}, {"EndIndex", Int64.Type}, {"LoadType", Int64.Type}, {"Depth", Int64.Type}})
+				
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

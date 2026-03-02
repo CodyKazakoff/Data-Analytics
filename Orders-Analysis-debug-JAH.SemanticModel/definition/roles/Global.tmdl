@@ -1,0 +1,7 @@
+role Global
+	modelPermission: read
+
+	tablePermission RLS_HR_Hierarchy = 'RLS_HR_Hierarchy'[EMPLOYEE_UPN] = USERPRINCIPALNAME()
+
+	annotation PBI_Id = 63595d1069af41b3bdeaafa50d28ae62
+

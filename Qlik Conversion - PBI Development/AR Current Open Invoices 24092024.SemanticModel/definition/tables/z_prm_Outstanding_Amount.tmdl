@@ -1,0 +1,57 @@
+table z_prm_Outstanding_Amount
+	lineageTag: c8835aab-2e48-45a1-b9d2-2c2b82ce26b4
+
+	column z_prm_Outstanding_Amount
+		lineageTag: da8fb972-107f-4fcb-99a0-39e12ae85d04
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_Outstanding_Amount Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_Outstanding_Amount Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_Outstanding_Amount Fields'
+		isHidden
+		lineageTag: e8a05415-2507-46f0-9ac3-3e6f914269e6
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_Outstanding_Amount Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_Outstanding_Amount Order'
+		isHidden
+		formatString: 0
+		lineageTag: 45fd44dc-b1cb-4d0d-b389-e47a7a48002e
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value4
+		formatString: 0
+		lineageTag: 1ee21f0b-eb4d-4dca-941e-3ed06cb7cf7a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_Outstanding_Amount = calculated
+		mode: import
+		source =
+				{
+				    ("Outstanding Amount", NAMEOF('Measure'[Outstanding Amount]), 0, 0),
+				    ("Outstanding Amount", NAMEOF('Measure'[Outstanding Amount BASE]), 1, 1)
+				}
+
+	annotation PBI_Id = 38b18f8977494b63bc9159815c508edd
+

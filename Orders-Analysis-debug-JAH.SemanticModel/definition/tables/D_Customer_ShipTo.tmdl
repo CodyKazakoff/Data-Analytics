@@ -1,0 +1,259 @@
+table D_Customer_ShipTo
+	lineageTag: b73bfc98-9451-475d-a444-5b53ea4ee729
+
+	column 'MI Loc  Ship To Customer No  Ship To Customer Name'
+		dataType: string
+		lineageTag: 977e3a5a-c82a-4e4e-886f-910d6e351697
+		summarizeBy: none
+		sourceColumn: MI Loc  Ship To Customer No  Ship To Customer Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Customer No  Ship To Customer Name'
+		dataType: string
+		lineageTag: d6a07db7-2a48-451d-aa03-1ef9fa2bd9fd
+		summarizeBy: none
+		sourceColumn: Ship To Customer No  Ship To Customer Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Customer Name'
+		dataType: string
+		lineageTag: afbabfad-b293-4749-ac03-63e4f76688d8
+		summarizeBy: none
+		sourceColumn: Ship To Customer Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Sic'
+		dataType: string
+		lineageTag: 50427d11-cc40-4223-b1e0-ca055c360c44
+		summarizeBy: none
+		sourceColumn: Ship To Sic
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Cust Key'
+		dataType: string
+		isKey
+		lineageTag: 74407540-790d-4cad-a78d-d5324ee1384f
+		summarizeBy: none
+		sourceColumn: Ship To Cust Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Loc  Ship To Customer No'
+		dataType: string
+		lineageTag: 905fa8fb-817c-45ab-8da1-aab168a1e859
+		summarizeBy: none
+		sourceColumn: MI Loc  Ship To Customer No
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Employee ID'
+		dataType: string
+		lineageTag: efab76f1-91fc-479e-ba65-c2b6e348c345
+		summarizeBy: none
+		sourceColumn: Territory Employee ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Full Name'
+		dataType: string
+		lineageTag: 62742b0d-ed64-4662-a2ae-4b0744205db7
+		summarizeBy: none
+		sourceColumn: Territory Full Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Sic 2Digit'
+		dataType: string
+		lineageTag: ef2d4dba-c79a-47ee-9fbd-4f7e6c65c4d2
+		summarizeBy: none
+		sourceColumn: Ship To Sic 2Digit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Sic  Ship To Sic Name'
+		dataType: string
+		lineageTag: daee7426-9c51-4fc6-b8f5-378c0417744d
+		summarizeBy: none
+		sourceColumn: Ship To Sic  Ship To Sic Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Short Name'
+		dataType: string
+		lineageTag: 3c0828ef-354a-4ab3-bc0b-58e27c5592ac
+		summarizeBy: none
+		sourceColumn: Territory Short Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Customer No'
+		dataType: string
+		lineageTag: 18c01f9c-dedf-4ad9-bea4-3f9c89b73985
+		summarizeBy: none
+		sourceColumn: Ship To Customer No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Addr Line 1'
+		dataType: string
+		lineageTag: b564e1f6-7f4d-4258-9c10-e04a5963ae4e
+		summarizeBy: none
+		sourceColumn: Ship To Addr Line 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To City'
+		dataType: string
+		lineageTag: 808b2f08-2392-47e8-ba92-9e91efed45a3
+		summarizeBy: none
+		sourceColumn: Ship To City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To State'
+		dataType: string
+		lineageTag: d9e5b910-5f2d-443f-abd8-31d8bd4bbee5
+		summarizeBy: none
+		sourceColumn: Ship To State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Zip'
+		dataType: string
+		lineageTag: 45516108-31ff-4e29-9732-4411f1848b0a
+		summarizeBy: none
+		sourceColumn: Ship To Zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Longitude'
+		dataType: double
+		lineageTag: a5156dfe-1a1c-490e-82fa-94164710914e
+		summarizeBy: none
+		sourceColumn: Ship To Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Ship To Latitude'
+		dataType: double
+		lineageTag: 56d09e03-337d-4575-ba35-394e124be038
+		summarizeBy: none
+		sourceColumn: Ship To Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Ship To Customer Source'
+		dataType: string
+		lineageTag: 156a668e-4a84-48ff-b4c3-bc6635ce2316
+		summarizeBy: none
+		sourceColumn: Ship To Customer Source
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cust Size'
+		dataType: string
+		lineageTag: c2cf53f0-f084-4b8e-9d8c-41f8edb84b4c
+		summarizeBy: none
+		sourceColumn: Cust Size
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Employee Job Code'
+		dataType: string
+		lineageTag: 645a160a-9593-43b9-b68c-00b5c0cc5e9c
+		summarizeBy: none
+		sourceColumn: Territory Employee Job Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Employee Email'
+		dataType: string
+		lineageTag: 88a5a94f-b21a-43e8-9de3-4392ac5f05cf
+		summarizeBy: none
+		sourceColumn: Territory Employee Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Employee Job Title'
+		dataType: string
+		lineageTag: da98eea1-2b21-4cc5-bf80-c7d5bd555080
+		summarizeBy: none
+		sourceColumn: Territory Employee Job Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loc Key'
+		dataType: string
+		lineageTag: f5786b42-93bb-418e-8add-8c5b13eba812
+		summarizeBy: none
+		sourceColumn: Loc Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column Industry
+		dataType: string
+		lineageTag: 34030f13-f732-43ce-bf97-e7101a8e946d
+		summarizeBy: none
+		sourceColumn: Industry
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Customer_ShipTo = m
+		mode: import
+		queryGroup: Dimensions
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    // Removing values not present in the fact table
+				    dbo_D_Customer_ShipTo = Value.NativeQuery(Source,
+				    "
+				        SELECT DIM.* 
+				        FROM dbo.D_Customer_ShipTo DIM
+				        INNER JOIN (SELECT DISTINCT SHIP_TO_CUST_KEY FROM dbo.F_Shipper_Item) FAC
+				            ON FAC.SHIP_TO_CUST_KEY = DIM.SHIP_TO_CUST_KEY", null, [EnableFolding = true]),
+				    #"Remove Unused Columns" = Table.SelectColumns(dbo_D_Customer_ShipTo,{"SHIP_TO_CUSTOMER_NO", "SHIP_TO_CUSTOMER_NAME", "SHIP_TO_CUSTOMER_NO__SHIP_TO_CUSTOMER_NAME", "SHIP_TO_SIC", "SHIP_TO_SIC_2DIGIT", "SHIP_TO_ADDR_LINE_1", "SHIP_TO_CITY", "SHIP_TO_STATE", "SHIP_TO_ZIP", "SHIP_TO_LONGITUDE", "SHIP_TO_LATITUDE", "SHIP_TO_CUSTOMER_SOURCE", "CUST_SIZE", "TERRITORY_EMPLOYEE_ID", "TERRITORY_EMPLOYEE_JOB_CODE", "TERRITORY_EMPLOYEE_EMAIL", "TERRITORY_EMPLOYEE_JOB_TITLE", "TERRITORY_FULL_NAME", "TERRITORY_SHORT_NAME", "MI_LOC__SHIP_TO_CUSTOMER_NO", "MI_LOC__SHIP_TO_CUSTOMER_NO__SHIP_TO_CUSTOMER_NAME", "SHIP_TO_SIC__SHIP_TO_SIC_NAME", "LOC_KEY", "SHIP_TO_CUST_KEY"}),
+				    #"TEMP DEV STEP: LimitRecords" = fx_ConditionallyLimitRows(#"Remove Unused Columns",  LimitRecordCount, RecordCountLimit),
+				    // Rename columns to be more business frieldly
+				    #"Bulk Column Rename" = Table.TransformColumnNames(#"Remove Unused Columns", each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," ")),
+				    // Temporarily limiting the data when building on local desktop. This setting is toggled off on PBI online
+				    #"Changed Type" = Table.TransformColumnTypes(#"Bulk Column Rename",{{"Ship To Longitude", type number}, {"Ship To Latitude", type number}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"Ship To Sic 2Digit"}, Temp_Fin_Ind_Mapping, {"SIC"}, "IndMapping-Booking-Invoice%20Summary", JoinKind.LeftOuter),
+				    #"Expanded IndMapping-Booking-Invoice%20Summary" = Table.ExpandTableColumn(#"Merged Queries", "IndMapping-Booking-Invoice%20Summary", {"GPC_SU_TITLE"}, {"GPC_SU_TITLE"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded IndMapping-Booking-Invoice%20Summary",{{"GPC_SU_TITLE", "Industry"}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns",{{"Territory Employee ID", type text}})
+				in
+				    #"Changed Type1"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

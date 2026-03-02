@@ -1,0 +1,56 @@
+table F_Shipper_Item
+	lineageTag: a39beab5-d3f8-441e-984d-57367c381466
+
+	column SALES_AMOUNT
+		dataType: double
+		lineageTag: e4526c47-6770-4f7b-91dc-5618d12faa8b
+		summarizeBy: sum
+		sourceColumn: SALES_AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALES_POSTED_DATE
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 76cffb2c-0f01-49a3-b868-54c119652637
+		summarizeBy: none
+		sourceColumn: SALES_POSTED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column WEB_ORDERS
+		dataType: string
+		lineageTag: 6fa0615d-eb14-4610-967f-bc0f490a2030
+		summarizeBy: none
+		sourceColumn: WEB_ORDERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_CUSTOMER_COST_AMOUNT
+		dataType: double
+		lineageTag: 791a5062-4f58-49fd-8f5e-cd2e5b43f2ea
+		summarizeBy: sum
+		sourceColumn: TOTAL_CUSTOMER_COST_AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition F_Shipper_Item = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-255cr47brb7ubl4dmbam3tblom.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_F_Shipper_Item = Source{[Schema="dbo",Item="F_Shipper_Item"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(dbo_F_Shipper_Item,{"WEB_ORDERS", "SALES_AMOUNT", "TOTAL_CUSTOMER_COST_AMOUNT", "SALES_POSTED_DATE"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

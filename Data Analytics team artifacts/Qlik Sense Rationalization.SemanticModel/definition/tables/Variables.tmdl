@@ -1,0 +1,91 @@
+table Variables
+	lineageTag: 52771a45-8ac9-477f-a347-1720322d6817
+
+	column Id
+		dataType: string
+		lineageTag: ebe459b9-2b87-4afc-8df7-2fa1e6062f3d
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column RawName
+		dataType: string
+		lineageTag: 2f59bd3c-870b-4a82-a147-0165e83094ab
+		summarizeBy: none
+		sourceColumn: RawName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: 89067a10-a858-41eb-b561-de26f3244dc1
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: d5c6e50a-e408-41d6-bf7b-17eca4ce4cb0
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column RawDefinition
+		dataType: string
+		lineageTag: 97cb965a-6d46-4286-a158-8e6896dd9c06
+		summarizeBy: none
+		sourceColumn: RawDefinition
+
+		annotation SummarizationSetBy = Automatic
+
+	column Definition
+		dataType: string
+		lineageTag: dc728a87-a57f-4894-a619-b76396011761
+		summarizeBy: none
+		sourceColumn: Definition
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: ac15174b-4907-4e81-a909-3a01ebc109ee
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: a599f35c-b20e-478c-b515-071fdb275ef3
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppKey
+		dataType: string
+		lineageTag: e9d9af5e-b61e-4d56-a478-c90ddde7cfc9
+		summarizeBy: none
+		sourceColumn: AppKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Variables = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_variables"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Solution_ID", "Solution ID"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns", {{"Solution ID", type text}, {"Id", type text}, {"RawName", type text}, {"Name", type text}, {"Description", type text}, {"RawDefinition", type text}, {"Definition", type text}, {"Notes", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

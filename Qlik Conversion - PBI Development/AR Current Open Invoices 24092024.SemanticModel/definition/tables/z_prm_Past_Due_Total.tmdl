@@ -1,0 +1,57 @@
+table z_prm_Past_Due_Total
+	lineageTag: 701d477d-02f9-4ac3-8f1c-308c86f4e2ba
+
+	column z_prm_Past_Due_Total
+		lineageTag: d4ee402d-e4d5-48d5-adbb-d0a9330af765
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_Past_Due_Total Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_Past_Due_Total Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_Past_Due_Total Fields'
+		isHidden
+		lineageTag: a4f2c59e-f325-40df-8fed-15b79aa0290d
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_Past_Due_Total Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_Past_Due_Total Order'
+		isHidden
+		formatString: 0
+		lineageTag: 067ff40e-6978-4f9b-b8af-38d76208ec82
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value4
+		formatString: 0
+		lineageTag: 7f6a6fa8-0f83-4c9c-8093-3ab36ab0fda4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_Past_Due_Total = calculated
+		mode: import
+		source =
+				{
+				    ("Past Due Total", NAMEOF('Measure'[Past Due Total]), 0,0),
+				    ("Past Due Total", NAMEOF('Measure'[Past Due Total BASE]), 1,1)
+				}
+
+	annotation PBI_Id = ea4a7b7c77ce4f519e4234d2dc917dca
+

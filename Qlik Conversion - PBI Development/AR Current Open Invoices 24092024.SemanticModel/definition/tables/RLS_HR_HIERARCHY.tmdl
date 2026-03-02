@@ -1,0 +1,44 @@
+table RLS_HR_HIERARCHY
+	lineageTag: 6245ef43-e501-4c9a-bacc-9da02c8a33b9
+
+	column SUPERVISOR_UPN
+		dataType: string
+		lineageTag: 1019bbf5-7231-4496-a241-7a9cad44ca08
+		summarizeBy: none
+		sourceColumn: SUPERVISOR_UPN
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_MI_LOC
+		dataType: string
+		lineageTag: de286833-5f0f-419f-826d-99b8574dfe5b
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_ID
+		dataType: string
+		lineageTag: 706bfee2-64e5-470b-8655-bcb1f5cfdc21
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RLS_HR_HIERARCHY = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4" = Workspaces{[workspaceId="8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"]}[Data],
+				    #"95974454-5d50-4047-8207-905e735f62f5" = #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"{[dataflowId="95974454-5d50-4047-8207-905e735f62f5"]}[Data],
+				    RLS_HR_HIERARCHY_ = #"95974454-5d50-4047-8207-905e735f62f5"{[entity="RLS_HR_HIERARCHY",version=""]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(RLS_HR_HIERARCHY_,{"SUPERVISOR_EMAIL", "SUPERVISOR_EMPLOYEE_ID", "SUPERVISOR_DISPLAY_NAME", "EMPLOYEE_DISPLAY_NAME", "EMPLOYEE_MI_ACCOUNT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

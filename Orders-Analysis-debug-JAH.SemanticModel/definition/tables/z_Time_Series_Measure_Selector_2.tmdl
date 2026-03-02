@@ -1,0 +1,39 @@
+table z_Time_Series_Measure_Selector_2
+	lineageTag: 899beb2f-0f58-42ff-9a53-718c425668a1
+
+	column 'Measure Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: c5c15738-a1e7-44da-b3b2-e016bfbef96d
+		summarizeBy: none
+		sourceColumn: Measure Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure Name'
+		dataType: string
+		lineageTag: c8aaabea-d36c-48f7-b5ae-dc34488faf5e
+		summarizeBy: none
+		sourceColumn: Measure Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_Time_Series_Measure_Selector_2 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUXIsS9dTcEnMzKlU8C9KSS0qVorViVYyAsqE5Jck5ig45uaX5pWABU3ggs5wMVOgmH9Bah5EM7JqM6CMe4CCqlJsLAA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Measure Index" = _t, #"Measure Name" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Measure Index", Int64.Type}, {"Measure Name", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

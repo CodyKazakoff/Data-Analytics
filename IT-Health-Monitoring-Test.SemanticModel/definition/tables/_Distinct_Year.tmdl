@@ -1,0 +1,24 @@
+table _Distinct_Year
+	lineageTag: ca799313-483f-475c-9801-a7b208286822
+
+	column Year
+		formatString: 0
+		lineageTag: 52b7a80b-60c8-4c9e-9c17-7479d519b6d2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: _Date_Table[Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year_Text = FORMAT(_Distinct_Year[Year], "0")
+		lineageTag: ec2ae309-094d-4498-b604-9ad4130c153e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Distinct_Year = calculated
+		mode: import
+		source = DISTINCT(_Date_Table[Year])
+
+	annotation PBI_Id = 84e263a15b514a6a9fe33107654b40bd
+

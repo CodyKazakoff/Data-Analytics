@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Employee Data Test"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f488a4ea-f48d-8f2c-4dd6-3b4264882aae"
+  }
+}

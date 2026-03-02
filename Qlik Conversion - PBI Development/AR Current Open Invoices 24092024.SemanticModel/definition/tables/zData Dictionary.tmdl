@@ -1,0 +1,55 @@
+/// *Metadata*
+table 'zData Dictionary'
+	isHidden
+	lineageTag: a188fca2-0bc3-487d-8fd2-57465d30a5ce
+
+	column 'Term Name'
+		dataType: string
+		lineageTag: 3e823d8a-0d21-47ab-8bbd-519cdabcebff
+		summarizeBy: none
+		sourceColumn: Term Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Key Logic'
+		dataType: string
+		lineageTag: 715916f4-889f-43e5-a4c3-77ffa6a53136
+		summarizeBy: none
+		sourceColumn: Key Logic
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Term Definition'
+		dataType: string
+		lineageTag: d3af494a-ebfa-4e31-98be-60594f57fb9c
+		summarizeBy: none
+		sourceColumn: Term Definition
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'zData Dictionary-24954ba4-f0dc-4630-9179-a6855b2617a0' = m
+		mode: import
+		queryGroup: Metadata\Queries
+		source = ```
+				let
+				    // Create internal source
+				    Source                                          = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCkktylUwVNKBMFxS0zLzMksy8/PAYt6plQo++emZyUBerA5UsREWxUYoio0Qio2xKDZGUWyMUGyCRbEJimIThGJTLIpNURSbKsXGAgA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Term Name" = _t, #"Term Definition" = _t, #"Key Logic" = _t]),
+				    // Get Measure Defs
+				    tempMeasureDefs                                 = Table.SelectColumns(Table.SelectRows(#"zMeasure Definitions", each [IsHidden] = false), {"Measure Name", "Measure Definition", "Description"}),
+				    // Rename Measure Def Columns
+				    MeasureDefs                                     = Table.RenameColumns(tempMeasureDefs, 
+				                                                        {
+				                                                            {"Measure Name", "Term Name"}
+				                                                            , {"Description", "Term Definition"}
+				                                                            , {"Measure Definition", "Key Logic"}
+				                                                        }),
+				    // Combined Tables
+				    CombinedTables                                  = Table.Combine({Source, MeasureDefs}),
+				    // Change type for output
+				    Output                                          = Table.TransformColumnTypes(CombinedTables,{{"Term Name", type text}, {"Term Definition", type text}, {"Key Logic", type text}})
+				in
+				    Output
+				```
+
+	annotation PBI_ResultType = Table
+

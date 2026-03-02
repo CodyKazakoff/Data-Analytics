@@ -1,0 +1,59 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Dimensions
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Facts
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Metadata
+
+	annotation PBI_QueryGroupOrder = 4
+
+/// Workspace names for dataflows are referenced
+queryGroup Parameters
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Functions
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup 'Temp tables'
+
+	annotation PBI_QueryGroupOrder = 6
+
+annotation PBI_QueryOrder = ["Measure Table","RangeStart","RangeEnd","FilePath","Dataflow_LimitRecordCount","Dataflow_RecordCountLimit","Workspace","zLast Refresh Datetime","fx_ConditionallyLimitRows","fx_Loop","fx_TableProfile","fx_DistinctKeyChecker","fx_FilterDimByFact","fx_ConvertUTCtoET","zChange Log","zData Details","zDataset Information","zKnown Issues","zTime Series Definition","data_quality_testing","GBQ_Tables_Metadata","refresh_log","refresh_log_detail","zDetail_Level_Slicer","Lakehouse","Dev","Prod"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.141.1451.0 (25.03)+5007b75f0f7edbed506e31fcb76584cd6d711788
+
+annotation __TEdtr = 1
+
+ref table 'Measure Table'
+ref table 'zLast Refresh Datetime'
+ref table data_quality_testing
+ref table DataPeriod
+ref table z_prm_test_cases
+ref table z_prm_failed_cases
+ref table z_prm_failed_items
+ref table z_prm_%_failed
+ref table z_prm_passed_cases
+ref table z_prm_%_passed
+ref table GBQ_Tables_Metadata
+ref table refresh_log
+ref table refresh_log_detail
+ref table zDetail_Level_Slicer
+ref table z_prm_detail_level_slicer
+
+ref cultureInfo en-US
+

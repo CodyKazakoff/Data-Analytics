@@ -1,0 +1,28 @@
+table 'UserInput_Normalized Sessions'
+	lineageTag: ccc929d8-8fa8-4aec-b6ff-521ff2fe2d83
+
+	measure 'Normalized Sessions Value' = SELECTEDVALUE('UserInput_Normalized Sessions'[Normalized Sessions], 0.32)
+		lineageTag: 680fe142-d8c0-492c-9c21-c052ebff1a56
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Normalized Sessions'
+		lineageTag: dd57427c-2e4f-4618-b006-1272913af782
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'UserInput_Normalized Sessions' = calculated
+		mode: import
+		source = GENERATESERIES(0, 1, 0.01)
+
+	annotation PBI_Id = fe46513995f24254b2ef7e6cddd76edf
+

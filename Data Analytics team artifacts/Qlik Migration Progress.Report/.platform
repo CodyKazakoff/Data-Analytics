@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Qlik Migration Progress"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "95337e8c-3574-a2a3-4660-3a814336d269"
+  }
+}

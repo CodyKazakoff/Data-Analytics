@@ -1,0 +1,28 @@
+table z_max_order_amt
+	lineageTag: b7bfe0e9-9b34-4649-909e-acb060a29298
+
+	measure 'z_max_order_amt Value' = SELECTEDVALUE('z_max_order_amt'[z_max_order_amt])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 58d669e3-2f17-496d-9074-61ae7444a85d
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column z_max_order_amt
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 528f5095-c686-4fec-a8ed-4ff7f17b5815
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition z_max_order_amt = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(0), CURRENCY(2500000), CURRENCY(5000))
+
+	annotation PBI_Id = a225b4fa2c8b4faca38798237daa886f
+

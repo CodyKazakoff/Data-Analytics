@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "CoPilot Metrics POC"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e9f44e30-f53c-b668-43cf-a03e27d313eb"
+  }
+}

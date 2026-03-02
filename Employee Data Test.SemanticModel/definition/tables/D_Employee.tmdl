@@ -1,0 +1,367 @@
+table D_Employee
+	lineageTag: 907b14f3-616a-47fa-aa43-5ff27336e8b1
+	sourceLineageTag: [dbo].[D_Employee]
+
+	column EMPLOYEE_KEY
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d00fb16e-11fc-467a-a1dd-8a39152d9927
+		sourceLineageTag: EMPLOYEE_KEY
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_ID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ac8dfe66-3806-400b-91e3-8fd4450a4fc7
+		sourceLineageTag: EMPLOYEE_ID
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_ACCOUNT
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 438b0231-adb4-46ba-80db-5c3d3535dc7c
+		sourceLineageTag: MI_ACCOUNT
+		summarizeBy: none
+		sourceColumn: MI_ACCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_NAME_CN
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6bfadec8-eb36-4587-9386-35a25cc01058
+		sourceLineageTag: EMP_NAME_CN
+		summarizeBy: none
+		sourceColumn: EMP_NAME_CN
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_MI_LOC
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 00a811b4-1a3b-4484-a8f6-4dbc5fdefb49
+		sourceLineageTag: EMP_MI_LOC
+		summarizeBy: none
+		sourceColumn: EMP_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_EMAIL
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 0225f3d8-f7fb-4d0b-b3e1-5f55d65018d3
+		sourceLineageTag: EMP_EMAIL
+		summarizeBy: none
+		sourceColumn: EMP_EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_TELEPHONE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a0586efa-6df4-4b5b-9c62-d4f597cb675f
+		sourceLineageTag: EMP_TELEPHONE
+		summarizeBy: none
+		sourceColumn: EMP_TELEPHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_FAX_NO
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8c885019-9115-4c0e-8f8f-9aaf07283de7
+		sourceLineageTag: EMP_FAX_NO
+		summarizeBy: none
+		sourceColumn: EMP_FAX_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_TITLE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a3d09d36-3a6f-45cb-8c0f-895cb22a939f
+		sourceLineageTag: EMP_TITLE
+		summarizeBy: none
+		sourceColumn: EMP_TITLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_DEPT
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3aa4d706-4e03-4935-8aca-2a9264343ffd
+		sourceLineageTag: EMP_DEPT
+		summarizeBy: none
+		sourceColumn: EMP_DEPT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_ADDRESS
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f594419c-01e0-4d06-979f-69a05994deb2
+		sourceLineageTag: EMP_ADDRESS
+		summarizeBy: none
+		sourceColumn: EMP_ADDRESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_DESCRIPTION
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 90b24ec5-8c83-4897-8fb0-0b1384a70347
+		sourceLineageTag: EMP_DESCRIPTION
+		summarizeBy: none
+		sourceColumn: EMP_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_DISPLAY_NAME
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2c810541-87a7-4f13-84ec-9b61f27b867e
+		sourceLineageTag: EMP_DISPLAY_NAME
+		summarizeBy: none
+		sourceColumn: EMP_DISPLAY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_GIVEN_NAME
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cea4884c-af6d-4e1f-ab6d-3a58b854821e
+		sourceLineageTag: EMP_GIVEN_NAME
+		summarizeBy: none
+		sourceColumn: EMP_GIVEN_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_CITY
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7effffa9-50de-4e72-aa11-a81271e9dbe1
+		sourceLineageTag: EMP_CITY
+		summarizeBy: none
+		sourceColumn: EMP_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_OBJ_CLASS
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4a330e19-a064-4a00-a22a-4200959626c4
+		sourceLineageTag: EMP_OBJ_CLASS
+		summarizeBy: none
+		sourceColumn: EMP_OBJ_CLASS
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_POSTAL_CD
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5eb21d26-994e-46f8-b6e7-8c205c88f036
+		sourceLineageTag: EMP_POSTAL_CD
+		summarizeBy: none
+		sourceColumn: EMP_POSTAL_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_NAME
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 09656477-6d14-4ee9-b1d4-8ddd2f1c5f75
+		sourceLineageTag: EMP_NAME
+		summarizeBy: none
+		sourceColumn: EMP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_STATE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: eb03893d-eb42-4278-b32f-a12d164f3b61
+		sourceLineageTag: EMP_STATE
+		summarizeBy: none
+		sourceColumn: EMP_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_SIR_NAME
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 62087179-88c2-42b3-81b8-fa946dfad4a5
+		sourceLineageTag: EMP_SIR_NAME
+		summarizeBy: none
+		sourceColumn: EMP_SIR_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_HOME_PHONE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: afadd5c6-3c75-4ff9-859c-c925a015bf4c
+		sourceLineageTag: EMP_HOME_PHONE
+		summarizeBy: none
+		sourceColumn: EMP_HOME_PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_MOBILE_PHONE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 8aabf719-fd08-464e-bd7f-96800d35a500
+		sourceLineageTag: EMP_MOBILE_PHONE
+		summarizeBy: none
+		sourceColumn: EMP_MOBILE_PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_PAGER
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d14996b9-63b2-4a07-b00c-6037b6ee05a4
+		sourceLineageTag: EMP_PAGER
+		summarizeBy: none
+		sourceColumn: EMP_PAGER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPERVISOR_ID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 86f598e0-626a-4f76-8479-70a2a358faaa
+		sourceLineageTag: SUPERVISOR_ID
+		summarizeBy: none
+		sourceColumn: SUPERVISOR_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOB_CODE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: da536a62-b2a5-4862-b38a-4ba959fc2385
+		sourceLineageTag: JOB_CODE
+		summarizeBy: none
+		sourceColumn: JOB_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOB_POSITION
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3d51d0cd-57bb-46e0-9553-c34e78b1d60e
+		sourceLineageTag: JOB_POSITION
+		summarizeBy: none
+		sourceColumn: JOB_POSITION
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOB_STATUS
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6718ce73-d839-4c03-a2b9-bcd6f6b4866b
+		sourceLineageTag: JOB_STATUS
+		summarizeBy: none
+		sourceColumn: JOB_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SSN_LAST4
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c13215f7-6d9c-4c80-9a65-1be3a8d8a436
+		sourceLineageTag: SSN_LAST4
+		summarizeBy: none
+		sourceColumn: SSN_LAST4
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_HIRED
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: dec4c24d-bb83-43d7-906c-e168d7fbefc9
+		sourceLineageTag: DATE_HIRED
+		summarizeBy: none
+		sourceColumn: DATE_HIRED
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_ADJUSTED_HIRE
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: b0bcafe1-e55a-4410-b6f8-2cf868612f31
+		sourceLineageTag: DATE_ADJUSTED_HIRE
+		summarizeBy: none
+		sourceColumn: DATE_ADJUSTED_HIRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_TERMINATED
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 7f93b2af-2338-487d-9d7e-ddb9dd8508ad
+		sourceLineageTag: DATE_TERMINATED
+		summarizeBy: none
+		sourceColumn: DATE_TERMINATED
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORP_ACCOUNTS_FLAG
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 51e5d78b-93eb-4351-a127-bda77b87aaf0
+		sourceLineageTag: CORP_ACCOUNTS_FLAG
+		summarizeBy: none
+		sourceColumn: CORP_ACCOUNTS_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORP_ACCT_TYPE
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f349c171-b8cf-47c7-a313-d0adbcf07f67
+		sourceLineageTag: CORP_ACCT_TYPE
+		summarizeBy: none
+		sourceColumn: CORP_ACCT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AREA_VP_SUPPORT_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		sourceProviderType: bit
+		lineageTag: 0987791b-d854-419b-a9bb-e9f476dd38af
+		sourceLineageTag: AREA_VP_SUPPORT_FLAG
+		summarizeBy: none
+		sourceColumn: AREA_VP_SUPPORT_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column AREA_VP_SUPERVISOR_ID
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 660cf82e-630e-48ee-be76-69e74b59b479
+		sourceLineageTag: AREA_VP_SUPERVISOR_ID
+		summarizeBy: none
+		sourceColumn: AREA_VP_SUPERVISOR_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Employee = entity
+		mode: directLake
+		source
+			entityName: D_Employee
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

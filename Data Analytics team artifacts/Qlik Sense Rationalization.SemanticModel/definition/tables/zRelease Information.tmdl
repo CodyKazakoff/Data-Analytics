@@ -1,0 +1,87 @@
+/// *Metadata*
+table 'zRelease Information'
+	isHidden
+	lineageTag: fb29766d-18b3-4278-ada6-176dbff23e53
+
+	column 'Release Index'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3965e053-f183-42da-a813-a5581909cb9e
+		summarizeBy: none
+		sourceColumn: Release Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column Release
+		dataType: string
+		isHidden
+		lineageTag: 72fe6ce0-c35c-4a51-8e9a-83c7f6f329fd
+		summarizeBy: none
+		sourceColumn: Release
+		sortByColumn: 'Release Index'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Release Date'
+		dataType: dateTime
+		isHidden
+		formatString: mm/dd/yyyy
+		lineageTag: b8bb7393-5381-4dfc-8a93-1587057e782e
+		summarizeBy: none
+		sourceColumn: Release Date
+		sortByColumn: 'Release Index'
+
+		changedProperty = IsHidden
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Released By'
+		dataType: string
+		isHidden
+		lineageTag: 6270f7f7-5235-491d-b31b-46bfed6da809
+		summarizeBy: none
+		sourceColumn: Released By
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Release Notes'
+		dataType: string
+		isHidden
+		lineageTag: 39414399-92a4-44b9-a713-756dc154d585
+		summarizeBy: none
+		sourceColumn: Release Notes
+		sortByColumn: 'Release Index'
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'zRelease Information-32ee1650-3fa7-4388-9103-bf68220cb5c4' = m
+		mode: import
+		queryGroup: Metadata\Queries
+		source =
+				let
+				    //Create internal source
+				    Source =                                        Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("fZLbboJAEIZfZcI1EUFBb7WJiU1MrWmvjGmmMMCmuGt3F619+s6Atkljyw17IN9/GLbbIA7CYBMPhvyaRqMoGSayvKeyhA2pvG5I836plVfYgKWG0BGYEl66hz86GOuDXbgNEkElHSqL4qGwOjqeYWHPxMsVeSzQIyhdGrtHr4wGLAoqQka3Dl8bghUsWp3LlevvOvhISKOLz2RyA/5wJFtj24i5tTmRhceW7BmMrVCrz4uYLqC84gcdeSyYcUeOk2h6g/x8YNPkwBtw7UHyQl6jrvqj2YdysJ4v4cmYxoXiWenqt0oqyLRTSaMkFZXkT5UDWtyTJ8u4b04Ie1OoUuXYd3OV7mSB+7ykni97xUzw2bWx7H/F/XUyXmbARzV6cN5Y4it0rSVJxuXNXk3r2WBFvcpEkJO+vTiKb8ncWWKZnyCix/UVPGuXk0arjINTTaxVYu57C8DJ2MKJ6E2Ca1+H8N6i5VJCHimcCS00dKSGfybnCQuZu+TpT9nd7gs=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Release Index" = _t, Release = _t, #"Release Date" = _t, #"Released By" = _t, #"Release Notes" = _t]),
+				    //Change type for output
+				    #"Changed Type" =                               Table.TransformColumnTypes(Source,{{"Release Index", Int64.Type}, {"Release", type text}, {"Release Date", type date}, {"Released By", type text}, {"Release Notes", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

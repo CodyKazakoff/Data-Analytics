@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Motion Power BI Template With RLS"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "82545024-8c23-8f76-4ff9-6d3ccf9f9ca9"
+  }
+}

@@ -1,0 +1,76 @@
+table z_Param_Calc_Condition_Details
+	lineageTag: 8d5cd4f1-c3f9-4b1f-8f8b-8128d6199dd4
+
+	column 'zParam Calc Condition - Details'
+		lineageTag: 8d45deda-37ed-47b7-b8e8-1e39cc08629c
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam Calc Condition - Details Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam Calc Condition - Details Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Calc Condition - Details Fields'
+		lineageTag: a5ad40b9-b8b8-4bd4-8a79-cb5a36080b9d
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam Calc Condition - Details Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Calc Condition - Details Order'
+		formatString: 0
+		lineageTag: 85aae074-e0c0-4522-9f5e-427462f93670
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	column Show/Hide
+		lineageTag: e56b2f57-5b8a-4b1d-88e3-834c37c6a9d9
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_Param_Calc_Condition_Details = calculated
+		mode: import
+		source =
+				{
+				    ("Branch + Order Control No + Line No", NAMEOF('F_Order_Item'[MI Loc  Order Ctl No  Order Line No]), 1 , "Show"),
+				    ("Billing Customer", NAMEOF(D_Customer_BillTo[Billing Customer No  Billing Customer Name]), 2 , "Show"),
+				    ("Order Control Number", NAMEOF('F_Order_Item'[Order Ctl No]), 4 , "Show"),
+				    ("Order Line Number", NAMEOF(F_Order_Item[Order Line No]), 5 , "Show"),
+				    //("Order Control Number", NAMEOF(item), 6 , "Show"),
+				    ("MINO", NAMEOF(F_Order_Item[Itm Mino]), 7 , "Show"),
+				    ("Manufacturer Name", NAMEOF(D_Manufacturer[Enterprise No  Enterprise Name]), 8 , "Show"),
+				    ("Manufacturer Supplier InMotion**", NAMEOF(D_Manufacturer[Mfr Supplier Inmotion]), 9 , "Show"),
+				    ("Sales $", NAMEOF([Total $]), 10 , "Show"),
+				    ("Gross Profit %", NAMEOF([Total GP %]), 11 , "Show"),
+				    //*******************Dates
+				    ("Item/Order Due Date", NAMEOF(F_Order_Item[Itm Order Due Date]), 12 , "Show"),
+				    ("OCN Due Date", NAMEOF(F_Order_Item[Due Date]), 13, "Show"),
+				    //("Order Creation Date", NAMEOF(F_Order_Item[ITM_CREATION_DATE]), 14 , "Show"),
+				    //("OCN Due Date", NAMEOF(F_Order_Item[ITM_ORDER_DUE_DATE]), 15 , "Show"),
+				    ("Booked Date", NAMEOF(F_Order_Item[Converted To Order Date]), 16 , "Show"),
+				    ("Order Header Status", NAMEOF(F_Order_Item[Process Status Desc]), 17 , "Show"),
+				    //("Order Item Status", NAMEOF(), 18 , "Show"),
+				    //("ORDER_DATE", NAMEOF(Supplier), 19 , "Show"),
+				    //*****************Loaction Dims
+				    ("Branch", NAMEOF(D_Location[MI Loc]), 20 , "Show"),
+				    ("Division", NAMEOF(D_Location[Division Name]), 21 , "Show"),
+				    ("Group", NAMEOF(D_Location[MI Group Loc]), 22 , "Show"),
+				    ("Price Card Type", NAMEOF(F_Order_Item[Price Card Type]), 23 , "Show"),
+				    ("Condition Message", NAMEOF('Measure Table'[Detail Error Message]), 99 , "Hide")
+				}
+
+	annotation PBI_Id = dbcf5b6557af46528ca75ca84c5c28ff
+

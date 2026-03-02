@@ -1,0 +1,66 @@
+table 'test_Current Employees Table'
+	lineageTag: efce5d9b-f4a5-46a6-9f07-0acc6846e6c4
+
+	column 'Employee ID'
+		lineageTag: 7b665b17-e99d-4292-873d-2b9c2361e0b5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Employee ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Hired'
+		formatString: General Date
+		lineageTag: bcc593f0-a6d3-4a09-bd10-e21214cc58c7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date Hired]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Terminated'
+		formatString: General Date
+		lineageTag: 0d6a0824-81da-4d72-b897-341aa70f3f7c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date Terminated]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		lineageTag: 97a22cf8-4376-42fd-ad45-6dd6e2ba7cd3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Location]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Name'
+		lineageTag: 1e88756e-dd25-4534-a671-c25ecea12c51
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Employee Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'test_Current Employees Table' = calculated
+		mode: import
+		source = ```
+				
+				SELECTCOLUMNS(
+				    FILTER(
+				        D_Employee,
+				        D_Employee[DATE_TERMINATED] = DATE(1900,1,1)
+				        && CONTAINSSTRING(D_Employee[EMP_DEPT], "DP")
+				    ),
+				    "Employee ID", D_Employee[EMPLOYEE_ID],
+				    "Employee Name", D_Employee[EMP_NAME_CN],
+				    "Date Hired", D_Employee[DATE_HIRED],
+				    "Date Terminated", D_Employee[DATE_TERMINATED],
+				    "Location", D_Employee[EMP_DEPT]
+				)
+				
+				```
+
+	annotation PBI_Id = 5c2a3dbb00014ea994d1f9801fd848ac
+

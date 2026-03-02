@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "T&E Pcards-MOT"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ecc1a5be-0c92-9f10-492b-745888a0d48a"
+  }
+}

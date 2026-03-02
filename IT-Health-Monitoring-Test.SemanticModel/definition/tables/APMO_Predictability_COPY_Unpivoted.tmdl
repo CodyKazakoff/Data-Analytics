@@ -1,0 +1,69 @@
+table APMO_Predictability_COPY_Unpivoted
+	lineageTag: b6101e5a-7f13-454a-a440-d9b23c9252a3
+
+	column PI
+		dataType: int64
+		formatString: 0
+		lineageTag: 26fb013f-666b-41b7-99d2-6f3f1761dd10
+		summarizeBy: none
+		sourceColumn: PI
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribute
+		dataType: string
+		lineageTag: d4d45525-b1fd-4b5b-82f5-0af0644214f8
+		summarizeBy: none
+		sourceColumn: Attribute
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value
+		dataType: double
+		lineageTag: a556dc0a-b034-40c1-adad-cfb55fe149d4
+		summarizeBy: sum
+		sourceColumn: Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Value_Text
+		dataType: string
+		lineageTag: db9eb6d5-b8f1-4231-a34f-4f2f3b3ff0ff
+		summarizeBy: none
+		sourceColumn: Value_Text
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column PI_Text
+		dataType: string
+		lineageTag: 0606f365-0b75-4dd8-9fb9-9c4bbeee25c3
+		summarizeBy: none
+		sourceColumn: PI_Text
+
+		annotation SummarizationSetBy = Automatic
+
+	partition APMO_Predictability_COPY_Unpivoted = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared%20Documents/MOT%20-%20Enterprise%20Analytics/Power%20BI%20Files/IT%20Health%20Monitoring%20PBI%20Report/APMO_Predictability_COPY.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"PI", Int64.Type}, {"Start Date", type date}, {"End Date", type date}, {"Business Value  (Committed)", Int64.Type}, {"Business Value (Uncommitted)", Int64.Type}, {"Actual Business Value", Int64.Type}, {"ART Predictability Score", type number}, {"Average ART Predictabilty Score", type number}, {"Objectives Added", Int64.Type}, {"Objectives Deferred", Int64.Type}, {"Objectives Stopped", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Start Date", "End Date", "Average ART Predictabilty Score", "Objectives Added", "Objectives Deferred", "Objectives Stopped"}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Removed Columns", {"PI"}, "Attribute", "Value"),
+				    #"Added Custom" = Table.AddColumn(#"Unpivoted Columns", "Custom", each if [Value] < 1 then Number.ToText([Value], "0%") else Number.ToText([Value])),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Custom",{{"Custom", "Value_Text"}}),
+				    #"Added Custom1" = Table.AddColumn(#"Renamed Columns", "PI_Text", each Text.Combine({"PI ", Text.From([PI])})),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom1",{{"Value", type number}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

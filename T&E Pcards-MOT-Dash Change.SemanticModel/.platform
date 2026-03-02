@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "T&E Pcards-MOT-Dash Change"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3fe06ee2-f90c-a7e9-4224-d5bb5debc225"
+  }
+}

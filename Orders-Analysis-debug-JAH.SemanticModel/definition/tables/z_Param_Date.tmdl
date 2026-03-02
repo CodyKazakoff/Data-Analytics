@@ -1,0 +1,47 @@
+table z_Param_Date
+	lineageTag: 58eecdca-8008-4789-a2ce-0d5da4d374fb
+
+	column zParamDate
+		lineageTag: 34ea04bc-ca67-4772-9164-c0fa59e35ceb
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParamDate Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParamDate Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamDate Fields'
+		lineageTag: 4bf41d43-2d90-4692-b680-f0ca4a9ab3b4
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParamDate Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamDate Order'
+		formatString: 0
+		lineageTag: 89b587cf-8a9d-4df6-ada6-4a5767839fed
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Date = calculated
+		mode: import
+		source =
+				{
+				    ("Month", NAMEOF('D_Calendar_Visual'[Month]), 0),
+				    ("Week", NAMEOF('D_Calendar_Visual'[Week Number]), 1),
+				    ("Workday of Year", NAMEOF('D_Calendar_Filter'[Workday Of Year]), 2)
+				}
+
+	annotation PBI_Id = 05190737c6f7474a98dd991309e53e75
+

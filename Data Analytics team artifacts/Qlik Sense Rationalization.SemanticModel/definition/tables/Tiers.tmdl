@@ -1,0 +1,204 @@
+table Tiers
+	lineageTag: 3b65b66c-c406-481f-94a7-395470a89bf0
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: 7fb0e801-9078-4f38-a682-9da74bc4a8dd
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column App
+		dataType: string
+		lineageTag: a26670e9-9183-48ec-ae21-93c84d022e1a
+		summarizeBy: none
+		sourceColumn: App
+
+		annotation SummarizationSetBy = Automatic
+
+	column '[Automated Savings]'
+		dataType: double
+		lineageTag: 4f444743-2334-446e-baf7-5b2a405ec028
+		summarizeBy: sum
+		sourceColumn: [Automated Savings]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '[Calculated Per Item Manual Effort (Minutes)]'
+		dataType: double
+		lineageTag: 2532c7d6-4209-4794-92d7-737a88ad9866
+		summarizeBy: sum
+		sourceColumn: [Calculated Per Item Manual Effort (Minutes)]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'New Estimated Time'
+		dataType: double
+		lineageTag: 0dc6fc35-ca8e-4d58-8763-2cf3df33863a
+		summarizeBy: sum
+		sourceColumn: New Estimated Time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Automation_Ratio
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 16f47ad3-6921-492d-80dd-98d04b6509de
+		summarizeBy: sum
+		sourceColumn: Automation_Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Number of Users'
+		dataType: int64
+		formatString: 0
+		lineageTag: d49f7ef2-be85-4605-a9d6-19358f457f91
+		summarizeBy: sum
+		sourceColumn: Number of Users
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Facing App'
+		dataType: string
+		lineageTag: 97963d8a-f781-436d-83c1-e4b23326b50e
+		summarizeBy: none
+		sourceColumn: User Facing App
+
+		annotation SummarizationSetBy = Automatic
+
+	column engagement
+		dataType: double
+		lineageTag: c73894bd-50fc-40b4-9773-b6f456a33b3d
+		summarizeBy: sum
+		sourceColumn: engagement
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Activity_Index
+		dataType: double
+		formatString: 0.0000
+		lineageTag: 6e16e6b8-c7d0-4552-8a7d-80ee0167c8c2
+		summarizeBy: sum
+		sourceColumn: Activity_Index
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"Tiers","TableItemName":"Activity_Index (bins)","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column 'Activity Index Log Scale'
+		dataType: double
+		lineageTag: 7a9ca70c-5834-4783-811f-666cf4ca9938
+		summarizeBy: sum
+		sourceColumn: Activity Index Log Scale
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Activity_Index (bins)' =
+			IF(
+				ISBLANK('Tiers'[Activity_Index]),
+				BLANK(),
+				IF(
+					'Tiers'[Activity_Index] >= 0,
+					ROUNDDOWN('Tiers'[Activity_Index] / 0.1, 0) * 0.1,
+					ROUNDUP('Tiers'[Activity_Index] / 0.1, 0) * 0.1
+				)
+			)
+		lineageTag: c877b51f-bdc1-40c9-9aee-603e92faa48e
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "Tiers"
+				          }
+				        },
+				        "Property": "Activity_Index"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 0.1,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"t","Entity":"Tiers"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"t"}},"Property":"Activity_Index"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"t"}},"Property":"Activity_Index"}},"Size":0.1}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Activity_Index_Bins
+		dataType: double
+		lineageTag: dcf35b35-fcd4-4f37-8126-5316df2caa83
+		summarizeBy: sum
+		sourceColumn: Activity_Index_Bins
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Tier
+		dataType: string
+		lineageTag: a5adcbcb-b7c3-4ed0-955d-c1fdbc6799c6
+		summarizeBy: none
+		sourceColumn: Tier
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stream
+		dataType: string
+		lineageTag: 17597ce3-4b3e-4846-9312-44357f6bea83
+		summarizeBy: none
+		sourceColumn: Stream
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tiers = m
+		mode: import
+		queryGroup: 'Clustering Calculations'
+		source =
+				let
+				    Source = Csv.Document(File.Contents(SupportingFiles & "\Tiers_Motion_Updated.csv"),[Delimiter=",", Columns=13, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Solution ID", type text}, {"Name", type text}, {"[Automated Savings]", type number}, {"[Calculated Per Item Manual Effort (Minutes)]", type number}, {"New Estimated Time", type number}, {"Automation Ratio", type number}, {"Number of Users", Int64.Type}, {"User Facing App", type text}, {"engagement", type number}, {"Activity Index", type number}, {"Activity Index Log Scale", type number}, {"Tier", type text}, {"Tier Adjusted", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Name", "App"}, {"Activity Index", "Activity_Index"}, {"Automation Ratio", "Automation_Ratio"}, {"Tier", "Tier_old"}, {"Tier Adjusted", "Tier"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"Tier_old"}),
+				    #"Added Activity Bins" = Table.AddColumn(#"Removed Columns", "Activity_Index_Bins", each //Truncating to the first decimal
+				        Number.FromText(Text.Start(Number.ToText([Activity_Index]), 3))
+				    , type number),
+				    #"Added New Tier" = Table.AddColumn(#"Added Activity Bins", "New Tier", each
+				        if ([Tier] = "Tier 1" and [Activity_Index] < 0.005)
+				        then "Tier 2"
+				        else [Tier]
+				    , type text),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Added New Tier",{"Tier"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",{{"New Tier", "Tier"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns1", {"Solution ID"}, activity_index, {"User-facing App Id"}, "activity_index.1", JoinKind.Inner),
+				    #"Expanded activity_index.1" = Table.ExpandTableColumn(#"Merged Queries", "activity_index.1", {"User-facing App Workspace"}, {"Stream"}),
+				    #"Sorted Rows" = Table.Sort(#"Expanded activity_index.1",{{"App", Order.Ascending}})
+				in
+				    #"Sorted Rows"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

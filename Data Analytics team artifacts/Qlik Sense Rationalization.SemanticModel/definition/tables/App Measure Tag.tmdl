@@ -1,0 +1,45 @@
+table 'App Measure Tag'
+	lineageTag: 851d8404-45fb-4d42-8330-4c10d6621030
+
+	column Complexity
+		dataType: double
+		lineageTag: 7fd0b931-acbe-4864-bfef-9198e82a20bc
+		summarizeBy: none
+		sourceColumn: Complexity
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Measure Id'
+		dataType: string
+		lineageTag: 3c4c03e0-5d1e-4a5f-a066-b472b28d2b3d
+		summarizeBy: none
+		sourceColumn: Measure Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppMeasureKey
+		dataType: string
+		lineageTag: 1d8a1628-ed76-4825-9b1d-cf9bfd9f308f
+		summarizeBy: none
+		sourceColumn: AppMeasureKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'App Measure Tag' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex\App Queries'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_app_measure_tag"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Measure_Id", "Measure Id"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Measure Id", type text}, {"Complexity", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

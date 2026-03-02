@@ -1,0 +1,774 @@
+table F_Order_Item
+	lineageTag: 65618784-46d1-4f50-ac6a-47712d1ea2fd
+
+	column 'Ord Hdr Key'
+		dataType: string
+		lineageTag: 750664c2-6bb2-4a70-bcae-ef6dfa5ce0a9
+		summarizeBy: none
+		sourceColumn: Ord Hdr Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Final Cost Amt USD'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 55affd4b-7782-4628-9590-4dcfc601e753
+		summarizeBy: none
+		sourceColumn: Itm Final Cost Amt USD
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Ship Method Desc'
+		dataType: string
+		lineageTag: 5ec7a746-e9e7-436c-a3f4-9664e68e079e
+		summarizeBy: none
+		sourceColumn: Ship Method Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Ship Method Desc'
+		dataType: string
+		lineageTag: f4ef3078-0bfd-418b-845f-141051d8f431
+		summarizeBy: none
+		sourceColumn: Itm Ship Method Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Process Status Desc'
+		dataType: string
+		lineageTag: c325175c-9de9-4b33-ac66-892abed40bd0
+		summarizeBy: none
+		sourceColumn: Process Status Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Unit Sell Amt USD'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 4a085dc3-66f1-4972-8741-de85be5e3bb9
+		summarizeBy: none
+		sourceColumn: Itm Unit Sell Amt USD
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Due Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 58b2040b-b270-4698-8a7f-688e8f7c9063
+		summarizeBy: none
+		sourceColumn: Due Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Itm Allocated Qty'
+		dataType: int64
+		lineageTag: 20a33c4a-3aeb-436c-8969-ddbfb5fbb7e4
+		summarizeBy: none
+		sourceColumn: Itm Allocated Qty
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Itm Pgc Key'
+		dataType: string
+		lineageTag: 50ff4a9a-04d9-49c4-848c-b2a434f039ac
+		summarizeBy: none
+		sourceColumn: Itm Pgc Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: f21d8b34-6d75-4739-98fa-8f34e92f5564
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Order Source Desc'
+		dataType: string
+		lineageTag: 61bc5399-5248-40e2-93a4-c74e4badb27d
+		summarizeBy: none
+		sourceColumn: Order Source Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Converted To Order Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 61d1c6b3-d665-41b7-be94-e4665fd59d27
+		summarizeBy: none
+		sourceColumn: Converted To Order Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Itm Order Size Bucket'
+		dataType: string
+		lineageTag: 0a39990f-3ade-4ea2-a3d0-2513266b7c75
+		summarizeBy: none
+		sourceColumn: Itm Order Size Bucket
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loc Key'
+		dataType: string
+		lineageTag: e0088fbe-653d-4d81-81fe-6124ef09448e
+		summarizeBy: none
+		sourceColumn: Loc Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Mino'
+		dataType: string
+		lineageTag: b73c4c53-9089-4031-806b-b29c17eca802
+		summarizeBy: none
+		sourceColumn: Itm Mino
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ord Ln Key'
+		dataType: string
+		isKey
+		lineageTag: 7c214643-48d4-4419-9aae-e0d88dd0f16f
+		summarizeBy: none
+		sourceColumn: Ord Ln Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Unit Sell Price'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: f2885645-3f05-4f90-9566-308bd35b550c
+		summarizeBy: none
+		sourceColumn: Itm Unit Sell Price
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Entered By ID'
+		dataType: string
+		lineageTag: ebdb3d2c-e702-4b6d-aa75-2fcecac30118
+		summarizeBy: none
+		sourceColumn: Entered By ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Final Cost Amt Local'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 90cf22c6-06f6-4a8b-8959-d89dd663c0aa
+		summarizeBy: none
+		sourceColumn: Itm Final Cost Amt Local
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Bill To Cust Key'
+		dataType: string
+		lineageTag: e4fc2357-1a10-4f6c-96a4-8ced0ea0bf18
+		summarizeBy: none
+		sourceColumn: Bill To Cust Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Ctl No'
+		dataType: string
+		lineageTag: ad8db39a-12c5-4019-bac5-5b81da600b51
+		summarizeBy: none
+		sourceColumn: Order Ctl No
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mfr Key'
+		dataType: string
+		lineageTag: f2f1d835-26f4-4336-94b3-d848d48e87a0
+		summarizeBy: none
+		sourceColumn: Mfr Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Cust Key'
+		dataType: string
+		lineageTag: 9a1b1f85-8f9a-4233-9c61-dd9c6924a529
+		summarizeBy: none
+		sourceColumn: Ship To Cust Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Loc  Order Ctl No  Order Line No'
+		dataType: string
+		lineageTag: 34db86b0-54e8-44ca-b1aa-19881ddee06a
+		summarizeBy: none
+		sourceColumn: MI Loc  Order Ctl No  Order Line No
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Unit Sell Amt Local'
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: b3895ba0-d88d-4461-8219-59fadb3314d6
+		summarizeBy: none
+		sourceColumn: Itm Unit Sell Amt Local
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Itm Op Qty Ordered'
+		dataType: int64
+		formatString: 0
+		lineageTag: c0db3dd1-177e-4665-b177-a1fcea8a0cc8
+		summarizeBy: none
+		sourceColumn: Itm Op Qty Ordered
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Order Line No'
+		dataType: int64
+		formatString: 0
+		lineageTag: b1919169-18e1-4d18-9554-8b23cabb4ac2
+		summarizeBy: none
+		sourceColumn: Order Line No
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Itm Op Qty Billed'
+		dataType: int64
+		formatString: 0
+		lineageTag: a76bdb4e-b683-4514-bf41-dba9a5d9b197
+		summarizeBy: none
+		sourceColumn: Itm Op Qty Billed
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Order Type Desc'
+		dataType: string
+		lineageTag: e76e5f43-f280-4766-aa23-a9008ee101dd
+		summarizeBy: none
+		sourceColumn: Order Type Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Op Qty Shipped'
+		dataType: int64
+		formatString: 0
+		lineageTag: 25cae410-693a-4ef9-9917-ab9ae8c4aae3
+		summarizeBy: none
+		sourceColumn: Itm Op Qty Shipped
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column 'Itm Order Due Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2e4214c4-59e1-43cd-b7f7-e670526ded7d
+		summarizeBy: none
+		sourceColumn: Itm Order Due Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Price Card Type'
+		dataType: string
+		lineageTag: d000f46c-68b3-4822-b10a-c7d22209eac3
+		summarizeBy: none
+		sourceColumn: Price Card Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Entered By Name'
+		dataType: string
+		lineageTag: 4267c5ec-5225-4092-9000-008308479509
+		summarizeBy: none
+		sourceColumn: Entered By Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Late Line'
+		dataType: string
+		lineageTag: a7309442-b293-4602-b9b8-6e3775b534f5
+		summarizeBy: none
+		sourceColumn: Late Line
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Price Override Reason'
+		dataType: string
+		lineageTag: 0eff19e4-4d54-436c-8cb4-37cfe2fee861
+		summarizeBy: none
+		sourceColumn: Itm Price Override Reason
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date Bucket' =
+			
+			IF(F_Order_Item[Itm Promised Delivery Date]=DATE(1900, 1, 1),"Due Date Missing",
+			IF(F_Order_Item[Late Line Days]<-30,"Due 30+ Days",
+			IF(F_Order_Item[Late Line Days]<-7,"Due in 7-30 Days",
+			IF(F_Order_Item[Late Line Days]<=0,"Due in <7 Days",
+			IF(F_Order_Item[Late Line Days]<=7,"<7 Days Late",
+			IF(F_Order_Item[Late Line Days]<=30,"7-30 Days Late",
+			IF(F_Order_Item[Late Line Days]<=60,"30-60 Days Late",
+			IF(F_Order_Item[Late Line Days]<=90,"60-90 Days Late",
+			"90+ Days Late"
+			))))))))
+		lineageTag: aaa6a7cd-cdc1-4337-99d2-501bcb6a6766
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parent Source' =
+			
+			IF(F_Order_Item[Order Source Desc]="ACCOUNT REP", "Account Rep",
+			IF(F_Order_Item[Order Source Desc]="AFTER HOURS (NIGHT CALL)","Phone",
+			IF(F_Order_Item[Order Source Desc]="ASSIGNED ORDER", "Other",
+			IF(F_Order_Item[Order Source Desc]="COUNTER","Other",
+			IF(F_Order_Item[Order Source Desc]="CUSTOMER PORTAL", "Customer Portal",
+			IF(F_Order_Item[Order Source Desc]="EDI","Customer Portal",
+			IF(F_Order_Item[Order Source Desc]="E-MAIL ORDER", "Email",
+			IF(F_Order_Item[Order Source Desc]="REPLENISHMENT", "Other",
+			IF(F_Order_Item[Order Source Desc]="SMART EMAIL", "Email",
+			IF(F_Order_Item[Order Source Desc]="SMART EMAIL 2.0", "Email",
+			IF(F_Order_Item[Order Source Desc]="SOLICITED BY VISIT", "Account Rep",
+			IF(F_Order_Item[Order Source Desc]="STOREROOM ORDER", "Other",
+			IF(F_Order_Item[Order Source Desc]="TELEPHONE", "Phone",
+			IF(F_Order_Item[Order Source Desc]="WEB ENTER ORDER", "Web",
+			IF(F_Order_Item[Order Source Desc]="ACQUISITION CONVERSION", "Other",
+			IF(F_Order_Item[Order Source Desc]="AUTOMATED EMAIL", "Email",
+			IF(F_Order_Item[Order Source Desc]="WEB ENTER ORDER", "Web",
+			IF(F_Order_Item[Order Source Desc]="BRANCH TRANSFER", "Other",
+			IF(F_Order_Item[Order Source Desc]="CONSIGNMENT REPLENISHMENT", "Other",
+			IF(F_Order_Item[Order Source Desc]="CUSTOMER DROP OFF", "Other",
+			IF(F_Order_Item[Order Source Desc]="DC COUNTER SALES", "Other",
+			IF(F_Order_Item[Order Source Desc]="ELECTRONIC ORDER EXPECTED", "Web",
+			IF(F_Order_Item[Order Source Desc]="EXCHANGE ORDERS", "Other",
+			IF(F_Order_Item[Order Source Desc]="FAX", "Email",
+			IF(F_Order_Item[Order Source Desc]="MAIL", "Email",
+			IF(F_Order_Item[Order Source Desc]="MI PRO SALES", "Web",
+			IF(F_Order_Item[Order Source Desc]="PUNCHOUT", "Other",
+			IF(F_Order_Item[Order Source Desc]="SECOND TIER ORDER", "Other",
+			IF(F_Order_Item[Order Source Desc]="SOLICITED BY PHONE", "Phone",
+			IF(F_Order_Item[Order Source Desc]="TEXT MESSAGE", "Phone",
+			IF(F_Order_Item[Order Source Desc]="VENDING", "Other",
+			IF(F_Order_Item[Order Source Desc]="WEB LEAD", "Web",
+			BLANK()))))))))))))))))))))))))))))))))
+		lineageTag: 6ba1acfd-8e9c-4c16-94a3-79a823a5943f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Item Status Cd'
+		dataType: string
+		lineageTag: bbeabe84-4d70-4a8c-a518-d572d77283f8
+		summarizeBy: none
+		sourceColumn: Itm Item Status Cd
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cust Po No'
+		dataType: string
+		lineageTag: cf29fdc3-776a-4b5b-be28-afbc9a8c3609
+		summarizeBy: none
+		sourceColumn: Cust Po No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Internal Exp Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e2dd623c-fa6c-4c66-897a-ada7c978fd67
+		summarizeBy: none
+		sourceColumn: Internal Exp Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Itm Mfg Part No'
+		dataType: string
+		lineageTag: 16d82b56-8850-429b-a6ca-7cbc68be8b7b
+		summarizeBy: none
+		sourceColumn: Itm Mfg Part No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Unit Cost'
+		dataType: double
+		lineageTag: e2dae331-b704-416f-97c8-388c80a96efd
+		summarizeBy: sum
+		sourceColumn: Itm Unit Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Order Type Cd'
+		dataType: string
+		lineageTag: ad9c5866-2d39-4e0c-917b-378574744a6f
+		summarizeBy: none
+		sourceColumn: Order Type Cd
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Order Incl Vas USD'
+		dataType: double
+		lineageTag: b73b7e05-504e-4fff-a7be-a85bfaafe521
+		summarizeBy: sum
+		sourceColumn: Total Order Incl Vas USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Vas'
+		dataType: double
+		lineageTag: 791ca48d-a46f-4d25-96e7-b08fae588e5e
+		summarizeBy: sum
+		sourceColumn: Total Vas
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Late Days'
+		dataType: int64
+		formatString: 0
+		lineageTag: 947b5213-e049-4509-92c8-0ab8ca1b3f66
+		summarizeBy: sum
+		sourceColumn: Late Days
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Late Line Bucket'
+		dataType: string
+		lineageTag: 8371298b-9f3c-4988-b5d2-3b35a7c14e2e
+		summarizeBy: none
+		sourceColumn: Late Line Bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Order Incl Vas Local'
+		dataType: double
+		lineageTag: 186ffb4a-c0ce-49c9-a3fd-00965ddba499
+		summarizeBy: sum
+		sourceColumn: Total Order Incl Vas Local
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Itm Promised Delivery Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: cea2edb2-fc48-4cce-95b7-21846e2ee657
+		summarizeBy: none
+		sourceColumn: Itm Promised Delivery Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Itm Item No'
+		dataType: string
+		lineageTag: 3282764a-d5bf-4852-82c5-9f853c61b8de
+		summarizeBy: none
+		sourceColumn: Itm Item No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sup Loc No'
+		dataType: string
+		lineageTag: 8ad208c9-e667-4afa-835d-2cc25082826e
+		summarizeBy: none
+		sourceColumn: Sup Loc No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sup Loc Name'
+		dataType: string
+		lineageTag: fdaa92da-f3c9-40ce-871f-a54b7a3d4b43
+		summarizeBy: none
+		sourceColumn: Sup Loc Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Late Line Days' = DATEDIFF(F_Order_Item[Itm Promised Delivery Date],TODAY()-1,DAY)
+		formatString: 0
+		lineageTag: 7f7e03bb-66e4-46da-9776-3cac7be477fe
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Past Delivery' = DATEDIFF(F_Order_Item[Itm Promised Delivery Date],TODAY()-1,DAY)
+		formatString: 0
+		lineageTag: 3cc92079-4a39-4aac-9615-53c2cb0f08c0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Past Due Bucket' =
+			
+			IF(F_Order_Item[Days Past Delivery]<0,"On-Time",
+			IF(F_Order_Item[Days Past Delivery]<31,"0-30",
+			IF(F_Order_Item[Days Past Delivery]<61,"31-60",
+			IF(F_Order_Item[Days Past Delivery]<91,"61-90",
+			IF(F_Order_Item[Days Past Delivery]<121,"91-120","121+")))))
+		lineageTag: 787b3bd7-4a9f-416e-92a6-c257af261c02
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Item No  Mgf Part No'
+		dataType: string
+		lineageTag: aef17303-d988-425f-97d8-bf0bdbe6dd4a
+		summarizeBy: none
+		sourceColumn: Itm Item No  Mgf Part No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Source It Flag'
+		dataType: string
+		lineageTag: d39a1777-7573-468a-b8f9-2c7da2fe67de
+		summarizeBy: none
+		sourceColumn: Itm Source It Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Purchase It Flag'
+		dataType: string
+		lineageTag: 618336c4-edcb-4573-a35a-c172c3e99a91
+		summarizeBy: none
+		sourceColumn: Itm Purchase It Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Acknowledge It Flag'
+		dataType: string
+		lineageTag: 03f0ed12-de93-4485-ba35-439804e4eb0e
+		summarizeBy: none
+		sourceColumn: Itm Acknowledge It Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Ship It Flag'
+		dataType: string
+		lineageTag: fa161d6b-c06a-4bbe-8565-633866996f08
+		summarizeBy: none
+		sourceColumn: Itm Ship It Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Smart Email Hdr Closed Lines Open Flag'
+		dataType: string
+		lineageTag: dfdd5d99-cb69-4cc6-900d-8afa42372117
+		summarizeBy: none
+		sourceColumn: Smart Email Hdr Closed Lines Open Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Employee ID'
+		dataType: string
+		lineageTag: ce3b3059-f23f-445e-9663-03395fbbbcac
+		summarizeBy: none
+		sourceColumn: Territory Employee ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Full Name'
+		dataType: string
+		lineageTag: 4a8bdce7-5915-46ae-8f3b-cc705f7e0990
+		summarizeBy: none
+		sourceColumn: Territory Full Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Short Name'
+		dataType: string
+		lineageTag: 8bdeed6b-a073-4862-92db-895ef4bf189d
+		summarizeBy: none
+		sourceColumn: Territory Short Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Employee Job Code'
+		dataType: string
+		lineageTag: 6e8a60f6-3e4e-4ba6-899c-a25f80054ea6
+		summarizeBy: none
+		sourceColumn: Territory Employee Job Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Territory Employee Job Title'
+		dataType: string
+		lineageTag: 2410f679-26fc-4422-b0fd-0ea299b4e8f4
+		summarizeBy: none
+		sourceColumn: Territory Employee Job Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Loc  Ship To Customer No'
+		dataType: string
+		lineageTag: 2bd0ddd9-85f6-4e82-b030-603894bb8855
+		summarizeBy: none
+		sourceColumn: MI Loc  Ship To Customer No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Loc  Ship To Customer No  Ship To Customer Name'
+		dataType: string
+		lineageTag: 1871e688-cc67-4537-b861-09817e677bb7
+		summarizeBy: none
+		sourceColumn: MI Loc  Ship To Customer No  Ship To Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship To Customer No  Ship To Customer Name'
+		dataType: string
+		lineageTag: e2e2bac3-29a4-4e6f-ac59-b5907a8ef567
+		summarizeBy: none
+		sourceColumn: Ship To Customer No  Ship To Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Writer' =
+			
+			VAR PipePosition = FIND("|", F_Order_Item[Entered By Name], 1, 0)
+			RETURN
+			    IF(
+			        PipePosition > 0,
+			        TRIM(RIGHT(F_Order_Item[Entered By Name], LEN(F_Order_Item[Entered By Name]) - PipePosition)),
+			        BLANK()
+			    )
+		lineageTag: ed9c0c68-ebff-4753-82c2-551a89a5b49f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Itm Expedite It Flag'
+		dataType: string
+		lineageTag: 98e220d8-3ba6-4e62-840d-329db4121029
+		summarizeBy: none
+		sourceColumn: Itm Expedite It Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_Order_Item = m
+		mode: import
+		queryGroup: Facts
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_F_Order_Item = Value.NativeQuery(Source, 
+				    "SELECT *
+				    FROM [dbo].[F_Order_Item_w_Customer_Names]
+				    Where ITM_DELETE_FLAG <> 'D'
+				                and MI_LOC <> 'AL98'"
+				    , null, [EnableFolding = true]),
+				    #"Removed Other Columns" = Table.SelectColumns(dbo_F_Order_Item,{"ORD_LN_KEY", "ORD_HDR_KEY", "MFR_KEY", "SHIP_TO_CUST_KEY", "BILL_TO_CUST_KEY", "ITM_PGC_KEY", "ORDER_CTL_NO", "ORDER_LINE_NO", "MI_LOC__ORDER_CTL_NO__ORDER_LINE_NO", "CONVERTED_TO_ORDER_DATE", "SUP_LOC_NO", "SUP_LOC_NAME", "CUST_PO_NO", "ORDER_TYPE_DESC", "ORDER_TYPE_CD", "PROCESS_STATUS_DESC", "ORDER_SOURCE_DESC", "SHIP_METHOD_DESC", "ORDER_DATE", "DUE_DATE", "TOTAL_VAS", "TOTAL_ORDER_INCL_VAS_LOCAL", "TOTAL_ORDER_INCL_VAS_USD", "INTERNAL_EXP_DATE", "ITM_MINO", "ITM_MFG_PART_NO", "ITM_ITEM_NO__MGF_PART_NO", "ITM_OP_QTY_ORDERED", "ITM_OP_QTY_SHIPPED", "ITM_OP_QTY_BILLED", "ITM_UNIT_SELL_PRICE", "ITM_UNIT_SELL_AMT_LOCAL", "ITM_UNIT_SELL_AMT_USD", "ITM_ORDER_SIZE_BUCKET", "PRICE_CARD_TYPE", "ITM_UNIT_COST", "ITM_ORDER_DUE_DATE", "LATE_LINE", "LATE_DAYS", "LATE_LINE_BUCKET", "ITM_ITEM_STATUS_CD", "ITM_ALLOCATED_QTY", "ITM_ITEM_NO", "ITM_PRICE_OVERRIDE_REASON", "ITM_FINAL_COST_AMT_LOCAL", "ITM_FINAL_COST_AMT_USD", "ITM_SHIP_METHOD_DESC", "ENTERED_BY_ID", "ENTERED_BY_NAME", "LOC_KEY", "ITM_PROMISED_DELIVERY_DATE", "SMART_EMAIL_HDR_CLOSED_LINES_OPEN_FLAG", "ITM_SOURCE_IT_FLAG", "ITM_PURCHASE_IT_FLAG", "ITM_ACKNOWLEDGE_IT_FLAG", "ITM_EXPEDITE_IT_FLAG", "ITM_SHIP_IT_FLAG", "TERRITORY_EMPLOYEE_ID", "TERRITORY_FULL_NAME", "TERRITORY_SHORT_NAME", "TERRITORY_EMPLOYEE_JOB_CODE", "TERRITORY_EMPLOYEE_JOB_TITLE", "MI_LOC__SHIP_TO_CUSTOMER_NO", "MI_LOC__SHIP_TO_CUSTOMER_NO__SHIP_TO_CUSTOMER_NAME", "SHIP_TO_CUSTOMER_NO__SHIP_TO_CUSTOMER_NAME"}),
+				    #"Filtered Rows (Last 5 years)" = Table.SelectRows(#"Removed Other Columns", each Date.Year([CONVERTED_TO_ORDER_DATE]) >= Date.Year(Date.AddYears(DateTime.LocalNow(), -4))),
+				    #"TEMP DEV STEP: LimitRecords" = fx_ConditionallyLimitRows(#"Filtered Rows (Last 5 years)", LimitRecordCount, RecordCountLimit),
+				    #"Changed Type" = Table.TransformColumnTypes(#"TEMP DEV STEP: LimitRecords",{{"ITM_FINAL_COST_AMT_USD", Currency.Type}, {"ITM_UNIT_SELL_AMT_USD", Currency.Type}, {"DUE_DATE", type date}, {"ORDER_DATE", type date}, {"CONVERTED_TO_ORDER_DATE", type date}, {"ITM_UNIT_SELL_PRICE", Currency.Type}, {"ITM_FINAL_COST_AMT_LOCAL", Currency.Type}, {"ITM_UNIT_SELL_AMT_LOCAL", Currency.Type}, {"ITM_OP_QTY_ORDERED", Int64.Type}, {"ORDER_LINE_NO", Int64.Type}, {"ITM_OP_QTY_BILLED", Int64.Type}, {"ITM_OP_QTY_SHIPPED", Int64.Type}, {"ITM_ORDER_DUE_DATE", type date}, {"ITM_ALLOCATED_QTY", Int64.Type}, {"ITM_PROMISED_DELIVERY_DATE", type date}}),
+				    #"Bulk Column Rename" = Table.TransformColumnNames(#"Changed Type", each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," ")),
+				    #"Changed Datetime to Date" = Table.TransformColumnTypes(#"Bulk Column Rename",{{"Internal Exp Date", type date}, {"Order Type Desc", type text}}),
+				    #"Duplicated Column" = Table.DuplicateColumn(#"Changed Datetime to Date", "Entered By Name", "Entered By Name - Copy"),
+				    #"Split Column by Delimiter" = Table.SplitColumn(#"Duplicated Column", "Entered By Name - Copy", Splitter.SplitTextByDelimiter("|", QuoteStyle.Csv), {"Entered By Name - Copy.1", "Entered By Name - Copy.2"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"Entered By Name - Copy.1", type text}, {"Entered By Name - Copy.2", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"Entered By Name - Copy.2", "Entered By Name Only"}, {"Entered By Name - Copy.1", "Entered By Number Only"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Entered By", each if Text.Contains([Entered By ID], "OE0487") then "ZERO TOUCH" else if Text.Contains([Entered By ID], "EB99") then "WEB USER" else [Entered By Name Only]),
+				    #"Removed Columns" = Table.RemoveColumns(#"Added Custom",{"Entered By Name", "Entered By Name Only"}),
+				    #"Merged Columns" = Table.CombineColumns(#"Removed Columns",{"Entered By Number Only", "Entered By"},Combiner.CombineTextByDelimiter("|", QuoteStyle.None),"Entered By Name"),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Merged Columns",{{"Itm Expedite It Flag", "Itm Expedite It Flag"}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Renamed Columns1", each [Smart Email Hdr Closed Lines Open Flag] = "N")
+				in
+				    #"Filtered Rows"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

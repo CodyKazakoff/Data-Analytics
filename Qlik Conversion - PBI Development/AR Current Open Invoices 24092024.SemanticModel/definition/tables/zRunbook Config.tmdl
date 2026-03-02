@@ -1,0 +1,115 @@
+/// *Metadata*
+table 'zRunbook Config'
+	isHidden
+	lineageTag: 0322490f-3fff-41db-b8e3-a35a5853cf44
+
+	column 'Output Location'
+		dataType: string
+		lineageTag: e61059a5-b7cb-47b6-82ed-57c7571e2103
+		summarizeBy: none
+		sourceColumn: [Output Location]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Company Name'
+		dataType: string
+		lineageTag: e4eb9398-d2be-4eec-bf47-af0523cefda3
+		summarizeBy: none
+		sourceColumn: [Company Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report Name'
+		dataType: string
+		lineageTag: 81ebc2a4-f767-470f-846a-8fc9811d523c
+		summarizeBy: none
+		sourceColumn: [Report Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Logo Location'
+		dataType: string
+		lineageTag: 8147a5f4-aaa9-4cf1-bfca-db89579911ec
+		summarizeBy: none
+		sourceColumn: [Logo Location]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contact Name'
+		dataType: string
+		lineageTag: 551fe04c-4263-475c-916b-d36e89f54336
+		summarizeBy: none
+		sourceColumn: [Contact Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contact Email'
+		dataType: string
+		lineageTag: d82f20b5-bd7b-407c-b4a4-c48fa3d0d4ad
+		summarizeBy: none
+		sourceColumn: [Contact Email]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Sources'
+		dataType: string
+		lineageTag: 3efe43f3-f077-4a21-a034-7d1c97159c02
+		summarizeBy: none
+		sourceColumn: [Data Sources]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Refresh Rate'
+		dataType: string
+		lineageTag: c42761b3-638a-4794-8676-8ace7d12c7f1
+		summarizeBy: none
+		sourceColumn: [Refresh Rate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Time Period'
+		dataType: string
+		lineageTag: 8765cee9-7cff-4566-8b7b-749077d4b786
+		summarizeBy: none
+		sourceColumn: [Time Period]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Owner'
+		dataType: string
+		lineageTag: c5910967-73ca-4c90-8df7-30e0c9c82284
+		summarizeBy: none
+		sourceColumn: [Data Owner]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'zRunbook Config' = calculated
+		mode: import
+		source =
+				DATATABLE(
+				"Output Location", STRING
+				, "Company Name", STRING
+				, "Report Name", STRING
+				, "Logo Location", STRING
+				, "Contact Name", STRING
+				, "Contact Email", STRING
+				, "Data Sources", STRING
+				, "Refresh Rate", STRING
+				, "Time Period", STRING
+				, "Data Owner", STRING
+				,{
+				{
+				"C:\Users\%USERNAME%\Downloads"
+				, "Axis Group"
+				, "Power BI Dataset Runbook"
+				, "Z:\Shared\Projects\.Axis\.Axis Development Foundation (ADF)\Power BI\Axis Tools for Power BI\Run Book\Axis_LogoEPS.png"
+				, "Ray Frye"
+				, "rfrye@axisgroup.com"
+				, "<ex: SQLDBPRD01.axisgroup.com>"
+				, "<ex: Daily @8:00AM>"
+				, "<ex: Rolling 2 Years>"
+				, "<ex: jsmith@axisgroup.com>"
+				}
+				}
+				)
+

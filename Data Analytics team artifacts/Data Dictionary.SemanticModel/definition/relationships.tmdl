@@ -1,0 +1,4 @@
+relationship 9a287fbf-4716-432c-bf88-43289c181966
+	fromColumn: 'Field Dictionary'.'Physical Table Name'
+	toColumn: 'Table Dictionary'.'Physical Table Name'
+

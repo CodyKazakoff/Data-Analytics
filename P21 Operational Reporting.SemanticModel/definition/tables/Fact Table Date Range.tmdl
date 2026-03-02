@@ -1,0 +1,42 @@
+table 'Fact Table Date Range'
+	lineageTag: 972a55a9-9348-4af3-a200-0136668bb2c3
+
+	column 'Max Transaction Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: acf05c86-d12a-4238-b347-b7c94fd9f7e8
+		summarizeBy: none
+		sourceColumn: Max Transaction Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Min Transaction Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 7d92f37a-6279-401a-ae2e-7963a89d176c
+		summarizeBy: none
+		sourceColumn: Min Transaction Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'Fact Table Date Range' = m
+		mode: import
+		queryGroup: Dimensions
+		source = ```
+				let
+				    Source = F_SHPR_P21, /*Replace F_Shipper_Item with the name of the fact table*/
+				    #"CalculateMinMaxDates" = Table.Group(Source, {}, 
+				      {{"Max Transaction Date", each List.Max([SHIP_DATE]), type nullable date}, 
+				      {"Min Transaction Date", each List.Min([SHIP_DATE]), type nullable date}}) /*Replace SHIP_DATE with the name of the date field in the fact table*/
+				in
+				    #"CalculateMinMaxDates"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

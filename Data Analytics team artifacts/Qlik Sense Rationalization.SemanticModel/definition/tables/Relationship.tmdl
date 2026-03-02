@@ -1,0 +1,146 @@
+table Relationship
+	lineageTag: e4be5eb9-432e-4d5a-ae43-d6d7090a74b8
+
+	column Id
+		dataType: string
+		lineageTag: 7897e10e-31c7-4fd1-abcd-61bba11af9c5
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: e5fcc2e1-a89a-4e79-a2c5-2008bea7464d
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromTableId
+		dataType: string
+		lineageTag: 360d86fd-a035-4f9b-a51d-284ac4138cca
+		summarizeBy: none
+		sourceColumn: FromTableId
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromTableName
+		dataType: string
+		lineageTag: 2b5a596b-9d50-4100-ad5b-d77e5afc0fbc
+		summarizeBy: none
+		sourceColumn: FromTableName
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromColumnName
+		dataType: string
+		lineageTag: e06486cd-8055-4cf3-a389-d62dca388495
+		summarizeBy: none
+		sourceColumn: FromColumnName
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromCardinality
+		dataType: string
+		lineageTag: 75be79fb-368d-45f9-bbc9-57f90b5109e3
+		summarizeBy: none
+		sourceColumn: FromCardinality
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToTableId
+		dataType: string
+		lineageTag: 9f63b157-6ea8-4cdd-aab7-652a2ef07331
+		summarizeBy: none
+		sourceColumn: ToTableId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToTableName
+		dataType: string
+		lineageTag: 7e8b75c4-be28-41c9-896b-8558ce8c9ea5
+		summarizeBy: none
+		sourceColumn: ToTableName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToColumnName
+		dataType: string
+		lineageTag: 879c48e0-a756-4bdc-a3c3-b98dfc8dde47
+		summarizeBy: none
+		sourceColumn: ToColumnName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToCardinality
+		dataType: string
+		lineageTag: e2e06724-3689-4727-a005-6064b8b6490e
+		summarizeBy: none
+		sourceColumn: ToCardinality
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsActive
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f2d99ba1-d378-41da-8844-a0a4b6ad0256
+		summarizeBy: none
+		sourceColumn: IsActive
+
+		annotation SummarizationSetBy = Automatic
+
+	column Filters
+		dataType: string
+		lineageTag: 92f4e26c-a2fd-439a-8dcf-d81e965a62bf
+		summarizeBy: none
+		sourceColumn: Filters
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: 053549ef-3c44-44b6-91ce-7711a28b0e80
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Relationship = CONCATENATE(CONCATENATE(Relationship[FromCardinality], " to "), Relationship[ToCardinality])
+		lineageTag: 167d2033-c3d1-40bb-94f5-7a94d07da785
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: cba6d615-d06e-428d-b594-71ac8e35a23a
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppKey
+		dataType: string
+		lineageTag: 1378172a-3c6a-431c-8a0c-8f39931f843f
+		summarizeBy: none
+		sourceColumn: AppKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Relationship = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_relationship"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Solution_ID", "Solution ID"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Solution ID", type text}, {"Id", type text}, {"Name", type text}, {"FromTableId", type text}, {"FromTableName", type text}, {"FromColumnName", type text}, {"FromCardinality", type text}, {"ToTableId", type text}, {"ToTableName", type text}, {"ToColumnName", type text}, {"ToCardinality", type text}, {"IsActive", type logical}, {"Filters", type text}, {"Notes", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

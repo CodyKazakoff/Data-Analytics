@@ -1,0 +1,95 @@
+table Competitor_Sales
+	lineageTag: 99e50fd0-82c7-4e9b-a065-feb249fe99d8
+
+	column 'Company '
+		dataType: string
+		lineageTag: d7f09c67-b2eb-4296-b20b-b4393e0ccaa6
+		summarizeBy: none
+		sourceColumn: "Company "
+		sortByColumn: Company_Sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 143bc03c-c939-4e47-9986-822ec89c255c
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a2f67df-3034-47ac-911c-0653ff139297
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: int64
+		formatString: 0
+		lineageTag: dad58b25-4e19-4f5c-8f18-bdd3acb0a3ec
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column Growth_Change = ```
+			
+			VAR CurrentSales = Competitor_Sales[Sales]
+			VAR PriorRow = 
+			    LOOKUPVALUE(
+			        Competitor_Sales[Sales],
+			        Competitor_Sales[Company ], Competitor_Sales[Company ],
+			        Competitor_Sales[Year], IF(Competitor_Sales[Quarter] = 1, Competitor_Sales[Year]-1, Competitor_Sales[Year]),
+			        Competitor_Sales[Quarter], IF(Competitor_Sales[Quarter] = 1, 4, Competitor_Sales[Quarter] -1)
+			    )
+			RETURN
+			    DIVIDE(
+			        (CurrentSales - PriorRow),
+			        PriorRow,
+			        BLANK()
+			    )
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: b34c0dbe-f2eb-424a-8dba-21ea0ef0f072
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year_Quarter = FORMAT('Competitor_Sales'[Year], "0000") & " Q" & FORMAT('Competitor_Sales'[Quarter], "0")
+		lineageTag: d9a7d5af-02e1-421a-ad49-46f8fe939ef6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company_Sort
+		dataType: int64
+		formatString: 0
+		lineageTag: e321c7bb-8551-4860-83d9-f469f73f4c21
+		summarizeBy: sum
+		sourceColumn: Company_Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Competitor_Sales = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared%20Documents/MOT%20-%20Enterprise%20Analytics/Power%20BI%20Files/IT%20Health%20Monitoring%20PBI%20Report/Competitor_Sales.xlsx"), null, true),
+				    Sheet2_Sheet = Source{[Item="Sheet2",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet2_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Company ", type text}, {"Year", Int64.Type}, {"Quarter", Int64.Type}, {"Sales", Int64.Type}, {"Company_Sort", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

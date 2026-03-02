@@ -1,0 +1,48 @@
+table z_Param_Current_ADO_KPI
+	lineageTag: 80b9807a-8e9a-4ec7-b59a-1c528f73c8f7
+
+	column 'zParamCurrent - ADOKPI'
+		lineageTag: 9644753a-f228-43e8-9d71-76dbe04dbc56
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParamCurrent - ADOKPI Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParamCurrent - ADOKPI Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamCurrent - ADOKPI Fields'
+		lineageTag: 4dfa67be-32b0-4e6e-8b6f-6edc260ff783
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParamCurrent - ADOKPI Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamCurrent - ADOKPI Order'
+		formatString: 0
+		lineageTag: bcfce594-f407-49a5-8850-a1c58264820a
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Current_ADO_KPI = calculated
+		mode: import
+		source =
+				{
+				    ("ADO YTD", NAMEOF('Measure Table'[ADO CYTD]), 0),
+				    ("ADO MTD", NAMEOF('Measure Table'[ADO CMTD]), 1),
+				    ("ADO QTD", NAMEOF('Measure Table'[ADO CQTD]), 2),
+				    ("ADO Rolling 12 M", NAMEOF('Measure Table'[ADO Rolling 12M]), 3)
+				}
+
+	annotation PBI_Id = d31149dd7e814a3bbdcf4201dcf1ce10
+

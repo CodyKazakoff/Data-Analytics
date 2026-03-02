@@ -1,0 +1,48 @@
+table z_Param_Previous_GP%
+	lineageTag: 8713e1e8-340d-4511-b69f-694c5a97ba1d
+
+	column 'zParamCurrent - GP%'
+		lineageTag: 1facab98-641e-4bd6-b507-ecf5e67dba33
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParamCurrent - GP% Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParamCurrent - GP% Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamCurrent - GP% Fields'
+		lineageTag: e1b8e0a2-f615-4ad0-ac50-0ff2ddff0e38
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParamCurrent - GP% Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamCurrent - GP% Order'
+		formatString: 0
+		lineageTag: d5fcc85d-607e-4b77-95b3-5b5419bb4114
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Previous_GP% = calculated
+		mode: import
+		source =
+				{
+				    ("PYTD", NAMEOF('Measure Table'[Order GP % PYTD]), 0),
+				    ("PMTD", NAMEOF('Measure Table'[Order GP % PMTD]), 1),
+				    ("PQTD", NAMEOF('Measure Table'[Order GP % PQTD]), 2),
+				    ("Prior Year", NAMEOF('Measure Table'[Order GP % Rolling P12M]), 3)
+				}
+
+	annotation PBI_Id = 3628375590684bf7ab2509e1784b39b1
+

@@ -1,0 +1,48 @@
+table z_Param_Prev_ADO_KPI
+	lineageTag: fa9aec02-849b-4c82-9acd-a53c7b741f0a
+
+	column 'zParamPrev - ADOKPI'
+		lineageTag: 21eb39e8-3836-45e0-9f3d-17cc7019b12e
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParamPrev - ADOKPI Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParamPrev - ADOKPI Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrev - ADOKPI Fields'
+		lineageTag: c98d8ecc-bb38-4b47-bfb2-df8e3e6acab4
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParamPrev - ADOKPI Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrev - ADOKPI Order'
+		formatString: 0
+		lineageTag: 0025290b-d8ac-4ea6-9ceb-37d7f2414ea7
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Prev_ADO_KPI = calculated
+		mode: import
+		source =
+				{
+				    ("PYTD", NAMEOF('Measure Table'[ADO PYTD]), 0),
+				    ("PMTD", NAMEOF('Measure Table'[ADO PMTD]), 1),
+				    ("PQTD", NAMEOF('Measure Table'[ADO PQTD]), 2),
+				    ("Prior Year", NAMEOF('Measure Table'[ADO Rolling P12M]), 3)
+				}
+
+	annotation PBI_Id = de584b58ba4b421cb268d4f01f73971e
+

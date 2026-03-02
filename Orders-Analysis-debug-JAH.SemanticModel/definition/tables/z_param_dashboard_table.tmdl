@@ -1,0 +1,71 @@
+table z_param_dashboard_table
+	lineageTag: a7bbe0c9-6c2a-489b-84eb-1cd67de94285
+
+	column z_param_dashboard_table
+		lineageTag: 92821604-be43-4ae1-96e9-a3f2d742c61a
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_param_dashboard_table Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_param_dashboard_table Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_param_dashboard_table Fields'
+		isHidden
+		lineageTag: 4b6a0cc1-29ee-41b8-862f-909cc4a18ae2
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_param_dashboard_table Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_param_dashboard_table Order'
+		isHidden
+		formatString: 0
+		lineageTag: c7693672-d49a-421a-bf89-966066c57aad
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Show/Hide
+		formatString: 0
+		lineageTag: d0f2b1a8-7907-40b2-a679-88a4d27393e4
+		summarizeBy: sum
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_param_dashboard_table = calculated
+		mode: import
+		source = ```
+				{
+				    ("Branch", NAMEOF('D_Location'[MI Loc]), 0, 0),
+				    ("Parent Name", NAMEOF('D_Customer_BillTo'[Natl Acct Parent Company Name]), 1, 0),
+				    ("Natl Acct No", NAMEOF('D_Customer_BillTo'[Natl Acct No]), 2, 0),
+				    ("Natl Acct Name", NAMEOF('D_Customer_BillTo'[Natl Acct Name]), 3, 0),
+				    ("Natl Acct Cam Name", NAMEOF('D_Customer_BillTo'[Natl Acct Cam Name]), 4, 0),
+				    ("Ship-To No", NAMEOF(D_Customer_ShipTo[MI Loc  Ship To Customer No]), 5, 0),
+				    ("OCN", NAMEOF('F_Order_Item'[Order Ctl No]), 6, 0),
+				    ("Cust PO No", NAMEOF('F_Order_Item'[Cust Po No]), 7, 0),  
+				    ("Itm Item Status Cd", NAMEOF('F_Order_Item'[Itm Item Status Cd]), 8, 0),
+				    ("Order Type Code", NAMEOF('F_Order_Item'[Order Type Cd]), 9, 0),
+				    ("Order Date", NAMEOF('F_Order_Item'[Order Date]), 10, 0),
+				    ("Order Due Date", NAMEOF('F_Order_Item'[Due Date]), 11, 0),
+				    ("Expected Date", NAMEOF(F_Order_Item[Internal Exp Date]), 12, 0),  
+				    ("Total Order", NAMEOF('Measure Table'[Order $ Include VAS]), 13, 0),
+				    ("Condition", NAMEOF('Measure Table'[Calculation Condition]), 17, 1)
+				}
+				
+				```
+
+	annotation PBI_Id = 428242db08ce4cf59aca25b20cb2e9f9
+

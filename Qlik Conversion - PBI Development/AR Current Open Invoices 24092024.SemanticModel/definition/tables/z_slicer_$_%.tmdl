@@ -1,0 +1,35 @@
+table z_slicer_$_%
+	lineageTag: 8917609f-29b7-4ee0-a187-4b3777e13686
+
+	column SYMBOL
+		lineageTag: ed0e69d2-a173-4bde-861b-51d4fcbe3431
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [SYMBOL]
+
+		annotation SummarizationSetBy = Automatic
+
+	column INDEX
+		formatString: 0
+		lineageTag: 89421774-fd15-4734-806e-66d9e1ea51a0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [INDEX]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_slicer_$_% = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "SYMBOL", STRING,
+				    "INDEX", INTEGER,
+				    {
+				        {"$",0},
+				        {"%",1}
+				    }
+				    )
+
+	annotation PBI_Id = 99f3bedf05044f92898070b1409022b1
+

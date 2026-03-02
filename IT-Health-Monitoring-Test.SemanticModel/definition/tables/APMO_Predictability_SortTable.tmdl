@@ -1,0 +1,39 @@
+table APMO_Predictability_SortTable
+	lineageTag: 43045546-218b-4bfc-a656-8a90b1d8e150
+
+	column Attribute
+		lineageTag: e9a0bf91-ba85-4b42-bcff-cf8218f12d9e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Attribute]
+		sortByColumn: SortOrder
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortOrder
+		formatString: 0
+		lineageTag: 44d41e92-1e2a-4fac-96bf-fc25aac8d84d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [SortOrder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition APMO_Predictability_SortTable = calculated
+		mode: import
+		source = ```
+				DATATABLE(
+				    "Attribute", STRING,
+				    "SortOrder", INTEGER,
+				    {
+				        {"ART Predictability Score", 1},
+				        {"Actual Business Value", 2},
+				        {"Business Value  (Committed)", 3},
+				        {"Business Value (Uncommitted)", 4}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = 8cf80f81d28b438181ec4f547ee10e89
+

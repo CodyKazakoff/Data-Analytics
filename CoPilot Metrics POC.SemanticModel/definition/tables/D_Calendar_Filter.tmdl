@@ -1,0 +1,614 @@
+table D_Calendar_Filter
+	lineageTag: e314cdc2-1272-435b-bd46-115ce488718f
+
+	column 'Calendar Date Sort Order Desc'
+		dataType: int64
+		formatString: 0
+		lineageTag: c85bc617-fdae-43ab-8cd3-d65784c0e3e5
+		summarizeBy: sum
+		sourceColumn: Calendar Date Sort Order Desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Index Sort Order Desc'
+		dataType: int64
+		formatString: 0
+		lineageTag: 00e4c7d5-5d0e-44e5-b1b9-e23699d6219c
+		summarizeBy: sum
+		sourceColumn: Month Index Sort Order Desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Index Sort Order Desc'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3d654d66-9e5a-46b6-803b-3a3d67a6d1c7
+		summarizeBy: sum
+		sourceColumn: Quarter Index Sort Order Desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Sort Order Desc'
+		dataType: int64
+		formatString: 0
+		lineageTag: c7b5824a-230e-476d-a64d-6e2b8d65e74c
+		summarizeBy: sum
+		sourceColumn: Year Sort Order Desc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Calendar Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a3cf4133-54e0-4736-be80-0748a6675a41
+		summarizeBy: none
+		sourceColumn: Calendar Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 9bbe8f30-ce8b-45ff-8a2d-ffccb633927d
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: string
+		lineageTag: 2e99bfcc-59c3-4be8-94e3-3c6105953a4c
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Start Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b1daff36-f026-4089-9362-dbef6d32f81f
+		summarizeBy: none
+		sourceColumn: Quarter Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter End Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 72229fb1-7333-4dcb-9ab3-9edfb533c38a
+		summarizeBy: none
+		sourceColumn: Quarter End Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3fc7ed00-b09a-41fd-a270-239d74563ab0
+		summarizeBy: sum
+		sourceColumn: Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year'
+		dataType: string
+		lineageTag: 1412f130-21a4-4f07-a120-ac4c5bc2e9ba
+		summarizeBy: none
+		sourceColumn: Month Year
+		sortByColumn: 'Ordered Month Year Index'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Of Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: fa2e9b16-9490-4740-95fb-c356e20dd8bb
+		summarizeBy: sum
+		sourceColumn: Day Of Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		dataType: string
+		lineageTag: e8a19d35-b42c-4177-90f6-b7daf6e94c40
+		summarizeBy: none
+		sourceColumn: Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 138dc610-ede7-4c29-838a-412eff3b09e5
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Start Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 79e59a15-dd97-4281-bdf4-adf12d2787df
+		summarizeBy: none
+		sourceColumn: Month Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month End Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e4222707-4d3a-419f-a46c-cb8a36714e24
+		summarizeBy: none
+		sourceColumn: Month End Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 407de7a4-8951-47b4-92aa-edb9106d0c34
+		summarizeBy: sum
+		sourceColumn: Week Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number Year'
+		dataType: string
+		lineageTag: 934f6b58-7401-4927-9b99-d1a408b9c157
+		summarizeBy: none
+		sourceColumn: Week Number Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Start Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4385d4e7-f406-4dc2-8802-92f8e5625846
+		summarizeBy: none
+		sourceColumn: Week Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week End Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fc35bebe-d01e-42a1-8295-afbee1fdf144
+		summarizeBy: none
+		sourceColumn: Week End Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Day Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5cc807ee-8704-4a2c-8947-5fe74ebef339
+		summarizeBy: sum
+		sourceColumn: Week Day Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Day'
+		dataType: string
+		lineageTag: 7be06d6e-1c74-4470-8934-8263333e5305
+		summarizeBy: none
+		sourceColumn: Week Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mtd Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 39e88bdf-1199-4184-b05c-4f2acd61ebb8
+		summarizeBy: none
+		sourceColumn: Mtd Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Qtd Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 17c3a413-bd4f-42fd-b55b-eb6ef2742642
+		summarizeBy: none
+		sourceColumn: Qtd Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ytd Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 70c6dc8f-6880-432d-8216-8aefe8da8e75
+		summarizeBy: none
+		sourceColumn: Ytd Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter'
+		dataType: string
+		lineageTag: 5110c640-03c0-4b1a-a14c-f38077bcfb13
+		summarizeBy: none
+		sourceColumn: Year Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'End Of Month Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 348a2d17-f21e-4a8e-8add-21e0209de65d
+		summarizeBy: none
+		sourceColumn: End Of Month Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workday Of Month'
+		dataType: double
+		lineageTag: ec92d787-8c7f-48c6-998f-3bf6c9b553b9
+		summarizeBy: sum
+		sourceColumn: Workday Of Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Workday Of Year'
+		dataType: double
+		lineageTag: 67e635a2-cc2a-4483-8ccb-82c3babd33dc
+		summarizeBy: sum
+		sourceColumn: Workday Of Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Weekend Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 46598977-090d-4e47-b6b8-c2c45f4b621f
+		summarizeBy: none
+		sourceColumn: Weekend Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Holiday Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3288b701-a5ab-4e2a-b0a5-843d05de9031
+		summarizeBy: none
+		sourceColumn: Holiday Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Day Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e22e5506-c794-41be-b176-e12edb52e410
+		summarizeBy: none
+		sourceColumn: Business Day Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Canada Workday Of Month'
+		dataType: double
+		lineageTag: 58910b16-8610-4e3b-8d53-ba73a9b577ea
+		summarizeBy: sum
+		sourceColumn: Canada Workday Of Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Canada Workday Of Year'
+		dataType: double
+		lineageTag: 2a5504c9-a024-4115-949b-8bc222959f33
+		summarizeBy: sum
+		sourceColumn: Canada Workday Of Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Canada Weekend Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e2157728-4409-48b3-b56a-d7cbdc0d4e83
+		summarizeBy: none
+		sourceColumn: Canada Weekend Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Canada Holiday Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 884b4fd5-05e2-4f83-b293-813696bbdbec
+		summarizeBy: none
+		sourceColumn: Canada Holiday Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mexico Workday Of Month'
+		dataType: double
+		lineageTag: ba77e162-dffb-4ff2-8f19-84e38ae29223
+		summarizeBy: sum
+		sourceColumn: Mexico Workday Of Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Mexico Workday Of Year'
+		dataType: double
+		lineageTag: fd86f2d3-be3e-492b-b4dc-20ba278865eb
+		summarizeBy: sum
+		sourceColumn: Mexico Workday Of Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Mexico Weekend Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ee8f4140-79c6-4d4f-859a-2d509703e5f2
+		summarizeBy: none
+		sourceColumn: Mexico Weekend Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mexico Holiday Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 77d1849d-0288-456b-bdf0-228d7ee7f3a3
+		summarizeBy: none
+		sourceColumn: Mexico Holiday Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prim Key Chksum Val'
+		dataType: string
+		lineageTag: 3f2bc3fb-e3f4-4c2a-9459-755e90d3e253
+		summarizeBy: none
+		sourceColumn: Prim Key Chksum Val
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Chksum Val'
+		dataType: string
+		lineageTag: a29283f9-bc3d-4615-bcea-821421f7e9e9
+		summarizeBy: none
+		sourceColumn: Chksum Val
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ins Dt'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7be505b0-c7a9-4c06-a56c-cb663e4190b8
+		summarizeBy: none
+		sourceColumn: Ins Dt
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Upd Dt'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1aa750e4-577f-40fc-a524-7e6fd4edb901
+		summarizeBy: none
+		sourceColumn: Upd Dt
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pytd Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: efe0ff52-9514-4500-b522-fb8876f8378f
+		summarizeBy: none
+		sourceColumn: Pytd Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ppytd Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 89cd096b-b04b-4381-b285-64253bb5cbef
+		summarizeBy: none
+		sourceColumn: Ppytd Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Py Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e10d4bb9-3c40-404e-8559-b1cbe361cd0a
+		summarizeBy: none
+		sourceColumn: Py Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ppy Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 58942804-07a4-485b-952c-36dc9441947e
+		summarizeBy: none
+		sourceColumn: Ppy Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cy Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b9c90351-4465-4957-b4e6-d9a5ecbdebaa
+		summarizeBy: none
+		sourceColumn: Cy Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cm Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 91cb1ddf-d78c-404c-8d62-5d9e2f654c7a
+		summarizeBy: none
+		sourceColumn: Cm Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'P24M Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a5dfee28-c243-4c91-941d-e36471911e21
+		summarizeBy: none
+		sourceColumn: P24M Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Of Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 90941740-e8d9-40cb-a382-2538f88d135d
+		summarizeBy: sum
+		sourceColumn: Day Of Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: ec5db80b-0de9-40d2-ae71-18d34c686055
+		summarizeBy: sum
+		sourceColumn: Month Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f8c3fc9-abdf-47aa-a9b5-c208d9babe03
+		summarizeBy: sum
+		sourceColumn: Quarter Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Of Quarter'
+		dataType: int64
+		formatString: 0
+		lineageTag: 7afe314d-6adf-472a-a7e9-e24a26f0f5c1
+		summarizeBy: sum
+		sourceColumn: Day Of Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workday Of Month Orig'
+		dataType: double
+		lineageTag: 458d2953-b3e7-4c45-8f8a-f252c0af023d
+		summarizeBy: sum
+		sourceColumn: Workday Of Month Orig
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Max Workday Month'
+		dataType: double
+		lineageTag: b7a2ef58-b7d8-4d93-8ca3-524c3ebb6f1f
+		summarizeBy: sum
+		sourceColumn: Max Workday Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Max Workday Month Cy'
+		dataType: double
+		lineageTag: 80b50746-0ea7-4954-b4c2-b5837eed42b2
+		summarizeBy: sum
+		sourceColumn: Max Workday Month Cy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Canada Workday Of Month Orig'
+		dataType: double
+		lineageTag: 75ea7ee8-78d2-4345-b3a0-c8d637b52176
+		summarizeBy: sum
+		sourceColumn: Canada Workday Of Month Orig
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Mexico Workday Of Month Orig'
+		dataType: double
+		lineageTag: c851d9d9-9d8f-48c8-91af-19bfb8cae2b4
+		summarizeBy: sum
+		sourceColumn: Mexico Workday Of Month Orig
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Canada Max Workday Month'
+		dataType: double
+		lineageTag: 4810cf96-dde8-431b-9a2f-3ae2724b5c4d
+		summarizeBy: sum
+		sourceColumn: Canada Max Workday Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Canada Max Workday Month Cy'
+		dataType: double
+		lineageTag: b8b58ee7-601c-4a5d-9a04-1fd970123b64
+		summarizeBy: sum
+		sourceColumn: Canada Max Workday Month Cy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Mexico Max Workday Month'
+		dataType: double
+		lineageTag: 30bf0e05-f245-4d1f-9f48-7601b6a1ce6b
+		summarizeBy: sum
+		sourceColumn: Mexico Max Workday Month
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Mexico Max Workday Month Cy'
+		dataType: double
+		lineageTag: f8ecc524-ac1c-41da-8e0a-1ef6e1f038e4
+		summarizeBy: sum
+		sourceColumn: Mexico Max Workday Month Cy
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Ordered Month Year Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: 96cfc74d-7fb1-41df-ad38-cb1cb6a08dc6
+		summarizeBy: sum
+		sourceColumn: Ordered Month Year Index
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Calendar_Filter = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+				    Source = D_Calendar_Visual,
+				    #"Inserted Calendar Date Sort Order" = Table.AddColumn(Source, "Calendar Date Sort Order Desc", each Number.From([Calendar Date]) * -1, Int64.Type),
+				    #"Inserted Month Index Sort Order" = Table.AddColumn(#"Inserted Calendar Date Sort Order", "Month Index Sort Order Desc", each [Month Index] * -1, Int64.Type),
+				    #"Inserted Quarter Index Sort Order" = Table.AddColumn(#"Inserted Month Index Sort Order", "Quarter Index Sort Order Desc", each [Quarter Index] * -1, Int64.Type),
+				    #"Inserted Year Sort Order" = Table.AddColumn(#"Inserted Quarter Index Sort Order", "Year Sort Order Desc", each [Year] * -1, Int64.Type)
+				in
+				    #"Inserted Year Sort Order"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,256 @@
+table F_Fleet_Expenses
+	lineageTag: a5a5168d-d6e4-4bfe-bf74-64c9f980bd4d
+
+	column OU_DEPT_PK
+		dataType: int64
+		formatString: 0
+		lineageTag: 79dacdb2-eaec-404c-96c6-8eccc7ab3c66
+		summarizeBy: sum
+		sourceColumn: OU_DEPT_PK
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6f302566-db9b-4c2d-b043-0d6721150476
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 594b4d8b-450d-47ea-808e-39040d45c4b4
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d3bd0d5-02e1-42ce-8e47-5e54d5ce3ea6
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column ComdataCardNum
+		dataType: string
+		lineageTag: 7a00a06f-9f36-4ba1-b52b-dc1a08991931
+		summarizeBy: none
+		sourceColumn: ComdataCardNum
+
+		annotation SummarizationSetBy = Automatic
+
+	column VIN
+		dataType: string
+		lineageTag: cfca9f46-7c5a-4579-b932-710be4145d91
+		summarizeBy: none
+		sourceColumn: VIN
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: 85bff5fe-27c5-4c3d-a10b-84469f25f271
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column BU
+		dataType: int64
+		formatString: 0
+		lineageTag: 3fb1b5bf-e505-4252-bd25-6ace165a4065
+		summarizeBy: sum
+		sourceColumn: BU
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GL Account'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b4c9823-13ea-4d9e-8497-2bba013d9140
+		summarizeBy: sum
+		sourceColumn: GL Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column OU
+		dataType: string
+		lineageTag: 1af6db95-9272-4519-8510-593cf227eeca
+		summarizeBy: none
+		sourceColumn: OU
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMDATA_OU
+		dataType: int64
+		formatString: 0
+		lineageTag: 8da4fea7-f0e6-456e-9683-1e44cd6e68da
+		summarizeBy: sum
+		sourceColumn: COMDATA_OU
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeptP
+		dataType: string
+		lineageTag: 4bb029c2-c8b0-4d97-bb8e-2f2eaf1eec06
+		summarizeBy: none
+		sourceColumn: DeptP
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSFirstName
+		dataType: string
+		lineageTag: 736f8aa9-fac7-4e1c-ae02-bdaa5764c800
+		summarizeBy: none
+		sourceColumn: POSFirstName
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSLastName
+		dataType: string
+		lineageTag: 54542f71-7e51-4458-b40d-4845d8eb6dfa
+		summarizeBy: none
+		sourceColumn: POSLastName
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmpName
+		dataType: string
+		lineageTag: a2440c90-044d-4302-b3df-abd844bf8af2
+		summarizeBy: none
+		sourceColumn: EmpName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Odometer
+		dataType: int64
+		formatString: 0
+		lineageTag: 58277070-958c-4145-9202-8dea24565227
+		summarizeBy: sum
+		sourceColumn: Odometer
+
+		annotation SummarizationSetBy = Automatic
+
+	column MerchantName
+		dataType: string
+		lineageTag: b7be965b-3df2-45ae-9056-f8520b004429
+		summarizeBy: none
+		sourceColumn: MerchantName
+
+		annotation SummarizationSetBy = Automatic
+
+	column MerchantAddress
+		dataType: string
+		lineageTag: f4976ec8-85a4-4404-8247-f79fcb107fba
+		summarizeBy: none
+		sourceColumn: MerchantAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column MerchantCity
+		dataType: string
+		lineageTag: d5865525-8e10-4813-b866-c12027a87298
+		summarizeBy: none
+		sourceColumn: MerchantCity
+
+		annotation SummarizationSetBy = Automatic
+
+	column MerchantState
+		dataType: string
+		lineageTag: 78501799-fbe1-47a0-9e0a-3ce7e5d5176b
+		summarizeBy: none
+		sourceColumn: MerchantState
+
+		annotation SummarizationSetBy = Automatic
+
+	column FUEL_PERCENT_T
+		dataType: int64
+		formatString: 0
+		lineageTag: c4935ed2-da8e-4b86-b029-84595bf04f47
+		summarizeBy: sum
+		sourceColumn: FUEL_PERCENT_T
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gallons
+		dataType: double
+		lineageTag: f4c0de6d-3228-4038-9621-58dd598fe4ce
+		summarizeBy: sum
+		sourceColumn: Gallons
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FuelAmount
+		dataType: double
+		lineageTag: 4063af14-6fea-44e6-8409-cb89c14b12c3
+		summarizeBy: sum
+		sourceColumn: FuelAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MiscAmount
+		dataType: double
+		lineageTag: 0bbd9a12-5bc3-4ed4-ad92-f667a907c17d
+		summarizeBy: sum
+		sourceColumn: MiscAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Pre_Amount
+		dataType: double
+		lineageTag: e668d5f4-2c01-455d-acb7-bbe5336aa27d
+		summarizeBy: sum
+		sourceColumn: Pre_Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Branch
+		dataType: string
+		lineageTag: 40243beb-21be-4d44-bd06-c4dc7870e7d4
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fleet Employee'
+		dataType: string
+		lineageTag: 84e3d51b-441d-4e33-a72f-3f9a522c3ef1
+		summarizeBy: none
+		sourceColumn: Fleet Employee
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_Fleet_Expenses = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared%20Documents/MOT%20-%20Finance/Fleet%20Expenses.csv"),[Delimiter=",", Columns=26, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OU_DEPT_PK", Int64.Type}, {"Date", type date}, {"Year", Int64.Type}, {"Month", Int64.Type}, {"ComdataCardNum", type text}, {"VIN", type text}, {"Type", type text}, {"BU", Int64.Type}, {"GL Account", Int64.Type}, {"OU", Int64.Type}, {"COMDATA_OU", Int64.Type}, {"DeptP", type text}, {"POSFirstName", type text}, {"POSLastName", type text}, {"EmpName", type text}, {"Odometer", Int64.Type}, {"MerchantName", type text}, {"MerchantAddress", type text}, {"MerchantCity", type text}, {"MerchantState", type text}, {"FUEL_PERCENT_T", Int64.Type}, {"Gallons", type number}, {"FuelAmount", type number}, {"MiscAmount", type number}, {"Pre_Amount", type number}, {"Branch", type text}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "Fleet Employee", each [POSFirstName] & " " & [POSLastName]),
+				    #"Limit Record Count" = if LimitRecordCount then Table.SelectRows(#"Added Custom", each [Year] = YearSelector ) else #"Added Custom"
+				in
+				    #"Limit Record Count"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

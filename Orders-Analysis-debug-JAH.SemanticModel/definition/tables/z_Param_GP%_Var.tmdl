@@ -1,0 +1,48 @@
+table z_Param_GP%_Var
+	lineageTag: 745beed5-f46a-4974-a77d-bbc68b157545
+
+	column 'zParam - Ord Count Var'
+		lineageTag: dd4972b9-33c0-4906-886c-6ebbf004a13a
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam - Ord Count Var Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam - Ord Count Var Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam - Ord Count Var Fields'
+		lineageTag: 781a19ee-76c5-4618-b5eb-121cbae23e38
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam - Ord Count Var Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam - Ord Count Var Order'
+		formatString: 0
+		lineageTag: 47953bf3-2763-457e-bc05-023bcb0f049a
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_GP%_Var = calculated
+		mode: import
+		source =
+				{
+				    ("BPS", NAMEOF('Measure Table'[Order GP BPS YTD]), 0),
+				    ("BPS", NAMEOF('Measure Table'[Order GP BPS MTD]), 1),
+				    ("BPS", NAMEOF('Measure Table'[Order GP BPS QTD]), 2),
+				    ("BPS", NAMEOF('Measure Table'[Order GP BPS Rolling 12M]), 3)
+				}
+
+	annotation PBI_Id = 0e1db11518ac423ca324ee87e5e7addf
+

@@ -1,0 +1,142 @@
+table F_ECOS_CoPilot_Agent_Actions_Header
+	lineageTag: 50a18b6d-517e-42c7-a014-37ad1e227532
+
+	column CONVERSATION_START_UTC_DTTM
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6c2cbbe9-25d5-4f0d-8e26-53e761ff2b1f
+		summarizeBy: none
+		sourceColumn: CONVERSATION_START_UTC_DTTM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CONVERSATION_END_UTC_DTTM
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7d5965e8-7a8b-4382-9c47-8a68ac2798af
+		summarizeBy: none
+		sourceColumn: CONVERSATION_END_UTC_DTTM
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_AGENT_ACTION_TAKEN
+		dataType: string
+		lineageTag: 58c8ea9d-c6a3-40e0-a5eb-9769037204e0
+		summarizeBy: none
+		sourceColumn: LAST_AGENT_ACTION_TAKEN
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_KEY
+		dataType: string
+		lineageTag: f8bd9e6a-0bf3-479f-a853-f50900238490
+		summarizeBy: none
+		sourceColumn: LOC_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIMARY_USER_ID
+		dataType: string
+		lineageTag: 642a5895-ad4a-4b59-a85e-75fd54535177
+		summarizeBy: none
+		sourceColumn: PRIMARY_USER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_COMPLETED_FLAG
+		dataType: string
+		lineageTag: 540d9f04-310b-40d8-8bac-b57b41fcc9bc
+		summarizeBy: none
+		sourceColumn: AGENT_COMPLETED_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONVERSATION_INTENT
+		dataType: string
+		lineageTag: f7c371d7-d351-4e6b-b678-5c9cda80d78d
+		summarizeBy: none
+		sourceColumn: CONVERSATION_INTENT
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Processing_Time
+		dataType: decimal
+		formatString: 0
+		lineageTag: 1bf25b08-01b1-4d3d-93bc-b65b169f2ab2
+		summarizeBy: sum
+		sourceColumn: Total_Processing_Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: d7400b37-f88f-4a19-8069-4cc05d166880
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_UPDATED_TO_EXACT_MATCH_COUNT
+		dataType: int64
+		formatString: 0
+		lineageTag: 8eac3bff-ec37-4907-bc3f-e55f35db5826
+		summarizeBy: sum
+		sourceColumn: PRODUCT_UPDATED_TO_EXACT_MATCH_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_TOTAL_ATTEMPTED_Z_CODE_UPDATES_COUNT
+		dataType: int64
+		formatString: 0
+		lineageTag: 37266138-4561-46d8-96f4-349c210c37e9
+		summarizeBy: sum
+		sourceColumn: PRODUCT_TOTAL_ATTEMPTED_Z_CODE_UPDATES_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNPROCESSED_ORDER_SOURCE_TYPE
+		dataType: string
+		lineageTag: 73537e63-2443-423e-b34b-6235df7ca939
+		summarizeBy: none
+		sourceColumn: UNPROCESSED_ORDER_SOURCE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRUNCATED_EDI_ENTRY_FLAG
+		dataType: string
+		lineageTag: 7f10c35e-35fb-46a0-a82e-50b8ecb9e528
+		summarizeBy: none
+		sourceColumn: TRUNCATED_EDI_ENTRY_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_ECOS_CoPilot_Agent_Actions_Header = m
+		mode: import
+		queryGroup: Facts
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_F_ECOS_CoPilot_Agent_Actions_Header = Value.NativeQuery(Source, "        
+				    SELECT
+				    *
+				    FROM F_ECOS_CoPilot_Agent_Actions_Header
+				        ", null, [EnableFolding = true]),
+				    #"Removed Unused Columns"= Table.SelectColumns(dbo_F_ECOS_CoPilot_Agent_Actions_Header,{"UNPROCESSED_ORDER_SOURCE_TYPE","LAST_AGENT_ACTION_TAKEN","PRIMARY_USER_ID","LOC_KEY","CONVERSATION_START_UTC_DTTM","CONVERSATION_END_UTC_DTTM","PRODUCT_TOTAL_ATTEMPTED_Z_CODE_UPDATES_COUNT","SHIP_TO_CUST_KEY","AGENT_COMPLETED_FLAG","PRODUCT_UPDATED_TO_EXACT_MATCH_COUNT","CONVERSATION_INTENT"}),
+				    #"Added Custom" = Table.AddColumn(#"Removed Unused Columns", "Total_Processing_Time", each Duration.Seconds( [CONVERSATION_END_UTC_DTTM] - [CONVERSATION_START_UTC_DTTM])/60),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "TRUNCATED_EDI_ENTRY_FLAG", each if
+				        [UNPROCESSED_ORDER_SOURCE_TYPE] = "EDI"
+				        and [CONVERSATION_START_UTC_DTTM] >= #datetime(2025, 12,15, 0, 0, 0)
+				        and [CONVERSATION_START_UTC_DTTM] <= #datetime(2026, 1, 08, 0, 0, 0)
+				        and [CONVERSATION_INTENT] = null
+				        then "Truncated EDI Entry" else "Normal EDI Entry"),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom1",{{"Total_Processing_Time", Currency.Type}, {"CONVERSATION_START_UTC_DTTM", type date}})
+				in
+				    #"Changed Type"
+				```
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

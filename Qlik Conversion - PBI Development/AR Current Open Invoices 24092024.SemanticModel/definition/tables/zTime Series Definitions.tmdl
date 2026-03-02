@@ -1,0 +1,48 @@
+/// *Metadata*
+table 'zTime Series Definitions'
+	isHidden
+	lineageTag: 075a174b-bfaf-4260-847b-e4b363c1f353
+
+	column Name
+		dataType: string
+		isHidden
+		lineageTag: a75a1f10-861b-4e92-9894-45844df2ad27
+		summarizeBy: none
+		sourceColumn: Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Definition
+		dataType: string
+		isHidden
+		lineageTag: fe58c5e9-4276-41dc-aa43-df4110403656
+		summarizeBy: none
+		sourceColumn: Definition
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Format
+		dataType: string
+		lineageTag: 428fe13d-a20b-4d28-92a6-c1348a3f86f1
+		summarizeBy: none
+		sourceColumn: Format
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'zTime Series Definitions-bcc98a51-1d7a-48c8-a107-f6d46ff1eec8' = m
+		mode: import
+		queryGroup: Metadata\Axis
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("7ZndbtowFMdf5QhUCaR0ggytFxMXkZNKSEmBNK0WQS6s1WgXbZACTJ2mvcYeZNd7mj1J/ZFkTpSBgQJhNUJIsePjv//n/HA+JpMGChtG497y4SsKoQ/TGFkuunOtwGlNY6Afz/rUmq46HfMK4UcSP+AELsFawHAmWichwUnUFicbYLnureM6KHDstcPoAPqdxnxqnyxWj8uq6SffPYIXq4Tc4CfyI+JtBlwP3MDxS/HFkdDBTqrqFWLpRHS1/MxMhu8Ed/5NpoRa0ogMZk5g18AeZONvwxkLVJLAYirKoCFgPoOimtTHLUQBVNtbtWjJ5tTnEydbfHjnB/FbPU72ip/x/nNfzoJC5YzeLFZUT1fJII3Wa6JVi5QfETAUIi+vH2+3+vHm8fILDOIH8nw2pMmaufueolkSbie3S2RaxNsXOx5lf+42ULfW9nqUwDbwDTPfoF/IhlItjTR43HXFnY4ZpuE7GHx1KoQjITjSe5/kvKnomGbwf2fQ3APC0lWo+m6IxnlZjXcrq/EKJ0uSnBmMRdU8CWNFwyQSa2CZSHgWcV8a0zgH53GD/XUphm1glNwr45i2q11taSDzHKhfomooDw9lvUri6GiO9F5ZzENP0TSN5ptBs3caNMN5CBf0wB7cD2ynVVwssNdgERVXamaP8COjsrVNYzWNZrPzrnMBf37++tiSjn63+ZxB18zvYj38bOMl2a242ciz+SvgYv8mKl34llnPQxBwbCY1i2PAZddsq71+OQv7K/1X8/afzryKzWYvXzLrsuzycuUobHIDQsfy12dF3NZugpE9yqjEkXdUAMnbNyIZvQA=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Name = _t, Definition = _t, Format = _t]),
+				    // Change output type
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Name", type text}, {"Definition", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

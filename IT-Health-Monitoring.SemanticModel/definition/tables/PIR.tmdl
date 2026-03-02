@@ -1,0 +1,124 @@
+table PIR
+	lineageTag: 8f71e5c6-0530-4ae5-8057-dc94953438d5
+
+	column WorkItemId
+		dataType: int64
+		formatString: 0
+		lineageTag: d28c9e62-f8d7-4215-9ed6-2ba459a537bf
+		summarizeBy: count
+		sourceColumn: WorkItemId
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaSK
+		dataType: string
+		lineageTag: 5d60aa79-40d3-4b38-a48e-149b32512523
+		summarizeBy: none
+		sourceColumn: AreaSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: d534dde2-0dc2-4385-bf55-4551f051732c
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkItemType
+		dataType: string
+		lineageTag: 671f39b7-ae15-49fc-a026-fd5146208789
+		summarizeBy: none
+		sourceColumn: WorkItemType
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: c80bb1c4-fd7e-44b6-9f23-2d7f8f7514f7
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 79d31d60-9d43-42ec-995a-7e8a34b8b7b2
+		summarizeBy: none
+		sourceColumn: ClosedDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Links.LinkTypeName'
+		dataType: string
+		lineageTag: 4bedfeab-6ca3-49e7-aaa0-00210148a44a
+		summarizeBy: none
+		sourceColumn: Links.LinkTypeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.WorkItemId'
+		dataType: int64
+		formatString: 0
+		lineageTag: ae2c3ab1-3512-4396-a88b-e9e03bd74b27
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.WorkItemId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.Title'
+		dataType: string
+		lineageTag: 42a7137f-a3a3-4bee-9e51-c9dfe7552999
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.WorkItemType'
+		dataType: string
+		lineageTag: c7381bc9-9555-4b98-94e7-6123e589cac0
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.WorkItemType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.State'
+		dataType: string
+		lineageTag: 4cf2852f-dee5-452d-8da1-bf0559fb3807
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.State
+
+		annotation SummarizationSetBy = Automatic
+
+	partition PIR = m
+		mode: import
+		source = ```
+				let
+				   Source = OData.Feed ("https://analytics.dev.azure.com/Motion-IT/MI-Dev/_odata/v3.0-preview/WorkItems?"
+				        &"$filter=WorkItemType eq 'PIR' "
+				            &"and State eq 'Closed' and State ne 'Removed' "
+				        &"&$select=WorkItemId,Title,WorkItemType,State,AreaSK,ClosedDate "
+				        &"&$expand=Iteration($select=IterationPath),Area($select=AreaPath), "
+				                &"Links( "
+				                    &"$filter=LinkTypeName eq 'Predecessor' "
+				                        &"and TargetWorkItem/WorkItemType eq 'Bug'; "
+				                    &"$select=LinkTypeName; "
+				                    &"$expand=TargetWorkItem($select=WorkItemType,WorkItemId,Title,State) "
+				                &") "
+				    ,null, [Implementation="2.0",OmitValues = ODataOmitValues.Nulls,ODataVersion = 4]),
+				    #"Expanded Links" = Table.ExpandTableColumn(Source, "Links", {"LinkTypeName", "TargetWorkItem"}, {"Links.LinkTypeName", "Links.TargetWorkItem"}),
+				    #"Expanded Links.TargetWorkItem" = Table.ExpandRecordColumn(#"Expanded Links", "Links.TargetWorkItem", {"WorkItemId", "Title", "WorkItemType", "State"}, {"Links.TargetWorkItem.WorkItemId", "Links.TargetWorkItem.Title", "Links.TargetWorkItem.WorkItemType", "Links.TargetWorkItem.State"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Expanded Links.TargetWorkItem", each [Links.LinkTypeName] <> null and [Links.LinkTypeName] <> ""),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows",{{"ClosedDate", type date}}) 
+				in
+				    #"Changed Type"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,299 @@
+table 'F_T&E PCards 1'
+	lineageTag: 76c379d0-ed45-493d-9fa4-8f0395ee687b
+
+	column OU_DEPT
+		dataType: string
+		lineageTag: 30195e7a-4025-46b1-9c26-eb7ed22e367e
+		summarizeBy: none
+		sourceColumn: OU_DEPT
+
+		annotation SummarizationSetBy = Automatic
+
+	column Level5
+		dataType: string
+		lineageTag: fc9b662d-bf44-49d9-8c49-785975e2f5e1
+		summarizeBy: none
+		sourceColumn: Level5
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Allocation Branch'
+		dataType: string
+		lineageTag: 263eca47-18b0-4082-a0d7-24dca65e9bf0
+		summarizeBy: none
+		sourceColumn: Allocation Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employee
+		dataType: string
+		lineageTag: ea65e9be-61a6-49be-9f46-fabe0eefff71
+		summarizeBy: none
+		sourceColumn: Employee
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Report Name'
+		dataType: string
+		lineageTag: b48817f6-e307-437d-b3af-ed2b4b055144
+		summarizeBy: none
+		sourceColumn: Report Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Trans Date'
+		dataType: string
+		lineageTag: 415a54a2-00f1-4b92-85a3-fd134adfcbd8
+		summarizeBy: none
+		sourceColumn: Trans Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment Type'
+		dataType: string
+		lineageTag: 91913758-03d7-4608-816b-29b29f218808
+		summarizeBy: none
+		sourceColumn: Payment Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expense Type'
+		dataType: string
+		lineageTag: 04cc5b9b-3467-4fe4-8a3b-80e5b64d44b9
+		summarizeBy: none
+		sourceColumn: Expense Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendor
+		dataType: string
+		lineageTag: 3c30d283-2fc7-430f-bb50-3dfc363e6c27
+		summarizeBy: none
+		sourceColumn: Vendor
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: e96545ce-ddac-4d13-96a6-3e7697793f80
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_ID
+		dataType: string
+		lineageTag: 772f5afb-2b53-4246-ac4e-4d521d1888d8
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: adc5d1f4-1298-45a0-adfc-e7cdf499d2b8
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GL Account'
+		dataType: string
+		lineageTag: d0053432-a899-469b-8605-a5b7e77ca66a
+		summarizeBy: none
+		sourceColumn: GL Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: double
+		lineageTag: 5c089a74-8cdc-407b-8544-7177a0a8a467
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Packed Value'
+		dataType: string
+		lineageTag: e67ba645-bb3c-49c8-a04c-335ab40de1d2
+		summarizeBy: none
+		sourceColumn: Packed Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Allocation Value'
+		dataType: string
+		lineageTag: c68ea677-4013-4620-85f2-a046262e264b
+		summarizeBy: none
+		sourceColumn: Allocation Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column BU
+		dataType: string
+		lineageTag: bfbb59eb-51a1-4eb1-b9f3-40b36d92fab8
+		summarizeBy: none
+		sourceColumn: BU
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ac0d5b12-b35c-47a8-b242-5fcda650d89a
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Acct Month'
+		dataType: string
+		lineageTag: 47b3b8e8-80ad-40ef-89e8-71f75cb577a0
+		summarizeBy: none
+		sourceColumn: Acct Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: double
+		lineageTag: b50a1890-6223-41ea-8108-53400ec0ffef
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Peronsal Flag'
+		dataType: string
+		lineageTag: fc68b741-22f6-412d-983f-ced3f89de792
+		summarizeBy: none
+		sourceColumn: Peronsal Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Trans Counter'
+		dataType: int64
+		formatString: 0
+		lineageTag: a325e2d0-e522-47b3-af16-003cd1385b52
+		summarizeBy: sum
+		sourceColumn: Trans Counter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: e2cfcb06-798a-4f01-a5b2-9da1b779a30d
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HC OU'
+		dataType: string
+		lineageTag: 8724944a-addc-4a56-b6a6-5850c38a099b
+		summarizeBy: none
+		sourceColumn: HC OU
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HC Dept'
+		dataType: string
+		lineageTag: cf19e0d3-c1f9-4c90-bc5b-ab1cce01c0fd
+		summarizeBy: none
+		sourceColumn: HC Dept
+
+		annotation SummarizationSetBy = Automatic
+
+	column OU
+		dataType: string
+		lineageTag: c2e4d019-8d95-4271-a3c3-bef6f20f11f8
+		summarizeBy: none
+		sourceColumn: OU
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dept
+		dataType: string
+		lineageTag: 67b9c754-5b29-4f8a-8911-bfdcc7bdd6f8
+		summarizeBy: none
+		sourceColumn: Dept
+
+		annotation SummarizationSetBy = Automatic
+
+	column HC_OU_DEPT
+		dataType: string
+		lineageTag: eb38cca2-54f1-485b-acd8-84f6be87b18e
+		summarizeBy: none
+		sourceColumn: HC_OU_DEPT
+
+		annotation SummarizationSetBy = Automatic
+
+	column JoinBranch
+		dataType: string
+		lineageTag: 92e64c12-7d57-4ec1-b342-6670c82888e1
+		summarizeBy: none
+		sourceColumn: JoinBranch
+
+		annotation SummarizationSetBy = Automatic
+
+	column HAS_JOIN_BRANCH
+		dataType: string
+		lineageTag: 6394f6be-4267-4851-acde-bcf60fcd65fd
+		summarizeBy: none
+		sourceColumn: HAS_JOIN_BRANCH
+
+		annotation SummarizationSetBy = Automatic
+
+	column OUBranch
+		dataType: string
+		lineageTag: b47be45e-30ba-40cf-9f20-90310441e781
+		summarizeBy: none
+		sourceColumn: OUBranch
+
+		annotation SummarizationSetBy = Automatic
+
+	column Branch
+		dataType: string
+		lineageTag: 19bba920-94ad-4130-bf96-a196cfed4e13
+		summarizeBy: none
+		sourceColumn: Branch
+
+		annotation SummarizationSetBy = Automatic
+
+	column T&E/Pcard
+		dataType: string
+		lineageTag: 1477355c-04b5-4959-9812-490f6220b7e4
+		summarizeBy: none
+		sourceColumn: T&E/Pcard
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'F_T&E PCards 1' = m
+		mode: import
+		source = ```
+				let
+				    Source = Csv.Document(Web.Contents("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared%20Documents/MOT%20-%20Finance/T&E%20PCards.csv"),[Delimiter=",", Columns=32, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OU_DEPT", type text}, {"Level5", type text}, {"Allocation Branch", type text}, {"Employee", type text}, {"Report Name", type text}, {"Trans Date", type text}, {"Payment Type", type text}, {"Expense Type", type text}, {"Vendor", type text}, {"City", type text}, {"EMP_ID", type text}, {"State", type text}, {"GL Account", type text}, {"Amount", type text}, {"Packed Value", type text}, {"Allocation Value", type text}, {"BU", type text}, {"Date", type text}, {"Acct Month", type text}, {"Year", type number}, {"Peronsal Flag", type text}, {"Trans Counter", Int64.Type}, {"Month", Int64.Type}, {"HC OU", type text}, {"HC Dept", type text}, {"OU", type text}, {"Dept", type text}, {"HC_OU_DEPT", type text}, {"JoinBranch", type text}, {"HAS_JOIN_BRANCH", type text}, {"OUBranch", type text}, {"Branch", type text}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "T&E/Pcard", each if [Payment Type] = "Bank of America" or [Payment Type] = "Cash" then "T&E"
+				else if [Payment Type] = "BofA PCard MOT CA Expense" or 
+				        [Payment Type] = "BofA PCard MOT Expense" or 
+				        [Payment Type] = "BofA PCard MOT Inventory" or [Payment Type] = "BofA Pcard MOT CA Expense" then "PCard"
+				else null),
+				#"Limit Record Count" = if LimitRecordCount then Table.SelectRows(#"Added Custom", each [Year] = YearSelector ) else #"Added Custom",
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Limit Record Count",{{"Amount", type number}, {"Date", type date}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"EMP_ID", "EMPLOYEE_ID"}})
+				in
+				    #"Renamed Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

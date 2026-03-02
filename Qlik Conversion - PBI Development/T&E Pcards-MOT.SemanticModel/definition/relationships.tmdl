@@ -1,0 +1,20 @@
+relationship d0a53acd-c670-7308-23b7-0c420b423bfc
+	fromColumn: 'F_T&E PCards 1'.Date
+	toColumn: D_Calendar.CALENDAR_DATE
+
+relationship a35a847e-0e9b-9b1f-b79b-c3afac4c6655
+	fromColumn: 'F_T&E PCards 1'.Branch
+	toColumn: D_Location.MI_LOC
+
+relationship 03158d79-11f2-5ea2-a8d8-623448787e3e
+	fromColumn: 'F_T&E PCards 1'.EMPLOYEE_ID
+	toColumn: D_Employee.EMPLOYEE_ID
+
+relationship 3c4a6fa7-fb5b-db24-5a5e-511337e7c3d9
+	fromColumn: F_Fleet_Expenses.Date
+	toColumn: D_Calendar.CALENDAR_DATE
+
+relationship 4c4fa946-a5b5-996b-bd88-30832bc35396
+	fromColumn: F_Fleet_Expenses.Branch
+	toColumn: D_Location.MI_LOC
+

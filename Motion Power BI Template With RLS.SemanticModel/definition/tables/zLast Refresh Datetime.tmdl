@@ -1,0 +1,40 @@
+table 'zLast Refresh Datetime'
+	lineageTag: 1dbf5d3b-f6b8-4493-8788-086f5038bc5b
+
+	column Index
+		dataType: string
+		lineageTag: e4795241-2531-4184-8374-25b84d73af05
+		summarizeBy: none
+		sourceColumn: Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Refresh Datetime'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c688058d-9a2c-4130-9246-2ca6afb49edf
+		summarizeBy: none
+		sourceColumn: Last Refresh Datetime
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'zLast Refresh Datetime' = m
+		mode: import
+		queryGroup: Metadata
+		source =
+				let
+				  Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlSKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Index = _t]),
+				  #"Added Last Refresh Date" = Table.AddColumn(Source, "Last Refresh Datetime", each DateTime.LocalNow() - #duration(0,5,0,0))
+				in
+				    #"Added Last Refresh Date"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "P21 Operational Reporting & Validation"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "364e08e2-4b7d-9bae-425b-a1e305300ef3"
+  }
+}

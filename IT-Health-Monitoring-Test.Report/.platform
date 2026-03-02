@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "IT-Health-Monitoring-Test"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "52023199-5a66-9ebd-4eba-77c18c579e14"
+  }
+}

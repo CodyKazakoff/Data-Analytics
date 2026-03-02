@@ -1,0 +1,36 @@
+table 'Due Date Order'
+	lineageTag: b738931f-34c8-43b4-9dc8-4090023f35f1
+
+	column 'Due Date Bucket'
+		dataType: string
+		lineageTag: 1d32d9c8-5cf1-4b6f-a4b8-73406b44768c
+		summarizeBy: none
+		sourceColumn: Due Date Bucket
+		sortByColumn: Order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ac6bdad-b218-427e-9c6a-0a9e8a909ef8
+		summarizeBy: none
+		sourceColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Due Date Order' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("Vc4xDoAgDIXhq5CuSlKtguyOegJlMMYYFhdk8PaSKgbX70/6Ok3Qh030y7mJ0Xnvjh1KqMCWTyAsYrx8xPpDdwgtCVOgPMwBkVadWsMtRzHErVhaLt+dxIqZUKq/a3aF0vy9Yzfvm0kNWHsD", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Due Date Bucket" = _t, Order = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Due Date Bucket", type text}, {"Order", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

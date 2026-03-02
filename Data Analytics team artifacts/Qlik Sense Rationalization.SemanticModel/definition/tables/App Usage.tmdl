@@ -1,0 +1,162 @@
+table 'App Usage'
+	lineageTag: 426622ce-f5b6-4d80-bb29-26a4dc5ef016
+
+	column Duration
+		dataType: dateTime
+		formatString: h:nn
+		lineageTag: 7e67603f-c3c6-4e32-a5b0-317ce6c72944
+		summarizeBy: none
+		sourceColumn: Duration
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Month
+		dataType: string
+		lineageTag: 29b69bf8-450f-4b86-ae9e-76d58a8ea3fa
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: MonthIndex
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Users = Calculate(Countx('App Usage','App Usage'[User ID]), GROUPBY('App Usage', 'App Usage'[Month], 'App Usage'[App]))
+		formatString: 0
+		lineageTag: d70a0bf4-b90d-42c1-a9e6-66c5313f3459
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Active app' =
+			
+			var halfyear = Month(Today())-6
+			var calc = IF(Year('App Usage'[Date]) <> Year(Today()), "No",
+			                IF(Month('App Usage'[Date]) < halfyear, "No", "Yes"))
+			
+			return calc
+		lineageTag: 2325cc3e-e6d3-4940-afff-d7e0183630ee
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthIndex = ```
+			RANKX('App Usage',YEAR('App Usage'[Date])*100+MONTH('App Usage'[Date]),,ASC,Dense)
+			
+			```
+		formatString: 0
+		lineageTag: 34ae5604-d07e-4496-af5b-5894fd096d8d
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Name'
+		dataType: string
+		lineageTag: eeb75649-7b98-49d6-b344-151f50385c64
+		summarizeBy: none
+		sourceColumn: User Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Session Start'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2f02cce3-6fb2-4bb0-84ad-5d8c2c59cd82
+		summarizeBy: none
+		sourceColumn: Session Start
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d7e5fbcf-e803-4886-810b-dacbaec2c452
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Selections
+		dataType: int64
+		formatString: 0
+		lineageTag: fa20f75d-c05e-4fbc-bde8-9cb3ab337c33
+		summarizeBy: sum
+		sourceColumn: Selections
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User ID'
+		dataType: string
+		lineageTag: ef507dca-7387-46d8-91f6-6bcccadcb5ed
+		summarizeBy: none
+		sourceColumn: User ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User-facing App'
+		dataType: string
+		lineageTag: 875b2004-90b8-4d8a-97a1-0216531a9286
+		summarizeBy: none
+		sourceColumn: User-facing App
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'App Stream'
+		dataType: string
+		lineageTag: fd01598e-4d59-472b-9ed7-5ddad57a727b
+		summarizeBy: none
+		sourceColumn: App Stream
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppId
+		dataType: string
+		lineageTag: 8d5c54c0-373c-411c-b433-c6c1d62ef381
+		summarizeBy: none
+		sourceColumn: AppId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Duration (min)'
+		dataType: double
+		lineageTag: 6f3a03a3-8cc0-4ff7-aa5b-1c8a1c6a4751
+		summarizeBy: sum
+		sourceColumn: Duration (min)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'App Usage' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Non-Vortex Data Sources'
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SupportingFiles & "\zQlikAppUsageDownload.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Session Start", type datetime}, {"Session Finish", type datetime}, {"Selection Count", Int64.Type}, {"User Id", type text}, {"User Name", type text}, {"User-facing App", type text}, {"User-facing App Workspace", type text}, {"User-facing App Id", type text}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each ([#"User-facing App Workspace"] <> "-" and [#"User-facing App Workspace"] <> "Unpublished") and ([User Id] <> "-")),
+				    #"Added Custom" = Table.AddColumn(#"Filtered Rows", "Duration", each [Session Finish] - [Session Start], type duration),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Duration (min)", each Duration.Seconds([Duration])/60
+				+ Duration.Minutes([Duration])
+				+ Duration.Hours([Duration]) * 60, type number),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom1",{{"Session Finish", type date}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type1",{{"Session Finish", "Date"}, {"User Id", "User ID"}, {"Selection Count", "Selections"}, {"User-facing App Id", "AppId"}, {"User-facing App Workspace", "App Stream"}}),
+				    #"Inserted Month Name" = Table.AddColumn(#"Renamed Columns", "Month", each Date.MonthName([Date]) & " " & Number.ToText(Date.Year([Date])), type text),
+				    #"Filtered Rows1" = Table.SelectRows(#"Inserted Month Name", each [Date] > #date(2023, 9, 30))
+				in
+				    #"Filtered Rows1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

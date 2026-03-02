@@ -1,0 +1,84 @@
+table 'Page Object Dimension'
+	lineageTag: f5ae4187-38cf-4a7f-a9f2-2864577239b7
+
+	column Name
+		dataType: string
+		lineageTag: b8b163b0-9a58-44ba-bbd5-8df64c49414c
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Definition
+		dataType: string
+		lineageTag: 88aafbcb-8384-4ff6-bedc-51703860a108
+		summarizeBy: none
+		sourceColumn: Definition
+
+		annotation SummarizationSetBy = Automatic
+
+	column Table
+		dataType: string
+		lineageTag: c960a33f-cf3c-4ffd-8e82-0ae3f8c2b606
+		summarizeBy: none
+		sourceColumn: Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column FieldId
+		dataType: string
+		lineageTag: af2b652f-5ee5-4a63-92fb-dcf8d4544701
+		summarizeBy: none
+		sourceColumn: FieldId
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCalculated
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8743049c-af64-4a05-a6f6-48dac3ab223c
+		summarizeBy: none
+		sourceColumn: IsCalculated
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		dataType: string
+		lineageTag: f904a342-9de0-43fd-b0c1-d8221e8a9038
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Page Object Id'
+		dataType: string
+		lineageTag: da99d357-8ac4-4c3b-b57b-45a245ec64d2
+		summarizeBy: none
+		sourceColumn: Page Object Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column PageObjectKey
+		dataType: string
+		lineageTag: 0567f9fd-8f88-4295-b1dc-12013294aa23
+		summarizeBy: none
+		sourceColumn: PageObjectKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Page Object Dimension' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex\Page Queries'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_page_object_dimension"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Page_Object_Id", "Page Object Id"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Page Object Id", type text}, {"Id", type text}, {"Name", type text}, {"Definition", type text}, {"Table", type text}, {"FieldId", type text}, {"IsCalculated", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,3184 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "3.5.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "range": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Range"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "range": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "variety": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "series": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "assortment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "collection": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "gamut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "selection": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "choice": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "array": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "kind": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "scope": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "range.value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Range",
+			          "ConceptualProperty": "Value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "value": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "assessment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "worth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "price": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "cost": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "charge": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "rate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "importance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "significance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "usefulness": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "consequence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "qlik app migration progress": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "qlik app migration development": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "qlik app migration growth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "qlik app migration advancement": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "qlik app migration improvement": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "qlik app migration evolution": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "qlik app migration headway": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "qlik app migration movement": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "qlik app migration evolvement": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.stream": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "Stream"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "stream": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "watercourse": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "torrent": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "rivulet": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "beck": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "brook": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "river": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "tributary": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "creek": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "crick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "jet": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.app": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "App"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "app": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.state": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "State"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {},
+			        {
+			          "location": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "province": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "territory": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "nation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "condition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "country": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.PI_period": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "PI Period"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "PI period": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "period": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "pi era": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "pi epoch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "era": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "epoch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "pi age": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "pi stage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "pi phase": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "age": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "stage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "phase": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.state_sort_order": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "State Sort Order"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "state sort order": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "order": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "sort order": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "location sort order": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "province sort order": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "territory sort order": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "nation sort order": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "condition sort order": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "country sort order": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "state sort instruction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "state sort direction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "state sort edict": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "sort instruction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.stream_order_stream_sort_order": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "Stream Order.Stream Sort Order"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "stream order.stream sort order": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.app_order_app_sort_order": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "App Order.App Sort Order"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "app order.app sort order": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "app order.app sort instruction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "app order.app sort direction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "app order.app sort edict": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.514
+			          }
+			        },
+			        {
+			          "app order.app sort command": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "app order.app sort directive": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "app order.app sort demand": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "app order.app sort mandate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "app order.app sort imperative": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.499
+			          }
+			        },
+			        {
+			          "app order.app sort stability": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "app order.app sort harmony": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.deprecated_state": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "Deprecated State"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "deprecated state": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "deprecated location": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "deprecated province": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "deprecated territory": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "deprecated nation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "deprecated condition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "deprecated country": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.state_manual_override": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "State Manual Override"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "state manual override": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "override": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "manual override": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "location manual override": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "province manual override": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "territory manual override": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "nation manual override": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "condition manual override": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "country manual override": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.GBQ_table_detail_key": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "GBQ Table Detail Key"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "GBQ table detail key": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "detail key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "table detail key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "gbq table detail solution": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "gbq table detail explanation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "gbq table detail basis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "gbq table detail recipe": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "gbq table detail interpretation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "gbq table detail resolution": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.489
+			          }
+			        },
+			        {
+			          "table detail solution": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "table detail explanation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "table detail basis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "table detail recipe": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.app_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "App Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "app count": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "app amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.app_state": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "App State"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "app state": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "app location": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "app province": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "app territory": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "app nation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "app condition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "app country": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.app_stream_ranking": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "App Stream Ranking"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "app stream ranking": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ranking": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "stream ranking": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "app stream status": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "app stream classification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "stream status": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "stream classification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "app stream position": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "app stream place": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "app stream grade": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "app stream standing": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "app stream level": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.492
+			          }
+			        },
+			        {
+			          "app stream rank": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.492
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.apps_by_stream": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "Apps by Stream"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "apps by stream": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "apps": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress.state_color_by_app": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App Migration Progress",
+			          "ConceptualProperty": "State Color by App"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "state color by app": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "color": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "state color": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "location color by app": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "province color by app": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "territory color by app": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "nation color by app": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "location color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "province color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "territory color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "nation color": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "condition color by app": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        },
+			        {
+			          "country color by app": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App GBQ Table Detail"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "qlik app GBQ table detail": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "qlik app gbq table aspect": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "qlik app gbq table element": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "qlik app gbq table fact": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.52
+			          }
+			        },
+			        {
+			          "qlik app gbq table part": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "qlik app gbq table feature": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "qlik app gbq table point": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "qlik app gbq table factor": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "qlik app gbq table facet": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.504
+			          }
+			        },
+			        {
+			          "qlik app gbq table unit": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.494
+			          }
+			        },
+			        {
+			          "qlik app gbq table taskforce": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.494
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail.qlik_app": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App GBQ Table Detail",
+			          "ConceptualProperty": "Qlik App"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "qlik app": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail.source_table_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App GBQ Table Detail",
+			          "ConceptualProperty": "Source Table Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "source table name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "source table": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "table name": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "source table nickname": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "source table title": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "source table label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "source table tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "table nickname": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "table title": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "table label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "table tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "source tabletop": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "source bench": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail.GBQ_table_name": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App GBQ Table Detail",
+			          "ConceptualProperty": "GBQ Table Name"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "GBQ table name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "GBQ table": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "table name": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "gbq table nickname": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "gbq table title": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "gbq table label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "gbq table tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.739
+			          }
+			        },
+			        {
+			          "table nickname": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "table title": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "table label": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "table tag": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "gbq tabletop": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "gbq bench": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail.column_4": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App GBQ Table Detail",
+			          "ConceptualProperty": "Column4"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "column 4": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Column4": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail.soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Qlik App GBQ Table Detail",
+			          "ConceptualProperty": "Soure: https://sense-internal.axisgroup.com/sense/app/bddcaed2-a1f5-4f55-8b7b-795afde4abef/sheet/d2fe6484-6801-4f3f-99f8-760ebd046837/state/analysis"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "soure https //sense internal axisgroup com/sense/app/bddcaed 2 a 1f 5 4f 55 8b 7b 79 5afde 4abef/sheet/d 2fe 6484 6801 4f 3f 9 9f 8 76 0ebd 046837/state/analysis": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "soure https": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "sense internal axisgroup com": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "sense": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "bddcaed 2 a 1f 5 4f 55 8b 7b 79 5afde 4abef": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "sheet": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "d 2fe 6484 6801 4f 3f 9 9f 8 76 0ebd 046837": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "soure https sense internal axisgroup com sense app bddcaed 2 a 1f 5 4f 55 8b 7b 79 5afde 4abef sheet d 2fe 6484 6801 4f 3f 9 9f 8 76 0ebd 046837 state analysis": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "analysis": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "intelligence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "intellect": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "examination": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "wisdom": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "investigation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "sagacity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "scrutiny": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "logic": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "pane": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "breakdown": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        }
+			      ]
+			    },
+			    "measure_table.usd_amount": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Measure Table",
+			          "ConceptualProperty": "USD Amount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "USD": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
+			    "qlik_app_migration_progress_in_state": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.state": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.state"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "qlik_app_migration_progress.state"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.state"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_are_in_states"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_in_deprecated_state": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.deprecated_state": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.deprecated_state"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "qlik_app_migration_progress.deprecated_state"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.deprecated_state"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_are_in_deprecated_states"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_in_state_manual_override": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.state_manual_override": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.state_manual_override"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "qlik_app_migration_progress.state_manual_override"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.state_manual_override"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_are_in_state_manual_overrides"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_in_app_state": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.app_state": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.app_state"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "qlik_app_migration_progress.app_state"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.app_state"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_are_in_app_state"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_in_state_color_by_app": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.state_color_by_app": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.state_color_by_app"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "qlik_app_migration_progress.state_color_by_app"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.state_color_by_app"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_are_in_state_color_by_app"
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail_in_soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App GBQ Table Detail"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_GBQ_table_detail": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail"
+			          }
+			        },
+			        "qlik_app_GBQ_table_detail.soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail.soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "Where": {
+			          "Role": "qlik_app_GBQ_table_detail.soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Preposition": {
+			            "Subject": {
+			              "Role": "qlik_app_GBQ_table_detail"
+			            },
+			            "Prepositions": [
+			              {
+			                "in": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "qlik_app_GBQ_table_detail.soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_GBQ_table_details_are_in_soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis"
+			        }
+			      ]
+			    },
+			    "range_has_value": {
+			      "Binding": {
+			        "ConceptualEntity": "Range"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "range": {
+			          "Target": {
+			            "Entity": "range"
+			          }
+			        },
+			        "range.value": {
+			          "Target": {
+			            "Entity": "range.value"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "range"
+			            },
+			            "Object": {
+			              "Role": "range.value"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "ranges_have_values"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_stream": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.stream": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.stream"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.stream"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_streams"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_app": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.app": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.app"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.app"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_apps"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_state": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.state": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.state"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.state"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_states"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_PI_period": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.PI_period": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.PI_period"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.PI_period"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_PI_periods"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_state_sort_order": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.state_sort_order": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.state_sort_order"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.state_sort_order"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_state_sort_orders"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_stream_order_stream_sort_order": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.stream_order_stream_sort_order": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.stream_order_stream_sort_order"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.stream_order_stream_sort_order"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_stream_order_stream_sort_orders"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_app_order_app_sort_order": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.app_order_app_sort_order": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.app_order_app_sort_order"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.app_order_app_sort_order"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_app_order_app_sort_orders"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_deprecated_state": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.deprecated_state": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.deprecated_state"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.deprecated_state"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_deprecated_states"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_state_manual_override": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.state_manual_override": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.state_manual_override"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.state_manual_override"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_state_manual_overrides"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_GBQ_table_detail_key": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.GBQ_table_detail_key": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.GBQ_table_detail_key"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.GBQ_table_detail_key"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_GBQ_table_detail_keys"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_app_count": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.app_count": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.app_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.app_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_app_count"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_app_state": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.app_state": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.app_state"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.app_state"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_app_state"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_app_stream_ranking": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.app_stream_ranking": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.app_stream_ranking"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.app_stream_ranking"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_app_stream_ranking"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_apps_by_stream": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.apps_by_stream": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.apps_by_stream"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.apps_by_stream"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_apps_by_stream"
+			        }
+			      ]
+			    },
+			    "qlik_app_migration_progress_has_state_color_by_app": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App Migration Progress"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          }
+			        },
+			        "qlik_app_migration_progress.state_color_by_app": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress.state_color_by_app"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress.state_color_by_app"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_state_color_by_app"
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail_has_source_table_name": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App GBQ Table Detail"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_GBQ_table_detail": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail"
+			          }
+			        },
+			        "qlik_app_GBQ_table_detail.source_table_name": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail.source_table_name"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_GBQ_table_detail"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_GBQ_table_detail.source_table_name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_GBQ_table_details_have_source_table_names"
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail_has_GBQ_table_name": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App GBQ Table Detail"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_GBQ_table_detail": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail"
+			          }
+			        },
+			        "qlik_app_GBQ_table_detail.GBQ_table_name": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail.GBQ_table_name"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_GBQ_table_detail"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_GBQ_table_detail.GBQ_table_name"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_GBQ_table_details_have_GBQ_table_names"
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail_has_column_4": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App GBQ Table Detail"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_GBQ_table_detail": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail"
+			          }
+			        },
+			        "qlik_app_GBQ_table_detail.column_4": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail.column_4"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_GBQ_table_detail"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_GBQ_table_detail.column_4"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_GBQ_table_details_have_column_4"
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail_has_soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App GBQ Table Detail"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_GBQ_table_detail": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail"
+			          }
+			        },
+			        "qlik_app_GBQ_table_detail.soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail.soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_GBQ_table_detail"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_GBQ_table_detail.soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_GBQ_table_details_have_soure_https___sense_internal_axisgroup_com_sense_app_bddcaed_2_a_1f_5_4f_55_8b_7b_79_5afde_4abef_sheet_d_2fe_6484_6801_4f_3f_9_9f_8_76_0ebd_046837_state_analysis"
+			        }
+			      ]
+			    },
+			    "qlik_app_GBQ_table_detail_has_qlik_app_migration_progress": {
+			      "Binding": {
+			        "ConceptualEntity": "Qlik App GBQ Table Detail"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "qlik_app_GBQ_table_detail": {
+			          "Target": {
+			            "Entity": "qlik_app_GBQ_table_detail"
+			          }
+			        },
+			        "qlik_app_migration_progress": {
+			          "Target": {
+			            "Entity": "qlik_app_migration_progress"
+			          },
+			          "Nouns": [
+			            {
+			              "qlik app": {
+			                "State": "Generated"
+			              }
+			            }
+			          ]
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_GBQ_table_detail"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_migration_progress"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_GBQ_table_details_have_qlik_app_migration_progresses"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "qlik_app_migration_progress"
+			            },
+			            "Object": {
+			              "Role": "qlik_app_GBQ_table_detail"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "qlik_app_migration_progresses_have_qlik_app_GBQ_table_details"
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

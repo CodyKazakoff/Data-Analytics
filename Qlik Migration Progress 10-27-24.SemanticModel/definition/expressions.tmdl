@@ -1,0 +1,50 @@
+expression 'Stream Order' =
+		let
+		    Source = #"Qlik App Migration Progress Temp",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Stream", "PI Period"}),
+		    #"Grouped Rows" = Table.Group(#"Removed Other Columns", {"Stream"}, {{"Min PI Period", each List.Min([PI Period]), type nullable text}}),
+		    #"Inserted Text After Delimiter" = Table.AddColumn(#"Grouped Rows", "Text After Delimiter", each Text.AfterDelimiter([Min PI Period], "PI"), type text),
+		    #"Added Conditional Column" = Table.AddColumn(#"Inserted Text After Delimiter", "Custom", each if [Min PI Period] is null then 9999 else [Text After Delimiter]),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"Min PI Period", "Text After Delimiter"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Custom", "Stream Sort Order"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: ed3abbe6-d2aa-44a0-8a64-b1f62fe17bb3
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Qlik App Migration Progress Temp' =
+		let
+		    Source = Excel.Workbook(Web.Contents("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared%20Documents/MOT%20-%20Enterprise%20Analytics/Rationalization%20files/Qlik%20App%20and%20Stream%20Analysis.xlsx"), null, true),
+		    #"Qlik App Migration Progress_Sheet" = Source{[Item="Qlik App Migration Progress",Kind="Sheet"]}[Data],
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Qlik App Migration Progress_Sheet", [PromoteAllScalars=true]),
+		    #"Replaced Errors" = Table.ReplaceErrorValues(#"Promoted Headers", {{"State", "1 - Not Started"}}),
+		    #"Add State Sort Order Column" = Table.AddColumn(#"Replaced Errors", "State Sort Order", each Text.BeforeDelimiter([State], " "), type text),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Add State Sort Order Column",{{"Stream", type text}, {"App", type text}, {"Deprecated State", type text}, {"State Manual Override", type any}, {"State", type text}, {"PI Period", type text}, {"State Sort Order", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: e8cebf93-98b0-44c0-a18a-f2e27b5fffaf
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'App Order' =
+		let
+		    Source = #"Qlik App Migration Progress Temp",
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"App", "PI Period"}),
+		    #"Grouped Rows" = Table.Group(#"Removed Other Columns", {"App"}, {{"Min PI Period", each List.Min([PI Period]), type nullable text}}),
+		    #"Inserted Text After Delimiter" = Table.AddColumn(#"Grouped Rows", "Text After Delimiter", each Text.AfterDelimiter([Min PI Period], "PI"), type text),
+		    #"Added Conditional Column" = Table.AddColumn(#"Inserted Text After Delimiter", "Custom", each if [Min PI Period] is null then 9999 else [Text After Delimiter]),
+		    #"Removed Columns" = Table.RemoveColumns(#"Added Conditional Column",{"Min PI Period", "Text After Delimiter"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Custom", "App Sort Order"}})
+		in
+		    #"Renamed Columns"
+	lineageTag: 71e74368-910c-4e9e-831d-03be9c245505
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

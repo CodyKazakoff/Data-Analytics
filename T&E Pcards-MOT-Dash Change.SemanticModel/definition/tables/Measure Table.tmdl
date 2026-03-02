@@ -1,0 +1,378 @@
+/// Sum of total Reportable Accidents
+table 'Measure Table'
+	lineageTag: ce2aa14d-6693-4b71-be30-f49cd138f021
+
+	/// Refresh Date for Loss Run Report
+	measure 'Report Refresh Date' = "Report as of: " & Max('zLast Refresh Datetime'[Last Refresh Datetime])
+		displayFolder: Metadata
+		lineageTag: 2360455c-966c-4ea4-af74-a5137572a971
+
+	measure Amount = Sum('F_T&E PCards 1'[Amount])
+		formatString: #,0
+		lineageTag: e6e17a5c-9255-4d3b-ad5f-9eebfd63741c
+
+	measure Price/Gall = DIVIDE(Sum(F_Fleet_Expenses[FuelAmount]),Sum(F_Fleet_Expenses[Gallons]))
+		lineageTag: d22c9068-23a0-4ccc-b2ad-3b75941e8867
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 3MA =
+			
+			CALCULATE(
+			    Divide(Sum('F_T&E PCards 1'[Amount]), 3),
+			    DATESINPERIOD(
+			        'F_T&E PCards 1'[Date],
+			        MAX('F_T&E PCards 1'[Date]),
+			        -3,
+			        MONTH
+			    )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: 3MA
+		lineageTag: 7feed3fa-9104-42ea-a22e-227129e7baaf
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'CM Amount' =
+			
+			VAR LatestMonth = MAX('F_T&E PCards 1'[Date])
+			RETURN
+			CALCULATE(
+			    SUM('F_T&E PCards 1'[Amount]),
+			    FILTER(
+			        'D_Calendar',
+			        MONTH('D_Calendar'[CALENDAR_DATE]) = MONTH(LatestMonth) &&
+			        YEAR(D_Calendar[CALENDAR_DATE]) = YEAR(LatestMonth)
+			    )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: CM
+		lineageTag: f4a69649-e94a-4b8f-a6d0-e63c98988ec4
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Prior 3MA' =
+			
+			VAR LatestDate = MAX('F_T&E PCards 1'[Date])
+			VAR EndOfLastMonth = EOMONTH(LatestDate, -3)
+			VAR StartOfThreeMonthsAgo = EOMONTH(LatestDate, -6) + 1
+			RETURN
+			CALCULATE(
+			    Divide(SUM('F_T&E PCards 1'[Amount]),3),
+			    FILTER(
+			        'D_Calendar',
+			        'D_Calendar'[CALENDAR_DATE] >= StartOfThreeMonthsAgo &&
+			        'D_Calendar'[CALENDAR_DATE] <= EndOfLastMonth
+			    )
+			)
+		formatString: #,0
+		lineageTag: 91df62ab-5cbe-4942-a774-d198e1124194
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '$Change.CM' = [CM Amount]- [Prior 3MA]
+		formatString: #,0
+		displayFolder: CM
+		lineageTag: 70d7b282-bab6-4049-9fe2-846d3bce5c93
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Comdata AMT' = CALCULATE(Sum(F_Fleet_Expenses[FuelAmount]) + Sum(F_Fleet_Expenses[MiscAmount]))
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 1a3f6408-28d8-466e-9479-bf04fbfd2a83
+
+	measure 'CMFuel Amount' =
+			
+			VAR LatestMonth = MAX('F_Fleet_Expenses'[Date])
+			RETURN
+			CALCULATE(
+			    (SUM('F_Fleet_Expenses'[FuelAmount])+ SUM(F_Fleet_Expenses[MiscAmount])),
+			    FILTER(
+			        'D_Calendar',
+			        MONTH('D_Calendar'[CALENDAR_DATE]) = MONTH(LatestMonth) &&
+			        YEAR(D_Calendar[CALENDAR_DATE]) = YEAR(LatestMonth)
+			    )
+			)
+		formatString: #,0
+		displayFolder: CMFuel
+		lineageTag: 036ea3dc-377c-4fd4-ba03-dc25a5a7f6ac
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Prior 3MAFuel' =
+			
+			VAR LatestDate = MAX('F_Fleet_Expenses'[Date])
+			VAR EndOfLastMonth = EOMONTH(LatestDate, -3)
+			VAR StartOfThreeMonthsAgo = EOMONTH(LatestDate, -6) + 1
+			RETURN
+			CALCULATE(
+			    Divide(SUM(F_Fleet_Expenses[FuelAmount]) + SUM(F_Fleet_Expenses[MiscAmount]),3),
+			    FILTER(
+			        'D_Calendar',
+			        'D_Calendar'[CALENDAR_DATE] >= StartOfThreeMonthsAgo &&
+			        'D_Calendar'[CALENDAR_DATE] <= EndOfLastMonth
+			    )
+			)
+		formatString: #,0
+		displayFolder: 3MA Fuel
+		lineageTag: ff2100f6-00fd-401b-8874-2e8cb3d40d3f
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 3MAFuel =
+			
+			CALCULATE(
+			    Divide(Sum('F_Fleet_Expenses'[FuelAmount]) + SUM(F_Fleet_Expenses[MiscAmount]), 3),
+			    DATESINPERIOD(
+			        'F_Fleet_Expenses'[Date],
+			        MAX('F_Fleet_Expenses'[Date]),
+			        -3,
+			        MONTH
+			    ))
+		formatString: #,0
+		displayFolder: 3MA Fuel
+		lineageTag: 29ef8884-40f2-424c-afe4-29425abecd34
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'CM Amount(Gal)' =
+			
+			VAR LatestMonth = MAX('F_Fleet_Expenses'[Date])
+			RETURN
+			CALCULATE(
+			    (SUM('F_Fleet_Expenses'[Gallons])),
+			    FILTER(
+			        'D_Calendar',
+			        MONTH('D_Calendar'[CALENDAR_DATE]) = MONTH(LatestMonth) &&
+			        YEAR(D_Calendar[CALENDAR_DATE]) = YEAR(LatestMonth)
+			    )
+			)
+		formatString: #,0
+		displayFolder: Gal
+		lineageTag: 8fdbf84e-864e-4a55-adc6-f48b18146930
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Prior 3MA(Gal)' =
+			
+			VAR LatestDate = MAX('F_Fleet_Expenses'[Date])
+			VAR EndOfLastMonth = EOMONTH(LatestDate, -3)
+			VAR StartOfThreeMonthsAgo = EOMONTH(LatestDate, -6) + 1
+			RETURN
+			CALCULATE(
+			    Divide(SUM(F_Fleet_Expenses[Gallons]),3),
+			    FILTER(
+			        'D_Calendar',
+			        'D_Calendar'[CALENDAR_DATE] >= StartOfThreeMonthsAgo &&
+			        'D_Calendar'[CALENDAR_DATE] <= EndOfLastMonth
+			    )
+			)
+		formatString: #,0
+		displayFolder: Gal
+		lineageTag: ae20612c-fc1e-48cc-888e-55b68dfe3dee
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'CM Amount(PPG)' =
+			
+			VAR LatestMonth = MAX('F_Fleet_Expenses'[Date])
+			RETURN
+			CALCULATE(
+			    ([Price/Gall]),
+			    FILTER(
+			        'D_Calendar',
+			        MONTH('D_Calendar'[CALENDAR_DATE]) = MONTH(LatestMonth) &&
+			        YEAR(D_Calendar[CALENDAR_DATE]) = YEAR(LatestMonth)
+			    )
+			)
+		formatString: #,0.00
+		displayFolder: PPG
+		lineageTag: 19965d1a-e079-4fb7-a2fc-d27847268845
+
+	measure 'Prior 3MA(PPG)' =
+			
+			VAR LatestDate = MAX('F_Fleet_Expenses'[Date])
+			VAR EndOfLastMonth = EOMONTH(LatestDate, -3)
+			VAR StartOfThreeMonthsAgo = EOMONTH(LatestDate, -6) + 1
+			RETURN
+			CALCULATE(
+			    DIVIDE(Sum(F_Fleet_Expenses[FuelAmount]),Sum(F_Fleet_Expenses[Gallons])),
+			    FILTER(
+			        'D_Calendar',
+			        'D_Calendar'[CALENDAR_DATE] >= StartOfThreeMonthsAgo &&
+			        'D_Calendar'[CALENDAR_DATE] <= EndOfLastMonth
+			    )
+			)
+		formatString: #,0.00
+		displayFolder: PPG
+		lineageTag: 10e811f0-2094-4c3a-ac55-607c84bb07a1
+
+	measure '%Change.CM' = [$Change.CM]/[CM Amount]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: CM
+		lineageTag: 8a1fbe32-374c-4aef-9b3d-9b087f88bde2
+
+	measure '$Change.3MA' = [3MA]- [Prior 3MA]
+		formatString: #,0
+		displayFolder: 3MA
+		lineageTag: 46c896c7-de22-455d-a773-3917cee2aaf5
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '%Change.3MA' = [$Change.3MA]/[3MA]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 3MA
+		lineageTag: cf835eda-7aad-4713-ae03-95afab35cb7e
+
+	measure '$Change.CMFuel' = [CMFuel Amount]-[Prior 3MAFuel]
+		formatString: #,0
+		displayFolder: CMFuel
+		lineageTag: 873bb593-4c1d-497a-bcf9-0d59d755dcf7
+
+	measure '%Change.CMFuel' = [$Change.CMFuel]/[CMFuel Amount]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: CMFuel
+		lineageTag: 51c6757d-0765-42b7-b764-131f3750d87b
+
+	measure '$Change.Gal' = [CM Amount(Gal)]-[Prior 3MA(Gal)]
+		formatString: #,0
+		displayFolder: Gal
+		lineageTag: e460391f-6878-4bc3-9b50-6e41afab7bbe
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '%Change.Gal' = [$Change.Gal]/[CM Amount(Gal)]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Gal
+		lineageTag: 7f0827a5-67c7-4f0e-8a75-796ba7acd4b6
+
+	measure '$Change.PPG' = [CM Amount(PPG)]-[Prior 3MA(PPG)]
+		formatString: #,0.00
+		displayFolder: PPG
+		lineageTag: 9fc8d35f-3228-4550-98ca-0b9e810ce34d
+
+	measure '%Change.PPG' = [$Change.PPG]/[CM Amount(PPG)]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: PPG
+		lineageTag: 913da22e-72d3-4a05-972b-150453b8edc9
+
+	measure '$Change.3MAFuel' = [3MAFuel]-[Prior 3MAFuel]
+		formatString: #,0
+		displayFolder: 3MA Fuel
+		lineageTag: e87e93f5-565b-4eb9-8a30-761cd867adc7
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure '%Change.3MAFuel' = [$Change.3MAFuel]/[3MAFuel]
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: 3MA Fuel
+		lineageTag: b0f71bb3-064f-485f-8442-823859007079
+
+		changedProperty = IsHidden
+
+	measure Prior3MAvsCMFuel =
+			
+			VAR LatestDate = MAX('F_Fleet_Expenses'[Date])
+			VAR EndOfLastMonth = EOMONTH(LatestDate, -3)
+			VAR StartOfThreeMonthsAgo = EOMONTH(LatestDate, -6) + 1
+			RETURN
+			CALCULATE(
+			    Divide(SUM(F_Fleet_Expenses[FuelAmount]) + SUM(F_Fleet_Expenses[MiscAmount]),3),
+			    FILTER(
+			        'D_Calendar',
+			        'D_Calendar'[CALENDAR_DATE] >= StartOfThreeMonthsAgo &&
+			        'D_Calendar'[CALENDAR_DATE] <= EndOfLastMonth
+			    )
+			)
+		formatString: #,0
+		displayFolder: CMFuel
+		lineageTag: 0361376d-8c9e-4572-9936-0c84e56c2327
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure CM3MA = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [%Change.3MA] > 0.2, "#cf7673",  // Red for positive values
+			    [%Change.3MA] < -0.2, "#8bd7b3"  // Green for negative values
+			     //no color
+			   
+			)
+			```
+		displayFolder: 3MA
+		lineageTag: 23bbb43e-8a49-4471-b948-296e94fb163e
+
+	measure CMCM = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [%Change.CM] > 0.2, "#cf7673",  // Red for positive values 
+			    [%Change.CM] < -0.2, "#8bd7b3"  // Green for negative values
+			   
+			)
+			```
+		displayFolder: CM
+		lineageTag: bea73e72-b776-44d8-af96-aa001e096448
+
+	measure CMCMGal = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [%Change.Gal] > 0.2, "#cf7673",  // Red for positive values
+			    [%Change.Gal] < -0.2, "#8bd7b3"  // Green for negative values
+			   
+			)
+			```
+		displayFolder: Gal
+		lineageTag: 89acb1b0-48e5-4165-b90d-d090c0de4baf
+
+	measure CMCMPPG = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [%Change.PPG] > 0.2, "#cf7673",  // Red for positive values
+			    [%Change.PPG] < -0.2, "#8bd7b3"  // Green for negative values
+			   
+			)
+			```
+		displayFolder: PPG
+		lineageTag: 85c78d90-58a6-49b6-aed7-3ad7139ac92f
+
+	measure CM3MAFuel = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [%Change.3MAFuel] > 0.2, "#cf7673",  // Red for positive values
+			    [%Change.3MAFuel] < -0.2, "#8bd7b3"  // Green for negative values
+			   
+			)
+			```
+		displayFolder: 3MA Fuel
+		lineageTag: 927d6726-9da5-4137-a877-f3d37cfe5409
+
+	measure CMCMFuel = ```
+			
+			SWITCH(
+			    TRUE(),
+			    [%Change.CMFuel] > 0.2, "#cf7673",  // Red for positive values
+			    [%Change.CMFuel] < -0.2, "#8bd7b3"  // Green for negative values
+			   
+			)
+			```
+		displayFolder: CMFuel
+		lineageTag: 401cdfb3-b902-4ec1-ab4d-b604d0f257b6
+
+	partition 'Measure Table-8188158d-03d4-437e-a691-07154e8833cf' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

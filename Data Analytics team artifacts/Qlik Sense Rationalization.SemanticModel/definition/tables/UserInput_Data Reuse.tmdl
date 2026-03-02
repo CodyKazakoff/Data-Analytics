@@ -1,0 +1,28 @@
+table 'UserInput_Data Reuse'
+	lineageTag: cdbf6d9d-6f0e-4e4a-8bce-73ccfc3ebcdd
+
+	measure 'Data Reuse Value' = SELECTEDVALUE('UserInput_Data Reuse'[Data Reuse], 0.25)
+		lineageTag: de58c4c8-c424-4ea2-bade-422dd3db9222
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Data Reuse'
+		lineageTag: b990400d-bcee-4538-bf36-947ef96f6f2f
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'UserInput_Data Reuse' = calculated
+		mode: import
+		source = GENERATESERIES(0, 1, 0.01)
+
+	annotation PBI_Id = ae46fc673c96437ca38c4a23e8247ad9
+

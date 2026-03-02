@@ -1,0 +1,7 @@
+role 'Acct Lvl (AVP Emp ID)'
+	modelPermission: read
+
+	tablePermission RLS_Customer_BillTo_AVP = 'RLS_Customer_BillTo_AVP'[SUPERVISOR_UPN] = USERPRINCIPALNAME()
+
+	annotation PBI_Id = 643cb1b36cc841e084c0742d2f62ef40
+

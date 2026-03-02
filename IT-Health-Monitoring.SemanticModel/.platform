@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "IT-Health-Monitoring"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "d728c577-0f18-b1fa-4343-3b742629d511"
+  }
+}

@@ -1,0 +1,132 @@
+/// Parameter to set record limit to True/False when querying data from Dataflows
+expression LimitRecordCount = true meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = "Logical"]
+	lineageTag: 8558941c-2b30-4070-b5ca-d5c7e777f2e6
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Logical
+
+	annotation PBI_NavigationStepName = Navigation
+
+/// Parameter to limit number of rows when querying data from Dataflows
+expression RecordCountLimit = 50000 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=false]
+	lineageTag: 49216bc4-29cb-4bb5-a4d6-d5325a29807a
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Number
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression fx_ConditionallyLimitRows = ```
+		let
+		  fx = (p_Table as table, p_LimitRecords as logical, p_RecordCount as number) => let
+		        Output                          = if p_LimitRecords
+		                                            then Table.FirstN(p_Table, p_RecordCount)
+		                                            else p_Table
+		    in
+		        Output,
+		  fx_Type = type function
+		        (
+		            p_Table as table
+		            , p_LimitRecords as logical
+		            , p_RecordCount as number
+		        ) as table meta
+		        [
+		            Documentation.Name          = "fx_ConditionallyLimitRows"
+		            , Documentation.Description = "This function will conditionally limit the records based on the logical p_LimitRecords. This function is foldable, you'll see the native query for this step in your query's applied steps."
+		            , Documentation.Examples    = 
+		            {
+		                [
+		                    Description         = "Example usage of fx_ConditionallyLimitRows, limiting record to the first 10."
+		                    , Code              = "fx_ConditionallyLimitRows(#""Table"", true, 10)"
+		                    , Result            = "The top 10 records for table ""#Table"""
+		                ]
+		            }
+		        ],
+		  fx_Output = Value.ReplaceType(fx, fx_Type)
+		in
+		  fx_Output
+		```
+	lineageTag: a3a57874-4c40-496c-a968-c37bac4cf686
+	queryGroup: Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression Lakehouse = "mtlttngl6lvehlaffy3tzayehy-255cr47brb7ubl4dmbam3tblom" meta [IsParameterQuery=true, List={"mtlttngl6lvehlaffy3tzayehy-65dovdhw5fzu3dq6tjfnqi7nyq", "mtlttngl6lvehlaffy3tzayehy-k4xau425ln2uphai3th2u6oz3e", "mtlttngl6lvehlaffy3tzayehy-255cr47brb7ubl4dmbam3tblom"}, DefaultValue="mtlttngl6lvehlaffy3tzayehy-65dovdhw5fzu3dq6tjfnqi7nyq", Type="Text", IsParameterQueryRequired=true]
+	lineageTag: db4b2840-c81a-4c9a-8f8c-205db83fa415
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression 'Fact Table Date Range' = ```
+		let Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+		    #"CalculateMinMaxDates" = Value.NativeQuery(Source, 
+		    "SELECT Max([CONVERTED_TO_ORDER_DATE]) as [Max Transaction Date], Min([CONVERTED_TO_ORDER_DATE]) as [Min Transaction Date]
+		     FROM dbo.F_Order_Item ORD
+		     Where [ITM_DELETE_FLAG] <> 'D'
+		            and [MI_LOC] <> 'AL98' 
+		    "
+		    , null, [EnableFolding = true]),
+		    #"Changed Type" = Table.TransformColumnTypes(CalculateMinMaxDates,{{"Max Transaction Date", type date}, {"Min Transaction Date", type date}})
+		in
+		    #"Changed Type"
+		```
+	lineageTag: 8af6263a-1470-4b4d-baa4-cf2aa1ada1ba
+	queryGroup: 'Temp tables'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression Temp_Fin_Ind_Mapping =
+		let
+		Source = SharePoint.Files("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/", [ApiVersion = 15]),
+		    #"IndMapping-Booking-Invoice Summary csv_https://genparts sharepoint com/sites/MOT-AnalyticsDocumentation/Shared Documents/MOT - Enterprise Analytics/Power BI Files/Excel Lookups/" = Source{[Name="IndMapping-Booking-Invoice Summary.csv",#"Folder Path"="https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared Documents/MOT - Enterprise Analytics/Power BI Files/Excel Lookups/"]}[Content],
+		    #"Imported CSV" = Csv.Document(#"IndMapping-Booking-Invoice Summary csv_https://genparts sharepoint com/sites/MOT-AnalyticsDocumentation/Shared Documents/MOT - Enterprise Analytics/Power BI Files/Excel Lookups/",[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+		    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"SIC", type text}, {"GPC_TITLE", type text}, {"GPC_SU_TITLE", type text}}),
+		    #"Replaced Value" = Table.ReplaceValue(#"Changed Type","","Not Listed",Replacer.ReplaceValue,{"GPC_SU_TITLE"})
+		in
+		    #"Replaced Value"
+	lineageTag: fc784124-6a9b-4177-b01e-46379be8e9ab
+	queryGroup: 'Temp tables'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression z_Customer_Summary_Slicer =
+		let
+		    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WcszJUXAuLS7Jz00tKlbSUTJQitWJVvJLLUcRNVSKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Report Name" = _t, Index = _t]),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Report Name", type text}, {"Index", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: 9f4c9c19-14c7-4f6f-ba01-09011bddbef7
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression z_Bridge_Metric_Table =
+		let
+		    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W8i9KSS1ScMzNL80rUdJRMgDiyBAXMCtWB1VaAShqCMS+YHlDDHmgoBEQB4KljZCknTEMN8YiizDaBIsswmRTpdhYAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Metric = _t, #"Metric Index" = _t, Slicer = _t, Index = _t]),
+		    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Metric", type text}, {"Metric Index", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: 67fdd12a-8f13-42fb-9982-65b461ac8533
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression FieldAnalyticsLakehouse = "mtlttngl6lvehlaffy3tzayehy-a74uzfukqtluvp4fjaxiz4hoci" meta [IsParameterQuery=true, List={"mtlttngl6lvehlaffy3tzayehy-65dovdhw5fzu3dq6tjfnqi7nyq", "mtlttngl6lvehlaffy3tzayehy-k4xau425ln2uphai3th2u6oz3e", "mtlttngl6lvehlaffy3tzayehy-255cr47brb7ubl4dmbam3tblom"}, DefaultValue="mtlttngl6lvehlaffy3tzayehy-65dovdhw5fzu3dq6tjfnqi7nyq", Type="Text", IsParameterQueryRequired=true]
+	lineageTag: acf1f204-dc92-4d2d-9054-0c08d2dc5fc4
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+

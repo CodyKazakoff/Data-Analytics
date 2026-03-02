@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Qlik Sense Rationalization"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b5b8794f-2e88-8a7a-4d39-2a322e561b41"
+  }
+}

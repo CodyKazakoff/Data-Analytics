@@ -1,0 +1,19 @@
+role 'Loc Lvl (Loc Mgr Emp ID)'
+	modelPermission: read
+
+	tablePermission D_Location = ```
+			VAR vAccessList = SELECTCOLUMNS(    
+			    FILTER('RLS_HR_HIERARCHY',
+			        RLS_HR_Hierarchy[EMPLOYEE_UPN]=USERPRINCIPALNAME()),
+			        "Security list", RLS_HR_Hierarchy[EMPLOYEE_ID])
+			        
+			        
+			VAR vAccess = D_Location[Loc Mgr Employee ID] in vAccessList 
+			
+			Return vAccess
+			```
+
+	tablePermission RLS_HR_Hierarchy = 'RLS_HR_Hierarchy'[EMPLOYEE_UPN] = USERPRINCIPALNAME()
+
+	annotation PBI_Id = 23f864f6c871471b8e3171983b258c66
+

@@ -1,0 +1,33 @@
+table zDetail_Level_Slicer
+	lineageTag: c1c8aa9a-698d-4528-8f69-60223c64654d
+
+	column 'Detail Level'
+		dataType: string
+		lineageTag: 1aa6c530-905a-47c1-9a52-22c3706a6560
+		summarizeBy: none
+		sourceColumn: Detail Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Detail Level Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: 16c766ce-01b9-48d3-93d8-b596dc9fcbc3
+		summarizeBy: none
+		sourceColumn: Detail Level Key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition zDetail_Level_Slicer = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W8khNTEktUvBJLUvNUXAqSk3MTskvz1PSUTJUitWJVnJJLUnMzMEibaQUGwsA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Detail Level" = _t, #"Detail Level Key" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Detail Level", type text}, {"Detail Level Key", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

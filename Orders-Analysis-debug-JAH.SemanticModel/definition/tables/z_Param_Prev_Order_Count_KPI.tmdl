@@ -1,0 +1,48 @@
+table z_Param_Prev_Order_Count_KPI
+	lineageTag: 4c921e21-bc7d-480f-bbc5-30d23a318f3b
+
+	column 'zParamPrev - Ord Cnt KPI'
+		lineageTag: 904a35b4-02bd-43f8-94bc-140c6bccfc98
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParamPrev - Ord Cnt KPI Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParamPrev - Ord Cnt KPI Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrev - Ord Cnt KPI Fields'
+		lineageTag: 91b5c126-78b5-4519-b45c-4a202002daab
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParamPrev - Ord Cnt KPI Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrev - Ord Cnt KPI Order'
+		formatString: 0
+		lineageTag: c9139167-cc67-40bc-a278-48d3a9d4b42b
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Prev_Order_Count_KPI = calculated
+		mode: import
+		source =
+				{
+				    ("PYTD", NAMEOF('Measure Table'[Order # PYTD]), 0),
+				    ("PMTD", NAMEOF('Measure Table'[Order # PMTD]), 1),
+				    ("PQTD", NAMEOF('Measure Table'[Order # PQTD]), 2),
+				    ("Prior Year", NAMEOF('Measure Table'[Order # Rolling P12M]), 3)
+				}
+
+	annotation PBI_Id = 3782967662794dfda259b18f200a88e5
+

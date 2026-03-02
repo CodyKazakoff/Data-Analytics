@@ -1,0 +1,400 @@
+table Delivery_Details_New
+	lineageTag: 732ae204-c8fe-4321-a469-5f34babb1140
+
+	column 'Area Path'
+		dataType: string
+		lineageTag: abe3eceb-2bdd-4bb9-8e9a-d1ddcce45cd3
+		summarizeBy: none
+		sourceColumn: Area Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned To'
+		dataType: string
+		lineageTag: 48555fc6-e34a-4b18-b502-cb179daac984
+		summarizeBy: none
+		sourceColumn: Assigned To
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed By'
+		dataType: string
+		lineageTag: b0eb0e1e-b94e-406e-8c2d-ce8f4993a132
+		summarizeBy: none
+		sourceColumn: Closed By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Iteration Path'
+		dataType: string
+		lineageTag: 9208a206-b1dc-4e31-890a-a8478c404dec
+		summarizeBy: none
+		sourceColumn: Iteration Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Iteration Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bded9b26-1c02-4232-94bf-56c53da07980
+		summarizeBy: none
+		sourceColumn: Iteration Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Iteration End Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 11fdad9c-9abf-456e-91ef-1722b5b10372
+		summarizeBy: none
+		sourceColumn: Iteration End Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Risk Owner'
+		dataType: string
+		lineageTag: 297291be-09ba-478a-8cc0-4213ac1f2305
+		summarizeBy: none
+		sourceColumn: Risk Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Item Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: f3424b1d-3e77-4034-bc9e-0e2056b13c80
+		summarizeBy: count
+		sourceColumn: Work Item Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 1eb7886e-6da9-4619-982f-27d78b77d628
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Activated Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0f594c0f-8043-41e8-9261-137e9814bfcb
+		summarizeBy: none
+		sourceColumn: Activated Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 00da243f-37c5-4971-9a06-d754e2d477af
+		summarizeBy: none
+		sourceColumn: Created Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual End'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 70f7af26-6ca2-4a85-8901-b97302b79943
+		summarizeBy: none
+		sourceColumn: Actual End
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual Start'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1bc867a2-4aa4-458f-9f60-5a0834c2a451
+		summarizeBy: none
+		sourceColumn: Actual Start
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Completed Effort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5cecb082-161c-404a-99e5-95d5dd1c6edf
+		summarizeBy: sum
+		sourceColumn: Completed Effort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expense Type'
+		dataType: string
+		lineageTag: 22a790a8-15d2-41bf-b3cc-5482512f7ca3
+		summarizeBy: none
+		sourceColumn: Expense Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Requested By'
+		dataType: string
+		lineageTag: 21b74c3c-cbd5-4792-8968-ec560917a95e
+		summarizeBy: none
+		sourceColumn: Requested By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'InProgress Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: faf08a2a-37e4-459a-b09c-4a933e88be22
+		summarizeBy: none
+		sourceColumn: InProgress Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Original Estimate'
+		dataType: double
+		lineageTag: 47d072e4-54e6-4d2a-8c8d-d536476dcd7c
+		summarizeBy: sum
+		sourceColumn: Original Estimate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Parent Work Item Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c9465ec-05a9-466e-ac0e-39c6d7c3da21
+		summarizeBy: count
+		sourceColumn: Parent Work Item Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 4b530bb6-c0ad-49b1-a3d3-b36478f0dba8
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Change Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 46dce2e8-8318-4926-9501-4e4c70c085aa
+		summarizeBy: none
+		sourceColumn: State Change Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Story Points'
+		dataType: double
+		lineageTag: 2039c8a3-c208-4b4e-8570-7b8d0717dc4e
+		summarizeBy: sum
+		sourceColumn: Story Points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Work Item Type'
+		dataType: string
+		lineageTag: 37556394-e654-46ac-bd7b-537780c4ed7b
+		summarizeBy: none
+		sourceColumn: Work Item Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Committed Objective'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7c41c393-8f92-4356-a5c4-ee39ce19844e
+		summarizeBy: none
+		sourceColumn: Committed Objective
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e004d9b-dc29-4186-b4cd-32c90a977f8a
+		summarizeBy: sum
+		sourceColumn: Business Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column Risk
+		dataType: string
+		lineageTag: 0492f363-00b2-4b20-b708-0cb09a52e9f7
+		summarizeBy: none
+		sourceColumn: Risk
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Risk Assignment'
+		dataType: string
+		lineageTag: 4037e521-d7be-42d2-bb88-ef0b26774170
+		summarizeBy: none
+		sourceColumn: Risk Assignment
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Risk Reduction'
+		dataType: int64
+		formatString: 0
+		lineageTag: cebb687b-269c-4bca-932e-9b856651b5dd
+		summarizeBy: sum
+		sourceColumn: Risk Reduction
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Original Iteration Path'
+		dataType: string
+		lineageTag: 65bf0818-baca-4235-81cb-38f921f65c00
+		summarizeBy: none
+		sourceColumn: Original Iteration Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivatedDateSK
+		dataType: int64
+		formatString: 0
+		lineageTag: d200cf97-d1bb-4bbe-8354-58c0a8ee76d4
+		summarizeBy: sum
+		sourceColumn: ActivatedDateSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 32e564f0-8f6a-4377-8684-38467861e321
+		summarizeBy: none
+		sourceColumn: Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: deb4f3b7-38d9-4a3b-9c09-2eb11632d3ae
+		summarizeBy: sum
+		sourceColumn: Actual Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4ea64e24-1b53-4ced-885d-e26e8b44bc45
+		summarizeBy: none
+		sourceColumn: Closed Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaSK
+		dataType: string
+		lineageTag: 822077f7-5f07-4726-97f1-abe6efcae6ec
+		summarizeBy: none
+		sourceColumn: AreaSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column PI_Current_Iteration_Path
+		dataType: string
+		lineageTag: 1a6c6922-49ae-442c-805e-33ac0878d7a1
+		summarizeBy: none
+		sourceColumn: PI_Current_Iteration_Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column PI_Current_Iteration_Path_Int
+		dataType: int64
+		formatString: 0
+		lineageTag: 503c7cbf-3ff5-4bd5-9bd3-bc22192d0247
+		summarizeBy: none
+		sourceColumn: PI_Current_Iteration_Path_Int
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tags
+		dataType: string
+		lineageTag: cfe9b799-5347-40a8-8562-fdfa5c1ba17a
+		summarizeBy: none
+		sourceColumn: Tags
+
+		annotation SummarizationSetBy = Automatic
+
+	column Predictability = DIVIDE(Delivery_Details_New[Actual Value], Delivery_Details_New[Business Value])
+		lineageTag: 9e6ec67b-7e94-48a0-b197-4473b68d466a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PI_Original_Iteration_Path
+		dataType: string
+		lineageTag: f0dc07a7-90e2-4b83-8b7a-7067e682ce4d
+		summarizeBy: none
+		sourceColumn: PI_Original_Iteration_Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column Committed_Objective_Text = IF('Delivery_Details_New'[Committed Objective] = TRUE(), "Committed", "Uncommitted")
+		lineageTag: 4f74dbac-7da4-41c4-b5b6-a11f168580c7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Score'
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c84c204-c6d6-493b-a7ce-160e2e7477ea
+		summarizeBy: sum
+		sourceColumn: Customer Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column At_Risk = ```
+			IF(
+			    ('Delivery_Details_New'[Risk] IN {"Red", "Yellow"}) &&
+			    ('Delivery_Details_New'[Committed Objective] = TRUE()), 
+			    "At Risk", 
+			    "" 
+			    )
+			```
+		lineageTag: 97b414c5-757d-45c0-bc4d-bd0bbf86c917
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Is_Current_PI =
+			IF(
+			    Delivery_Details_New[PI_Current_Iteration_Path_Int] = [PI_Current],
+			    "Yes",
+			    "No"
+			)
+		lineageTag: 74fc05f9-ad2a-4611-b27e-a91147ae2031
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Delivery_Details_New = m
+		mode: import
+		source = ```
+				let
+				    Source = VSTS.AnalyticsViews("https://dev.azure.com/Motion-IT", "MI-Dev", []),
+				    #"Private Views_Folder" = Source{[Id="Private Views",Kind="Folder"]}[Data],
+				    #"84bf7497-d0a0-489e-a8a0-a27afe584147_Table" = #"Private Views_Folder"{[Id="84bf7497-d0a0-489e-a8a0-a27afe584147",Kind="Table"]}[Data],
+				    Filtered = Table.SelectRows(#"84bf7497-d0a0-489e-a8a0-a27afe584147_Table", each 
+				        Text.StartsWith([#"Iteration Path"], "MI-Dev\Holding\Uncommitted") or 
+				        Text.StartsWith([#"Iteration Path"], "MI-Dev\PI")),
+				   #"Added PI Column" = Table.AddColumn(Filtered, "PI_Current_Iteration_Path", each fx_CurrentIterationPI([Iteration Path])),
+				    #"Added Custom" = Table.AddColumn(#"Added PI Column", "PI_Current_Iteration_Path_Int", each if Text.AfterDelimiter([PI_Current_Iteration_Path], " ") <> null then Number.From(Text.AfterDelimiter([PI_Current_Iteration_Path], " ")) else null),
+				    #"Added Committed PI" = Table.AddColumn(#"Added Custom", "PI_Original_Iteration_Path", each if [Committed Objective] = false then "" else fx_OriginalIterationPI([Original Iteration Path], [PI_Current_Iteration_Path]))
+				in
+				    #"Added Committed PI"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

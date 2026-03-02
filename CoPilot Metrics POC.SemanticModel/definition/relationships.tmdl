@@ -1,0 +1,48 @@
+relationship AutoDetected_8e6094cc-d021-45e8-bb9a-35780cd42ec1
+	fromColumn: F_Shipper_Item.LOC_KEY
+	toColumn: D_Location.LOC_KEY
+
+relationship AutoDetected_9a631428-b04c-4ad2-9d31-37678c44ea2e
+	fromColumn: F_ECOS_CoPilot_Agent_Actions_Header.LOC_KEY
+	toColumn: D_Location.LOC_KEY
+
+relationship 5f977e46-844b-166f-0ae3-13b3fde547e9
+	fromColumn: F_Shipper_Item.BILL_TO_CUST_KEY
+	toColumn: D_Customer_BillTo.BILLING_CUST_KEY
+
+relationship 1bb8158c-7d5b-a46b-191c-88990c93e624
+	fromColumn: F_Shipper_Item.SHIP_TO_CUST_KEY
+	toColumn: D_Customer_ShipTo.SHIP_TO_CUST_KEY
+
+relationship c7823323-5c1a-95ee-d087-c83fbfdf996a
+	fromColumn: F_Shipper_Item.SALES_POSTED_DATE
+	toColumn: D_Calendar_Visual.'Calendar Date'
+
+relationship AutoDetected_2b3f87bf-2124-4051-9250-bef3ed559fbc
+	fromColumn: F_ECOS_CoPilot_Agent_Actions_Header.SHIP_TO_CUST_KEY
+	toColumn: D_Customer_ShipTo.SHIP_TO_CUST_KEY
+
+relationship AutoDetected_06cfcfff-4c45-4db8-8fd6-b3d96b768854
+	fromColumn: F_Order_Header.SHIP_TO_CUST_KEY
+	toColumn: D_Customer_ShipTo.SHIP_TO_CUST_KEY
+
+relationship a54357cb-a819-a575-a0ce-baa16c1dedc2
+	fromColumn: F_Order_Header.MI_LOC
+	toColumn: D_Location.MI_LOC
+
+relationship d57db526-14b8-e8de-8ac5-a634e0d103cf
+	fromColumn: F_Order_Header.CONVERTED_TO_ORDER_DATE
+	toColumn: D_Calendar_Visual.'Calendar Date'
+
+relationship d12ab16b-f823-56fd-154c-097eec850906
+	fromColumn: F_Shipper_Item.ORDER_SOURCE_DESC
+	toColumn: zOrder_Source_Slicer.'Order Source'
+
+relationship e55fe7c2-37ec-76b8-890d-c5856f306499
+	fromColumn: F_Order_Header.ORDER_SOURCE_DESC
+	toColumn: zOrder_Source_Slicer.'Order Source'
+
+relationship de831f04-a916-78be-bddf-5b6561a718f7
+	fromColumn: F_ECOS_CoPilot_Agent_Actions_Header.CONVERSATION_START_UTC_DTTM
+	toColumn: D_Calendar_Visual.'Calendar Date'
+

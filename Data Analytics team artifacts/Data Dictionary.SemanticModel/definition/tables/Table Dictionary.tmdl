@@ -1,0 +1,144 @@
+table 'Table Dictionary'
+	lineageTag: e913e479-12cc-47ab-b7b7-d0246f7200f4
+
+	column 'Subject Area'
+		dataType: string
+		lineageTag: 2bef20f2-7e1a-4188-89e2-cc5f91aadc8e
+		summarizeBy: none
+		sourceColumn: Subject Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Technical Domain'
+		dataType: string
+		lineageTag: 3caa525d-9cac-42e5-a149-8651093af458
+		summarizeBy: none
+		sourceColumn: Technical Domain
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BigQuery Project'
+		dataType: string
+		lineageTag: 61cf4c6a-f4fb-4644-bd08-9c3546621a4c
+		summarizeBy: none
+		sourceColumn: BigQuery Project
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset
+		dataType: string
+		lineageTag: 7ef1ab02-1724-4e92-81eb-cf44f6156b9d
+		summarizeBy: none
+		sourceColumn: Dataset
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Logical Table Name'
+		dataType: string
+		lineageTag: b02d825a-86f0-46ca-90d4-d694f2a9aef8
+		summarizeBy: none
+		sourceColumn: Logical Table Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Physical Table Name'
+		dataType: string
+		lineageTag: 79bc1fac-5739-4f38-87f8-13f59dd0d0f1
+		summarizeBy: none
+		sourceColumn: Physical Table Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Power BI Location (Dataflow/Lakehouse Location)'
+		dataType: string
+		lineageTag: 3467ca1a-edf5-4e73-a792-bc1585c61944
+		summarizeBy: none
+		sourceColumn: Power BI Location (Dataflow/Lakehouse Location)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fact/Dimension
+		dataType: string
+		lineageTag: 2af385b2-1c7f-479c-bfde-6f0c30128496
+		summarizeBy: none
+		sourceColumn: Fact/Dimension
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Database'
+		dataType: string
+		lineageTag: 3702ea28-f196-4d62-87de-ab61ad7ec2a1
+		summarizeBy: none
+		sourceColumn: Source Database
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Schema'
+		dataType: string
+		lineageTag: ad8f2d58-8db8-4b78-aa89-f81d11e53c1f
+		summarizeBy: none
+		sourceColumn: Source Schema
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Table'
+		dataType: string
+		lineageTag: f3353fef-a37c-4c97-86e7-d0063b2612ff
+		summarizeBy: none
+		sourceColumn: Source Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Table Load Logic Description'
+		dataType: string
+		lineageTag: 5ace8a6b-d4b3-44f4-822d-2b700c0a0fc9
+		summarizeBy: none
+		sourceColumn: Table Load Logic Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Owner'
+		dataType: string
+		lineageTag: 520f750e-8c4d-4c1d-bad5-06838b5da209
+		summarizeBy: none
+		sourceColumn: Data Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'History Start Date'
+		dataType: string
+		lineageTag: a1165f31-44d6-48d1-a04d-1d8c66786e79
+		summarizeBy: none
+		sourceColumn: History Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sensitivity
+		dataType: string
+		lineageTag: 33ce6df0-592e-4934-83f3-1fe84f286090
+		summarizeBy: none
+		sourceColumn: Sensitivity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: f27a9ae3-05fa-4394-a504-2f6c85ad73ae
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Table Dictionary' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\ckazakoff\Genuine Parts Company\MOT - Analytics Documentation - Documents\MOT - Enterprise Analytics\Data Dictionary\Data Dictionary.xlsx"), null, true),
+				    #"Table Dictionary_Sheet" = Source{[Item="Table Dictionary",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Table Dictionary_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Subject Area", type any}, {"Technical Domain", type text}, {"BigQuery Project", type text}, {"Dataset", type text}, {"Logical Table Name", type any}, {"Physical Table Name", type text}, {"Power BI Location (Dataflow/Lakehouse Location)", type any}, {"Fact/Dimension", type text}, {"Source Database", type text}, {"Source Schema", type text}, {"Source Table", type text}, {"Table Load Logic Description", type text}, {"Data Owner", type text}, {"History Start Date", type any}, {"Sensitivity", type any}, {"Notes", type any}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

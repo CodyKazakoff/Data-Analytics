@@ -1,0 +1,59 @@
+table z_prm_test_table
+	lineageTag: 1ced2156-9674-4c77-b1df-38979f483fca
+
+	column z_prm_test_table
+		lineageTag: 9f16fdd7-80a6-49ab-9a8c-bfa3c210626a
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_test_table Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_test_table Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_test_table Fields'
+		isHidden
+		lineageTag: 9f97725a-0362-4c7a-a086-a3b2fc74fb57
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_test_table Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_test_table Order'
+		isHidden
+		formatString: 0
+		lineageTag: f2d35a71-ead7-4f5c-987b-154357b2950b
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value4
+		lineageTag: 3006a480-03c0-4a7b-8367-3afb5014cff2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_test_table = calculated
+		mode: import
+		source =
+				{
+				    ("MI_LOC", NAMEOF('AR_DAILY_OPEN_INVOICES'[MI_LOC]), 0, "table 1"),
+				    ("MI_CORP_LOC", NAMEOF('AR_DAILY_OPEN_INVOICES'[MI_CORP_LOC]), 1, "table 1"),
+				    ("CHKSUM_VAL", NAMEOF('D_Customer'[CHKSUM_VAL]), 2, "table 2"),
+				    ("CONTRACT_FLAG", NAMEOF('D_Customer'[CONTRACT_FLAG]), 3, "table 2"),
+				    ("CORP_ACCOUNTS_FLAG", NAMEOF('D_Customer'[CORP_ACCOUNTS_FLAG]), 4, "table 2")
+				}
+
+	annotation PBI_Id = 6329304c64014ad7b00c18f6453f99cc
+

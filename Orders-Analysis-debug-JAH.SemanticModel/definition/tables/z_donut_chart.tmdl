@@ -1,0 +1,48 @@
+table z_donut_chart
+	lineageTag: 5dae6526-c695-49ac-bdd7-243900ccbc5a
+
+	column z_donut_chart
+		lineageTag: 4948d0cf-17c4-4679-b8f7-3859541987b0
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_donut_char Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_donut_char Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_donut_char Fields'
+		isHidden
+		lineageTag: 69f3a4a8-9c31-4501-87ee-c29838be7604
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_donut_char Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_donut_char Order'
+		isHidden
+		formatString: 0
+		lineageTag: b20e3ca9-2a84-49cc-b0d9-82f009054ef1
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_donut_chart = calculated
+		mode: import
+		source =
+				{
+				    ("Product Category", NAMEOF('D_Product_Group'[Product Category Desc]), 0),
+				    ("Order Source", NAMEOF('F_Order_Item'[Parent Source]), 1)
+				}
+
+	annotation PBI_Id = 12275c1bfa784ee784c90bddc27debcc
+
