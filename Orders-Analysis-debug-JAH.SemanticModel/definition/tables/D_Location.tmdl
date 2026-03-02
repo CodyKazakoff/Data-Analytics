@@ -1,0 +1,161 @@
+table D_Location
+	lineageTag: 6fea106f-763e-467d-a66a-e4588bbd2146
+
+	column 'Loc Key'
+		dataType: string
+		isKey
+		lineageTag: 8cd591b0-2deb-4c78-9a46-acaeead3a2c4
+		summarizeBy: none
+		sourceColumn: Loc Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Group Loc'
+		dataType: string
+		lineageTag: 35a3a292-7c0a-41a4-9777-47423fd073f1
+		summarizeBy: none
+		sourceColumn: MI Group Loc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Division Loc'
+		dataType: string
+		lineageTag: 04c0a440-0ecb-47c1-83ce-f507ad50f7a9
+		summarizeBy: none
+		sourceColumn: MI Division Loc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Loc'
+		dataType: string
+		lineageTag: 8497de51-7149-401e-bc72-2ddcfccae6cf
+		summarizeBy: none
+		sourceColumn: MI Loc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Division Name'
+		dataType: string
+		lineageTag: 2694a666-f5a4-472a-9d17-98539e69f790
+		summarizeBy: none
+		sourceColumn: Division Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 6d39ebe5-429f-44cc-ab78-7ba936de618a
+		summarizeBy: none
+		sourceColumn: Country
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loc Mgr Employee ID'
+		dataType: string
+		lineageTag: 8a391339-833b-44e3-a5b0-a6a873aee0f1
+		summarizeBy: none
+		sourceColumn: Loc Mgr Employee ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Loc  Location Name'
+		dataType: string
+		lineageTag: e11394bf-5b0f-4581-ae70-a2fd3477f8a4
+		summarizeBy: none
+		sourceColumn: MI Loc  Location Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Corp Loc'
+		dataType: string
+		lineageTag: 16db5253-4713-4057-83e9-a2411567d805
+		summarizeBy: none
+		sourceColumn: MI Corp Loc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Division No & Name'
+		dataType: string
+		lineageTag: 4855be09-628f-41ff-b7ff-be86d6496eb3
+		summarizeBy: none
+		sourceColumn: Division No & Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Group Name'
+		dataType: string
+		lineageTag: 8af33785-14cf-4e0c-947f-de92bb7a9f02
+		summarizeBy: none
+		sourceColumn: Group Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Group No & Name'
+		dataType: string
+		lineageTag: f528afb8-e955-4b96-a4df-ba2aec748e63
+		summarizeBy: none
+		sourceColumn: MI Group No & Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Region Loc'
+		dataType: string
+		lineageTag: 37a4f0f2-cf93-4c60-b4b9-11cf5a2335fb
+		summarizeBy: none
+		sourceColumn: MI Region Loc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ops Mgr Emp ID'
+		dataType: string
+		lineageTag: cd5ebb86-87f2-402e-aec4-78754f074e5f
+		summarizeBy: none
+		sourceColumn: Ops Mgr Emp ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Location = m
+		mode: import
+		queryGroup: Dimensions
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse&".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Location = Value.NativeQuery(Source, 
+				    "SELECT LOC.* 
+				    FROM dbo.D_Location LOC 
+				    INNER JOIN (SELECT DISTINCT LOC_KEY FROM dbo.F_Order_Item) ORD
+				        ON ORD.LOC_KEY = LOC.LOC_KEY", null, [EnableFolding = true]),
+				    #"Removed Other Columns" = Table.SelectColumns(dbo_D_Location,{"LOC_KEY", "MI_CORP_LOC", "MI_GROUP_LOC", "MI_DIVISION_LOC", "MI_LOC", "GROUP_NAME", "DIVISION_NAME", "COUNTRY", "LOC_MGR_EMPLOYEE_ID", "OPS_MGR_EMP_ID", "MI_LOC__LOCATION_NAME", "MI_REGION_LOC"}),
+				    #"TEMP DEV STEP: LimitRecords" = fx_ConditionallyLimitRows(#"Removed Other Columns", LimitRecordCount, RecordCountLimit),
+				    #"Bulk Column Rename" = Table.TransformColumnNames(#"TEMP DEV STEP: LimitRecords", each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," ")),
+				    #"Added Custom" = Table.AddColumn(#"Bulk Column Rename", "Division No & Name", each [MI Division Loc]&"|"&[Division Name]),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "MI Group No & Name", each [MI Group Loc] & "|" & [Group Name]),
+				    #"Ops Manager Custom Column" = Table.AddColumn(#"Added Custom1", "Ops_Mgr_ID_w_Adj", each if [MI Loc] = "AR04" then 438390 else [Ops Mgr Emp ID]),
+				    #"Removed Columns" = Table.RemoveColumns(#"Ops Manager Custom Column",{"Ops Mgr Emp ID"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Ops_Mgr_ID_w_Adj", "Ops Mgr Emp ID"}})
+				in
+				    #"Renamed Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

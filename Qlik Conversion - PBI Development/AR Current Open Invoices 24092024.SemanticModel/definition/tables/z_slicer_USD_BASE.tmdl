@@ -1,0 +1,35 @@
+table z_slicer_USD_BASE
+	lineageTag: 57777fe3-9a7b-406d-8a8c-ca9639f989b4
+
+	column CURRENCY
+		lineageTag: 27b5c0d4-726d-40d3-a19f-d6ed4530299d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CURRENCY]
+
+		annotation SummarizationSetBy = Automatic
+
+	column INDEX
+		formatString: 0
+		lineageTag: 1d974dc9-82ce-41e4-8c9a-1734ffeff6be
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [INDEX]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_slicer_USD_BASE = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "CURRENCY", STRING,
+				    "INDEX", INTEGER,
+				    {
+				        {"USD",0},
+				        {"BASE",1}
+				    }
+				    )
+
+	annotation PBI_Id = d780d9e14e1b480f839282aa153264a6
+

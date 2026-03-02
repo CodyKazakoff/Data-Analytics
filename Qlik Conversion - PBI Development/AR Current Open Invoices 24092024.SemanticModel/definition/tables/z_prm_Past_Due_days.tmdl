@@ -1,0 +1,63 @@
+table z_prm_Past_Due_days
+	lineageTag: c62d8299-bd0c-46a8-93ce-042520592da0
+
+	column z_prm_Past_Due_days
+		lineageTag: 0ef53cb2-6b69-4330-9d03-365499105056
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_Past_Due_days Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_Past_Due_days Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_Past_Due_days Fields'
+		isHidden
+		lineageTag: 156a9869-a0b2-4fd2-84b1-5c615b65cfb1
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_Past_Due_days Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_Past_Due_days Order'
+		isHidden
+		formatString: 0
+		lineageTag: 0283d92e-1fde-47a2-8e5a-12c57191ffd5
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value4
+		formatString: 0
+		lineageTag: d3e3db59-b52f-4f03-bade-518d8eaf4d53
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_Past_Due_days = calculated
+		mode: import
+		source =
+				{
+				    ("Past Due 1-30", NAMEOF('Measure'[Past Due 1-30]), 0, 0),
+				    ("Past Due 1-30", NAMEOF('Measure'[Past Due 1-30 BASE]), 1,1),
+				    ("Past Due 31-60", NAMEOF('Measure'[Past Due 31-60]), 2,0),
+				    ("Past Due 31-60", NAMEOF('Measure'[Past Due 31-60 BASE]), 3,1),
+				    ("Past Due 61-90", NAMEOF('Measure'[Past Due 61-90]), 4,0),
+				    ("Past Due 61-90", NAMEOF('Measure'[Past Due 61-90 BASE]), 5,1),
+				    ("Past Due 90+", NAMEOF('Measure'[Past Due 90+]), 6,0),
+				    ("Past Due 90+", NAMEOF('Measure'[Past Due 90+ BASE]), 7,1)
+				}
+
+	annotation PBI_Id = ad56c24a90334ba59988d8b80058b8a0
+

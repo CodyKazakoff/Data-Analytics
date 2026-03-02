@@ -1,0 +1,45 @@
+table DataPeriod
+	lineageTag: 5cdbd031-d0e4-4427-8946-410d1da030d1
+
+	measure 'date test' = ```
+			
+			 VAR MaxDate = FORMAT(MAX('data_quality_testing'[TIMESTAMP])-1, "dd/mm/yyyy")
+			 Return
+			 FORMAT(DATEVALUE(MaxDate) , "dd/mm/yyyy") 
+			```
+		lineageTag: 93ec9d3e-54da-4e8c-ba37-76984bda55d8
+
+	column Period
+		lineageTag: 24f99eb9-6270-45a6-82d3-ee1a199a27fb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Period]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		formatString: 0
+		lineageTag: 851d4b7c-95d8-4819-8756-3b37e000c33e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Index]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DataPeriod = calculated
+		mode: import
+		source = ```
+				
+				DATATABLE(
+				    "Period", STRING,
+				    "Index", INTEGER,
+				    {
+				        {"Last 24 Hours", 1},
+				        {"Historical Data", 0}
+				    }
+				)
+				
+				```
+
+	annotation PBI_Id = 77d1207c61db4e29978ca4da9f5230c2
+

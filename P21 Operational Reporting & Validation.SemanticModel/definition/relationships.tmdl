@@ -1,0 +1,55 @@
+relationship AutoDetected_f89338dd-5b9e-42bc-9473-147933a6ff6a
+	fromColumn: F_P21_Shipper_Header.CUST_KEY
+	toColumn: D_P21_Customer.CUST_KEY
+
+relationship e36dbb98-934c-3627-fb9c-808bd5df7e96
+	fromColumn: F_P21_Shipper_Header.SALES_POSTED_DATE
+	toColumn: 'D - Calendar Table'.CALENDAR_DATE
+
+relationship AutoDetected_ffe1ee19-2e03-4c06-ab4c-9fb9b3deecd6
+	fromColumn: F_P21_Shipper_Component.CUST_KEY
+	toColumn: D_P21_Customer.CUST_KEY
+
+relationship 90fffa8d-e6e6-339b-a9de-86f68abc7e66
+	fromColumn: F_P21_Shipper_Component.SALES_POSTED_DATE
+	toColumn: 'D - Calendar Table'.CALENDAR_DATE
+
+relationship b397e17e-cb3d-4891-98b7-e48cca747fb3
+	isActive: false
+	fromColumn: F_P21_Shipper_Header.ORDER_DATE
+	toColumn: 'D - Calendar Table'.CALENDAR_DATE
+
+relationship 48f6b044-1255-863e-30ec-f469d35f49ee
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'F_Inventory Location P21'.LOC_KEY
+	toColumn: F_P21_Shipper_Header.LOC_KEY
+
+relationship d0e45448-d010-f9bc-027a-0755716de01e
+	isActive: false
+	toCardinality: many
+	fromColumn: 'F_Inventory Location P21'.BUS_PERIOD
+	toColumn: 'D - Calendar Table'.BUS_PERIOD
+
+relationship AutoDetected_f9f26a2a-35ad-4513-80cd-a12fb6cc24d0
+	fromColumn: F_P21_Orders_Line.ORDER_CTL_NO
+	toColumn: F_P21_Orders_Header.ORDER_CTL_NO
+
+relationship bd06c45f-67b3-324b-23ac-9a694759318a
+	fromColumn: F_P21_Orders_Header.ORDER_DATE
+	toColumn: 'D - Calendar Table'.CALENDAR_DATE
+
+relationship 58a57022-facc-40dc-0394-756e93b65786
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: F_P21_Orders_Header.BILL_TO_CUST_NO
+	toColumn: D_P21_Customer.BILLING_CUSTOMER_NO
+
+relationship 3765c89e-bb77-e0bc-c8a6-fb414d72866c
+	fromColumn: F_P21_Shipper_Line.SHIP_TO_CUST_NO
+	toColumn: D_P21_Customer.SHIP_TO_CUSTOMER_NO
+
+relationship cb8fcef7-ce9b-fbd1-e576-6a968348d6cc
+	fromColumn: F_P21_Shipper_Line.SALES_POSTED_DATE
+	toColumn: 'D - Calendar Table'.CALENDAR_DATE
+

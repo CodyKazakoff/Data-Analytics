@@ -1,0 +1,318 @@
+table F_SHPR_P21
+	lineageTag: 6e61e807-1fc3-472a-a2c0-55dad393e53b
+
+	column SHPR_LN_KEY
+		dataType: string
+		lineageTag: 176408f3-df7b-44a0-90cd-e89a80a2e508
+		summarizeBy: none
+		sourceColumn: SHPR_LN_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHPR_HDR_KEY
+		dataType: string
+		lineageTag: 65b75f20-2f56-4baa-ae88-9cd51a888347
+		summarizeBy: none
+		sourceColumn: SHPR_HDR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_KEY
+		dataType: string
+		lineageTag: 96d70198-6c8e-4ec7-ae44-ccc7cffe00e9
+		summarizeBy: none
+		sourceColumn: ITM_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: 8bdf4772-f356-429b-aadd-d05a61718fc6
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 61ba5a02-56c6-466a-957a-4a80ab7ecf40
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPPER_CTL_NO
+		dataType: string
+		lineageTag: bf10c33c-df1f-4dd8-b6e9-553dbb938f2b
+		summarizeBy: none
+		sourceColumn: SHIPPER_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_NO
+		dataType: string
+		lineageTag: 89278e86-2bc2-481c-a3cc-8f4cb2f39590
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALES_POSTED_DATE
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 463dfea0-5ef3-4eb5-9d60-21de3c84c2df
+		summarizeBy: none
+		sourceColumn: SALES_POSTED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ad83f87e-43d2-4755-9578-c623ff5b7548
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ba184165-dda4-4beb-a09f-d7cef9ea8194
+		summarizeBy: none
+		sourceColumn: SHIP_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_FRT
+		dataType: double
+		lineageTag: 94f2ef8a-3e2e-4c79-8733-ac3cadebf5a8
+		summarizeBy: sum
+		sourceColumn: TOTAL_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIPPER_ITEM_LINE_NO
+		dataType: double
+		formatString: 0
+		lineageTag: 7151180e-0ca8-4cb2-9b7b-9ec26dff081a
+		summarizeBy: sum
+		sourceColumn: SHIPPER_ITEM_LINE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column SHIPPER_ITEM_ITEM_NO
+		dataType: string
+		lineageTag: b2051cf1-d134-4691-a9d0-44ea20f00204
+		summarizeBy: none
+		sourceColumn: SHIPPER_ITEM_ITEM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPPER_ITEM_QTY_BILLED
+		dataType: double
+		formatString: 0
+		lineageTag: f33f7b0d-f1f3-421f-a78b-9bbafd11d508
+		summarizeBy: sum
+		sourceColumn: SHIPPER_ITEM_QTY_BILLED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column SHIPPER_ITEM_QTY_SHIPPED
+		dataType: double
+		lineageTag: 32dd0929-cd75-4098-89e3-2fd0181a27d4
+		summarizeBy: sum
+		sourceColumn: SHIPPER_ITEM_QTY_SHIPPED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIPPER_ITEM_SUPPLIER
+		dataType: string
+		lineageTag: dbdba01d-2640-47c3-88e8-a079b93f693e
+		summarizeBy: none
+		sourceColumn: SHIPPER_ITEM_SUPPLIER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPPER_ITEM_UNIT_COST
+		dataType: double
+		lineageTag: dc06278e-4a94-4894-b3d0-77b0e964114e
+		summarizeBy: sum
+		sourceColumn: SHIPPER_ITEM_UNIT_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CHKSUM_VAL
+		dataType: string
+		lineageTag: 9614aa94-3001-42ba-8d44-63659585f21e
+		summarizeBy: none
+		sourceColumn: CHKSUM_VAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIM_KEY_CHKSUM_VAL
+		dataType: string
+		lineageTag: ea4b29c5-bc4f-4457-a676-36ada1539ae5
+		summarizeBy: none
+		sourceColumn: PRIM_KEY_CHKSUM_VAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORD_KEY
+		dataType: string
+		lineageTag: 8c2c5fb7-8466-4401-b48d-709caab2469b
+		summarizeBy: none
+		sourceColumn: ORD_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_LINE_NO
+		dataType: double
+		lineageTag: d1ad58ae-178d-4354-a63d-11c2f76c368e
+		summarizeBy: sum
+		sourceColumn: ORDER_LINE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDER_CTL_NO
+		dataType: string
+		lineageTag: 9aca2c3f-7a67-4b09-90b9-10f8f384ef4c
+		summarizeBy: none
+		sourceColumn: ORDER_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHPR_KEY
+		dataType: string
+		lineageTag: 5d1debd5-5d2e-45e7-891c-7e40c5129b80
+		summarizeBy: none
+		sourceColumn: SHPR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILL_TO_CUST_NO
+		dataType: string
+		lineageTag: 8faff794-ce76-4320-b386-7b9da2e57521
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_KEY
+		dataType: string
+		lineageTag: 0807d09a-23d9-400f-b387-c309d8212035
+		summarizeBy: none
+		sourceColumn: CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPPER_ITEM_UNIT_SELL_PRICE
+		dataType: double
+		lineageTag: eed97605-35b6-47e0-b39d-7d6d257ccf07
+		summarizeBy: sum
+		sourceColumn: SHIPPER_ITEM_UNIT_SELL_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIPPER_ITEM_FINAL_COST
+		dataType: double
+		lineageTag: 0514a011-1345-478b-a566-5355f1ba9ccc
+		summarizeBy: sum
+		sourceColumn: SHIPPER_ITEM_FINAL_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIPPER_ITEM_SUPPLIER_NO
+		dataType: string
+		lineageTag: 36c5a755-c6ea-42e1-9080-be9f3f04ecf9
+		summarizeBy: none
+		sourceColumn: SHIPPER_ITEM_SUPPLIER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIPPER_ITEM_MFG_PART_NO
+		dataType: string
+		lineageTag: 96ab7bab-d909-4e92-bf98-290072010aee
+		summarizeBy: none
+		sourceColumn: SHIPPER_ITEM_MFG_PART_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALESMAN_ID
+		dataType: string
+		lineageTag: 2779cccd-1617-410a-ac3c-bf31f74cb2c9
+		summarizeBy: none
+		sourceColumn: SALESMAN_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_SALES_AMOUNT
+		dataType: double
+		lineageTag: cdaf3866-965b-49ef-9fb2-c312c6a2e30e
+		summarizeBy: sum
+		sourceColumn: ITEM_SALES_AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITEM_GROSS_COST_OF_GOODS_SOLD_AMOUNT
+		dataType: double
+		lineageTag: aef1fe00-936a-402c-be8b-0a314c773ad9
+		summarizeBy: sum
+		sourceColumn: ITEM_GROSS_COST_OF_GOODS_SOLD_AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column BILL_TO_CUST_KEY
+		dataType: string
+		lineageTag: b5c95413-28ca-4b12-902c-db8e8111c8a5
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITEM_DESCRIPTION
+		dataType: string
+		lineageTag: 2293750e-a71b-4c68-ad7c-63b50db5e99a
+		summarizeBy: none
+		sourceColumn: ITEM_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_SHPR_P21 = m
+		mode: import
+		queryGroup: Facts
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4" = Workspaces{[workspaceId="8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"]}[Data],
+				    #"d646a64b-d8dc-4875-983f-fdbdaf561e2c" = #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"{[dataflowId="d646a64b-d8dc-4875-983f-fdbdaf561e2c"]}[Data],
+				    F_SHPR_P21_ = #"d646a64b-d8dc-4875-983f-fdbdaf561e2c"{[entity="F_SHPR_P21",version=""]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(F_SHPR_P21_,{"SHPR_LN_KEY", "SHPR_HDR_KEY", "ITM_KEY", "SHIP_TO_CUST_KEY", "MI_LOC", "SHIPPER_CTL_NO", "SHIP_TO_CUST_NO", "SALES_POSTED_DATE", "ORDER_DATE", "SHIP_DATE", "TOTAL_FRT", "SHIPPER_ITEM_LINE_NO", "SHIPPER_ITEM_ITEM_NO", "SHIPPER_ITEM_QTY_BILLED", "SHIPPER_ITEM_QTY_SHIPPED", "SHIPPER_ITEM_SUPPLIER", "SHIPPER_ITEM_UNIT_COST", "CHKSUM_VAL", "PRIM_KEY_CHKSUM_VAL", "ORD_KEY", "ORDER_LINE_NO", "ORDER_CTL_NO", "SHPR_KEY", "BILL_TO_CUST_NO", "CUST_KEY", "SHIPPER_ITEM_UNIT_SELL_PRICE", "SHIPPER_ITEM_FINAL_COST", "SHIPPER_ITEM_SUPPLIER_NO", "SHIPPER_ITEM_MFG_PART_NO", "SALESMAN_ID", "ITEM_SALES_AMOUNT", "ITEM_GROSS_COST_OF_GOODS_SOLD_AMOUNT", "BILL_TO_CUST_KEY", "ITEM_DESCRIPTION"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

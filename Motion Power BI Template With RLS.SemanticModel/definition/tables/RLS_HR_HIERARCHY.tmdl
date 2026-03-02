@@ -1,0 +1,45 @@
+table RLS_HR_HIERARCHY
+	lineageTag: 44401d9f-8c36-41ae-afc0-140e878be546
+
+	column SUPERVISOR_EMAIL
+		dataType: string
+		lineageTag: c4c04dd7-9523-451d-8001-7ca10004410c
+		summarizeBy: none
+		sourceColumn: SUPERVISOR_EMAIL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_DISPLAY_NAME
+		dataType: string
+		lineageTag: 9be7a49d-3f84-464e-bec3-22021836fb13
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_DISPLAY_NAME
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RLS_HR_HIERARCHY = m
+		mode: import
+		queryGroup: RLS
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4" = Workspaces{[workspaceId="8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"]}[Data],
+				    #"95974454-5d50-4047-8207-905e735f62f5" = #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"{[dataflowId="95974454-5d50-4047-8207-905e735f62f5"]}[Data],
+				    RLS_HR_HIERARCHY_ = #"95974454-5d50-4047-8207-905e735f62f5"{[entity="RLS_HR_HIERARCHY",version=""]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(RLS_HR_HIERARCHY_,{"SUPERVISOR_EMAIL", "EMPLOYEE_DISPLAY_NAME"}),
+				    #"Remove Empty Supervisor Emails" = Table.SelectRows(#"Removed Other Columns", each [SUPERVISOR_EMAIL] <> null and [SUPERVISOR_EMAIL] <> ""),
+				    #"Remove Empty Emloyee Display Names" = Table.SelectRows(#"Remove Empty Supervisor Emails", each [EMPLOYEE_DISPLAY_NAME] <> null and [EMPLOYEE_DISPLAY_NAME] <> "")
+				in
+				    #"Remove Empty Emloyee Display Names"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

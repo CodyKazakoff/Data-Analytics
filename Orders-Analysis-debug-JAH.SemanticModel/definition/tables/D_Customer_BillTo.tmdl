@@ -1,0 +1,260 @@
+table D_Customer_BillTo
+	lineageTag: dd8880a2-88b9-49d6-abf8-06132f78499a
+
+	column 'Billing Customer No  Billing Customer Name'
+		dataType: string
+		lineageTag: febe70fc-f365-42fe-95f1-00a3bfa069fe
+		summarizeBy: none
+		sourceColumn: Billing Customer No  Billing Customer Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Cust Key'
+		dataType: string
+		isKey
+		lineageTag: 0ade22f0-9833-433d-b982-8ee3a1ae68ca
+		summarizeBy: none
+		sourceColumn: Billing Cust Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct Name'
+		dataType: string
+		lineageTag: cfca66a6-3f3d-4201-8778-0041ff4a3ddb
+		summarizeBy: none
+		sourceColumn: Natl Acct Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct Cam Name'
+		dataType: string
+		lineageTag: 41a25dbe-352a-45da-a993-d9848510ed17
+		summarizeBy: none
+		sourceColumn: Natl Acct Cam Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct Area Vp Name'
+		dataType: string
+		lineageTag: 712dcc86-1b7b-47e4-a5ca-40d29b9c7409
+		summarizeBy: none
+		sourceColumn: Natl Acct Area Vp Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Corp Acct Status'
+		dataType: string
+		lineageTag: 9d991c92-8e51-40c0-a280-543ce0c5e00e
+		summarizeBy: none
+		sourceColumn: Corp Acct Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct Parent Company Name'
+		dataType: string
+		lineageTag: a648a176-cd73-4aac-8678-a1e76d05f44e
+		summarizeBy: none
+		sourceColumn: Natl Acct Parent Company Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct Area Vp Emp ID'
+		dataType: string
+		lineageTag: 2ee768f9-7d20-42d4-a9c7-c5f1b23dd3bb
+		summarizeBy: none
+		sourceColumn: Natl Acct Area Vp Emp ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct No'
+		dataType: string
+		lineageTag: 6243ac1d-927a-4095-a191-e1cfd91b9d50
+		summarizeBy: none
+		sourceColumn: Natl Acct No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Corp Acct Flag'
+		dataType: string
+		lineageTag: 2177c775-8891-4ada-bf9d-952c8d7ce479
+		summarizeBy: none
+		sourceColumn: Corp Acct Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct Full Name'
+		dataType: string
+		lineageTag: ba582e31-c129-40c9-a1bf-c63f96b3cea8
+		summarizeBy: none
+		sourceColumn: Natl Acct Full Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Customer Name'
+		dataType: string
+		lineageTag: 3f4d91e3-b3f8-4550-a4cd-d20b548b396a
+		summarizeBy: none
+		sourceColumn: Billing Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Zip Code'
+		dataType: string
+		lineageTag: a6328a16-f281-4fb1-ac66-fcb89d3ccdca
+		summarizeBy: none
+		sourceColumn: Billing Zip Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Divcrmgr Name'
+		dataType: string
+		lineageTag: ba625ac4-6aab-4f2c-a87d-3928d58320ae
+		summarizeBy: none
+		sourceColumn: Divcrmgr Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Billing Disabled Flag'
+		dataType: string
+		lineageTag: 80e18b66-afbf-40b1-aa1c-1032ddf6ec5a
+		summarizeBy: none
+		sourceColumn: Billing Disabled Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct Naics Key'
+		dataType: string
+		lineageTag: 1b0268f4-8ea5-4ab1-9f0d-cf43097cf85d
+		summarizeBy: none
+		sourceColumn: Natl Acct Naics Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct Cam Emp ID'
+		dataType: string
+		lineageTag: 3478da01-815b-4668-b131-29e969dc911e
+		summarizeBy: none
+		sourceColumn: Natl Acct Cam Emp ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract Flag'
+		dataType: string
+		lineageTag: 167f6a44-373a-4305-8a88-9434478f55b2
+		summarizeBy: none
+		sourceColumn: Contract Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Loc Key'
+		dataType: string
+		lineageTag: be263d80-6dcb-4bdc-b4eb-f38594d2eaae
+		summarizeBy: none
+		sourceColumn: Loc Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Cust Acct Bill To Cust Key'
+		dataType: string
+		lineageTag: d8fd2b5b-42f6-4dbe-af27-4156aa1cd824
+		summarizeBy: none
+		sourceColumn: Cust Acct Bill To Cust Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl No & Name'
+		dataType: string
+		lineageTag: f4fe6e12-3f38-482c-904c-02e1773c0b4b
+		summarizeBy: none
+		sourceColumn: Natl No & Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Corp Industry'
+		dataType: string
+		lineageTag: 81855d47-ff20-4421-93bb-a834ab17c3ab
+		summarizeBy: none
+		sourceColumn: Corp Industry
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Creation Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 152cf2f3-229f-422f-8911-490514f9ae41
+		summarizeBy: none
+		sourceColumn: Creation Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Natl Acct Creation Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5126fb21-1add-4aaa-89ce-5d39bfd15438
+		summarizeBy: none
+		sourceColumn: Natl Acct Creation Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Loc  Billing Customer No  Billing Customer Name'
+		dataType: string
+		lineageTag: 1fd85dad-2970-4c53-9d93-fad1c95c5015
+		summarizeBy: none
+		sourceColumn: MI Loc  Billing Customer No  Billing Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MI Loc  Natl Acct No  Natl Acct Name'
+		dataType: string
+		lineageTag: e757979c-dd6d-4d94-b01e-e3b77d62a0a1
+		summarizeBy: none
+		sourceColumn: MI Loc  Natl Acct No  Natl Acct Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Customer_BillTo = m
+		mode: import
+		queryGroup: Dimensions
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    // Removing values not present in the fact table
+				    dbo_D_Customer_BillTo = Value.NativeQuery(Source,
+				    "
+				        SELECT DIM.* 
+				        FROM dbo.D_Customer_BillTo DIM
+				        INNER JOIN (SELECT DISTINCT BILL_TO_CUST_KEY FROM dbo.F_Shipper_Item) FAC
+				            ON FAC.BILL_TO_CUST_KEY = DIM.BILLING_CUST_KEY", null, [EnableFolding = true]),
+				    #"Remove Unused Columns" = Table.SelectColumns(dbo_D_Customer_BillTo,{"NATL_ACCT_NO", "BILLING_CUSTOMER_NAME", "BILLING_CUSTOMER_NO__BILLING_CUSTOMER_NAME", "MI_LOC__BILLING_CUSTOMER_NO__BILLING_CUSTOMER_NAME", "BILLING_ZIP_CODE", "DIVCRMGR_NAME", "BILLING_DISABLED_FLAG", "CREATION_DATE", "NATL_ACCT_NAME", "NATL_ACCT_FULL_NAME", "MI_LOC__NATL_ACCT_NO__NATL_ACCT_NAME", "NATL_ACCT_CREATION_DATE", "NATL_ACCT_NAICS_KEY", "CORP_ACCT_FLAG", "NATL_ACCT_PARENT_COMPANY_NAME", "NATL_ACCT_CAM_NAME", "NATL_ACCT_CAM_EMP_ID", "NATL_ACCT_AREA_VP_NAME", "NATL_ACCT_AREA_VP_EMP_ID", "CONTRACT_FLAG", "CORP_ACCT_STATUS", "LOC_KEY", "BILLING_CUST_KEY", "CUST_ACCT_BILL_TO_CUST_KEY"}),
+				    #"Added Custom" = Table.AddColumn(#"Remove Unused Columns", "NATL NO & NAME", each if [NATL_ACCT_NAME] = "LOCAL ACCOUNT" then [NATL_ACCT_NAME] else [NATL_ACCT_NO] & "|" & [NATL_ACCT_NAME]),
+				    // Temporarily limiting the data when building on local desktop. This setting is toggled off on PBI online
+				    #"TEMP DEV STEP: LimitRecords" = fx_ConditionallyLimitRows(#"Added Custom",  LimitRecordCount, RecordCountLimit),
+				    #"Merged Queries" = Table.NestedJoin(#"TEMP DEV STEP: LimitRecords", {"NATL_ACCT_NAICS_KEY"}, TEMP_Corp_Industry_Mapping, {"NA_KEY"}, "TEMP_IND_FIN_SOURCE", JoinKind.LeftOuter),
+				    #"Expanded TEMP_IND_FIN_SOURCE" = Table.ExpandTableColumn(#"Merged Queries", "TEMP_IND_FIN_SOURCE", {"Corp Industry"}, {"Corp Industry"}),
+				    // Rename columns to be more business frieldly
+				    #"Bulk Column Rename" = Table.TransformColumnNames(#"Expanded TEMP_IND_FIN_SOURCE", each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," ")),
+				    #"Replaced Value" = Table.TransformColumns(#"Bulk Column Rename",{{"Corp Industry", each if _ <> null and Text.Length(Text.Trim(Text.From(_))) > 0 then _ else "All Others"}})
+				in
+				    #"Replaced Value"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,1074 @@
+table F_ORD_HDR_AGG_P21
+	lineageTag: 37d44892-a287-4928-8bfa-563fd3535542
+
+	column ORD_HDR_KEY
+		dataType: string
+		lineageTag: c7eb2e91-cb34-4f3a-96c7-309ae8e8454e
+		summarizeBy: none
+		sourceColumn: ORD_HDR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: 1460000a-185e-4760-9263-45e2bbe1a265
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILL_TO_CUST_KEY
+		dataType: string
+		lineageTag: 509bf2ca-806e-481d-a59a-6f69a1e20cf0
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 9bff8059-71bd-40a6-a666-6cd03febed42
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_CTL_NO
+		dataType: string
+		lineageTag: 361be29a-5915-4f3b-bf6a-eec32fd240dd
+		summarizeBy: none
+		sourceColumn: ORDER_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_NO
+		dataType: string
+		lineageTag: 79e9ccb1-6152-4f41-a2b0-3e05658b9ea6
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILL_TO_CUST_NO
+		dataType: string
+		lineageTag: 8af724ff-e6e5-4d51-aa08-a292ce5a3938
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_CODE
+		dataType: string
+		lineageTag: ca67c276-22b3-4f60-8ede-57cceb7a9550
+		summarizeBy: none
+		sourceColumn: TAX_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_OVERRIDE
+		dataType: string
+		lineageTag: 94a69505-1434-470d-b2f5-06d2615eb16a
+		summarizeBy: none
+		sourceColumn: SHIP_TO_OVERRIDE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_PO_NO
+		dataType: string
+		lineageTag: bf378c32-21c6-46e8-80f8-e25dcdfdfa57
+		summarizeBy: none
+		sourceColumn: CUST_PO_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_RELEASE_NO
+		dataType: string
+		lineageTag: bd916e1b-dfa0-4131-91a4-c74b9fcdebbf
+		summarizeBy: none
+		sourceColumn: CUST_RELEASE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_RFQ_NO
+		dataType: string
+		lineageTag: 1f2d16ba-3fc4-4eba-8feb-f310bcfa1b20
+		summarizeBy: none
+		sourceColumn: CUST_RFQ_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column HANDLING_INST
+		dataType: string
+		lineageTag: a6b9e8f5-c1d6-41a5-9905-ceac8bc705d1
+		summarizeBy: none
+		sourceColumn: HANDLING_INST
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_TYPE
+		dataType: string
+		lineageTag: d3f78400-d7a1-49f9-8470-f7b203011875
+		summarizeBy: none
+		sourceColumn: ORDER_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_TYPE_CD
+		dataType: string
+		lineageTag: e04f2887-73f5-40e6-947e-36f4176e3954
+		summarizeBy: none
+		sourceColumn: ORDER_TYPE_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROCESS_STATUS_DESC
+		dataType: string
+		lineageTag: 9f32396b-5279-4c91-b44a-0118e282da1c
+		summarizeBy: none
+		sourceColumn: PROCESS_STATUS_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROCESS_STATUS
+		dataType: string
+		lineageTag: c41092c1-3b6d-4b16-b50f-9841f752685e
+		summarizeBy: none
+		sourceColumn: PROCESS_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SOURCE
+		dataType: string
+		lineageTag: f8ea1192-4251-42ae-9952-567f232f8a50
+		summarizeBy: none
+		sourceColumn: ORDER_SOURCE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SOURCE_CD
+		dataType: string
+		lineageTag: e8519fa2-7a16-42ed-8c9a-20c824f02463
+		summarizeBy: none
+		sourceColumn: ORDER_SOURCE_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_CHARGES
+		dataType: string
+		lineageTag: c7cbd297-94b1-4cf1-8bf1-5997abd86c08
+		summarizeBy: none
+		sourceColumn: SHIP_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_CHARGES_CD
+		dataType: string
+		lineageTag: 1dac3944-995d-4892-9cdc-153283352b66
+		summarizeBy: none
+		sourceColumn: SHIP_CHARGES_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_METHOD
+		dataType: string
+		lineageTag: 60b4e464-327e-4857-82b6-3b7335ada0e8
+		summarizeBy: none
+		sourceColumn: SHIP_METHOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_METHOD_CD
+		dataType: string
+		lineageTag: 1f922bff-2239-4297-8950-720e812f375a
+		summarizeBy: none
+		sourceColumn: SHIP_METHOD_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column CARRIER
+		dataType: string
+		lineageTag: ad7af866-9cd0-47ac-a932-214993ac6da1
+		summarizeBy: none
+		sourceColumn: CARRIER
+
+		annotation SummarizationSetBy = Automatic
+
+	column CARRIER_CD
+		dataType: string
+		lineageTag: c3a7649e-cfcc-4d71-a97e-291b6aaa194d
+		summarizeBy: none
+		sourceColumn: CARRIER_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOST_SALE_CD
+		dataType: string
+		lineageTag: 5d25657b-5b3c-41b3-ac39-29b267db430a
+		summarizeBy: none
+		sourceColumn: LOST_SALE_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_OUTBND_FRT
+		dataType: string
+		lineageTag: 4b9a0eee-acdf-4068-877f-623e9c8197bf
+		summarizeBy: none
+		sourceColumn: TAX_OUTBND_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+	column MDSE_ORDERED_PRICE
+		dataType: double
+		lineageTag: c4e3cac8-1a3a-4a08-ae47-6237c4b4a450
+		summarizeBy: sum
+		sourceColumn: MDSE_ORDERED_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MDSE_ORDERED_COST
+		dataType: double
+		lineageTag: bbacaf3f-f78c-4269-a756-c6ca7441e1d3
+		summarizeBy: sum
+		sourceColumn: MDSE_ORDERED_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALES_TAX_PCT
+		dataType: double
+		lineageTag: dbb7abd2-5b93-4b6d-b994-e5b6a6db2cf0
+		summarizeBy: sum
+		sourceColumn: SALES_TAX_PCT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALES_TAX_AMT
+		dataType: double
+		lineageTag: 7c0e708e-2a77-43e1-b1c5-075ada1299f0
+		summarizeBy: sum
+		sourceColumn: SALES_TAX_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALES_TAX_TOTAL
+		dataType: double
+		lineageTag: 5be4aad7-8d23-4743-bc27-8b9fab7d198c
+		summarizeBy: sum
+		sourceColumn: SALES_TAX_TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INBOUND_FRT
+		dataType: double
+		lineageTag: e6961c8f-2f46-4a79-ad43-d0bd20befa68
+		summarizeBy: sum
+		sourceColumn: INBOUND_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OUTBOUND_FRT
+		dataType: double
+		lineageTag: 6012f735-2a11-4029-9814-f6d2ad7ffd6f
+		summarizeBy: sum
+		sourceColumn: OUTBOUND_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_FRT
+		dataType: double
+		lineageTag: 2b50d54a-0bb6-4884-acdd-8112c8216424
+		summarizeBy: sum
+		sourceColumn: TOTAL_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OTHER_CHARGES
+		dataType: double
+		lineageTag: 6f3d9c74-5309-4124-af68-76107b31002b
+		summarizeBy: sum
+		sourceColumn: OTHER_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ORDER_AMT
+		dataType: double
+		lineageTag: f1c1e0b6-934f-47a8-a5ba-216c2ba5c0b0
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDER_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LINES_ORDERED
+		dataType: double
+		lineageTag: f87cff18-122b-409c-8053-b6b0578196a3
+		summarizeBy: sum
+		sourceColumn: LINES_ORDERED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALESMAN_ID
+		dataType: string
+		lineageTag: a6184fd8-3958-4e5c-b3b3-0804fa2dd660
+		summarizeBy: none
+		sourceColumn: SALESMAN_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ENTERED_BY_ID
+		dataType: string
+		lineageTag: 7ac7365b-bada-4761-b1af-9a36e4f81df7
+		summarizeBy: none
+		sourceColumn: ENTERED_BY_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAKEN_BY
+		dataType: string
+		lineageTag: e9b32f03-b239-4637-b736-794cf1b0f82d
+		summarizeBy: none
+		sourceColumn: TAKEN_BY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 08fa764d-b9e6-4f2f-8e56-4deaa095fc0e
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DUE_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 29a3c3ef-2f39-45c8-a9a6-f939e97810fd
+		summarizeBy: none
+		sourceColumn: DUE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_INST
+		dataType: string
+		lineageTag: 253d3780-14cb-490a-81ec-42d53082eccf
+		summarizeBy: none
+		sourceColumn: DC_INST
+
+		annotation SummarizationSetBy = Automatic
+
+	column TRN_REQ_FLAG
+		dataType: string
+		lineageTag: 9fd042d4-a131-4600-a861-f807b7e6162d
+		summarizeBy: none
+		sourceColumn: TRN_REQ_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROJECT_DIST_CD
+		dataType: string
+		lineageTag: 5c8b284e-fc08-491e-9035-dad925bc7674
+		summarizeBy: none
+		sourceColumn: PROJECT_DIST_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_STATUS
+		dataType: string
+		lineageTag: 1b58b2df-e42f-4cad-90bc-a5c3b074eff3
+		summarizeBy: none
+		sourceColumn: TAX_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPECIAL_TAX_CD
+		dataType: string
+		lineageTag: 34d5f6ac-4153-4bc8-9534-2f0e292a474d
+		summarizeBy: none
+		sourceColumn: SPECIAL_TAX_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_OVERRIDE_TYPE
+		dataType: string
+		lineageTag: bd6c74b4-bcfb-42c5-a04f-1bdb710c8d30
+		summarizeBy: none
+		sourceColumn: TAX_OVERRIDE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EDI_CHG_FLAG
+		dataType: string
+		lineageTag: e7a4e893-2d32-4a90-b50e-c3be4b47eefd
+		summarizeBy: none
+		sourceColumn: EDI_CHG_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column EDI_DISCREPANCY
+		dataType: string
+		lineageTag: e2c890b5-cd5f-41e1-adc3-770b0a00044b
+		summarizeBy: none
+		sourceColumn: EDI_DISCREPANCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9be42c1f-ec92-49bb-bff5-a9cbb248b475
+		summarizeBy: none
+		sourceColumn: SHIP_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_DATE_DESC
+		dataType: string
+		lineageTag: 2ecb89f6-1feb-4dc0-8770-764f6058f3a5
+		summarizeBy: none
+		sourceColumn: SHIP_DATE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXPEDITE_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b8dee5b5-8f68-46bf-acaa-846bc287465e
+		summarizeBy: none
+		sourceColumn: EXPEDITE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONSIGN_ORDER_FLAG
+		dataType: string
+		lineageTag: acb8b4f3-c3f5-463d-8258-de1a7ea7d5b7
+		summarizeBy: none
+		sourceColumn: CONSIGN_ORDER_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_VAS
+		dataType: double
+		lineageTag: cc2dfc81-6280-41cf-a3a9-123b3c4facc8
+		summarizeBy: sum
+		sourceColumn: TOTAL_VAS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIP_COMPLETE
+		dataType: string
+		lineageTag: 4dbad9b9-75b4-4314-b18f-5c56198aaca8
+		summarizeBy: none
+		sourceColumn: SHIP_COMPLETE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMAIL_ADDRESS
+		dataType: string
+		lineageTag: 164ce62e-d8fc-4ca9-a5ff-c116cdc6c914
+		summarizeBy: none
+		sourceColumn: EMAIL_ADDRESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column PST_TAX
+		dataType: double
+		lineageTag: 358c21ce-d628-4afa-9adb-aeff6c2821fe
+		summarizeBy: sum
+		sourceColumn: PST_TAX
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GST_TAX
+		dataType: double
+		lineageTag: 60bb65a8-4546-412f-811e-4fdba50c3767
+		summarizeBy: sum
+		sourceColumn: GST_TAX
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDER_EXCHANGE
+		dataType: double
+		lineageTag: f425008a-fb7b-4911-bf8a-82f5724bba2f
+		summarizeBy: sum
+		sourceColumn: ORDER_EXCHANGE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PROMOTION_CODE
+		dataType: string
+		lineageTag: af643355-c40e-46c3-84ac-c902e52c9d63
+		summarizeBy: none
+		sourceColumn: PROMOTION_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column XML_LOCATION_ID
+		dataType: string
+		lineageTag: cecec4a7-ebaf-4263-a574-8df3d5dc87c1
+		summarizeBy: none
+		sourceColumn: XML_LOCATION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column XML_VENDOR_ID
+		dataType: string
+		lineageTag: eafc9571-84ba-4013-9b91-6ab4840ed8ae
+		summarizeBy: none
+		sourceColumn: XML_VENDOR_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROMOTION_CD
+		dataType: double
+		lineageTag: a9d440eb-6d5e-41c7-a656-0356bc7945a0
+		summarizeBy: sum
+		sourceColumn: PROMOTION_CD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NB_FLAG
+		dataType: string
+		lineageTag: 409456b0-b758-468f-a2e9-7a6713ee8af6
+		summarizeBy: none
+		sourceColumn: NB_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column SERVICE_TYPE
+		dataType: string
+		lineageTag: eb691b06-f32f-4633-a639-c3aef72c97a5
+		summarizeBy: none
+		sourceColumn: SERVICE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EBUS_SOURCE
+		dataType: string
+		lineageTag: 8b9c96a6-dd5f-4a69-83de-5310754d8928
+		summarizeBy: none
+		sourceColumn: EBUS_SOURCE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COD_FLAG
+		dataType: string
+		lineageTag: fec306a8-3112-453a-ba5f-7815317b9fbc
+		summarizeBy: none
+		sourceColumn: COD_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column CARRIER_CONSIGNEE
+		dataType: string
+		lineageTag: a3659a6d-f200-414f-9948-b48c1b370573
+		summarizeBy: none
+		sourceColumn: CARRIER_CONSIGNEE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRICE_GUIDE
+		dataType: string
+		lineageTag: 8acdb929-5767-4e8e-a809-3ed20f62a64d
+		summarizeBy: none
+		sourceColumn: PRICE_GUIDE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STOREROOM_NO
+		dataType: string
+		lineageTag: 1e5ea5c6-8ea2-40a2-9205-1bb0602af6c6
+		summarizeBy: none
+		sourceColumn: STOREROOM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_LIST_AMT
+		dataType: double
+		lineageTag: 4b988fdb-f3e1-48b9-ab58-0addbde8ba30
+		summarizeBy: sum
+		sourceColumn: TOTAL_LIST_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUST_REQ_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d436652f-0196-49ac-ba78-cbe84025d82c
+		summarizeBy: none
+		sourceColumn: CUST_REQ_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_ACK_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a7d6fd93-3ee9-4fb2-aab9-8fd23c1ce714
+		summarizeBy: none
+		sourceColumn: CUST_ACK_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXP_DELIVERY_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 02e0b71d-53ef-475e-83e7-a7baf79fdd98
+		summarizeBy: none
+		sourceColumn: EXP_DELIVERY_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNAL_EXP_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: cb3f6456-be29-4ea4-96f4-fc5116924e29
+		summarizeBy: none
+		sourceColumn: INTERNAL_EXP_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCK_FRT_CHARGE
+		dataType: string
+		lineageTag: 7711dc81-dd7d-49c6-87de-f3467943cb2b
+		summarizeBy: none
+		sourceColumn: LOCK_FRT_CHARGE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MDSE_ORD_FIN_COST
+		dataType: double
+		lineageTag: 4ab39d43-108b-4ea6-82be-87ebf4c05bb3
+		summarizeBy: sum
+		sourceColumn: MDSE_ORD_FIN_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MDSE_ORD_CUST_COST
+		dataType: double
+		lineageTag: 78a1ca32-88a8-45e5-a75a-fc23c34dbebf
+		summarizeBy: sum
+		sourceColumn: MDSE_ORD_CUST_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OCN_COPIED
+		dataType: string
+		lineageTag: 0cd66936-366b-44c0-bc3c-77b31c3fa534
+		summarizeBy: none
+		sourceColumn: OCN_COPIED
+
+		annotation SummarizationSetBy = Automatic
+
+	column CC_ACCT_OVERRIDE
+		dataType: string
+		lineageTag: ae0c78e3-bbfd-4e26-9c24-bd5766e27e93
+		summarizeBy: none
+		sourceColumn: CC_ACCT_OVERRIDE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STAGING_LOCATION
+		dataType: string
+		lineageTag: 20c0b7a9-a560-4bfe-b9db-0e3700616c34
+		summarizeBy: none
+		sourceColumn: STAGING_LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_METHOD
+		dataType: string
+		lineageTag: bc289f01-3052-4d3c-afa9-36df68bddb64
+		summarizeBy: none
+		sourceColumn: ORDER_METHOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_METHOD_CD
+		dataType: string
+		lineageTag: 42390546-b277-4a0b-9af7-788f6a2e16c5
+		summarizeBy: none
+		sourceColumn: ORDER_METHOD_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMERCIAL_CURRENCY
+		dataType: string
+		lineageTag: 34adc2ef-2ad5-4e49-9942-4dfb7f7bc150
+		summarizeBy: none
+		sourceColumn: COMMERCIAL_CURRENCY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENCY_TYPE
+		dataType: string
+		lineageTag: 0930c507-bd3d-4064-b66b-690a8b3c8761
+		summarizeBy: none
+		sourceColumn: CURRENCY_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_MDSE_ORDERED_PRICE
+		dataType: double
+		lineageTag: ef7cbae9-3caa-4670-a96e-61061d624484
+		summarizeBy: sum
+		sourceColumn: CUST_MDSE_ORDERED_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUST_SALES_TAX_AMT
+		dataType: double
+		lineageTag: f727f411-d132-4164-8639-367058da4c24
+		summarizeBy: sum
+		sourceColumn: CUST_SALES_TAX_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUST_SALES_TAX_TOTAL
+		dataType: double
+		lineageTag: c23ce672-2afa-45cd-a10c-f51be1db1de2
+		summarizeBy: sum
+		sourceColumn: CUST_SALES_TAX_TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUST_INBOUND_FRT
+		dataType: double
+		lineageTag: 0fa5a674-de7e-4292-a07f-3c4648cff96b
+		summarizeBy: sum
+		sourceColumn: CUST_INBOUND_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUST_OUTBOUND_FRT
+		dataType: double
+		lineageTag: 4c20f861-f33c-461a-840d-ab37f5ae6dfd
+		summarizeBy: sum
+		sourceColumn: CUST_OUTBOUND_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUST_TOTAL_FRT
+		dataType: double
+		lineageTag: 03517dda-18bb-4b41-9fe0-76da17e3e66f
+		summarizeBy: sum
+		sourceColumn: CUST_TOTAL_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUST_OTHER_CHARGES
+		dataType: double
+		lineageTag: 63ddb0e0-a6aa-4d33-9a51-2c21e938164b
+		summarizeBy: sum
+		sourceColumn: CUST_OTHER_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FUNCTIONAL_EXCHANGE
+		dataType: double
+		lineageTag: 6bfc7600-ffc3-48c9-b3d1-596db363893c
+		summarizeBy: sum
+		sourceColumn: FUNCTIONAL_EXCHANGE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREDIT_OVERRIDE_USERID
+		dataType: string
+		lineageTag: 716579b0-1059-4f2d-82f6-b87e422c7390
+		summarizeBy: none
+		sourceColumn: CREDIT_OVERRIDE_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREDIT_OVERRIDE_AMT
+		dataType: double
+		lineageTag: 90093da0-ea1d-44b5-822f-cd22a7dc5276
+		summarizeBy: sum
+		sourceColumn: CREDIT_OVERRIDE_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PRICE_OVERRIDE_REASON
+		dataType: string
+		lineageTag: 99aeada5-4510-4e04-977b-a8797f14bc80
+		summarizeBy: none
+		sourceColumn: PRICE_OVERRIDE_REASON
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRICE_OVERRIDE_USERID
+		dataType: string
+		lineageTag: ecadb353-0409-4035-aed3-ea2726b40a5b
+		summarizeBy: none
+		sourceColumn: PRICE_OVERRIDE_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORIGINAL_FREIGHT_CHARGE
+		dataType: double
+		lineageTag: ca1c82f8-923f-497d-a2a9-fb363932465b
+		summarizeBy: sum
+		sourceColumn: ORIGINAL_FREIGHT_CHARGE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FREIGHT_OVERRIDE_USERID
+		dataType: string
+		lineageTag: 63bca8ec-37f2-4d9a-9f2e-f7b1ae525c97
+		summarizeBy: none
+		sourceColumn: FREIGHT_OVERRIDE_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column FREIGHT_OVERRIDE_TMSTMP
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 088c556d-a5bb-4abb-8cb7-09d6079ee683
+		summarizeBy: none
+		sourceColumn: FREIGHT_OVERRIDE_TMSTMP
+
+		annotation SummarizationSetBy = Automatic
+
+	column VAS_REQUIRED
+		dataType: string
+		lineageTag: 000c3e6d-6658-431e-984c-59fc988cca20
+		summarizeBy: none
+		sourceColumn: VAS_REQUIRED
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXCLUDE_FROM_WEB
+		dataType: string
+		lineageTag: 75787c76-ddec-41c4-9789-00a06c4ddc1f
+		summarizeBy: none
+		sourceColumn: EXCLUDE_FROM_WEB
+
+		annotation SummarizationSetBy = Automatic
+
+	column FREIGHT_LOCKED_FLAG
+		dataType: string
+		lineageTag: 4a63b5e8-a7da-4d1a-be0f-15b5a199ae39
+		summarizeBy: none
+		sourceColumn: FREIGHT_LOCKED_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column COPY_ALLOWED
+		dataType: string
+		lineageTag: 2fc35745-cbdf-408f-b4b7-d65201452f21
+		summarizeBy: none
+		sourceColumn: COPY_ALLOWED
+
+		annotation SummarizationSetBy = Automatic
+
+	column COPY_RESTRICT_USERID
+		dataType: string
+		lineageTag: cb1f2333-37d4-4f4b-a760-9889c5eb454b
+		summarizeBy: none
+		sourceColumn: COPY_RESTRICT_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CALCULATED_FRT_TOTAL
+		dataType: double
+		lineageTag: e2c50af6-06ee-4c41-bada-0dce092f824b
+		summarizeBy: sum
+		sourceColumn: CALCULATED_FRT_TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column API_CALCULATED_FRT_TOTAL
+		dataType: double
+		lineageTag: 7ef82834-bab7-4a37-aa11-1e7c5200a172
+		summarizeBy: sum
+		sourceColumn: API_CALCULATED_FRT_TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LOCAL_HD_OVERRIDE
+		dataType: string
+		lineageTag: c694eefc-899a-4d92-866e-5ff4f1bdbff5
+		summarizeBy: none
+		sourceColumn: LOCAL_HD_OVERRIDE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCAL_HD_OVERRIDE_USERID
+		dataType: string
+		lineageTag: 98baa0c2-f03c-4c16-8362-8f29e723905e
+		summarizeBy: none
+		sourceColumn: LOCAL_HD_OVERRIDE_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_CALCULATED_FRT
+		dataType: double
+		lineageTag: 7d295406-6af3-4396-86f9-a59a7ccedcbc
+		summarizeBy: sum
+		sourceColumn: TOTAL_CALCULATED_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FREIGHT_TIER
+		dataType: double
+		lineageTag: 2509baad-c494-4c8f-9a82-25a2077eeda9
+		summarizeBy: sum
+		sourceColumn: FREIGHT_TIER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HAS_TRACKING
+		dataType: string
+		lineageTag: 08b5fa8d-be2d-4e55-b981-e36eb6897b4b
+		summarizeBy: none
+		sourceColumn: HAS_TRACKING
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORIGINAL_CALC_FREIGHT_TOTAL
+		dataType: double
+		lineageTag: 4bcf2330-b306-4142-8eaa-0028adaee528
+		summarizeBy: sum
+		sourceColumn: ORIGINAL_CALC_FREIGHT_TOTAL
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HDR_LAST_UPD_USERID
+		dataType: string
+		lineageTag: 04838e29-2264-49d0-bd25-610e33a1d695
+		summarizeBy: none
+		sourceColumn: HDR_LAST_UPD_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column HDR_LAST_UPD_TERMID
+		dataType: string
+		lineageTag: 9f46a1ec-da08-4339-a1e6-e91bed7b6955
+		summarizeBy: none
+		sourceColumn: HDR_LAST_UPD_TERMID
+
+		annotation SummarizationSetBy = Automatic
+
+	column HDR_LAST_UPD_TMSTMP
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5be700c7-d248-4482-b291-ff59633b8203
+		summarizeBy: none
+		sourceColumn: HDR_LAST_UPD_TMSTMP
+
+		annotation SummarizationSetBy = Automatic
+
+	column HDR_ORIGINAL_USERID
+		dataType: string
+		lineageTag: f60d1a16-1b7d-40f5-aa9f-3820f56138a2
+		summarizeBy: none
+		sourceColumn: HDR_ORIGINAL_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column HDR_CREATION_USERID
+		dataType: string
+		lineageTag: 5484439d-2b72-420f-a078-5d987444ba29
+		summarizeBy: none
+		sourceColumn: HDR_CREATION_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column HDR_CREATION_TMSTMP
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e75d9c4f-ee86-4199-aa10-957d94014beb
+		summarizeBy: none
+		sourceColumn: HDR_CREATION_TMSTMP
+
+		annotation SummarizationSetBy = Automatic
+
+	column HDR_DELETE_FLAG
+		dataType: string
+		lineageTag: 5508a70e-6961-4839-9547-6718ab00c744
+		summarizeBy: none
+		sourceColumn: HDR_DELETE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_ORD_HDR_AGG_P21 = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4" = Workspaces{[workspaceId="8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"]}[Data],
+				    #"d646a64b-d8dc-4875-983f-fdbdaf561e2c" = #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"{[dataflowId="d646a64b-d8dc-4875-983f-fdbdaf561e2c"]}[Data],
+				    F_ORD_HDR_AGG_P21_ = #"d646a64b-d8dc-4875-983f-fdbdaf561e2c"{[entity="F_ORD_HDR_AGG_P21",version=""]}[Data]
+				in
+				    F_ORD_HDR_AGG_P21_
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

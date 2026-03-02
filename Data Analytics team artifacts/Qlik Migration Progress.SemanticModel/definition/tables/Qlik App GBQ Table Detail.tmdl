@@ -1,0 +1,58 @@
+table 'Qlik App GBQ Table Detail'
+	lineageTag: fa5a81af-e9d6-40a2-a1e1-dc415914609d
+
+	column 'Qlik App'
+		dataType: string
+		lineageTag: 2777e151-1359-4abb-b6e0-3f156fb8db45
+		summarizeBy: none
+		sourceColumn: Qlik App
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Table Name'
+		dataType: string
+		lineageTag: ef4fe046-276e-4c27-bd85-50fc8b7910e5
+		summarizeBy: none
+		sourceColumn: Source Table Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GBQ Table Name'
+		dataType: string
+		lineageTag: 2d69cdc9-2328-4046-9633-e474a19defea
+		summarizeBy: none
+		sourceColumn: GBQ Table Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column4
+		dataType: string
+		lineageTag: 882e8144-e6b4-475f-bf8e-052bf9826a3e
+		summarizeBy: none
+		sourceColumn: Column4
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Soure: https://sense-internal.axisgroup.com/sense/app/bddcaed2-a1f5-4f55-8b7b-795afde4abef/sheet/d2fe6484-6801-4f3f-99f8-760ebd046837/state/analysis'
+		dataType: string
+		lineageTag: 6516eadc-ef5f-46fb-aedf-25e2c6ad4671
+		summarizeBy: none
+		sourceColumn: Soure: https://sense-internal.axisgroup.com/sense/app/bddcaed2-a1f5-4f55-8b7b-795afde4abef/sheet/d2fe6484-6801-4f3f-99f8-760ebd046837/state/analysis
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Qlik App GBQ Table Detail' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared%20Documents/MOT%20-%20Enterprise%20Analytics/Delivery%20Artifacts/Rationalization%20files/Qlik%20App%20and%20Stream%20Analysis.xlsx"), null, true),
+				    #"Qlik App Migration Progress_Sheet" = Source{[Item="GBQ Tables (Copied from Qlik)",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Qlik App Migration Progress_Sheet", [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"GBQDataSource", "GBQ Table Name"}, {"table_name", "Source Table Name"}, {"User Facing App", "Qlik App"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

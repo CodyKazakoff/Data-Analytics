@@ -1,0 +1,4 @@
+relationship e0721833-ffae-473b-be36-0743b13f6eb9
+	fromColumn: 'Qlik App GBQ Table Detail'.'Qlik App'
+	toColumn: 'Qlik App Migration Progress'.'GBQ Table Detail Key'
+

@@ -1,0 +1,53 @@
+table AppsWithBothSources
+	lineageTag: b079c2a7-f8b5-43e7-a2eb-836aba81106e
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: 69e0d5c6-2a7f-4d6e-adc3-2034eb8950f1
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column App
+		dataType: string
+		lineageTag: 19e25b1c-c8bc-4e8a-944e-0d00feb32ccc
+		summarizeBy: none
+		sourceColumn: App
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'App.1.Solution ID'
+		dataType: string
+		lineageTag: 8b6f6c0b-4938-4aa1-8bb8-768d057829c0
+		summarizeBy: none
+		sourceColumn: App.1.Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'App.1.Name'
+		dataType: string
+		lineageTag: f9fcefb0-9aaf-46f9-88a5-f5b4bd4f50e7
+		summarizeBy: none
+		sourceColumn: App.1.Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition AppsWithBothSources = m
+		mode: import
+		queryGroup: 'Clustering Calculations'
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SupportingFiles & "\zAppsWithBothSources.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Solution ID", type text}, {"App", type text}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"Solution ID"}, App, {"Solution ID"}, "App.1", JoinKind.RightOuter),
+				    #"Expanded App.1" = Table.ExpandTableColumn(#"Merged Queries", "App.1", {"Solution ID", "Name"}, {"App.1.Solution ID", "App.1.Name"})
+				in
+				    #"Expanded App.1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,51 @@
+table D_Location
+	lineageTag: 8746b661-3204-4a47-91af-d0badb2b6ff9
+
+	column LOC_KEY
+		dataType: string
+		lineageTag: 2827a20e-c42c-4f4a-bf1b-db7460fbce1a
+		summarizeBy: none
+		sourceColumn: LOC_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 8dd7e3c2-179d-45f9-a7af-36a0aec426f1
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC__LOCATION_NAME
+		dataType: string
+		lineageTag: e200c250-53a0-4747-bbd5-c1510b803f3c
+		summarizeBy: none
+		sourceColumn: MI_LOC__LOCATION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Location = m
+		mode: import
+		queryGroup: Dimensions
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Location = Value.NativeQuery(Source, "        
+				    SELECT
+				    LOC.*
+				    FROM D_Location AS LOC
+				        INNER JOIN (
+				            SELECT DISTINCT LOC_KEY FROM F_ECOS_CoPilot_Agent_Actions_Header
+				        ) AS CoPilot
+				        ON LOC.LOC_KEY = CoPilot.LOC_KEY
+				        ", null, [EnableFolding = true]),
+				#"Removed Unused Columns"= Table.SelectColumns(dbo_D_Location,{"MI_LOC","MI_LOC__LOCATION_NAME","LOC_KEY"})
+				in
+				#"Removed Unused Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,81 @@
+table RLS_HR_HIERARCHY
+	lineageTag: 8a173fe3-198d-427f-bdd2-8950ffacbfcf
+
+	column SUPERVISOR_UPN
+		dataType: string
+		lineageTag: 764ab937-8344-45e5-98a6-02a09c227fa9
+		summarizeBy: none
+		sourceColumn: SUPERVISOR_UPN
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPERVISOR_EMAIL
+		dataType: string
+		lineageTag: 8eeba3fe-21a7-4608-a27c-3f7de4daa6e4
+		summarizeBy: none
+		sourceColumn: SUPERVISOR_EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPERVISOR_EMPLOYEE_ID
+		dataType: string
+		lineageTag: 391dc3f1-3f5d-4169-85aa-a70c34c641fc
+		summarizeBy: none
+		sourceColumn: SUPERVISOR_EMPLOYEE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPERVISOR_DISPLAY_NAME
+		dataType: string
+		lineageTag: 7c892828-dd78-4953-aa59-ec399a3987eb
+		summarizeBy: none
+		sourceColumn: SUPERVISOR_DISPLAY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_ID
+		dataType: string
+		lineageTag: b2aa542c-5138-4f8c-a0bb-c76b1af6be26
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_DISPLAY_NAME
+		dataType: string
+		lineageTag: 5177e023-a569-474b-bad9-5f39277c199a
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_DISPLAY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_MI_ACCOUNT
+		dataType: string
+		lineageTag: 14369329-9bd8-4f62-ac8e-dddad4b435e3
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_MI_ACCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_MI_LOC
+		dataType: string
+		lineageTag: 68494434-99e4-496c-b977-cd640bbf2b19
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RLS_HR_HIERARCHY = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4" = Workspaces{[workspaceId="8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"]}[Data],
+				    #"95974454-5d50-4047-8207-905e735f62f5" = #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"{[dataflowId="95974454-5d50-4047-8207-905e735f62f5"]}[Data],
+				    RLS_HR_HIERARCHY_ = #"95974454-5d50-4047-8207-905e735f62f5"{[entity="RLS_HR_HIERARCHY",version=""]}[Data]
+				in
+				    RLS_HR_HIERARCHY_
+
+	annotation PBI_NavigationStepName = Navigation
+

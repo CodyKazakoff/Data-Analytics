@@ -1,0 +1,57 @@
+table z_prm_Current_Total
+	lineageTag: ae4ec22e-18b3-436a-91f7-0b5f4993ed11
+
+	column z_prm_Current_Total
+		lineageTag: 51c8ab04-d744-48dd-bbca-985cf507a3be
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_Current_Total Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_Current_Total Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_Current_Total Fields'
+		isHidden
+		lineageTag: 7600e568-7762-48e3-8c92-2305baf7612d
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_Current_Total Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_Current_Total Order'
+		isHidden
+		formatString: 0
+		lineageTag: d2764ae7-8303-4072-abca-f73385e542c5
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value4
+		formatString: 0
+		lineageTag: be34a757-6d19-467e-b4a7-9abcf1c819e9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_Current_Total = calculated
+		mode: import
+		source =
+				{
+				    ("Current Total", NAMEOF('Measure'[Current Total]), 0, 0),
+				    ("Current Total", NAMEOF('Measure'[Current Total BASE]), 1, 1)
+				}
+
+	annotation PBI_Id = 032c34707b0440a2913908e940fd6fba
+

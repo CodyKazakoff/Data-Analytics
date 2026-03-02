@@ -1,0 +1,47 @@
+table z_Param_Avg_Order_Amount_Var
+	lineageTag: 5dde9764-6fe1-447f-a6c6-5e520c950a06
+
+	column 'zParam Avg Order Amount - Var'
+		lineageTag: 8b52143c-f708-4018-bad3-6cb24ed1d7bc
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam Avg Order Amount - Var Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam Avg Order Amount - Var Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Avg Order Amount - Var Fields'
+		lineageTag: 14636862-8c8b-4986-846c-9a5b39a15cf5
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam Avg Order Amount - Var Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Avg Order Amount - Var Order'
+		formatString: 0
+		lineageTag: c12bd307-49c0-4809-9b8b-f832a94409b7
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Avg_Order_Amount_Var = calculated
+		mode: import
+		source =
+				{
+				    ("Var %", NAMEOF('Measure Table'[Average Order $ YTD Var]), 0),
+				    ("Var %", NAMEOF('Measure Table'[Average Order $ MTD Var]), 1),
+				    ("Var %", NAMEOF('Measure Table'[Average Order $ QTD Var]), 2)
+				}
+
+	annotation PBI_Id = 77c5b3ff6fc04d4bb2a57f18a636f9cd
+

@@ -1,0 +1,90 @@
+table z_prm_%_$_USD_BASE
+	lineageTag: 9813cc0e-761c-490c-8287-886595ca930a
+
+	column z_prm_%_$_USD_BASE
+		lineageTag: 10bbb35a-04eb-45f9-a44a-ecf8f0e4b0dc
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_%_$_USD_BASE Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_%_$_USD_BASE Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_%_$_USD_BASE Fields'
+		isHidden
+		lineageTag: 7bbd37ea-e9a2-45be-9216-ee2a56d89614
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_%_$_USD_BASE Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_%_$_USD_BASE Order'
+		isHidden
+		formatString: 0
+		lineageTag: beff545f-707c-4f7d-98b7-6dca035b863b
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		formatString: 0
+		lineageTag: 7b625ebb-2d0c-48b1-b06b-e5d5e371b602
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = User
+
+	column $_%
+		formatString: 0
+		lineageTag: ec712b35-da9d-4324-acf4-194e2bcaa452
+		summarizeBy: none
+		sourceColumn: [Value5]
+
+		annotation SummarizationSetBy = User
+
+	partition z_prm_%_$_USD_BASE = calculated
+		mode: import
+		source =
+				{
+				    ("Outstanding Amount", NAMEOF('Measure'[Outstanding Amount]), 0,0,0),
+				    ("Outstanding Amount", NAMEOF('Measure'[Outstanding Amount BASE]), 1,1,0),
+				    ("% Outstanding", NAMEOF('Measure'[% Outstanding]), 2,0,1),
+				    ("% Outstanding", NAMEOF('Measure'[% Outstanding BASE]), 3,1,1),
+				    ("Current Total", NAMEOF('Measure'[Current Total]), 4,0,0),
+				    ("Current Total", NAMEOF('Measure'[Current Total BASE]), 5,1,0),
+				    ("% Current", NAMEOF('Measure'[% Current]), 6,0,1),
+				    ("% Current", NAMEOF('Measure'[% Current BASE]), 7,1,1),
+				    ("Past Due 1-30", NAMEOF('Measure'[Past Due 1-30]), 8,0,0),
+				    ("Past Due 1-30", NAMEOF('Measure'[Past Due 1-30 BASE]), 9,1,0),
+				    ("% Past Due 1-30", NAMEOF('Measure'[% Past Due 1-30]), 10,0,1),
+				    ("% Past Due 1-30", NAMEOF('Measure'[% Past Due 1-30 BASE]), 11,1,1),
+				    ("Past Due 31-60", NAMEOF('Measure'[Past Due 31-60]), 12,0,0),
+				    ("Past Due 31-60", NAMEOF('Measure'[Past Due 31-60 BASE]), 13,1,0),
+				    ("% Past Due 31-60", NAMEOF('Measure'[% Past Due 31-60]), 14,0,1),
+				    ("% Past Due 31-60", NAMEOF('Measure'[% Past Due 31-60 BASE]), 15,1,1),
+				    ("Past Due 61-90", NAMEOF('Measure'[Past Due 61-90]), 16,0,0),
+				    ("Past Due 61-90", NAMEOF('Measure'[Past Due 61-90 BASE]), 17,1,0),
+				    ("% Past Due 61-90", NAMEOF('Measure'[% Past Due 61-90]), 18,0,1),
+				    ("% Past Due 61-90", NAMEOF('Measure'[% Past Due 61-90 BASE]), 19,1,1),
+				    ("Past Due 90+", NAMEOF('Measure'[Past Due 90+]), 20,0,0),
+				    ("Past Due 90+", NAMEOF('Measure'[Past Due 90+ BASE]), 21,1,0),
+				    ("% Past Due 90+", NAMEOF('Measure'[% Past Due 90+]), 22,0,1),
+				    ("% Past Due 90+", NAMEOF('Measure'[% Past Due 90+ BASE]), 23,1,1),
+				    ("Past Due Total", NAMEOF('Measure'[Past Due Total]), 24,0,0),
+				    ("Past Due Total", NAMEOF('Measure'[Past Due Total BASE]), 25,1,0),
+				    ("% Past Due Total", NAMEOF('Measure'[% Past Due Total]), 26,0,1),
+				    ("% Past Due Total", NAMEOF('Measure'[% Past Due Total BASE]), 27,1,1)
+				}
+
+	annotation PBI_Id = e01b1ec729d74dd1a2fdd32102a7d6f0
+

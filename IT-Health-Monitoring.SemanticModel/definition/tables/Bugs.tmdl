@@ -1,0 +1,109 @@
+table Bugs
+	lineageTag: 57172348-5e19-4913-88b6-00e685cd8e61
+
+	column WorkItemId
+		dataType: int64
+		formatString: 0
+		lineageTag: 38080e0d-643a-47d3-a085-4ea6aaec3bc2
+		summarizeBy: none
+		sourceColumn: WorkItemId
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaSK
+		dataType: string
+		lineageTag: 9387cf28-55c3-42bf-9249-6711d887451f
+		summarizeBy: none
+		sourceColumn: AreaSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 302d7bce-205b-4ef1-8ea9-e077995b4e48
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkItemType
+		dataType: string
+		lineageTag: 5dcb7457-bd41-439c-a6b9-1a30b21eadc8
+		summarizeBy: none
+		sourceColumn: WorkItemType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 518f5ee7-a931-4be8-9918-3e4c011e2dfc
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 0c7bd9c2-c486-48b9-8775-360d8d29f987
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ed328e6f-c827-494e-8564-a21db2ae19e1
+		summarizeBy: none
+		sourceColumn: ClosedDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Severity
+		dataType: string
+		lineageTag: 9b1d3a29-f714-44a9-991d-d0f89943db19
+		summarizeBy: none
+		sourceColumn: Severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Custom_FoundInEnv
+		dataType: string
+		lineageTag: 9a43c962-5b9e-4f74-8569-7d68cc246797
+		summarizeBy: none
+		sourceColumn: Custom_FoundInEnv
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaPath
+		dataType: string
+		lineageTag: 8ad10094-4620-420a-a6cf-19c1053f44a6
+		summarizeBy: none
+		sourceColumn: AreaPath
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Bugs = m
+		mode: import
+		source =
+				let
+				   Source = OData.Feed ("https://analytics.dev.azure.com/Motion-IT/MI-Dev/_odata/v3.0-preview/WorkItems?"
+				        &"$filter=WorkItemType eq 'Bug' "
+				            &"and State eq 'Closed' and State ne 'Removed' "
+				        &"&$select=WorkItemId,Title,WorkItemType,State,AreaSK,ClosedDate,CreatedDate,Severity,Custom_FoundInEnv"
+				        &"&$expand=Iteration($select=IterationPath),Area($select=AreaPath),"
+				    ,null, [Implementation="2.0",OmitValues = ODataOmitValues.Nulls,ODataVersion = 4]),
+				    #"Expanded Area" = Table.ExpandRecordColumn(Source, "Area", {"AreaPath"}, {"AreaPath"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Expanded Area", each ([Severity] = "1 - Critical" or [Severity] = "2 - High") and ([Custom_FoundInEnv] = "Prod")),
+				    #"Extracted Date" = Table.TransformColumns(#"Filtered Rows",{{"ClosedDate", DateTime.Date, type date}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Extracted Date",{{"ClosedDate", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

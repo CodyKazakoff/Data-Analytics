@@ -1,0 +1,197 @@
+table Return_On_Sales
+	lineageTag: 44b5bfe5-a3e0-4612-afca-fa645d3e1921
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 78f7188e-0e8e-4f25-9148-1123e14ff338
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 257b9335-df94-41f6-b1a2-fc462ce95791
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'National Account'
+		dataType: string
+		lineageTag: 970f27ef-48cb-4d86-a25d-33a21d470b32
+		summarizeBy: none
+		sourceColumn: National Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: b7fb0d50-fcd3-4cc1-9303-621507346c2d
+		summarizeBy: sum
+		sourceColumn: Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Margin'
+		dataType: double
+		lineageTag: 482cf634-3566-4cf6-94b4-b2db46278cf2
+		summarizeBy: sum
+		sourceColumn: Product Margin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SSS
+		dataType: double
+		lineageTag: 68b28ac3-248a-44bf-8054-1fa603caf03d
+		summarizeBy: sum
+		sourceColumn: SSS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Cust Rebate'
+		dataType: double
+		lineageTag: 449bfbd6-20ea-4d93-8e09-acd5a1a395cd
+		summarizeBy: sum
+		sourceColumn: Cust Rebate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GPM
+		dataType: double
+		lineageTag: 24c614ce-d518-4856-9c3c-a203d6c5f458
+		summarizeBy: sum
+		sourceColumn: GPM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Freight Collected'
+		dataType: double
+		lineageTag: c791ac21-9468-4fdf-a69f-9271aaaa20f8
+		summarizeBy: sum
+		sourceColumn: Freight Collected
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Commission (%GP)'
+		dataType: double
+		lineageTag: 4ca91cc0-5032-4b45-8dde-abe3c894cc12
+		summarizeBy: sum
+		sourceColumn: Commission (%GP)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Contribution Margin'
+		dataType: double
+		lineageTag: 9f9541ca-0348-4542-b3bb-fb6bbbd557f0
+		summarizeBy: sum
+		sourceColumn: Contribution Margin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Contribution Profit'
+		dataType: decimal
+		formatString: 0
+		lineageTag: 759e25c4-b726-4172-8053-c5465e43f37f
+		summarizeBy: sum
+		sourceColumn: Contribution Profit
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Terms (Days)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c796546-d09c-44a2-98d7-a19d0e3611d4
+		summarizeBy: sum
+		sourceColumn: Terms (Days)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Terms (Impact)'
+		dataType: double
+		lineageTag: fc9cfc4b-450a-43f3-875c-aa62fc53620c
+		summarizeBy: sum
+		sourceColumn: Terms (Impact)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Discount
+		dataType: double
+		lineageTag: c9b4fac6-6d1d-4370-ba13-06f29ed2f852
+		summarizeBy: sum
+		sourceColumn: Discount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Cost to Serve'
+		dataType: double
+		lineageTag: 54c1f7f1-00e4-4b07-8cf6-90ed1e184ccf
+		summarizeBy: sum
+		sourceColumn: Cost to Serve
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RoS
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d23670c9-e6ba-46bb-84f6-cc633c4a8e25
+		summarizeBy: sum
+		sourceColumn: RoS
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Year = FORMAT(DATE([Year], [Month], 1), "MMM-yyyy")
+		lineageTag: 27b02569-ecda-478d-9b3c-723a4df5672e
+		summarizeBy: none
+		sortByColumn: Month_Year_Sort
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Year_Sort = ([Year] * 100) + [Month]
+		formatString: 0
+		lineageTag: 21da2d1e-afd8-468b-852f-dd0e53878590
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Return_On_Sales = m
+		mode: import
+		source =
+				let
+				    Source = SharePoint.Files("https://genparts.sharepoint.com/sites/MOT-CFAPMOTeam/", [ApiVersion = 15]),
+				    #"Contribution_Margin csv_https://genparts sharepoint com/sites/MOT-CFAPMOTeam/Shared Documents/Reporting/Contribution Margin/Contribution Margin - Data/" = Source{[Name="Contribution_Margin.csv",#"Folder Path"="https://genparts.sharepoint.com/sites/MOT-CFAPMOTeam/Shared Documents/Reporting/Contribution Margin/Contribution Margin - Data/"]}[Content],
+				    #"Imported CSV" = Csv.Document(#"Contribution_Margin csv_https://genparts sharepoint com/sites/MOT-CFAPMOTeam/Shared Documents/Reporting/Contribution Margin/Contribution Margin - Data/",[Delimiter=",", Columns=17, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Year", Int64.Type}, {"Month", Int64.Type}, {"National Account", type text}, {"Sales", Currency.Type}, {"Product Margin", Percentage.Type}, {"SSS", Percentage.Type}, {"Cust Rebate", Percentage.Type}, {"GPM", Percentage.Type}, {"Freight Collected", Percentage.Type}, {"Commission (%GP)", Percentage.Type}, {"Contribution Margin", Percentage.Type}, {"Contribution Profit", Currency.Type}, {"Terms (Days)", Int64.Type}, {"Terms (Impact)", Percentage.Type}, {"Discount", Percentage.Type}, {"Cost to Serve", Percentage.Type}, {"RoS", Percentage.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

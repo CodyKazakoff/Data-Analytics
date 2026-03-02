@@ -1,0 +1,97 @@
+table z_Param_Dim_Rollup_Dimension
+	lineageTag: 9751d32a-e181-405a-85e9-fe48c9e126a8
+
+	column 'Rollup Dim'
+		lineageTag: e0b816b9-2f8a-46b6-89b4-56d3be11d12f
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		lineageTag: 100c9068-a699-4987-8ad1-7b7e114ed24b
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		formatString: 0
+		lineageTag: d39bf25d-1e2c-4607-bb0d-0a60e488c640
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	column 'Dim Grouping'
+		lineageTag: 5c8f7fa8-af86-414f-8a18-cee690174d6f
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Show/Hide
+		lineageTag: ceb53ddf-2e79-424f-be33-f8352a9a46aa
+		summarizeBy: none
+		sourceColumn: [Value5]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_Param_Dim_Rollup_Dimension = calculated
+		mode: import
+		source =
+				{
+				    ("Country", NAMEOF(D_Location[Country]), 0, "Customer Location","Show"),
+				    ("Business Unit", NAMEOF(D_Location[MI Corp Loc]), 1,"Customer Location","Show"),
+				    ("Group", NAMEOF(D_Location[MI Group No & Name]), 2, "Customer Location","Show"),
+				    ("Division", NAMEOF(D_Location[Division No & Name]), 3, "Customer Location","Show"),
+				    ("Branch", NAMEOF(D_Location[MI Loc  Location Name]), 4, "Customer Location","Show"),
+				    ("Ship-To Cust", NAMEOF(D_Customer_ShipTo[MI Loc  Ship To Customer No  Ship To Customer Name]), 5, "Customer Location","Show"),
+				    ("Bill-To Cust", NAMEOF(D_Customer_BillTo[MI Loc  Billing Customer No  Billing Customer Name]), 6, "Customer Location","Show"),
+				    ("Year", NAMEOF(D_Calendar_Visual[Year]), 7, "Calendar","Show"),
+				    ("Month", NAMEOF(D_Calendar_Visual[Month]), 8, "Calendar","Show"),
+				    ("Week", NAMEOF(D_Calendar_Visual[Week]), 9, "Calendar","Show"),
+				    ("Date", NAMEOF(D_Calendar_Visual[Calendar Date]), 10, "Calendar","Show"),
+				    ("Workday of Month", NAMEOF(D_Calendar_Visual[Workday Of Month]), 11, "Calendar","Show"),
+				    ("Workday of Year", NAMEOF(D_Calendar_Visual[Workday Of Year]), 12, "Calendar","Show"),
+				    ("Natl Acct", NAMEOF(D_Customer_BillTo[MI Loc  Natl Acct No  Natl Acct Name]), 13, "National Account","Show"),
+				    ("Parent", NAMEOF(D_Customer_BillTo[Natl Acct Parent Company Name]), 14, "Parent","Show"),
+				    ("Acct Rep", NAMEOF(D_Customer_ShipTo[Territory Full Name]), 15, "National Account","Show"),
+				    ("Source", NAMEOF(F_Order_Item[Order Source Desc]), 16, "Order Detail","Show"),
+				    ("Order Size", NAMEOF(F_Order_Item[Itm Order Size Bucket]), 17, "Order Detail","Show"),
+				    ("Enterprise", NAMEOF(D_Manufacturer[Enterprise No  Enterprise Name]), 18, "Product","Show"),
+				    ("Manufacturer", NAMEOF(D_Manufacturer[Mfr Ctl No  Mfr Name]), 18, "Product","Show"),
+				    ("Supplier", NAMEOF(D_Supplier_Location[Sup Loc No  Sup Loc Name]), 19, "Product","Show"),
+				    ("PGC(1 Digit))", NAMEOF('D_Product_Group'[Product Group Label1]), 20, "Product","Show"),
+				    ("PGC(2 Digit)", NAMEOF('D_Product_Group'[Product Group Label2]), 21, "Product","Show"),
+				    ("PGC(3 Digit)", NAMEOF('D_Product_Group'[Product Group Label3]), 22, "Product","Show"),
+				    ("PGC(4 Digit)", NAMEOF('D_Product_Group'[Product Group Label4]), 23, "Product","Show"),
+				    ("Product Category", NAMEOF(D_Product_Group[Product Category Desc]), 24, "Product","Show"),
+				    ("SIC", NAMEOF(D_Customer_ShipTo[Ship To Sic  Ship To Sic Name]), 25, "Product","Show"),
+				    ("Price Card", NAMEOF(F_Order_Item[Price Card Type]), 26, "Product","Show"),
+				    ("Order Source", NAMEOF(F_Order_Item[Order Source Desc]), 27, "Order Source","Show"),
+				    ("Industry", NAMEOF(D_Customer_ShipTo[Industry]), 28, "National Account","Show"),
+				    ("CAM", NAMEOF(D_Customer_BillTo[Natl Acct Cam Name]), 29, "National Account","Show"),
+				    ("AVP", NAMEOF(D_Customer_BillTo[Natl Acct Area Vp Name]), 30, "National Account","Show"),
+				    ("Process Status", NAMEOF(F_Order_Item[Process Status Desc]), 31, "Order Detail","Show"),
+				    ("Customer Tier", NAMEOF(D_Customer_ShipTo[Cust Size]), 32, "Order Detail","Show"),
+				    ("Item", NAMEOF(F_Order_Item[Itm Item No  Mgf Part No]), 33, "Order Detail","Show"),
+				    ("MINO", NAMEOF(F_Order_Item[Itm Mino]), 34, "Order Detail","Show"),
+				    ("Make Selection", NAMEOF('z_Bar_Chart_Measures_Slicer'[SelectionMessage]), 35, " ","Hide")
+				
+				
+				}
+
+	annotation PBI_Id = 511c47ec14c24b959d36af6450ce6d13
+

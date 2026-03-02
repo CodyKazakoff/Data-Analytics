@@ -1,0 +1,412 @@
+table 'Time Intelligence'
+	lineageTag: 159acb68-7cbf-4929-b7b8-ca1968d93b7a
+
+	calculationGroup
+
+		calculationItem CMTD =
+				
+				
+				
+				VAR vCM =
+				CALCULATE(
+				MAX('D_Calendar_Filter'[Month Start Date])
+				, ALLSELECTED('D_Calendar_Filter')
+				
+				)
+				
+				
+				VAR vCDayOfMonth =
+				CALCULATE(
+				MAX('D_Calendar_Filter'[Workday Of Month])
+				, FILTER(ALLSELECTED('D_Calendar_Filter')
+				, 'D_Calendar_Filter'[Month Start Date] = vCM
+				)
+				)
+				
+				
+				VAR vResult =
+				CALCULATE(
+				SELECTEDMEASURE(), FILTER(ALL('D_Calendar_Filter')
+				, 'D_Calendar_Filter'[Month Start Date] = vCM
+				&& 'D_Calendar_Filter'[Day Of Month] <= vCDayOfMonth))
+				
+				
+				RETURN vResult
+
+		calculationItem CWTD =
+				
+				
+				VAR LastBusinessDate = LASTDATE('D_Calendar_Filter'[Calendar Date])
+				
+				VAR StartOfWeekDate = LastBusinessDate - WEEKDAY(LastBusinessDate, 2) + 1
+				
+				VAR vResult =
+				
+				CALCULATE(
+				
+				SELECTEDMEASURE(),
+				
+				DATESBETWEEN(
+				
+				'D_Calendar_Filter'[Calendar Date],
+				
+				StartOfWeekDate,
+				
+				LastBusinessDate
+				
+				)
+				
+				)
+				
+				RETURN vResult
+
+		calculationItem CYTD = ```
+				
+				
+				VAR vCY =
+				CALCULATE(
+				    MAX('D_Calendar_Filter'[Year])
+				    , ALLSELECTED('D_Calendar_Filter')
+				)
+				
+				VAR vCM = 
+				CALCULATE(
+				    MAX('D_Calendar_Filter'[Month Number])
+				    , ALLSELECTED('D_Calendar_Filter')
+				    , 'D_Calendar_Filter'[Year] = vCY
+				)
+				
+				VAR vCDay =
+				CALCULATE(
+				    MAX('D_Calendar_Filter'[Workday Of Month])
+				    , ALLSELECTED('D_Calendar_Filter')
+				    , 'D_Calendar_Filter'[Year] = vCY
+				    && 'D_Calendar_Filter'[Month Number] = vCM
+				)
+				
+				VAR vResult =
+				
+				CALCULATE(
+				    SELECTEDMEASURE()
+				    , FILTER(
+				        ALL('D_Calendar_Filter')
+				        // Select the correct year
+				        , 'D_Calendar_Filter'[Year] = vCY
+				        && (
+				            // We want to include all fully completed months...
+				            'D_Calendar_Filter'[Month Number] < vCM 
+				            || (
+				                // ... Then include all of the completed workdays of the current month
+				                'D_Calendar_Filter'[Workday Of Month] <= vCDay 
+				                && 'D_Calendar_Filter'[Month Number] = vCM 
+				            )
+				        )
+				    )
+				)
+				
+				RETURN vResult
+				```
+
+		calculationItem PYTD = ```
+				
+				
+				VAR vCY =
+				CALCULATE(
+				    MAX('D_Calendar_Filter'[Year])
+				    , ALLSELECTED('D_Calendar_Filter')
+				)
+				
+				VAR vCM = 
+				CALCULATE(
+				    MAX('D_Calendar_Filter'[Month Number])
+				    , ALLSELECTED('D_Calendar_Filter')
+				    , 'D_Calendar_Filter'[Year] = vCY
+				)
+				
+				VAR vCDay =
+				CALCULATE(
+				    MAX('D_Calendar_Filter'[Workday Of Month])
+				    , ALLSELECTED('D_Calendar_Filter')
+				    , 'D_Calendar_Filter'[Year] = vCY
+				    && 'D_Calendar_Filter'[Month Number] = vCM
+				)
+				
+				VAR vResult =
+				
+				CALCULATE(
+				    SELECTEDMEASURE()
+				    , FILTER(
+				        ALL('D_Calendar_Filter')
+				        // Select the correct year
+				        , 'D_Calendar_Filter'[Year] = vCY - 1
+				        && (
+				            // We want to include all fully completed months...
+				            'D_Calendar_Filter'[Month Number] < vCM 
+				            || (
+				                // ... Then include all of the completed workdays of the current month
+				                'D_Calendar_Filter'[Workday Of Month] <= vCDay 
+				                && 'D_Calendar_Filter'[Month Number] = vCM 
+				            )
+				        )
+				    )
+				)
+				RETURN vResult
+				```
+
+		calculationItem PMTD =
+				
+				VAR vCM =
+				    CALCULATE (
+				        MAX ( 'D_Calendar_Filter'[Month Index] ),
+				        ALLSELECTED ( 'D_Calendar_Filter' )
+				    )
+				VAR vCDayOfMonth =
+				    CALCULATE (
+				        MAX('D_Calendar_Filter'[Workday Of Month]),
+				        FILTER ( ALLSELECTED ( 'D_Calendar_Filter' ), 'D_Calendar_Filter'[Month Index] = vCM )
+				    )
+				VAR vResult =
+				    CALCULATE (
+				        SELECTEDMEASURE (),
+				        FILTER (
+				            ALL ( 'D_Calendar_Filter' ),
+				            'D_Calendar_Filter'[Month Index] = ( vCM - 12 )
+				                && 'D_Calendar_Filter'[Workday Of Month] <= vCDayOfMonth
+				        )
+				    )
+				RETURN
+				    vResult
+
+		calculationItem CQTD = ```
+				
+				 
+				VAR vCY =
+				CALCULATE(
+				MAX('D_Calendar_Filter'[Year])
+				,ALLSELECTED('D_Calendar_Filter')
+				)
+				 
+				VAR vCQ =
+				CALCULATE(
+				MAX('D_Calendar_Filter'[Quarter Index])
+				, FILTER(ALLSELECTED('D_Calendar_Filter')
+				, 'D_Calendar_Filter'[YEAR] = vCY
+				))
+				 
+				 
+				VAR vResult =
+				CALCULATE(
+				SELECTEDMEASURE()
+				, FILTER(ALL('D_Calendar_Filter')
+				, 'D_Calendar_Filter'[Quarter Index] = vCQ
+				&& 'D_Calendar_Filter'[YEAR] = vCY))
+				 
+				 
+				RETURN vResult
+				```
+
+		calculationItem PQTD = ```
+				
+				 
+				VAR vCQ =
+				    CALCULATE (
+				        MAX ( 'D_Calendar_Filter'[Quarter Index] ),
+				        ALLSELECTED ( 'D_Calendar_Filter' )
+				    )
+				
+				    //Change to day of quater when available
+				VAR vCDayOfYear =
+				    CALCULATE (
+				        MAX('D_Calendar_Filter'[Day Of Quarter]),
+				        FILTER ( ALLSELECTED ( 'D_Calendar_Filter' ), 'D_Calendar_Filter'[Quarter Index] = vCQ )
+				    )
+				VAR vResult =
+				    CALCULATE (
+				        SELECTEDMEASURE (),
+				        FILTER (
+				            ALL ( 'D_Calendar_Filter' ),
+				            'D_Calendar_Filter'[Quarter Index] = ( vCQ - 4 )
+				                && 'D_Calendar_Filter'[Day Of Quarter] <= vCDayOfYear
+				        )
+				    )
+				RETURN
+				    vResult
+				```
+
+		calculationItem 12_Month_Rolling = ```
+				
+				// Setting the maximum date we want to filter to.
+				// This filter depends on whether or not it's the end of a month. This scenario can ocur in 2 ways
+				//      1. It's actually final day of the month (ie December 31st)
+				//      2. You have filtered the max date by month (ie it's March 2nd and you've applied a set of filters like Jan-Feb inclusive)
+				VAR MaxDate = IF(
+				    MAX ( D_Calendar_Filter[Calendar Date] ) = EOMONTH(MAX(D_Calendar_Filter[Calendar Date]), 0)
+				    , MAX ( D_Calendar_Filter[Month Index] ) + 1 // Accounting for scenario where someone filters by month
+				    , MAX ( D_Calendar_Filter[Month Index] )
+				)
+				VAR MinDate = MaxDate - 12
+				 
+				VAR vResult =
+				CALCULATE (
+				    SELECTEDMEASURE(),
+				    KEEPFILTERS( D_Calendar_Filter[Month Index] >= MinDate ),
+				    KEEPFILTERS( D_Calendar_Filter[Month Index] <  MaxDate )
+				)
+				RETURN vResult
+				```
+
+		calculationItem 12_Month_Rolling_Previous_Year = ```
+				
+				// Setting the maximum date we want to filter to.
+				// This filter depends on whether or not it's the end of a month. This scenario can ocur in 2 ways
+				//      1. It's actually final day of the month (ie December 31st)
+				//      2. You have filtered the max date by month (ie it's March 2nd and you've applied a set of filters like Jan-Feb inclusive)
+				VAR MaxDate = IF(
+				    MAX ( D_Calendar_Filter[Calendar Date] ) = EOMONTH(MAX(D_Calendar_Filter[Calendar Date]), 0)
+				    , MAX ( D_Calendar_Filter[Month Index] ) - 12 + 1 // Accounting for scenario where someone filters by month
+				    , MAX ( D_Calendar_Filter[Month Index] ) - 12
+				)
+				VAR MinDate = MaxDate - 12
+				 
+				VAR vResult =
+				CALCULATE (
+				    SELECTEDMEASURE(),
+				    KEEPFILTERS( D_Calendar_Filter[Month Index] >= MinDate ),
+				    KEEPFILTERS( D_Calendar_Filter[Month Index] <  MaxDate )
+				)
+				RETURN vResult
+				```
+
+		calculationItem 24_Month_Rolling = ```
+				
+				// Setting the maximum date we want to filter to.
+				// This filter depends on whether or not it's the end of a month. This scenario can ocur in 2 ways
+				//      1. It's actually final day of the month (ie December 31st)
+				//      2. You have filtered the max date by month (ie it's March 2nd and you've applied a set of filters like Jan-Feb inclusive)
+				VAR MaxDate = IF(
+				    MAX ( D_Calendar_Filter[Calendar Date] ) = EOMONTH(MAX(D_Calendar_Filter[Calendar Date]), 0)
+				    , MAX ( D_Calendar_Filter[Month Index] ) + 1 // Accounting for scenario where someone filters by month
+				    , MAX ( D_Calendar_Filter[Month Index] )
+				)
+				VAR MinDate = MaxDate - 24
+				 
+				VAR vResult =
+				CALCULATE (
+				    SELECTEDMEASURE(),
+				    KEEPFILTERS( D_Calendar_Filter[Month Index] >= MinDate ),
+				    KEEPFILTERS( D_Calendar_Filter[Month Index] <  MaxDate )
+				)
+				RETURN vResult
+				```
+
+		calculationItem CY =
+				
+				VAR vCY =
+				    CALCULATE ( MAX ( 'D_Calendar_Filter'[Year] ), ALLSELECTED ( 'D_Calendar_Filter' ) )
+				VAR vResult =
+				    CALCULATE (
+				        SELECTEDMEASURE (),
+				        FILTER ( ALL ( 'D_Calendar_Filter' ), 'D_Calendar_Filter'[Year] = vCY)
+				    )
+				RETURN
+				    vResult
+
+		calculationItem PM = ```
+				
+				VAR vCM =
+				    CALCULATE (
+				        MAX ( 'D_Calendar_Filter'[Month Index] ),
+				        ALLSELECTED ( 'D_Calendar_Filter' )
+				    )
+				VAR vResult =
+				    CALCULATE (
+				        SELECTEDMEASURE (),
+				        FILTER (
+				            ALL ( 'D_Calendar_Filter' ),
+				            'D_Calendar_Filter'[Month Index] = ( vCM - 12 )
+				            
+				        )
+				    )
+				RETURN
+				    vResult
+				```
+
+		calculationItem PQ =
+				
+				VAR vCM =
+				    CALCULATE (
+				        MAX ( 'D_Calendar_Filter'[Quarter Index] ),
+				        ALLSELECTED ( 'D_Calendar_Filter' )
+				    )
+				VAR vResult =
+				    CALCULATE (
+				        SELECTEDMEASURE (),
+				        FILTER (
+				            ALL ( 'D_Calendar_Filter' ),
+				            'D_Calendar_Filter'[Quarter Index] = ( vCM - 4 )
+				        )
+				    )
+				RETURN
+				    vResult
+
+		calculationItem PY = ```
+				
+				VAR vCY =
+				
+				CALCULATE(
+				
+				MAX('D_Calendar_Filter'[Year]), 
+				ALLSELECTED('D_Calendar_Filter')
+				
+				)
+				
+				
+				
+				VAR vResult =
+				
+				CALCULATE(
+				
+				SELECTEDMEASURE(), 
+				FILTER(ALL('D_Calendar_Filter'), 
+				'D_Calendar_Filter'[Year] = vCY - 1
+				
+				)
+				
+				)
+				
+				
+				RETURN vResult
+				```
+
+		calculationItem 12_Month_Rolling_CM = ```
+				
+				VAR MaxDate = MAX ( D_Calendar_Filter[Calendar Date])
+				VAR MinDate = EOMONTH(MaxDate,-13)+1
+				 
+				VAR vResult =
+				CALCULATE (
+				    SELECTEDMEASURE(),
+				    KEEPFILTERS( D_Calendar_Filter[Calendar Date] >= MinDate ),
+				    KEEPFILTERS( D_Calendar_Filter[Calendar Date] <  MaxDate )
+				)
+				RETURN vResult
+				```
+
+	column 'Time Period'
+		dataType: string
+		lineageTag: b0243070-0b28-4b01-86d1-1b461307f572
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		formatString: 0
+		lineageTag: 02944c44-e29c-4118-a312-5d19993f145f
+		summarizeBy: none
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = User
+

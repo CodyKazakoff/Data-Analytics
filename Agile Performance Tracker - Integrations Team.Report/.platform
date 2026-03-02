@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Agile Performance Tracker - Integrations Team"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "eea14731-947a-8f7f-40ad-a5661b9f3417"
+  }
+}

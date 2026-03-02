@@ -1,0 +1,124 @@
+table APMO_Predictability_COPY
+	lineageTag: 136b7494-6bc5-4e10-868b-5da7789dc36f
+
+	column PI
+		dataType: int64
+		formatString: 0
+		lineageTag: a167cf19-4484-4b12-89fd-1e0e10070f5a
+		summarizeBy: sum
+		sourceColumn: PI
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Start Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 82c138c4-3891-4948-8bad-fc0f10c38f53
+		summarizeBy: none
+		sourceColumn: Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'End Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fd4c4848-5aca-4366-b2a3-19fdada63042
+		summarizeBy: none
+		sourceColumn: End Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Business Value  (Committed)'
+		dataType: int64
+		formatString: 0
+		lineageTag: b6a0f9e8-ebc6-4edb-9b48-a08de6549778
+		summarizeBy: sum
+		sourceColumn: Business Value  (Committed)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Value (Uncommitted)'
+		dataType: int64
+		formatString: 0
+		lineageTag: d2cef1e7-a141-4b92-891d-24865b6b6bce
+		summarizeBy: sum
+		sourceColumn: Business Value (Uncommitted)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual Business Value'
+		dataType: int64
+		formatString: 0
+		lineageTag: 05b9a586-9419-4848-888d-ef63f6a1f792
+		summarizeBy: sum
+		sourceColumn: Actual Business Value
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ART Predictability Score'
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 86972e35-9aa2-4043-9632-d0e86d8eeab7
+		summarizeBy: sum
+		sourceColumn: ART Predictability Score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Average ART Predictabilty Score'
+		dataType: double
+		lineageTag: b9af5858-9abe-4e85-8dcc-8f005d0e35a0
+		summarizeBy: sum
+		sourceColumn: Average ART Predictabilty Score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Objectives Added'
+		dataType: int64
+		formatString: 0
+		lineageTag: 277f6393-4a11-4ec8-bac2-662b2f7ba474
+		summarizeBy: sum
+		sourceColumn: Objectives Added
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Objectives Deferred'
+		dataType: int64
+		formatString: 0
+		lineageTag: f8484fee-07a2-4327-83fd-c1f3e21e1a46
+		summarizeBy: sum
+		sourceColumn: Objectives Deferred
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Objectives Stopped'
+		dataType: int64
+		formatString: 0
+		lineageTag: ad69a983-4a37-4809-ad94-4a0729ab4fbe
+		summarizeBy: sum
+		sourceColumn: Objectives Stopped
+
+		annotation SummarizationSetBy = Automatic
+
+	partition APMO_Predictability_COPY = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared%20Documents/MOT%20-%20Enterprise%20Analytics/Power%20BI%20Files/IT%20Health%20Monitoring%20PBI%20Report/APMO_Predictability_COPY.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"PI", Int64.Type}, {"Start Date", type date}, {"End Date", type date}, {"Business Value  (Committed)", Int64.Type}, {"Business Value (Uncommitted)", Int64.Type}, {"Actual Business Value", Int64.Type}, {"ART Predictability Score", type number}, {"Average ART Predictabilty Score", type number}, {"Objectives Added", Int64.Type}, {"Objectives Deferred", Int64.Type}, {"Objectives Stopped", Int64.Type}}),
+				    #"Removed Blank Rows" = Table.SelectRows(#"Changed Type", each not List.IsEmpty(List.RemoveMatchingItems(Record.FieldValues(_), {"", null}))),
+				    #"Removed Columns" = Table.RemoveColumns(#"Removed Blank Rows",{"Column9"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

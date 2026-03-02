@@ -1,0 +1,232 @@
+table D_Calendar_Visual
+	lineageTag: c34c67eb-78f1-46fd-bb7a-081f0692dff0
+	dataCategory: Time
+
+	column 'Calendar Date'
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: 60f5ae14-dd52-4d1a-bd3b-c71bb77b6719
+		summarizeBy: none
+		sourceColumn: Calendar Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 96564348-169e-4a33-b61c-4ab809af86a1
+		summarizeBy: none
+		sourceColumn: Year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: c3d2bc2e-e4fc-4103-9aa6-f18dd53f76ab
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: c966db49-9162-4db1-b683-1e4638726f49
+		summarizeBy: none
+		sourceColumn: Month Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year'
+		dataType: string
+		lineageTag: eacd2aed-76cb-4a44-88f2-12f8d32253b1
+		summarizeBy: none
+		sourceColumn: Month Year
+		sortByColumn: 'Month Index'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Of Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3efa2fd1-6b3f-450e-8648-f9cdd9d375a4
+		summarizeBy: none
+		sourceColumn: Day Of Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		dataType: string
+		lineageTag: 895ca194-29fb-4262-a208-2d6bf139d66a
+		summarizeBy: none
+		sourceColumn: Week
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 6cd9b54e-c234-4d83-a229-317d400a369f
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: 'Month Number'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 20da36f2-ca94-4a4f-b5ce-38a586ed2018
+		summarizeBy: none
+		sourceColumn: Week Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week End Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 96866b85-be2d-4e4a-9af3-5e0a0575f261
+		summarizeBy: none
+		sourceColumn: Week End Date
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Year Quarter'
+		dataType: string
+		lineageTag: 765ec2a6-4117-4c92-b058-ddede82cefd6
+		summarizeBy: none
+		sourceColumn: Year Quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workday Of Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: 67cb111e-5d52-4ff0-9bf9-37aebb337514
+		summarizeBy: none
+		sourceColumn: Workday Of Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workday Of Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 027ef423-8b14-4042-a702-f7f17608ec70
+		summarizeBy: none
+		sourceColumn: Workday Of Year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: be7bcb80-1b05-4b8a-b836-6b8d7f254033
+		summarizeBy: none
+		sourceColumn: Month Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: e55c2dbf-f71a-493e-b544-031df7e49b24
+		summarizeBy: none
+		sourceColumn: Quarter Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Of Quarter'
+		dataType: int64
+		formatString: 0
+		lineageTag: 664b1b7f-09bb-4873-b9e9-9f886545d8bc
+		summarizeBy: none
+		sourceColumn: Day Of Quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e1ca7de8-234b-4ef0-920b-65f255b167a3
+		summarizeBy: none
+		sourceColumn: Month Start Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Day Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1e48b066-4c63-4e22-a4e5-35a8a059dd53
+		summarizeBy: none
+		sourceColumn: Business Day Flag
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Calendar_Visual = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+				    Source = Sql.Database(Lakehouse&".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Calendar = Source{[Schema="dbo",Item="D_Calendar"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(dbo_D_Calendar,{"CALENDAR_DATE", "YEAR", "QUARTER", "MONTH_NUMBER", "MONTH_YEAR", "DAY_OF_MONTH", "WEEK", "MONTH", "MONTH_START_DATE", "WEEK_NUMBER", "WEEK_END_DATE", "YEAR_QUARTER", "WORKDAY_OF_MONTH", "WORKDAY_OF_YEAR", "BUSINESS_DAY_FLAG", "MONTH_INDEX", "QUARTER_INDEX", "DAY_OF_QUARTER"}),
+				    #"Changed Date Key Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"CALENDAR_DATE", type date}}),
+				    MinDate= List.Max(#"Fact Table Date Range"[Min Transaction Date]),
+				    MaxDate= List.Max(#"Fact Table Date Range"[Max Transaction Date]),
+				    #"Limit to Fact Table Date Range" = Table.SelectRows(#"Changed Date Key Type", each DateTime.Date([CALENDAR_DATE]) <= DateTime.Date(MaxDate) and DateTime.Date([CALENDAR_DATE]) >= DateTime.Date(MinDate)),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Limit to Fact Table Date Range",{{"WORKDAY_OF_MONTH", Int64.Type}, {"WORKDAY_OF_YEAR", Int64.Type}, {"YEAR", Int64.Type}, {"QUARTER", Int64.Type}, {"QUARTER_INDEX", Int64.Type}}),
+				    #"Bulk Column Rename" = Table.TransformColumnNames(#"Changed Type", each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," "))
+				in
+				    #"Bulk Column Rename"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

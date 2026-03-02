@@ -1,0 +1,156 @@
+table App
+	lineageTag: ab5afa31-9657-498e-9951-24ae499d4244
+
+	column Name
+		dataType: string
+		lineageTag: aa5b95d0-bec0-4bb2-b610-7ea67989b0c4
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: 378c3c10-86de-4fdf-8a10-aeb5cb703e34
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: da144194-1b73-4822-8d3e-fa849e58b844
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column FileSize
+		dataType: int64
+		formatString: 0
+		lineageTag: f4fd5f61-f097-4d61-a565-81d97a482748
+		summarizeBy: none
+		sourceColumn: FileSize
+
+		annotation SummarizationSetBy = User
+
+	column LastModifiedDateTime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 76afc79f-a876-4e61-9a7d-57d3473e82f3
+		summarizeBy: none
+		sourceColumn: LastModifiedDateTime
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasRowLevelSecurity
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3036e60c-1193-4d40-9d24-0b441004c665
+		summarizeBy: none
+		sourceColumn: HasRowLevelSecurity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column = 1 - ([Automation Assisted Effort (Minutes)] / [Calculated Per Item Manual Effort (Minutes)])
+		lineageTag: ef46d281-8d89-4285-928b-04a98c4870af
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"App","TableItemName":"Automation Bin","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column 'Automation Bin' =
+			IF(
+				ISBLANK('App'[Column]),
+				BLANK(),
+				IF(
+					'App'[Column] >= 0,
+					ROUNDDOWN('App'[Column] / 0.1, 0) * 0.1,
+					ROUNDUP('App'[Column] / 0.1, 0) * 0.1
+				)
+			)
+		lineageTag: 88225b3b-8011-43ec-adf3-e25736e2f038
+		summarizeBy: none
+
+		extendedProperty GroupingMetadata =
+				{
+				  "version": 0,
+				  "groupedColumns": [
+				    {
+				      "Column": {
+				        "Expression": {
+				          "SourceRef": {
+				            "Entity": "App"
+				          }
+				        },
+				        "Property": "Column"
+				      }
+				    }
+				  ],
+				  "binningMetadata": {
+				    "binSize": {
+				      "value": 0.1,
+				      "unit": 0
+				    }
+				  }
+				}
+
+		annotation GroupingDesignState = {"Version":0,"Sources":[{"Name":"a","Entity":"App"}],"GroupedColumns":[{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Column"}}],"BinItem":{"Expression":{"Floor":{"Expression":{"Column":{"Expression":{"SourceRef":{"Source":"a"}},"Property":"Column"}},"Size":0.1}}}}
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: fb2f8b82-5a62-4f2c-b1fd-cbe100479e0c
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'App Type'
+		dataType: string
+		lineageTag: 2c1fdf58-f10b-4e0c-8a76-bf0b22f68678
+		summarizeBy: none
+		sourceColumn: App Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FileSize (MB)'
+		dataType: double
+		lineageTag: e78e462f-2c4e-4435-95b2-88b1647b63b6
+		summarizeBy: sum
+		sourceColumn: FileSize (MB)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AppKey
+		dataType: string
+		lineageTag: a918034a-0074-4ae0-90c2-6706cdbb4f99
+		summarizeBy: none
+		sourceColumn: AppKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition App = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex\App Queries'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_app"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Solution_ID", "Solution ID"}, {"App_Type", "App Type"}, {"FileSize_MB", "FileSize (MB)"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Solution ID", type text}, {"Name", type text}, {"Group", type text}, {"Description", type text}, {"FileSize", Int64.Type}, {"LastModifiedDateTime", type datetime}, {"HasRowLevelSecurity", type logical}, {"App Type", type text}, {"FileSize (MB)", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

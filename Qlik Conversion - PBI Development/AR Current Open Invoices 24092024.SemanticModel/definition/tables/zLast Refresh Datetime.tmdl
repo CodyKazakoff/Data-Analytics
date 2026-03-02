@@ -1,0 +1,37 @@
+/// *Metadata*
+table 'zLast Refresh Datetime'
+	isHidden
+	lineageTag: b48ae91b-34d1-49ef-a278-908c055afd71
+
+	column Index
+		dataType: string
+		isHidden
+		lineageTag: c01a66d1-f6ff-4b25-a56b-5c53d3777ae4
+		summarizeBy: none
+		sourceColumn: Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Refresh Datetime'
+		dataType: string
+		lineageTag: c54ff3c5-998d-4996-a6e2-bb28b224fba8
+		summarizeBy: none
+		sourceColumn: Last Refresh Datetime
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'zLast Refresh Datetime-be2fc0d4-8ce0-4497-8890-329c2a3d05f5' = m
+		mode: import
+		queryGroup: Metadata\Queries
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlSKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Index = _t]),
+				    // Create Last Refresh Datetime field
+				    #"Added Last Refresh Datetime" = Table.AddColumn(Source, "Last Refresh Datetime", each Text.From(DateTime.LocalNow()), type text)
+				in
+				    #"Added Last Refresh Datetime"
+
+	annotation PBI_ResultType = Table
+

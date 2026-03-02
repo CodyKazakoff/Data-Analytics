@@ -1,0 +1,123 @@
+table Stories
+	lineageTag: 9ba72c87-1b01-460a-ae16-3a509d0e10bd
+
+	column WorkItemId
+		dataType: int64
+		formatString: 0
+		lineageTag: 1810a0ce-f806-455d-83d4-ab1e8b2c3f93
+		summarizeBy: none
+		sourceColumn: WorkItemId
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaSK
+		dataType: string
+		lineageTag: e526a1de-ec3a-48c7-a960-3b1d080a15e0
+		summarizeBy: none
+		sourceColumn: AreaSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 1c2fb9c0-1c63-464f-b72d-f090a279f415
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkItemType
+		dataType: string
+		lineageTag: 60ccf50d-5b9d-4643-b406-08da4a67b91e
+		summarizeBy: none
+		sourceColumn: WorkItemType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: afd9596f-6ed5-41aa-924d-c86a8dc6abb4
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 4489fa9f-b6c4-429f-8c69-6e3eb80805b1
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8ad5a740-d03e-468d-b256-4fe33d53501d
+		summarizeBy: none
+		sourceColumn: ActivatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 008a08b0-ca49-40bc-973a-387132ecfe67
+		summarizeBy: none
+		sourceColumn: ClosedDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Severity
+		dataType: string
+		lineageTag: 26d41286-04d0-4572-93a3-b1be048079ee
+		summarizeBy: none
+		sourceColumn: Severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Custom_FoundInEnv
+		dataType: string
+		lineageTag: 26b736c3-25af-494e-852b-f7267ed6fc09
+		summarizeBy: none
+		sourceColumn: Custom_FoundInEnv
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaPath
+		dataType: string
+		lineageTag: 25649eeb-bfff-4e34-b872-6b4cb72bc50f
+		summarizeBy: none
+		sourceColumn: AreaPath
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'ClosedDate Hierarchy'
+		lineageTag: a4b4a8ee-f84f-43e8-be70-a80ef95b1bb0
+
+		level ClosedDate
+			lineageTag: 44ff8570-0fcb-483d-bc22-5ce2e5dfc622
+			column: ClosedDate
+
+	partition Stories = m
+		mode: import
+		source =
+				let
+				   Source = OData.Feed ("https://analytics.dev.azure.com/Motion-IT/MI-Dev/_odata/v3.0-preview/WorkItems?"
+				        &"$filter=WorkItemType eq 'User Story' "
+				            &"and State eq 'Closed' and State ne 'Removed' "
+				        &"&$select=WorkItemId,Title,WorkItemType,State,AreaSK,ClosedDate,CreatedDate,Severity,Custom_FoundInEnv,ActivatedDate"
+				        &"&$expand=Iteration($select=IterationPath),Area($select=AreaPath),"
+				    ,null, [Implementation="2.0",OmitValues = ODataOmitValues.Nulls,ODataVersion = 4]),
+				    #"Expanded Area" = Table.ExpandRecordColumn(Source, "Area", {"AreaPath"}, {"AreaPath"}),
+				    #"Extracted Date" = Table.TransformColumns(#"Expanded Area",{{"ClosedDate", DateTime.Date, type date}})
+				in
+				    #"Extracted Date"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

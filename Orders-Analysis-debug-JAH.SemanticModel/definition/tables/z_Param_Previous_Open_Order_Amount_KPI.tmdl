@@ -1,0 +1,47 @@
+table z_Param_Previous_Open_Order_Amount_KPI
+	lineageTag: b6a1986a-d707-4cb0-9766-356ecd718ffb
+
+	column 'zParamPrevious - Open Ord Amount KPI'
+		lineageTag: ed8a966d-0cef-4756-81b7-5bc3c14d1e8b
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParamPrevious - Open Ord Amount KPI Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParamPrevious - Open Ord Amount KPI Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrevious - Open Ord Amount KPI Fields'
+		lineageTag: edebc66e-8e3b-4aed-a0fa-e2a9833b4a14
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParamPrevious - Open Ord Amount KPI Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrevious - Open Ord Amount KPI Order'
+		formatString: 0
+		lineageTag: 261ecd94-8b71-4ef6-ba63-cecac0a1a9ab
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_Param_Previous_Open_Order_Amount_KPI = calculated
+		mode: import
+		source =
+				{
+				    ("Open Ord Amt PMTD", NAMEOF('Measure Table'[Open Order $ PYTD]), 0),
+				    ("Open Ord Amt PQTD", NAMEOF('Measure Table'[Open Order $ PMTD]), 1),
+				    ("Open Ord Amt PYTD", NAMEOF('Measure Table'[Open Order $ PQTD]), 2)
+				}
+
+	annotation PBI_Id = 5b562dc373de4c2986c0529ff62710e0
+

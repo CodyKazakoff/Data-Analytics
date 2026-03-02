@@ -1,0 +1,17 @@
+role RESTRICTED
+	modelPermission: read
+
+	tablePermission D_Customer = ```
+			Var vEmployeeAccessList = SELECTCOLUMNS(    
+			    FILTER('RLS_HR_HIERARCHY',
+			        RLS_HR_HIERARCHY[SUPERVISOR_UPN]=USERPRINCIPALNAME()),        "Security list", RLS_HR_HIERARCHY[EMPLOYEE_ID])
+			       
+			       
+			VAR vEmployeeAccess = D_Customer[TERRITORY_EMP_ID] in vEmployeeAccessList
+			Return
+			 
+			vEmployeeAccess
+			```
+
+	annotation PBI_Id = 5ab22512b52f41b486d7e7bb6bd33e88
+

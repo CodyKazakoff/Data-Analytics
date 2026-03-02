@@ -1,0 +1,39 @@
+table z_Currency_Slicer
+	lineageTag: af607ab6-cb42-487f-9bbb-1ceff6e4ea81
+
+	column Currency
+		dataType: string
+		lineageTag: 0c012e64-3a90-4867-8f03-6d34ba064e5c
+		summarizeBy: none
+		sourceColumn: Currency
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Key
+		dataType: int64
+		formatString: 0
+		lineageTag: efaccb50-3f75-4d86-98b0-0ea4ad349a98
+		summarizeBy: none
+		sourceColumn: Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	partition z_Currency_Slicer = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCg12UdJRMlSK1YlW8slPTswB8oyUYmMB", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Currency = _t, Key = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Currency", type text}, {"Key", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,177 @@
+table D_Calendar
+	lineageTag: c31fdf5e-95fd-4851-9fc2-5a1b16111383
+
+	column CALENDAR_DATE
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 9273d25c-263e-4837-9015-4e78751d4347
+		summarizeBy: none
+		sourceColumn: CALENDAR_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column YEAR_QUARTER
+		dataType: string
+		lineageTag: e796048e-a197-4ec5-84fa-78bd2263988b
+		summarizeBy: none
+		sourceColumn: YEAR_QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTER_START_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 363f19fa-f57c-400a-82fb-4661ef1e4069
+		summarizeBy: none
+		sourceColumn: QUARTER_START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column QUARTER_END_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4f4227d4-e09e-45c7-88d1-792c93b85597
+		summarizeBy: none
+		sourceColumn: QUARTER_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MONTH_NUMBER
+		dataType: string
+		lineageTag: e3a72fc6-7039-4967-af0a-1ee880f5cdb5
+		summarizeBy: none
+		sourceColumn: MONTH_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH_YEAR
+		dataType: string
+		lineageTag: 47d09805-2f77-4b71-958d-d66a08bd5946
+		summarizeBy: none
+		sourceColumn: MONTH_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_OF_MONTH
+		dataType: string
+		lineageTag: 0ec5484d-9082-4235-a9b9-2bb38ed22067
+		summarizeBy: none
+		sourceColumn: DAY_OF_MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEK
+		dataType: string
+		lineageTag: 8918a43d-3247-4899-b5dc-748afc2cac17
+		summarizeBy: none
+		sourceColumn: WEEK
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH
+		dataType: string
+		lineageTag: 303fc93a-7284-46ca-a170-2f1bca6afa74
+		summarizeBy: none
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column YEAR
+		dataType: string
+		lineageTag: 62a2a51e-8356-4529-8dc3-3418d8e25474
+		summarizeBy: none
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTER
+		dataType: string
+		lineageTag: 9f02f34d-50c7-4ecc-84c1-29dbd00d141d
+		summarizeBy: none
+		sourceColumn: QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column MTD_FLAG
+		dataType: int64
+		formatString: 0
+		lineageTag: 17fba6cb-c513-4356-81af-95fd6d1cb7a3
+		summarizeBy: none
+		sourceColumn: MTD_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column QTD_FLAG
+		dataType: int64
+		formatString: 0
+		lineageTag: 715cea89-3135-4728-80f9-b5b8d5847d1a
+		summarizeBy: none
+		sourceColumn: QTD_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column YTD_FLAG
+		dataType: int64
+		formatString: 0
+		lineageTag: 675ec683-065b-413b-afbb-5f4e229c9043
+		summarizeBy: none
+		sourceColumn: YTD_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH_START_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 56c664cb-27d7-497e-9132-6cff57d968a1
+		summarizeBy: none
+		sourceColumn: MONTH_START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MONTH_END_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 882c25e2-6ec5-4f94-998d-bac9391a96a9
+		summarizeBy: none
+		sourceColumn: MONTH_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WEEK_START_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4d53eb6e-367a-4d5a-b797-e663a78ee444
+		summarizeBy: none
+		sourceColumn: WEEK_START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WEEK_DAY
+		dataType: string
+		lineageTag: cabccebb-67ed-40b5-bcc5-778b8766e5ac
+		summarizeBy: none
+		sourceColumn: WEEK_DAY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Calendar = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-255cr47brb7ubl4dmbam3tblom.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Calendar = Source{[Schema="dbo",Item="D_Calendar"]}[Data]
+				in
+				    dbo_D_Calendar
+

@@ -1,0 +1,81 @@
+table z_Param_Quotes_Open_Orders
+	lineageTag: 0f942b74-69d7-40fb-942f-6752f90b8041
+
+	column Parameter
+		lineageTag: ba806dd2-4e93-4866-bb24-c814eb192af8
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		lineageTag: fc4e7bcf-d9c4-4e15-a476-0fc0d28f389c
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		formatString: 0
+		lineageTag: d6f8280f-25de-43cd-8ae6-fa3e4b112015
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	column Value4
+		lineageTag: 6ca38e8e-4a9b-47bc-aa17-8a0b91690009
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_Param_Quotes_Open_Orders = calculated
+		mode: import
+		source = ```
+				{
+				    //At Risk Customer List
+				    ("Customer Name", NAMEOF('D_Customer_ShipTo'[MI Loc  Ship To Customer No  Ship To Customer Name]), 0,"At Risk Customer List"),
+				    ("Acct Rep", NAMEOF(D_Customer_ShipTo[Territory Full Name]), 0,"At Risk Customer List"),
+				    ("Order $ Rolling 12", NAMEOF('Measure Table'[Total $ Rolling 12M]), 1,"At Risk Customer List"),
+				    ("Open Quote #", NAMEOF('Measure Table'[Open Quote #]), 2,"At Risk Customer List"),
+				    ("Last Quote Date", NAMEOF('D_Customer_ShipTo'[Ship To Cust Last Quote Date]), 3,"At Risk Customer List"),
+				    ("Days Since Last Quote", NAMEOF('D_Customer_ShipTo'[Ship To Cust Days Since Quote]), 4,"At Risk Customer List"),
+				    ("Last Order Date", NAMEOF('D_Customer_ShipTo'[Ship To Cust Last Order Date]), 5,"At Risk Customer List"),
+				    ("Days Since Last Order", NAMEOF('D_Customer_ShipTo'[Ship To Cust Days Since Order]), 6,"At Risk Customer List"),
+				    ("Open Order Count#", NAMEOF('Measure Table'[Open Order #]), 7,"At Risk Customer List"),
+				
+				    
+				    //Open Quotes
+				    ("Customer Name", NAMEOF('D_Customer_ShipTo'[MI Loc  Ship To Customer No  Ship To Customer Name]), 7,"Open Quotes"),
+				    ("Territory", NAMEOF('D_Customer_ShipTo'[Territory Employee Name]), 8,"Open Quotes"),
+				    ("OCN", NAMEOF(F_Order_Item[Order Ctl No]), 9,"Open Quotes"),
+				    ("Total Lines Quoted", NAMEOF([Open Quote Line #]), 10,"Open Quotes"),
+				    ("Order Creation Date", NAMEOF(F_Order_Item[Order Date]), 11,"Open Quotes"),
+				    ("Open Quote $", NAMEOF([Open Quote $]), 12,"Open Quotes"),
+				
+				    //Open Orders
+				    ("Customer Name", NAMEOF('D_Customer_ShipTo'[MI Loc  Ship To Customer No  Ship To Customer Name]), 13,"Open Orders"),
+				    ("Territory", NAMEOF('D_Customer_ShipTo'[Territory Employee Name]), 14,"Open Orders"),
+				    ("OCN", NAMEOF(F_Order_Item[Order Ctl No]), 15,"Open Orders"),
+				    ("Total Lines Ordered", NAMEOF([Open Order Line #]), 16,"Open Orders"),
+				    ("Converted to Order Date", NAMEOF(F_Order_Item[Converted To Order Date]), 17,"Open Orders"),
+				    ("Due Date", NAMEOF(F_Order_Item[Due Date]), 18,"Open Orders"),
+				    ("Open Order $", NAMEOF([Open Order $]), 19,"Open Orders")
+				}
+				```
+
+	annotation PBI_Id = 5ff413f1d62f4d83bf91a7c9abdb195c
+

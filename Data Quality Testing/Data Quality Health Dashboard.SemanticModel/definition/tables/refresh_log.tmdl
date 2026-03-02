@@ -1,0 +1,143 @@
+table refresh_log
+	lineageTag: 279bd043-310a-4200-bc85-94e3d0de4375
+
+	column Status
+		dataType: string
+		lineageTag: edd58b2f-81a3-47b8-ab5f-851142b7e61c
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tablename
+		dataType: string
+		lineageTag: c691b9ee-db5f-4ec8-b81c-bbdb667b7049
+		summarizeBy: none
+		sourceColumn: Tablename
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Row Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: bf1ce5c1-fdac-4aff-9751-e40881ea88cb
+		summarizeBy: none
+		sourceColumn: Row Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Refresh Log Hdr Key'
+		dataType: string
+		lineageTag: 3d3ab408-2f23-4753-a8ae-f09ea5525ec6
+		summarizeBy: none
+		sourceColumn: Refresh Log Hdr Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Most Stale Table'
+		dataType: string
+		lineageTag: f7b7a261-c3c2-4abd-9731-bd145435d052
+		summarizeBy: none
+		sourceColumn: Most Stale Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Most Stale Source Table Tmstmp'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c58edaa1-50b9-4f8b-89d2-e292f35d1d83
+		summarizeBy: none
+		sourceColumn: Most Stale Source Table Tmstmp
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Refresh Type'
+		dataType: string
+		lineageTag: f2560077-3b2f-4fb2-8afa-95536f1d576f
+		summarizeBy: none
+		sourceColumn: Refresh Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Run Complete Time'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7c9808be-8ee8-4d11-a073-0548528aa629
+		summarizeBy: none
+		sourceColumn: Run Complete Time
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Table'
+		dataType: string
+		lineageTag: a7bd93c6-b06e-4947-bfbc-6c04c16c7bff
+		summarizeBy: none
+		sourceColumn: Source Table
+
+		annotation SummarizationSetBy = Automatic
+
+	partition refresh_log = m
+		mode: import
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_refresh_log = Value.NativeQuery(Source, "
+				-- Unfortunately, Native queries do not support CTEs! Sorry!
+				-- I have done my best to state what each query does and organize it so it makes sense
+				
+				SELECT 
+				    -- Header Level Fields
+				    rl.STATUS
+				    , rl.TABLENAME
+				    , rl.RUN_END_UTC_DTTM AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time' AS [RUN_COMPLETE_TIME]
+				    , rl.ROW_COUNT
+				    , rl.SOURCE_TABLE
+				    , rl.REFRESH_LOG_HDR_KEY
+				    -- Detail Level Aggregated Fields
+				    , mst.MOST_STALE_TABLE
+				    , mst.MOST_STALE_SOURCE_TABLE_TMSTMP AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time' AS MOST_STALE_SOURCE_TABLE_TMSTMP
+				    -- Other logical fields
+				    , CASE 
+				        WHEN mst.MOST_STALE_TABLE IS NULL AND mst.MOST_STALE_SOURCE_TABLE_TMSTMP IS NULL THEN 'Adhoc Refresh - No Details Captured'
+				        ELSE 'Scheduled Refresh'
+				    END AS REFRESH_TYPE
+				FROM dbo.refresh_log rl
+				    LEFT JOIN (
+				
+				        -- This section finds the most stale upstream table + its refresh time.
+				
+				        SELECT 
+				                rld.REFRESH_LOG_HDR_KEY
+				                -- Addresses the edge case where 2 upstream tables have the exact same refresh time
+				                --      (see key 'mot-dat-d-us-core-rf.DMN_ORDRMGT.F_SHPR_ITEM_CMPNT_UNION_V2025-04-11 09:12:37.904650')
+				                , MAX(rld.REFINED_VIEW_DEPENDENCY) AS MOST_STALE_TABLE
+				                , MAX(srt.MOST_STALE_SOURCE_TABLE_TMSTMP) AS MOST_STALE_SOURCE_TABLE_TMSTMP
+				            FROM dbo.refresh_log_detail rld 
+				                INNER JOIN (
+				
+				                    -- This section finds the most stale time (in an upstream materialized table) associated with each refresh
+				                    SELECT 
+				                        REFRESH_LOG_HDR_KEY
+				                        , MIN(LAST_REFRESH) AS MOST_STALE_SOURCE_TABLE_TMSTMP
+				                    FROM dbo.refresh_log_detail
+				                    GROUP BY REFRESH_LOG_HDR_KEY
+				
+				                ) srt 
+				                ON rld.REFRESH_LOG_HDR_KEY = srt.REFRESH_LOG_HDR_KEY
+				                    AND rld.LAST_REFRESH = srt.MOST_STALE_SOURCE_TABLE_TMSTMP
+				            GROUP BY rld.REFRESH_LOG_HDR_KEY
+				
+				
+				    ) mst
+				    on rl.REFRESH_LOG_HDR_KEY = mst.REFRESH_LOG_HDR_KEY
+				    ", null, [EnableFolding = true]),
+				    #"Bulk Column Rename" = Table.TransformColumnNames(dbo_refresh_log, each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," ")),
+				    #"Filtered Rows" = Table.SelectRows(#"Bulk Column Rename", each ([Refresh Log Hdr Key] <> null))
+				in
+				    #"Filtered Rows"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

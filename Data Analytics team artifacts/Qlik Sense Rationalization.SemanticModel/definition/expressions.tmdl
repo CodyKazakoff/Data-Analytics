@@ -1,0 +1,1085 @@
+/// Used to determine start of range for the dates when using an incremental load.
+expression RangeStart = #datetime(2001, 1, 1, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: 764afb13-5369-4067-8ec0-f917a7784463
+	queryGroup: 'Metadata\Parameters\File Locations'
+
+	annotation PBI_ResultType = DateTime
+
+/// Used to determine end of range for the dates when using an incremental load.
+expression RangeEnd = #datetime(2001, 1, 1, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
+	lineageTag: 727c8be9-47f3-4999-9f92-54a57ea8c70c
+	queryGroup: 'Metadata\Parameters\File Locations'
+
+	annotation PBI_ResultType = DateTime
+
+expression fx_CreateCalendar = ```
+		let
+		    fx = (p_DateList as list, optional p_FirstFiscalPeriod as number) => let
+		        /*  
+		            Find the start date and end date of the fact table
+		        */
+		        StartDate                                               = Date.From(List.Min(p_DateList)),
+		        EndDate                                                 = Date.From(List.Max(p_DateList)),
+		        
+		        // Load the distinct list of dates from the start date to end date and sort the table
+		        ListDates                                               = List.Dates(StartDate, Number.From(EndDate - StartDate) + 1, #duration(1,0,0,0)),
+		        #"Load Distinct All Dates"                              = Table.FromList(ListDates, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		        #"Renamed Columns"                                      = Table.RenameColumns(#"Load Distinct All Dates",{{"Column1", "Date"}}),
+		        #"Sorted Rows by Date Asc"                              = Table.Sort(#"Renamed Columns",{{"Date", Order.Ascending}}),
+		        
+		        // Add business friendly columns
+		        #"Added Calendar Year"                                  = Table.AddColumn(#"Sorted Rows by Date Asc", "Year", each Date.Year([Date])),
+		        #"Added Calendar Month of Year"                         = Table.AddColumn(#"Added Calendar Year", "Month of Year", each Text.Range(Date.MonthName([Date]), 0, 3)),
+		        #"Added Calendar Month of Year Long"                    = Table.AddColumn(#"Added Calendar Month of Year", "Month of Year Long", each Date.MonthName([Date])),
+		        #"Added Calendar Month Num"                              = Table.AddColumn(#"Added Calendar Month of Year Long", "Month Num", each Date.Month([Date])),
+		        #"Added Calendar Quarter of Year"                       = Table.AddColumn(#"Added Calendar Month Num", "Quarter of Year", each "Q" & Number.ToText(Number.RoundUp([Month Num] / 3))),
+		        #"Added Calendar Week of Year"                          = Table.AddColumn(#"Added Calendar Quarter of Year", "Week of Year", each Date.WeekOfYear([Date])),
+		        #"Added Calendar Month"                                 = Table.AddColumn(#"Added Calendar Week of Year", "Month", each Text.From([Year]) &"-"& [Month of Year]),
+		        #"Added Calendar Quarter"                               = Table.AddColumn(#"Added Calendar Month", "Quarter", each Text.From([Year]) &"-"& [Quarter of Year]),
+		        #"Added Calendar Week"                                  = Table.AddColumn(#"Added Calendar Quarter", "Week", each Text.From([Year]) &"-W"& Text.From([Week of Year])),
+		        #"Added Calendar Weekday"                               = Table.AddColumn(#"Added Calendar Week", "Weekday", each Text.Range(Date.DayOfWeekName([Date]), 0, 3)),
+		        #"Added Calendar Weekday Num"                           = Table.AddColumn(#"Added Calendar Weekday", "Weekday Num", each Date.DayOfWeek([Date])),
+		        #"Added Calendar Week Ending Date"                      = Table.AddColumn(#"Added Calendar Weekday Num", "Week Ending Date", each Date.EndOfWeek([Date])),
+		        
+		        // Add [Day of...] columns to enable time based variables 
+		        #"Added Calendar Day of Year"                           = Table.AddColumn(#"Added Calendar Week Ending Date", "Day of Year", each Date.DayOfYear([Date])),
+		        #"Added Calendar Day of Quarter"                        = Table.AddColumn(#"Added Calendar Day of Year", "Day of Quarter", each Number.From([Date]) - Number.From(Date.StartOfQuarter([Date])) + 1),
+		        #"Added Calendar Day of Month"                          = Table.AddColumn(#"Added Calendar Day of Quarter", "Day of Month", each Date.Day([Date])),
+		        
+		        // Add  Index columns to enable time based variables and sorting of business friendly columns
+		        // Year  Index is redundant with Year
+		        //#"Added Calendar Year Index"                           = Table.AddColumn(#"Added Calendar Day of Month", "Year Index", each [Year]),
+		        // Quarter & Month  Index is useful for sorting in UI
+		        #"Added Calendar Quarter Index"                          = Table.AddColumn(#"Added Calendar Day of Month", "Quarter Index", each [Year] * 4 + Number.RoundUp([Month Num] / 3)),
+		        #"Added Calendar Month Index"                            = Table.AddColumn(#"Added Calendar Quarter Index", "Month Index", each [Year] * 12 + Date.Month([Date])),
+		        // Add Week Index column
+		        #"Filtered Rows to Sundays only"                        = Table.SelectColumns(Table.SelectRows(#"Added Calendar Month Index", each ([Weekday] = "Sun")), "Week Ending Date"),
+		        #"Created Week Index"                                    = Table.AddIndexColumn(#"Filtered Rows to Sundays only", "TempWeek Index", 2, 1),
+		        #"Merged Queries Master Calendar to Week Index"          = Table.NestedJoin(#"Added Calendar Month Index",{"Week Ending Date"},#"Created Week Index",{"Week Ending Date"},"Added  Index WeekNum",JoinKind.LeftOuter),
+		        #"Expanded to add Week Index"                            = Table.ExpandTableColumn(#"Merged Queries Master Calendar to Week Index", "Added  Index WeekNum", {"TempWeek Index"}, {"TempWeek Index"}),
+		        #"Replaced nulls with 1s in Week Index"                  = Table.AddColumn(#"Expanded to add Week Index", "Week Index", each if [TempWeek Index] = null 
+		            then 1
+		            else [TempWeek Index]),
+		        #"Removed TempWeek Index"                                = Table.RemoveColumns(#"Replaced nulls with 1s in Week Index",{"TempWeek Index"}),
+		        
+		        #"Added Calendar Date Index"                             = Table.AddColumn(#"Removed TempWeek Index", "Date Index", each Number.From([Date])),
+		        
+		        #"Added Calendar DateKey"                               = Table.AddColumn(#"Added Calendar Date Index", "Date Key", each Date.ToText([Date], "YYYYMMDD"), Int64.Type),
+		
+		        #"Added Fiscal Year" 
+		            = Table.AddColumn(#"Added Calendar DateKey", "Fiscal Year"
+		            , each 
+		                if p_FirstFiscalPeriod <> null
+		                    then if [Month Num] >= p_FirstFiscalPeriod
+		                        then [Year]+1
+		                        else [Year]
+		                    else
+		                        [Year]
+		        ),
+		
+		        #"Added Fiscal Period Num" 
+		            = Table.AddColumn(#"Added Fiscal Year", "Fiscal Period Num"
+		            , each
+		                if p_FirstFiscalPeriod <> null
+		                    then if [Month Num] >= p_FirstFiscalPeriod
+		                        then [Month Num]-(p_FirstFiscalPeriod-1)
+		                        else [Month Num]+(12-p_FirstFiscalPeriod+1)
+		                    else [Month Num]
+		        ),
+		
+		        #"Added Fiscal Period"                                  = Table.AddColumn(#"Added Fiscal Period Num", "Fiscal Period", each Text.From([Fiscal Year]) &"-"& Text.PadStart(Text.From([Fiscal Period Num]), 2, "0")),
+		
+		        #"Added Fiscal Quarter of Year"                         = Table.AddColumn(#"Added Fiscal Period", "Fiscal Quarter of Year", each "Q" & Number.ToText(Number.RoundUp([Fiscal Period Num] / 3))),
+		
+		        #"Added Fiscal Quarter"                                 = Table.AddColumn(#"Added Fiscal Quarter of Year", "Fiscal Quarter", each Text.From([Fiscal Year]) &"-"& [Fiscal Quarter of Year]),
+		        
+		        // Change the data types to the final data types
+		        Output 
+		            = Table.TransformColumnTypes(#"Added Fiscal Quarter"
+		            ,{
+		                {"Date", type date}
+		                , {"Date Key", Int64.Type}
+		                , {"Year", Int64.Type}
+		                , {"Month of Year", type text}
+		                , {"Month Num", Int64.Type}
+		                , {"Quarter of Year", type text}
+		                , {"Week of Year", Int64.Type}
+		                , {"Month", type text}
+		                , {"Quarter", type text}
+		                , {"Week", type text}
+		                , {"Weekday", type text}
+		                , {"Week Ending Date", type date}
+		                , {"Day of Year", Int64.Type}
+		                , {"Day of Quarter", Int64.Type}
+		                , {"Day of Month", Int64.Type}
+		                //, {"Year Index", Int64.Type}
+		                , {"Quarter Index", Int64.Type}
+		                , {"Month Index", Int64.Type}
+		                , {"Week Index", Int64.Type}
+		                , {"Date Index", Int64.Type}
+		                , {"Weekday Num", Int64.Type}
+		                , {"Month of Year Long", type text}
+		                , {"Fiscal Year", Int64.Type}
+		                , {"Fiscal Period Num", Int64.Type}
+		                , {"Fiscal Period", type text}
+		                , {"Fiscal Quarter of Year", type text}
+		                , {"Fiscal Quarter", type text}
+		            })
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_DateList as list
+		            , optional p_FirstFiscalPeriod as number
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_CreateCalendar"
+		            , Documentation.Description = "This function takes a list of dates and generates all possible dates between the min and max date provided. Optionally, provide a first fiscal period to generate Fiscal Year, Fiscal Period, and Fiscal Quarter."
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_CreateCalendar without first fiscal period"
+		                    , Code = "fx_CreateCalendar(Sales[Date])"
+		                    , Result = "A table containing all dates between the min and max dates from the date list provided. The Fiscal columns will match the calendar equivalents (ex: Fiscal Year = Year)"
+		                ],
+		                [
+		                    Description = "Example usage of fx_CreateCalendar with first fiscal period"
+		                    , Code = "fx_CreateCalendar(Sales[Date], 10)"
+		                    , Result = "A table containing all dates between the min and max dates from the date list provided. The Fiscal periods will be based off the first fiscal period provided.#(cr)Ex: If first fiscal period = 10, the first period in the fiscal calendar will be 10."
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		```
+	lineageTag: 8dd23062-7f2a-43b0-8e56-16972936956f
+	queryGroup: Metadata\Functions
+
+	annotation PBI_ResultType = Function
+
+	annotation PBI_NavigationStepName = Navigation
+
+expression fx_Loop = ```
+		let
+		    fx = (
+		            p_startIteration as number
+		            , p_endIteration as number
+		            , p_increment as number
+		            //Function to be called on each iteration. This function should be expecting a numeric iteration paramter
+		            , p_function as function
+		            , optional p_combineresultsets as logical
+		            , optional p_result as table
+		            , optional p_currentIteration as number) =>
+		    let
+		        currentIteration =              if p_currentIteration = null
+		                                            then p_startIteration
+		                                            else p_currentIteration,
+		        //Run function that gets table for current iterations min/max dates
+		        currentResultSet =              @p_function(currentIteration, p_result),
+		        //Combine current table with prior iterations (if there are prior iterations)
+		        fullResultTable =               if p_result = null or p_combineresultsets = false
+		                                                then currentResultSet
+		                                                else Table.Combine({p_result, currentResultSet}),
+		        //Increment loop
+		        nextIteration = currentIteration + p_increment,
+		        //If there are still iterations to run, call this function again and pass the next iteration and the current table to append to
+		        //Otherwise, return the current output.
+		        Output = 
+		        if nextIteration <= p_endIteration
+		            then @fx_Loop(p_startIteration, p_endIteration, p_increment, p_function, p_combineresultsets, fullResultTable, nextIteration)
+		            else fullResultTable
+		    in
+		    Output
+		    , fx_Type = type function
+		    (
+		        p_startIteration as number
+		        , p_endIteration as number
+		        , p_increment as number
+		        //Function to be called on each iteration. This function should be expecting a numeric iteration paramter
+		        , p_function as function
+		        , optional p_combineresultsets as logical
+		        , optional p_result as table
+		        , optional p_currentIteration as number
+		    ) as any meta
+		    [
+		        Documentation.Name = "fx_Loop"
+		        , Documentation.Description = "This function provides a facility to iterate over a list of values and exucute a user defined function in each iteration. When invoking this function, you should never need to define p_result or p_currentIteration, those are defined as part of the fx_Loop itself."
+		        , Documentation.Examples = 
+		        {
+		            [
+		                Description = "Iterate from 0 to 9 by 1 and add each number to a table. Return a table with values 0 to 9."
+		                , Code = 
+		"fx_Loop(
+		    0
+		    , 9
+		    , 1
+		    , (p_iteration as number, optional p_result as table) => let
+		        //Logic that uses current iteration
+		        loopOutput          = #table({""Column""}, {{p_iteration}})
+		    in
+		        //Output that will be used as result.
+		        loopOutput
+		)"
+		                , Result = 
+		"{
+		    [Column = 0]
+		    , [Column = 1]
+		    , [Column = 2]
+		    , [Column = 3]
+		    , [Column = 4]
+		    , [Column = 5]
+		    , [Column = 6]
+		    , [Column = 7]
+		    , [Column = 8]
+		    , [Column = 9]
+		}"
+		            ]
+		            , [
+		                Description = "Iterate from 0 to 9 by 1 and add each number to a table. Return with only the last result."
+		                , Code = 
+		"fx_Loop(
+		    0
+		    , 9
+		    , 1
+		    , (p_iteration as number, optional p_result as table) => let
+		        //Logic that uses current iteration
+		        loopOutput          = #table({""Column""}, {{p_iteration}})
+		    in
+		        //Output that will be used as result.
+		        loopOutput
+		    , false
+		)"
+		                , Result = 
+		"{
+		    [Column = 0]
+		    , [Column = 1]
+		    , [Column = 2]
+		    , [Column = 3]
+		    , [Column = 4]
+		    , [Column = 5]
+		    , [Column = 6]
+		    , [Column = 7]
+		    , [Column = 8]
+		    , [Column = 9]
+		}"
+		            ]
+		        }
+		    ]
+		    
+		in
+		Value.ReplaceType(fx, fx_Type)
+		```
+	lineageTag: 5f47af5b-a622-4ee0-974e-670281b92efd
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_TableProfile = ```
+		let
+		    //This is a comment
+		    fx = (p_SourceTable as table, optional p_ColumnName as text, optional p_TableName as text) => let
+		        filteredSouceTable              = if p_ColumnName <> null
+		                                            then Table.SelectColumns(p_SourceTable,{p_ColumnName})
+		                                            else p_SourceTable,
+		
+		        //Get the base profile table for the table we want to profile
+		        tempProfile                     = Table.Profile(
+		                                            filteredSouceTable,
+		                                            {
+		                                                {"Median", each Type.Is(_, type number), List.Median}
+		                                                , {"Mode", each Type.Is(_, type number), List.Mode}
+		                                            }
+		                                        ),
+		        tempProfileRemovedColumns       = Table.RemoveColumns(tempProfile,
+		                                            {
+		                                                "DistinctCount"
+		                                            }),
+		        tempProfileRenamedColumns       = Table.RenameColumns(tempProfileRemovedColumns,
+		                                            {
+		                                                {"Count", "Row Count"}
+		                                            }),
+		        //Add an index column that we can use to loop over rows.
+		        Profile                         = Table.AddIndexColumn(tempProfileRenamedColumns, "Column Index", 0, 1, Int64.Type),
+		
+		        //Add % of values in column that are null & flag columns that are 100% null
+		        #"% Null"                       = Table.AddColumn(Profile, "% Null", each [NullCount] / [Row Count], Percentage.Type),
+		        #"Flag.Contains Nulls"              = Table.AddColumn(#"% Null", "Flag.Contains Nulls", each if [NullCount] > 0 then true else false, type logical),
+		   
+		        //Start loop function
+		        LoopOutput = fx_Loop(
+		            //Loop params
+		            //Loop Start
+		            0
+		            //Loop End
+		            , (Table.RowCount(Profile) - 1)
+		            //Loop Increment
+		            , 1
+		            //Create function that will be looped over
+		            , (p_iteration as number, optional p_result as table) => let
+		
+		                //Get the row that we're interested in, based on the iteration
+		                fieldRow                = Table.SelectRows(#"Flag.Contains Nulls", each [Column Index] = p_iteration),
+		
+		                //Get column name for use in later steps
+		                columnName              = fieldRow{0}[Column],
+		                
+		                //Get a list of all the values for a field so we can interrogate it.
+		                fieldValues         = Table.Column(filteredSouceTable, columnName),
+		    
+		                //Add % of values in column that are Distinct
+		                //Recalculating Distinct count because the default method that comes out of Table.Profile throws an error if there are nulls in the column
+		                DistinctValues          = List.Count(List.Distinct(fieldValues)),
+		                AddDistinctValues       = Table.AddColumn(fieldRow, "Distinct Values", each DistinctValues, type number),
+		                #"% Distinct"           = Table.AddColumn(AddDistinctValues, "% Distinct", each [Distinct Values] / [Row Count], Percentage.Type),
+		                #"Flag.100% Distinct"   = Table.AddColumn(#"% Distinct", "Flag.100% Distinct", each if [#"% Distinct"] = 1 then true else false, type logical),
+		
+		                BlankCount              = List.Count(List.Select(fieldValues, each Text.Trim(Text.From(_)) = "")),
+		                AddBlankCount           = Table.AddColumn(#"Flag.100% Distinct", "BlankCount", each BlankCount, type number),
+		                
+		                //Add % of values in column that are Blank
+		                #"% Blank"              = Table.AddColumn(AddBlankCount, "% Blank", each [BlankCount] / [Row Count], Percentage.Type),
+		                #"Flag.Contains Blanks" = Table.AddColumn(#"% Blank", "Flag.Contains Blanks", each if [BlankCount] > 0 then true else false, type logical),
+		
+		                BlankError              = if BlankCount > 0 then Text.Combine({columnName, " Contains Blanks"}) else null,
+		                NullError               = if fieldRow{0}[NullCount] > 0 then Text.Combine({columnName, " Contains Nulls"}) else null,
+		
+		                Errors                  = if
+		                                            BlankError <> null
+		                                            or NullError <> null
+		                                            //or TestError <> null
+		                                            then 
+		                                                error Error.Record(Text.Combine({"Errors were found in ", columnName})
+		                                                , "Check this column for errors"
+		                                                , Text.Combine(
+		                                                    {
+		                                                        "#(tab)"
+		                                                        , if BlankError <> null then Text.Combine({BlankError, "#(cr,tab)"}) else null
+		                                                        , if NullError <> null then Text.Combine({NullError, "#(cr,tab)"}) else null
+		                                                    })
+		                                                )
+		                                            else null,
+		
+		                AddErrorColumn          = Table.AddColumn(#"Flag.Contains Blanks", "Errors", each Errors, type logical),
+		
+		                //Add table name. This is useful when we're profiling the whole dataset, rather than just an individual table.
+		                TableName               = if p_TableName = null
+		                                            then "Table"
+		                                            else p_TableName,
+		                
+		                //Add table name column, and send output to next iteration
+		                loopOutput              = Table.AddColumn(AddErrorColumn, "Table Name", each TableName, type text)
+		            in
+		                //Output that will be used as result.
+		                loopOutput),
+		        LoopOutputRemoveColumns         = Table.RemoveColumns(LoopOutput,
+		                                            {
+		                                                "Column Index"
+		                                            }),
+		        
+		        #"Reorder Columns"              = Table.ReorderColumns(LoopOutputRemoveColumns,
+		            {
+		                "Column"
+		                , "Errors"
+		                , "Flag.100% Distinct"
+		                , "Flag.Contains Nulls"
+		                , "Flag.Contains Blanks"
+		                , "Distinct Values"
+		                , "Row Count"
+		                , "% Distinct"
+		                , "NullCount"
+		                , "% Null"
+		                , "BlankCount"
+		                , "% Blank"
+		                , "Min"
+		                , "Max"
+		                , "Average"
+		                , "Median"
+		                , "Mode"
+		                , "StandardDeviation"
+		            }),
+		
+		        Output                          = #"Reorder Columns"
+		    in
+		        Output
+		        , fx_Type = type function
+		        (
+		            p_SourceTable as table
+		            , optional p_ColumnName as text
+		            , optional p_TableName as text
+		        ) as table meta
+		        [
+		            Documentation.Name          = "fx_TableProfile"
+		            , Documentation.Description = "This function takes a tabe, runs the Table.Profile function against it, and adds some additional profiling information.<br>Optionally add a column name p_ColumnName to only run profiling against that column.<br>p_TableName is not required and is only included to support fx_DatasetProfile. <br><br> This function relies on the function fx_Loop existing in the dataset."
+		            , Documentation.Examples    = 
+		            {
+		                [
+		                    Description         = "Example usage of fx_TableProfile against an entire table."
+		                    , Code              = "fx_TableProfile(Sales)"
+		                    , Result            = "A table containing the result of Table.Profile(Sales), plus % Null, % Distinct, % Blank, and an errors column calling out the errors found for each column."
+		                ],
+		                [
+		                    Description         = "Example usage of fx_TableProfile against the Order Number column from the Sales table."
+		                    , Code              = "fx_TableProfile(Sales, ""Order Number"")"
+		                    , Result            = "A table containing the result of Table.Profile(Sales) for the Order Number column, plus % Null, % Distinct, % Blank, and an errors column calling out the errors found for the Order Number column."
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		```
+	lineageTag: 58ffd5f2-e1c8-4966-8502-e35ea5383abb
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_DistinctKeyChecker = ```
+		let
+		    //This is a comment
+		    fx = (p_KeyField as list) => let
+		        #"Converted to Table"            = Table.FromList(p_KeyField, Splitter.SplitByNothing(), {"Key"}, null, ExtraValues.Error),
+		        #"Grouped Rows"                  = Table.Group(#"Converted to Table", {"Key"}, {{"Count", each Table.RowCount(_), Int64.Type}}),
+		        #"Select Rows"                   = Table.SelectRows(#"Grouped Rows", each [Count] > 1),
+		        Error                            = error Error.Record(
+		                                                "Errors were found in a key field"
+		                                                , "Key field exists on multiple records"
+		                                                , "Check key field for duplicates"
+		                                                ),
+		        #"Add Error Column"             = Table.AddColumn(#"Select Rows", "Error", each Error),
+		        Output                          = #"Add Error Column"
+		    in
+		        Output
+		        , fx_Type = type function
+		        (
+		            p_KeyField as list
+		        ) as table meta
+		        [
+		            Documentation.Name          = "fx_DistinctKeyChecker"
+		            , Documentation.Description = "This function is intended to identify key values that are expected to be unique to each row and determine if it is truly unique. If it is not, this function will generate a table with the key values that are in violation, and throw an error in the data refresh"
+		            , Documentation.Examples    = 
+		            {
+		                [
+		                    Description         = "Example usage of fx_DistinctKeyChecker"
+		                    , Code              = "fx_DistinctKeyChecker(Sales[Order Number])"
+		                    , Result            = "A table with all the Order Numbers that appear on multiple records in the Sales table."
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		```
+	lineageTag: f4eb2a88-a282-4287-be77-cfb4ceaa2c48
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_TestRelationship = ```
+		let
+		    fx = (p_Column1 as list, p_Column2 as list) => let
+		
+		        //Column 1 Info
+		        #"Table 1 Source"               = Table.FromList(p_Column1, Splitter.SplitByNothing(), {"Table 1 Key"}, null, ExtraValues.Error),
+		        #"Table 1 Grouped Rows"         = Table.Group(#"Table 1 Source", {"Table 1 Key"}, {{"Table 1 Instance Count", each Table.RowCount(_), Int64.Type}}),
+		
+		        //Column 2 Info
+		        #"Table 2 Source"               = Table.FromList(p_Column2, Splitter.SplitByNothing(), {"Table 2 Key"}, null, ExtraValues.Error),
+		        #"Table 2 Grouped Rows"         = Table.Group(#"Table 2 Source", {"Table 2 Key"}, {{"Table 2 Instance Count", each Table.RowCount(_), Int64.Type}}),
+		
+		        #"Joined Tables"                = Table.NestedJoin(#"Table 1 Grouped Rows", {"Table 1 Key"}, #"Table 2 Grouped Rows", {"Table 2 Key"}, "Output", JoinKind.FullOuter),
+		        #"Expanded Output"              = Table.ExpandTableColumn(#"Joined Tables", "Output", {"Table 2 Key", "Table 2 Instance Count"}),
+		
+		        #"Table 1 Null Ind"             = Table.AddColumn(#"Expanded Output", "Table 1 Null Ind", each if [Table 1 Key] = null then 1 else 0),
+		        #"Table 2 Null Ind"             = Table.AddColumn(#"Table 1 Null Ind", "Table 2 Null Ind", each if [Table 2 Key] = null then 1 else 0),
+		        #"Grouped Rows Null Ind"        = Table.Group(#"Table 2 Null Ind"
+		                                            , {}
+		                                            , {
+		                                                {"Table 1 Null Count", each List.Sum([Table 1 Null Ind]), type number}
+		                                                , {"Table 2 Null Count", each List.Sum([Table 2 Null Ind]), type number}
+		                                            }
+		                                        ),
+		
+		        #"Grouped Rows Many Instances"  = Table.Group(#"Expanded Output"
+		                                                , {}
+		                                                , {
+		                                                    {"Table 1 Has Many Instances", each List.Max([Table 1 Instance Count]), type number}
+		                                                    , {"Table 2 Has Many Instances", each List.Max([Table 2 Instance Count]), type number}
+		                                                }
+		                                            ),
+		
+		        #"Output"                       = Table.FromRecords({
+		                                                [
+		                                                    Relationship = Text.Combine(
+		                                                        {
+		                                                            if #"Grouped Rows Many Instances"[Table 1 Has Many Instances]{0} > 1 then "m" else "1"
+		                                                            , if #"Grouped Rows Null Ind"[Table 1 Null Count]{0} > 0 then " or 0" else ""
+		                                                            , ":"
+		                                                            , if #"Grouped Rows Many Instances"[Table 2 Has Many Instances]{0} > 1 then "m" else "1"
+		                                                            , if #"Grouped Rows Null Ind"[Table 2 Null Count]{0} > 0 then " or 0" else ""
+		                                                        }
+		                                                    )
+		                                                ]
+		                                            })
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_Column1 as list
+		            , p_Column2 as list
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_TestRelationship"
+		            , Documentation.Description = "This function takes 2 columns and compares the values to determine the cardinality of the relationship that would be created in the UI."
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage"
+		                    , Code = "fx_TestRelationship(FactInternetSales[ProductKey], DimProduct[ProductKey])"
+		                    , Result = "m or 0:1"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		```
+	lineageTag: f28ad0d7-deda-40f1-9d92-4be1106026be
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_ConditionallyLimitRows = ```
+		let
+		  fx = (p_Table as table, p_LimitRecords as logical, p_RecordCount as number) => let
+		        Output                          = if p_LimitRecords
+		                                            then Table.FirstN(p_Table, p_RecordCount)
+		                                            else p_Table
+		    in
+		        Output,
+		  fx_Type = type function
+		        (
+		            p_Table as table
+		            , p_LimitRecords as logical
+		            , p_RecordCount as number
+		        ) as table meta
+		        [
+		            Documentation.Name          = "fx_ConditionallyLimitRows"
+		            , Documentation.Description = "This function will conditionally limit the records based on the logical p_LimitRecords. This function is foldable, you'll see the native query for this step in your query's applied steps."
+		            , Documentation.Examples    = 
+		            {
+		                [
+		                    Description         = "Example usage of fx_ConditionallyLimitRows, limiting record to the first 10."
+		                    , Code              = "fx_ConditionallyLimitRows(#""Table"", true, 10)"
+		                    , Result            = "The top 10 records for table ""#Table"""
+		                ]
+		            }
+		        ],
+		  fx_Output = Value.ReplaceType(fx, fx_Type)
+		in
+		  fx_Output
+		```
+	lineageTag: 4c4cad26-26d6-4c42-b259-8613daafc6cb
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+/// A flag used to determine whether the record count in the dataset should be limited.
+/// 
+/// Used with LImitRecordCount to determine how many records to keep on tables with the fx_ConditionallyLImitRows function. Useful when doing development on large datasets.
+expression LimitRecordCount = true meta [IsParameterQuery=true, Type="Logical", IsParameterQueryRequired=false]
+	lineageTag: c3785ece-0839-42a2-be18-4af5249ee543
+	queryGroup: 'Metadata\Parameters\File Locations'
+
+	annotation PBI_ResultType = Logical
+
+/// The number of records to keep.
+/// 
+/// Used with LmitRecordCount to determine how many records to keep on tables with the fx_ConditionallyLimitRows function. Useful when doing development on large datasets.
+expression RecordCountToKeep = 100 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=false]
+	lineageTag: 55752335-45da-4f23-a4ca-3dc67160a1b2
+	queryGroup: 'Metadata\Parameters\File Locations'
+
+	annotation PBI_ResultType = Number
+
+expression Today =
+		let
+		    Source = Date.From(DateTime.FixedLocalNow())
+		in
+		    Source
+	lineageTag: 7a4e4fb0-a327-45fb-8855-be50dc485f3a
+	queryGroup: Metadata\Queries
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Date
+
+expression fx_FilterDimByFact = ```
+		let
+		  fx = (p_FactTable as table, p_FactForeignKeyFieldName as text, p_DimTable as table, p_DimTableKeyFieldName as text) => let
+		        #"Fact Joined Table Name" = Text.Combine({p_FactForeignKeyFieldName, " - Joined"}),
+		        #"Get Distinct Keys from Fact" = Table.Distinct(Table.SelectColumns(p_FactTable, {p_FactForeignKeyFieldName})),
+		        #"Merged Queries" = Table.NestedJoin(p_DimTable, {p_DimTableKeyFieldName}, #"Get Distinct Keys from Fact", {p_FactForeignKeyFieldName}, #"Fact Joined Table Name", JoinKind.Inner),
+		        #"Expanded Foreign Key - Joined" = Table.ExpandTableColumn(#"Merged Queries", #"Fact Joined Table Name", {p_FactForeignKeyFieldName}, {#"Fact Joined Table Name"}),
+		        Output = Table.RemoveColumns(#"Expanded Foreign Key - Joined",{#"Fact Joined Table Name"})
+		    in
+		        Output,
+		  fx_Type = type function
+		        (
+		            p_FactTable as table
+		            , p_FactForeignKeyFieldName as text
+		            , p_DimTable as table
+		            , p_DimTableKeyFieldName as text
+		        ) as table meta
+		        [
+		            Documentation.Name          = "fx_FilterDimByFact"
+		            , Documentation.Description = "This function will filter a dimension table based on the unique list of key values from an associated fact table. This function is foldable."
+		            , Documentation.Examples    = 
+		            {
+		                [
+		                    Description         = "Example usage of fx_FilterDimByFact."
+		                    , Code              = "fx_FilterDimByFact(#""FactInternestSales"", ""CustomerKey"", ""dbo_DimCustomer"", ""CustomerKey"")"
+		                    , Result            = "A filtered down version of dbo_DimCustomer to only the matching values between #""dbo_DimCustomer""[CustomerKey] in #""FactInternestSales""[CustomerKey]"
+		                ]
+		            }
+		        ],
+		  fx_Output = Value.ReplaceType(fx, fx_Type)
+		in
+		  fx_Output
+		```
+	lineageTag: 1667b82c-7cfe-41b1-a15a-de04f7c543a9
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_AddYearIndex = ```
+		let
+		    Source = let
+		    fx = (p_Table as table, p_DateFieldName as text) => let
+		        #"Duplicated Column" = Table.DuplicateColumn(p_Table, p_DateFieldName, "Year Index"),
+		        Output = Table.TransformColumns(#"Duplicated Column", {"Year Index", each Date.Year(_), Int64.Type})
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_Table as table
+		            , p_DateFieldName as text
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_GetYearIndex"
+		            , Documentation.Description = "This function takes a table and date field name and returns a predictable index unique to the year that the date belongs to."
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_CreateDimQuarter"
+		                    , Code = "fx_GetYearIndex(#""FactInternetSales"", ""OrderDate"")"
+		                    , Result = "2022"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: 70730055-9f0d-417d-a1d7-3a1e0ac30c46
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_AddQuarterIndex = ```
+		let
+		    Source = let
+		    fx = (p_Table as table, p_DateFieldName as text) => let
+		        #"Duplicated Column" = Table.DuplicateColumn(p_Table, p_DateFieldName, "Quarter Index"),
+		        Output = Table.TransformColumns(#"Duplicated Column", {"Quarter Index", each Date.Year(_) * 4 + Number.RoundUp(Date.Month(_) / 3), Int64.Type})
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_Table as table
+		            , p_DateFieldName as text
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_GetQuarterIndex"
+		            , Documentation.Description = "This function takes a table and date field name and returns a predictable index unique to the quarter that the date belongs to."
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_CreateDimQuarter"
+		                    , Code = "fx_GetQuarterIndex(#""FactInternetSales"", ""OrderDate"")"
+		                    , Result = "8083"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: 6e15ee53-ec82-4d88-b95d-43e7d2459551
+	queryGroup: Metadata\Functions
+
+	annotation PBI_ResultType = Function
+
+expression fx_AddMonthIndex = ```
+		let
+		    Source = let
+		    fx = (p_Table as table, p_DateFieldName as text) => let
+		        #"Duplicated Column" = Table.DuplicateColumn(p_Table, p_DateFieldName, "Month Index"),
+		        Output = Table.TransformColumns(#"Duplicated Column", {"Month Index", each Date.Year(_) * 12 + Date.Month(_), Int64.Type})
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_Table as table
+		            , p_DateFieldName as text
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_GetMonthIndex"
+		            , Documentation.Description = "This function takes a table and date field name and returns a predictable index unique to the month that the date belongs to."
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_GetMonthIndex"
+		                    , Code = "fx_GetMonthIndex(#""FactInternetSales"", ""OrderDate"")"
+		                    , Result = "24247"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: 7a70079f-7d2a-48c4-85ee-aca78cc4478d
+	queryGroup: Metadata\Functions
+
+	annotation PBI_ResultType = Function
+
+expression fx_AddWeekIndex = ```
+		let
+		    Source = let
+		    fx = (p_Table as table, p_DateFieldName as text) => let
+		        #"Duplicated Column" = Table.DuplicateColumn(p_Table, p_DateFieldName, "Week Index"),
+		        Output = Table.TransformColumns(#"Duplicated Column", {"Week Index", each Date.Year(_) * 52 + Date.WeekOfYear(_), Int64.Type})
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_Table as table
+		            , p_DateFieldName as text
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_GetWeekIndex"
+		            , Documentation.Description = "This function takes a table and date field name and returns a predictable index unique to the week that the date belongs to."
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_GetWeekIndex"
+		                    , Code = "fx_GetWeekIndex(#""FactInternetSales"", ""OrderDate"")"
+		                    , Result = "105067"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: 86ec7336-28c0-4fa8-ba0a-d798eaac7a8f
+	queryGroup: Metadata\Functions
+
+	annotation PBI_ResultType = Function
+
+expression fx_AddDateIndex = ```
+		let
+		    Source = let
+		    fx = (p_Table as table, p_DateFieldName as text) => let
+		        #"Duplicated Column" = Table.DuplicateColumn(p_Table, p_DateFieldName, "Date Index"),
+		        Output = Table.TransformColumns(#"Duplicated Column", {"Date Index", each Number.From(_), Int64.Type})
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_Table as table
+		            , p_DateFieldName as text
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_GetDateIndex"
+		            , Documentation.Description = "This function takes a table and date field name and returns a predictable index unique to the date that the date belongs to."
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_GetDateIndex"
+		                    , Code = "fx_GetDateIndex(#""FactInternetSales"", ""OrderDate"")"
+		                    , Result = "44016"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: 4d3fbdad-6805-4326-a439-120148826237
+	queryGroup: Metadata\Functions
+
+	annotation PBI_ResultType = Function
+
+expression fx_CreateDimDate = ```
+		let
+		    Source = let
+		    fx = (p_DateList as list) => let
+		        Source = #"fx_CreateCalendar"(p_DateList),
+		        Output = Table.Distinct(Table.SelectColumns(Source,{"Date", "Weekday", "Weekday Num", "Day of Year", "Date Index", "Date Key", "Day of Quarter", "Day of Month"}))
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_DateList as list
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_CreateDimDate"
+		            , Documentation.Description = "This function takes a list of dates and generates all possible dates between the min and max date provided using fx_CreateCalendar, then keeps only the Date level columns"
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_CreateDimDate without first fiscal period"
+		                    , Code = "fx_CreateDimDate(Sales[Date])"
+		                    , Result = "A table containing all date level calendar information between the min and max dates from the date list provided"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: 49d09bbf-97f9-477f-b405-cb75d63c7611
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_CreateDimWeek = ```
+		let
+		    Source = let
+		    fx = (p_DateList as list) => let
+		        Source = #"fx_CreateCalendar"(p_DateList),
+		        Output = Table.Distinct(Table.SelectColumns(Source,{"Week", "Week Ending Date", "Week Index"}))
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_DateList as list
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_CreateDimWeek"
+		            , Documentation.Description = "This function takes a list of dates and generates all possible dates between the min and max date provided using fx_CreateCalendar, then keeps only the Week level columns"
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_CreateDimWeek without first fiscal period"
+		                    , Code = "fx_CreateDimWeek(Sales[Date])"
+		                    , Result = "A table containing all week level date information between the min and max dates from the date list provided"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: 2162db03-7bf1-44fc-b34c-5b39864eac6b
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_CreateDimMonth = ```
+		let
+		    Source = let
+		    fx = (p_DateList as list, optional p_FirstFiscalPeriod as number) => let
+		        Source = #"fx_CreateCalendar"(p_DateList),
+		        Output = Table.Distinct(Table.SelectColumns(Source,{"Month of Year", "Month of Year Long", "Month Num", "Month", "Month Index", "Fiscal Period", "Fiscal Period Num", "Month Selector"}))
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_DateList as list
+		            , optional p_FirstFiscalPeriod as number
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_CreateDimMonth"
+		            , Documentation.Description = "This function takes a list of dates and generates all possible dates between the min and max date provided using fx_CreateCalendar, then keeps only the Month level columns"
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_CreateDimMonth without first fiscal period"
+		                    , Code = "fx_CreateDimMonth(Sales[Date])"
+		                    , Result = "A table containing all month level date information between the min and max dates from the date list provided"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: 7f5bc4f5-2431-45ec-a9f6-a630c6212aeb
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_CreateDimQuarter = ```
+		let
+		    Source = let
+		    fx = (p_DateList as list, optional p_FirstFiscalPeriod as number) => let
+		        Source = #"fx_CreateCalendar"(p_DateList),
+		        Output = Table.Distinct(Table.SelectColumns(Source,{"Month of Year", "Month of Year Long", "Month Num", "Month", "Month Index", "Fiscal Period", "Fiscal Period Num", "Month Selector"}))
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_DateList as list
+		            , optional p_FirstFiscalPeriod as number
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_CreateDimQuarter"
+		            , Documentation.Description = "This function takes a list of dates and generates all possible dates between the min and max date provided using fx_CreateCalendar, then keeps only the Quarter level columns"
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_CreateDimQuarter without first fiscal period"
+		                    , Code = "fx_CreateDimQuarter(Sales[Date])"
+		                    , Result = "A table containing all month level date information between the min and max dates from the date list provided"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: b7933743-abac-497d-ba61-559dfc4e7c08
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression fx_CreateDimYear = ```
+		let
+		    Source = let
+		    fx = (p_DateList as list, optional p_FirstFiscalPeriod as number) => let
+		        Source = #"fx_CreateCalendar"(p_DateList),
+		        Output = Table.Distinct(Table.SelectColumns(Source,{"Year", "Year Index", "Fiscal Year"}))
+		    in
+		        Output,
+		        fx_Type = type function
+		        (
+		            p_DateList as list
+		            , optional p_FirstFiscalPeriod as number
+		        ) as table meta
+		        [
+		            Documentation.Name = "fx_CreateDimYear"
+		            , Documentation.Description = "This function takes a list of dates and generates all possible dates between the min and max date provided using fx_CreateCalendar, then keeps only the Year level columns"
+		            , Documentation.Examples = 
+		            {
+		                [
+		                    Description = "Example usage of fx_CreateDimYear without first fiscal period"
+		                    , Code = "fx_CreateDimYear(Sales[Date])"
+		                    , Result = "A table containing all year level date information between the min and max dates from the date list provided"
+		                ]
+		            }
+		        ]
+		in
+		Value.ReplaceType(fx, fx_Type)
+		in
+		    Source
+		```
+	lineageTag: 08c46613-a203-42ef-8f65-090b7081f733
+	queryGroup: Metadata\Functions
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression VortexAppDataFile = "C:\Users\smiller\Desktop\Motion\Dev\SupportingFiles\AppData.vortex" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: e3a49e44-93b5-4b1b-974d-5859ea7967a5
+	queryGroup: 'Metadata\Parameters\File Locations'
+
+	annotation PBI_ResultType = Text
+
+expression ConfigFolder = "C:\Users\smiller\Desktop\Motion\Dev\SupportingFiles\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: f75367d1-7853-4ceb-b1ba-1d15e3b40a48
+	queryGroup: 'Metadata\Parameters\File Locations'
+
+	annotation PBI_ResultType = Text
+
+expression USER_WEIGHT_PARAMETER = 0.3 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+	lineageTag: 91f0fa04-977e-4627-9b72-cb2505951f8c
+	queryGroup: 'Metadata\Parameters\Activity Index Weights'
+
+	annotation PBI_ResultType = Number
+
+expression SESSION_WEIGHT_PARAMETER = 0.1 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+	lineageTag: 99689738-0313-453e-ae90-d40e5aefffe5
+	queryGroup: 'Metadata\Parameters\Activity Index Weights'
+
+	annotation PBI_ResultType = Number
+
+expression ENGAGEMENT_WEIGHT_PARAMETER = 0.9 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+	lineageTag: e5d1282f-65f9-4326-b93b-26b9fe7b7e9b
+	queryGroup: 'Metadata\Parameters\Activity Index Weights'
+
+	annotation PBI_ResultType = Number
+
+expression EXPORT_LOCATION = "C:\Users\smiller\Desktop\Motion\Dev\QuickFix\Exports2\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: d68c0f72-2ab7-49af-9211-615d455a8d0c
+	queryGroup: 'Metadata\Parameters\File Locations'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression AppsPresent =
+		let
+		    Source = Tiers,
+		    #"Removed Other Columns" = Table.SelectColumns(Source,{"Solution ID", "App"})
+		in
+		    #"Removed Other Columns"
+	lineageTag: 23b46e02-c239-4f04-9059-05e97bfcdb6e
+	queryGroup: 'Clustering Calculations'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression PreloadedFiles = "C:\Users\smiller\Downloads\Paulina_Files\PreloadedFiles" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 5f3587d2-0ba7-4919-9b26-82851cd53273
+	queryGroup: 'Metadata\Parameters\File Locations'
+
+	annotation PBI_ResultType = Text
+
+expression SupportingFiles = "C:\Users\smiller\Downloads\Paulina_Files\SupportingFiles" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 56ab43c9-fa0a-4637-8a09-4fa1546bdc33
+	queryGroup: 'Metadata\Parameters\File Locations'
+
+	annotation PBI_ResultType = Text
+

@@ -1,0 +1,348 @@
+table 'F_Inventory Location P21'
+	lineageTag: a622b8ff-bdc1-4e28-8d79-14b250815470
+
+	column MFR_KEY
+		dataType: string
+		lineageTag: 7f35e036-15da-49b1-ad77-24ce6e0b7f13
+		summarizeBy: none
+		sourceColumn: MFR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_KEY
+		dataType: string
+		lineageTag: 6567d488-aa77-4203-99f5-f5fc25f2ffbd
+		summarizeBy: none
+		sourceColumn: LOC_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_KEY
+		dataType: string
+		lineageTag: ddb8bf39-c3f1-46cd-a45b-0fa3b977707b
+		summarizeBy: none
+		sourceColumn: ITM_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: 0eccc691-44bf-448f-8076-495c633b15bc
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORP_CODE
+		dataType: string
+		lineageTag: ef0770b2-e73b-4525-9b17-e47e1dddd4b5
+		summarizeBy: none
+		sourceColumn: CORP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_CORP_LOC
+		dataType: string
+		lineageTag: bffeb63a-01d5-45b3-bfbc-f5ad52ac7b6c
+		summarizeBy: none
+		sourceColumn: MI_CORP_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: f2259cef-6dcc-45bc-8d8e-f37056d2e7d4
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCATION_TYPE_CD
+		dataType: string
+		lineageTag: 39faf98b-474b-4825-b9f3-caea5fbee60d
+		summarizeBy: none
+		sourceColumn: LOCATION_TYPE_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCATION_TYPE
+		dataType: string
+		lineageTag: 88163c54-1dfa-4bfe-9c4e-3d35a93a0525
+		summarizeBy: none
+		sourceColumn: LOCATION_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUS_PERIOD
+		dataType: string
+		lineageTag: 953c1749-91f5-444f-a749-faf70889fa21
+		summarizeBy: none
+		sourceColumn: BUS_PERIOD
+
+		annotation SummarizationSetBy = Automatic
+
+	column STOREROOM_NO
+		dataType: double
+		lineageTag: 659e507d-2853-4250-bb2e-66dbc165039d
+		summarizeBy: sum
+		sourceColumn: STOREROOM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OWNERSHIP_CODE
+		dataType: string
+		lineageTag: e20a58ec-6529-44dd-bb83-6c426b52718d
+		summarizeBy: none
+		sourceColumn: OWNERSHIP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OWNERSHIP_DESC
+		dataType: string
+		lineageTag: 38aef639-34f2-48fa-a566-f2be791bb4b6
+		summarizeBy: none
+		sourceColumn: OWNERSHIP_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_NO
+		dataType: string
+		lineageTag: 9a4e3471-7dba-4533-a1d5-73a49bf64fb9
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MFR_CTL_NO
+		dataType: double
+		lineageTag: eb3db74f-7422-49c1-a3c2-33a8c1739b8c
+		summarizeBy: sum
+		sourceColumn: MFR_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITEM_NO
+		dataType: string
+		lineageTag: 8f72418b-52a8-4ceb-a8f7-38a236a76efc
+		summarizeBy: none
+		sourceColumn: ITEM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_GROUP_NO
+		dataType: string
+		lineageTag: 89beada4-300c-422a-8fd2-c1c2a59f850d
+		summarizeBy: none
+		sourceColumn: PRODUCT_GROUP_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRODUCT_GROUP_DESC
+		dataType: string
+		lineageTag: e8cad687-e62b-4866-aaf8-7108b8251f02
+		summarizeBy: none
+		sourceColumn: PRODUCT_GROUP_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column LEVEL
+		dataType: string
+		lineageTag: 7c1f9c3e-940e-4d07-8d84-e1c4a9ba5504
+		summarizeBy: none
+		sourceColumn: LEVEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column UNIT_COST
+		dataType: string
+		lineageTag: 39d61cd7-7e14-4981-abaa-6c009bcd34ec
+		summarizeBy: none
+		sourceColumn: UNIT_COST
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONVERT_FROM_CURR
+		dataType: string
+		lineageTag: 4a86baef-a844-4d2f-80fb-c6310592723c
+		summarizeBy: none
+		sourceColumn: CONVERT_FROM_CURR
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONVERT_TO_CURR
+		dataType: string
+		lineageTag: 88ead6d3-ee7b-4757-bd18-131eebe6d590
+		summarizeBy: none
+		sourceColumn: CONVERT_TO_CURR
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXCHANGE_DATE
+		dataType: string
+		lineageTag: 0cafd1cc-8ac0-4fa3-9b2c-bbbf62f1aaf4
+		summarizeBy: none
+		sourceColumn: EXCHANGE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXCHANGE_RATE
+		dataType: int64
+		formatString: 0
+		lineageTag: b0362036-12dc-4a22-b091-267751ac8fdf
+		summarizeBy: sum
+		sourceColumn: EXCHANGE_RATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVENTORY_TYPE
+		dataType: string
+		lineageTag: 262825dc-a773-4d74-86bc-2ffcc40f0a23
+		summarizeBy: none
+		sourceColumn: INVENTORY_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column INVENTORY_QTY
+		dataType: double
+		lineageTag: 89a13d40-4f87-4be2-b89e-e1643bc1234a
+		summarizeBy: sum
+		sourceColumn: INVENTORY_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ALLOCATED_QTY
+		dataType: double
+		lineageTag: 3b49f30b-7c3e-49a9-9066-bb3327792c0a
+		summarizeBy: sum
+		sourceColumn: ALLOCATED_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INV_12_MO_AVG
+		dataType: double
+		lineageTag: f4a3017a-9eb2-4c44-8bbe-29e4b5ed2874
+		summarizeBy: sum
+		sourceColumn: INV_12_MO_AVG
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MONTHS_HISTORY
+		dataType: string
+		lineageTag: 00d7d5a6-fc67-4980-b6de-706d80a08100
+		summarizeBy: none
+		sourceColumn: MONTHS_HISTORY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALES_USE_12_M_OCC
+		dataType: double
+		lineageTag: 0ee8d36e-abdc-4b18-b66f-afd5905c2088
+		summarizeBy: sum
+		sourceColumn: SALES_USE_12_M_OCC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALES_USE_12_M_QTY
+		dataType: double
+		lineageTag: 3c824d09-2746-466d-9030-a51106fa2043
+		summarizeBy: sum
+		sourceColumn: SALES_USE_12_M_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALES_USE_24_M_OCC
+		dataType: double
+		lineageTag: 6f679a66-0e18-4366-88e3-286937ccece9
+		summarizeBy: sum
+		sourceColumn: SALES_USE_24_M_OCC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALES_USE_24_M_QTY
+		dataType: double
+		lineageTag: 85ec005d-9cc2-4efb-b955-18150296c653
+		summarizeBy: sum
+		sourceColumn: SALES_USE_24_M_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column XFER_USE_12_M_OCC
+		dataType: string
+		lineageTag: 98e39982-8016-4dc6-8898-9d976aec4350
+		summarizeBy: none
+		sourceColumn: XFER_USE_12_M_OCC
+
+		annotation SummarizationSetBy = Automatic
+
+	column XFER_USE_12_M_QTY
+		dataType: string
+		lineageTag: 538ef0ab-6841-47b7-a7a1-14de008082ae
+		summarizeBy: none
+		sourceColumn: XFER_USE_12_M_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+	column XFER_USE_24_M_OCC
+		dataType: string
+		lineageTag: d38938fa-ce1f-4f5e-a08d-378910fbbd61
+		summarizeBy: none
+		sourceColumn: XFER_USE_24_M_OCC
+
+		annotation SummarizationSetBy = Automatic
+
+	column XFER_USE_24_M_QTY
+		dataType: string
+		lineageTag: 61898be4-db96-4a10-a18e-d139189d4d1f
+		summarizeBy: none
+		sourceColumn: XFER_USE_24_M_QTY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHKSUM_VALUE
+		dataType: string
+		lineageTag: 2b31ec83-6524-487d-afd3-5302ff4acee0
+		summarizeBy: none
+		sourceColumn: CHKSUM_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIM_KEY_CHKSUM_VAL
+		dataType: string
+		lineageTag: 45957fce-ace5-48c6-8c57-e578be7c96ed
+		summarizeBy: none
+		sourceColumn: PRIM_KEY_CHKSUM_VAL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'F_Inventory Location P21' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4" = Workspaces{[workspaceId="8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"]}[Data],
+				    #"2fee59b4-9a34-4143-92fb-1b9fc7c96540" = #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"{[dataflowId="2fee59b4-9a34-4143-92fb-1b9fc7c96540"]}[Data],
+				    #"F_Inventory Location P21_" = #"2fee59b4-9a34-4143-92fb-1b9fc7c96540"{[entity="F_Inventory Location P21",version=""]}[Data]
+				in
+				    #"F_Inventory Location P21_"
+
+	annotation PBI_ResultType = Table
+

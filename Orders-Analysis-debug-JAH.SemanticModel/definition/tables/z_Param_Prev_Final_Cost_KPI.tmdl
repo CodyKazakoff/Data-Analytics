@@ -1,0 +1,47 @@
+table z_Param_Prev_Final_Cost_KPI
+	lineageTag: ac7f7d0c-d67d-403e-b969-fdd2da785c82
+
+	column 'zParamPrev - Final Cost KPI'
+		lineageTag: 98e0483a-a960-461c-a429-63e50c50c422
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParamPrev - Final Cost KPI Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParamPrev - Final Cost KPI Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrev - Final Cost KPI Fields'
+		lineageTag: 4e34df41-17d5-490e-afc4-94f15bab99a3
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParamPrev - Final Cost KPI Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrev - Final Cost KPI Order'
+		formatString: 0
+		lineageTag: 1478a99e-ff25-4ea4-9f14-84bfbbafcae9
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Prev_Final_Cost_KPI = calculated
+		mode: import
+		source =
+				{
+				    ("Final Cost PYTD", NAMEOF('Measure Table'[Order Final Cost PYTD]), 0),
+				    ("Final Cost PMTD", NAMEOF('Measure Table'[Order Final Cost PMTD]), 1),
+				    ("Final Cost PQTD", NAMEOF('Measure Table'[Order Final Cost PQTD]), 2)
+				}
+
+	annotation PBI_Id = 3bc9d0649cd14ce9860a497a0fcc8ed6
+

@@ -1,0 +1,172 @@
+{
+  "config": "{\"version\":\"5.50\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY22SU11\",\"version\":\"5.40\",\"type\":2},\"customTheme\":{\"name\":\"Custom2929886398279613.json\",\"version\":\"5.49\",\"type\":1}},\"activeSectionIndex\":0,\"bookmarks\":[{\"displayName\":\"Atlantic\",\"name\":\"Bookmark43bd89fe7fd96a97312d\",\"explorationState\":{\"version\":\"1.3\",\"activeSection\":\"ReportSection2daa504ceb900cd7ce3c\",\"sections\":{\"ReportSection2daa504ceb900cd7ce3c\":{\"filters\":{\"byExpr\":[{\"name\":\"Filterdaaaf395bd7089bc5046\",\"type\":\"Categorical\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Date\"}},\"Property\":\"Calendar Date\"}},\"howCreated\":1},{\"name\":\"Filter734e4f820952042155c4\",\"type\":\"Categorical\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Date\"}},\"Property\":\"Calendar Date\"}},\"howCreated\":1},{\"name\":\"Filter911f8d2905cda2b4188b\",\"type\":\"Advanced\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Date\"}},\"Property\":\"Month\"}},\"howCreated\":1}]},\"visualContainers\":{}}},\"objects\":{\"merge\":{\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}},\"options\":{\"targetVisualNames\":[],\"applyOnlyToTargetVisuals\":true,\"suppressData\":true,\"suppressActiveSection\":true}},{\"displayName\":\"Eastern\",\"name\":\"Bookmarkfe8c33c36d322a5c5a81\",\"explorationState\":{\"version\":\"1.3\",\"activeSection\":\"ReportSection1d61f84d1076b5caa937\",\"filters\":{\"byExpr\":[{\"name\":\"Filterc1cb3a1b209296c687e6\",\"type\":\"Categorical\",\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Year\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2022L\"}}],[{\"Literal\":{\"Value\":\"2023L\"}}]]}}}]},\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Loss Run Report\"}},\"Property\":\"Loss Date\"}},\"howCreated\":1,\"cachedDisplayNames\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2022L\"}}}}},\"displayName\":\"2022\"},{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2023L\"}}}}},\"displayName\":\"2023\"}]}]},\"sections\":{\"ReportSection1d61f84d1076b5caa937\":{\"visualContainers\":{}}},\"objects\":{\"merge\":{\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}},\"options\":{\"targetVisualNames\":[\"7c6e99eeca5ed6a6cb55\",\"3e58a75e5a6482089822\",\"cb1dab8bb26334cfe6ae\",\"37de7aa31398bc88aca6\",\"08f2b2bf96757d0eea5c\",\"c81f1a8f0f7cc6ac5795\",\"2556b32305f46f9e2d3d\"],\"applyOnlyToTargetVisuals\":true,\"suppressData\":true,\"suppressActiveSection\":true}},{\"displayName\":\"Midwest\",\"name\":\"Bookmark28b99b0ed8470c065f57\",\"explorationState\":{\"version\":\"1.3\",\"activeSection\":\"ReportSection1d61f84d1076b5caa937\",\"filters\":{\"byExpr\":[{\"name\":\"Filterc1cb3a1b209296c687e6\",\"type\":\"Categorical\",\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Year\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2022L\"}}],[{\"Literal\":{\"Value\":\"2023L\"}}]]}}}]},\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Loss Run Report\"}},\"Property\":\"Loss Date\"}},\"howCreated\":1,\"cachedDisplayNames\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2022L\"}}}}},\"displayName\":\"2022\"},{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2023L\"}}}}},\"displayName\":\"2023\"}]}]},\"sections\":{\"ReportSection1d61f84d1076b5caa937\":{\"visualContainers\":{}}},\"objects\":{\"merge\":{\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}},\"options\":{\"targetVisualNames\":[\"7c6e99eeca5ed6a6cb55\",\"3e58a75e5a6482089822\",\"cb1dab8bb26334cfe6ae\",\"37de7aa31398bc88aca6\",\"08f2b2bf96757d0eea5c\",\"c81f1a8f0f7cc6ac5795\",\"2556b32305f46f9e2d3d\"],\"suppressData\":true,\"applyOnlyToTargetVisuals\":true,\"suppressActiveSection\":true}},{\"displayName\":\"Mountain\",\"name\":\"Bookmark90476bff2de8e9091c79\",\"explorationState\":{\"version\":\"1.3\",\"activeSection\":\"ReportSection1d61f84d1076b5caa937\",\"filters\":{\"byExpr\":[{\"name\":\"Filterc1cb3a1b209296c687e6\",\"type\":\"Categorical\",\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Year\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2022L\"}}],[{\"Literal\":{\"Value\":\"2023L\"}}]]}}}]},\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Loss Run Report\"}},\"Property\":\"Loss Date\"}},\"howCreated\":1,\"cachedDisplayNames\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2022L\"}}}}},\"displayName\":\"2022\"},{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2023L\"}}}}},\"displayName\":\"2023\"}]}]},\"sections\":{\"ReportSection1d61f84d1076b5caa937\":{\"visualContainers\":{}}},\"objects\":{\"merge\":{\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}},\"options\":{\"targetVisualNames\":[\"7c6e99eeca5ed6a6cb55\",\"3e58a75e5a6482089822\",\"cb1dab8bb26334cfe6ae\",\"37de7aa31398bc88aca6\",\"08f2b2bf96757d0eea5c\",\"c81f1a8f0f7cc6ac5795\",\"2556b32305f46f9e2d3d\"],\"suppressData\":true,\"suppressActiveSection\":true}},{\"displayName\":\"Southeast\",\"name\":\"Bookmarkc3f14b6bdcb3d6b7b6a1\",\"explorationState\":{\"version\":\"1.3\",\"activeSection\":\"ReportSection1d61f84d1076b5caa937\",\"filters\":{\"byExpr\":[{\"name\":\"Filterc1cb3a1b209296c687e6\",\"type\":\"Categorical\",\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Year\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2022L\"}}],[{\"Literal\":{\"Value\":\"2023L\"}}]]}}}]},\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Loss Run Report\"}},\"Property\":\"Loss Date\"}},\"howCreated\":1,\"cachedDisplayNames\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2022L\"}}}}},\"displayName\":\"2022\"},{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2023L\"}}}}},\"displayName\":\"2023\"}]}]},\"sections\":{\"ReportSection1d61f84d1076b5caa937\":{\"visualContainers\":{}}},\"objects\":{\"merge\":{\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}},\"options\":{\"targetVisualNames\":[\"7c6e99eeca5ed6a6cb55\",\"3e58a75e5a6482089822\",\"cb1dab8bb26334cfe6ae\",\"37de7aa31398bc88aca6\",\"08f2b2bf96757d0eea5c\",\"c81f1a8f0f7cc6ac5795\",\"2556b32305f46f9e2d3d\"],\"suppressActiveSection\":true}},{\"displayName\":\"Western\",\"name\":\"Bookmarkd1d1cb94ffe6ef163f76\",\"explorationState\":{\"version\":\"1.3\",\"activeSection\":\"ReportSection1d61f84d1076b5caa937\",\"filters\":{\"byExpr\":[{\"name\":\"Filterc1cb3a1b209296c687e6\",\"type\":\"Categorical\",\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"l\",\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"l\"}},\"Property\":\"Year\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2022L\"}}],[{\"Literal\":{\"Value\":\"2023L\"}}]]}}}]},\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Loss Run Report\"}},\"Property\":\"Loss Date\"}},\"howCreated\":1,\"cachedDisplayNames\":[{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2022L\"}}}}},\"displayName\":\"2022\"},{\"id\":{\"scopeId\":{\"Comparison\":{\"ComparisonKind\":0,\"Left\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"LocalDateTable_8aeee545-3985-4870-9dc6-3c85b49da75c\"}},\"Property\":\"Year\"}},\"Right\":{\"Literal\":{\"Value\":\"2023L\"}}}}},\"displayName\":\"2023\"}]}]},\"sections\":{\"ReportSection1d61f84d1076b5caa937\":{\"visualContainers\":{}}},\"objects\":{\"merge\":{\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}}},\"options\":{\"targetVisualNames\":[\"7c6e99eeca5ed6a6cb55\",\"3e58a75e5a6482089822\",\"cb1dab8bb26334cfe6ae\",\"37de7aa31398bc88aca6\",\"08f2b2bf96757d0eea5c\",\"c81f1a8f0f7cc6ac5795\",\"2556b32305f46f9e2d3d\"],\"suppressData\":true,\"applyOnlyToTargetVisuals\":true,\"suppressActiveSection\":true}}],\"defaultDrillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"allowChangeFilterTypes\":true,\"useEnhancedTooltips\":true,\"useDefaultAggregateDisplayName\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "filters": "[]",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY22SU11",
+            "path": "BaseThemes/CY22SU11.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    },
+    {
+      "resourcePackage": {
+        "items": [
+          {
+            "name": "Custom2929886398279613.json",
+            "path": "Custom2929886398279613.json",
+            "type": 100
+          },
+          {
+            "name": "Motion_-_Image9241845688554915.png",
+            "path": "Motion_-_Image9241845688554915.png",
+            "type": 100
+          },
+          {
+            "name": "Training_Logo5597607589125022.png",
+            "path": "Training_Logo5597607589125022.png",
+            "type": 100
+          }
+        ],
+        "name": "RegisteredResources",
+        "type": 1
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"objects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":-0.1}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"50D\"}}}}}]}}",
+      "displayName": "Data Dictionary",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"Filter7b3573487cf31d644e9e\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Table Dictionary\"}},\"Property\":\"BigQuery Project\"}},\"type\":\"Categorical\",\"howCreated\":1}]",
+      "height": 720.00,
+      "name": "ReportSection5c44b90539d1e3299d19",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"05305c2c188e467c0c63\",\"layouts\":[{\"id\":0,\"position\":{\"x\":476.1742100768574,\"y\":8.403074295473953,\"z\":2000,\"width\":380.0000910902363,\"height\":49.483370338741814,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Data Dictionary\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"18pt\",\"color\":\"#000000\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Page Title'\"}}}}}]}},\"parentGroupName\":\"0af5e2f03008b00167bc\"}",
+          "filters": "[]",
+          "height": 49.48,
+          "width": 380.00,
+          "x": 476.17,
+          "y": 8.40,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"0af5e2f03008b00167bc\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":0,\"width\":1280.4926108374384,\"height\":58.75,\"tabOrder\":0}}],\"singleVisualGroup\":{\"displayName\":\"Header Group\",\"groupMode\":0}}",
+          "height": 58.75,
+          "width": 1280.49,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"19aca0a9d4c90c8b0d00\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1200,\"y\":2.5,\"z\":4000,\"width\":63.75,\"height\":52.5,\"tabOrder\":4000}}],\"singleVisualGroup\":{\"displayName\":\"Group 1\",\"groupMode\":0},\"parentGroupName\":\"0af5e2f03008b00167bc\"}",
+          "height": 52.50,
+          "width": 63.75,
+          "x": 1200.00,
+          "y": 2.50,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"22ad0f10bd8ac1ee0e77\",\"layouts\":[{\"id\":0,\"position\":{\"x\":11.341667955525736,\"y\":0,\"z\":0,\"width\":40.666666666666664,\"height\":42,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"*\",\"textStyle\":{\"fontFamily\":\"Wingdings\",\"fontSize\":\"20pt\",\"color\":\"#ffffff\"},\"url\":\"mailto:MOT-AnalyticsSupport@motion.com\"}]}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#D9D9D6'\"}}}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"foreground\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}},\"showTooltipButton\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"showSmartNarrativeButton\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}],\"title\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Support_Icon'\"}}}}}],\"general\":[{\"properties\":{\"altText\":{\"expr\":{\"Literal\":{\"Value\":\"''\"}}}}}],\"visualHeaderTooltip\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Contact Support'\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'Default'\"}}},\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}},\"background\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}},\"titleFontColor\":{\"solid\":{\"color\":{\"expr\":{\"ThemeDataColor\":{\"ColorId\":0,\"Percent\":0}}}}}}}]}},\"parentGroupName\":\"19aca0a9d4c90c8b0d00\"}",
+          "filters": "[]",
+          "height": 42.00,
+          "width": 40.67,
+          "x": 11.34,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"3265985b8bfb2d8724cd\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":275.81567530444397,\"z\":3000,\"width\":1262.4399068661116,\"height\":430.87622908256424,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Field Dictionary.Physical Table Name\"},{\"queryRef\":\"Field Dictionary.Physical Field Name\"},{\"queryRef\":\"Field Dictionary.Source Field\"},{\"queryRef\":\"Field Dictionary.Source Table\"},{\"queryRef\":\"Field Dictionary.Field Description\"},{\"queryRef\":\"Field Dictionary.Data Type\"},{\"queryRef\":\"Field Dictionary.Data Owner\"},{\"queryRef\":\"Field Dictionary.Source Database\"},{\"queryRef\":\"Field Dictionary.Source Schema/Dataset\"},{\"queryRef\":\"Field Dictionary.Technical Transformation Logic\"},{\"queryRef\":\"Measure Table.Report Refresh Date\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"f\",\"Entity\":\"Field Dictionary\",\"Type\":0},{\"Name\":\"m\",\"Entity\":\"Measure Table\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Physical Table Name\"},\"Name\":\"Field Dictionary.Physical Table Name\",\"NativeReferenceName\":\"Physical Table Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Physical Field Name\"},\"Name\":\"Field Dictionary.Physical Field Name\",\"NativeReferenceName\":\"Physical Field Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Technical Transformation Logic\"},\"Name\":\"Field Dictionary.Technical Transformation Logic\",\"NativeReferenceName\":\"Technical Transformation Logic\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Source Field\"},\"Name\":\"Field Dictionary.Source Field\",\"NativeReferenceName\":\"Source Field\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Source Database\"},\"Name\":\"Field Dictionary.Source Database\",\"NativeReferenceName\":\"Source Database\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Field Description\"},\"Name\":\"Field Dictionary.Field Description\",\"NativeReferenceName\":\"Field Description\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Data Type\"},\"Name\":\"Field Dictionary.Data Type\",\"NativeReferenceName\":\"Data Type\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Data Owner\"},\"Name\":\"Field Dictionary.Data Owner\",\"NativeReferenceName\":\"Data Owner\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Source Schema/Dataset\"},\"Name\":\"Field Dictionary.Source Schema/Dataset\",\"NativeReferenceName\":\"Source Schema/Dataset\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Source Table\"},\"Name\":\"Field Dictionary.Source Table\",\"NativeReferenceName\":\"Source Table\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"m\"}},\"Property\":\"Report Refresh Date\"},\"Name\":\"Measure Table.Report Refresh Date\",\"NativeReferenceName\":\"Report Refresh Date\"}],\"OrderBy\":[{\"Direction\":2,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"f\"}},\"Property\":\"Source Table\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"232.4514648486574D\"}}}},\"selector\":{\"metadata\":\"Field Dictionary.Source Field\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"290.28405492561217D\"}}}},\"selector\":{\"metadata\":\"Field Dictionary.Field Description\"}}]}}}",
+          "filters": "[]",
+          "height": 430.88,
+          "width": 1262.44,
+          "x": 0.00,
+          "y": 275.82,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"3febcb7229269abe0500\",\"layouts\":[{\"id\":0,\"position\":{\"x\":64.42356959863365,\"y\":14.005123825789923,\"z\":3000,\"width\":372.53255906632506,\"height\":38.2778707657273,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Motion360 - Application Name\",\"textStyle\":{\"fontWeight\":\"bold\"}}]}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Logo Text Box'\"}}}}}]}},\"parentGroupName\":\"0af5e2f03008b00167bc\"}",
+          "filters": "[]",
+          "height": 38.28,
+          "width": 372.53,
+          "x": 64.42,
+          "y": 14.01,
+          "z": 3000.00
+        },
+        {
+          "config": "{\"name\":\"61026c839205a6e55093\",\"layouts\":[{\"id\":0,\"position\":{\"height\":40.39408866995074,\"width\":41.40394088669951,\"x\":10.098522167487545,\"y\":0,\"z\":1000,\"tabOrder\":3000}}],\"singleVisual\":{\"visualType\":\"image\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"imageUrl\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Training_Logo5597607589125022.png\"}}}}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}},\"tooltip\":{\"expr\":{\"Literal\":{\"Value\":\"'Training'\"}}},\"type\":{\"expr\":{\"Literal\":{\"Value\":\"'WebUrl'\"}}},\"webUrl\":{\"expr\":{\"Literal\":{\"Value\":\"'https://learn.microsoft.com/en-us/training/browse/?filter-products=power&products=power-bi'\"}}},\"showDefaultTooltip\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Training Logo'\"}}}}}]}},\"parentGroupName\":\"a2cfa884d03668384505\"}",
+          "filters": "[]",
+          "height": 40.39,
+          "width": 41.40,
+          "x": 10.10,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"6198b2b7ebe82a204c09\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":31.265300313122687,\"z\":1000,\"width\":63.3500025777182,\"height\":21,\"tabOrder\":11000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Support\",\"textStyle\":{\"fontSize\":\"8pt\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"color\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#00158A'\"}}}}},\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Support Text'\"}}}}}],\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}]}},\"parentGroupName\":\"19aca0a9d4c90c8b0d00\"}",
+          "filters": "[]",
+          "height": 21.00,
+          "width": 63.35,
+          "x": 0.00,
+          "y": 31.27,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"689949cc4690d94b94cb\",\"layouts\":[{\"id\":0,\"position\":{\"height\":32.31527093596059,\"width\":57.5615763546798,\"x\":0,\"y\":27.266009852216747,\"z\":0,\"tabOrder\":5000}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Training\",\"textStyle\":{\"fontSize\":\"8pt\"}}],\"horizontalTextAlignment\":\"center\"}]}}]},\"vcObjects\":{\"background\":[{\"properties\":{\"transparency\":{\"expr\":{\"Literal\":{\"Value\":\"100D\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Training Text Box'\"}}}}}]}},\"parentGroupName\":\"a2cfa884d03668384505\"}",
+          "filters": "[]",
+          "height": 32.32,
+          "width": 57.56,
+          "x": 0.00,
+          "y": 27.27,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"94922a332f7492a98310\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":79.5886028241679,\"z\":2000,\"width\":675.1309067153554,\"height\":181.1326822894856,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Table Dictionary.Dataset\"},{\"queryRef\":\"Table Dictionary.Physical Table Name\"},{\"queryRef\":\"Table Dictionary.Source Table\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"Table Dictionary\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Physical Table Name\"},\"Name\":\"Table Dictionary.Physical Table Name\",\"NativeReferenceName\":\"Physical Table Name\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Source Table\"},\"Name\":\"Table Dictionary.Source Table\",\"NativeReferenceName\":\"Source Table\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Dataset\"},\"Name\":\"Table Dictionary.Dataset\",\"NativeReferenceName\":\"Dataset\"}],\"OrderBy\":[{\"Direction\":1,\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"Physical Table Name\"}}}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"241.6927337350556D\"}}}},\"selector\":{\"metadata\":\"Table Dictionary.Physical Table Name\"}},{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"399.7217263995602D\"}}}},\"selector\":{\"metadata\":\"Table Dictionary.Source Table\"}}]}}}",
+          "filters": "[]",
+          "height": 181.13,
+          "width": 675.13,
+          "x": 0.00,
+          "y": 79.59,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"9cf05695043e04d51815\",\"layouts\":[{\"id\":0,\"position\":{\"height\":57.16420843907657,\"width\":1280.4926108374384,\"x\":0,\"y\":0,\"z\":0,\"tabOrder\":2000}}],\"singleVisual\":{\"visualType\":\"shape\",\"drillFilterOtherVisuals\":true,\"objects\":{\"shape\":[{\"properties\":{\"tileShape\":{\"expr\":{\"Literal\":{\"Value\":\"'rectangle'\"}}}}}],\"rotation\":[{\"properties\":{\"shapeAngle\":{\"expr\":{\"Literal\":{\"Value\":\"0L\"}}}}}],\"fill\":[{\"properties\":{\"fillColor\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#D9D9D6'\"}}}}}},\"selector\":{\"id\":\"default\"}}],\"outline\":[{\"properties\":{\"lineColor\":{\"solid\":{\"color\":{\"expr\":{\"Literal\":{\"Value\":\"'#0D6ABF'\"}}}}}},\"selector\":{\"id\":\"default\"}}]},\"vcObjects\":{\"visualLink\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"tooltip\":{\"expr\":{\"Literal\":{\"Value\":\"'contact'\"}}}}}],\"title\":[{\"properties\":{\"text\":{\"expr\":{\"Literal\":{\"Value\":\"'Top Banner Blue'\"}}}}}]}},\"parentGroupName\":\"0af5e2f03008b00167bc\",\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 57.16,
+          "width": 1280.49,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"a2cfa884d03668384505\",\"layouts\":[{\"id\":0,\"position\":{\"x\":1153.75,\"y\":0,\"z\":1000,\"width\":57.5,\"height\":58.75,\"tabOrder\":3000}}],\"singleVisualGroup\":{\"displayName\":\"Training\",\"groupMode\":0},\"parentGroupName\":\"0af5e2f03008b00167bc\"}",
+          "height": 58.75,
+          "width": 57.50,
+          "x": 1153.75,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"bbe163f162e993206814\",\"layouts\":[{\"id\":0,\"position\":{\"x\":0,\"y\":0,\"z\":1000,\"width\":65,\"height\":58.75,\"tabOrder\":1000}}],\"singleVisual\":{\"visualType\":\"image\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"imageUrl\":{\"expr\":{\"ResourcePackageItem\":{\"PackageName\":\"RegisteredResources\",\"PackageType\":1,\"ItemName\":\"Motion_-_Image9241845688554915.png\"}}}}}]},\"vcObjects\":{\"padding\":[{\"properties\":{\"top\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"right\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"bottom\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}},\"left\":{\"expr\":{\"Literal\":{\"Value\":\"0D\"}}}}}],\"lockAspect\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"true\"}}}}}]}},\"howCreated\":\"InsertVisualButton\"}",
+          "filters": "[]",
+          "height": 58.75,
+          "width": 65.00,
+          "x": 0.00,
+          "y": 0.00,
+          "z": 1000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ],
+  "theme": "Custom2929886398279613.json"
+}

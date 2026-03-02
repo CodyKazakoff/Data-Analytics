@@ -1,0 +1,75 @@
+table 'Automation Ratio Calculations'
+	lineageTag: aa407dfa-9ee8-4b39-b020-ae17b954d6dc
+
+	column Name
+		dataType: string
+		lineageTag: b4bccae1-3751-4c37-a06a-68fcb2ba2b63
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: 6a99f644-c74c-463e-9a9c-059d3ee6beb8
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column '[Automated Savings]'
+		dataType: double
+		lineageTag: 4ecc8325-f5d2-4da0-b2a0-5e49cd32f55c
+		summarizeBy: sum
+		sourceColumn: [Automated Savings]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '[Calculated Per Item Manual Effort (Minutes)]'
+		dataType: double
+		lineageTag: f512f18b-75df-48d9-af92-e81203a40bbc
+		summarizeBy: sum
+		sourceColumn: [Calculated Per Item Manual Effort (Minutes)]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'New Estimated Time'
+		dataType: double
+		lineageTag: cbb3073c-dd27-4211-acaf-389b14e57830
+		summarizeBy: sum
+		sourceColumn: New Estimated Time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '[Automation Ratio]'
+		dataType: double
+		lineageTag: 88e02491-ec22-4725-ac1a-aced9801f493
+		summarizeBy: sum
+		sourceColumn: [Automation Ratio]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Automation Ratio Calculations' = m
+		mode: import
+		queryGroup: 'Automation Ratio Calculations'
+		source = ```
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_automation_ratio"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Solution_ID", "Solution ID"}, {"Automated_Savings", "[Automated Savings]"}, {"Automation_Ratio", "[Automation Ratio]"}, {"New_Estimated_Time", "New Estimated Time"}, {"Calculated_Per_Item_Manual_Effort_Minutes", "[Calculated Per Item Manual Effort (Minutes)]"}})
+				in 
+				    #"Renamed Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

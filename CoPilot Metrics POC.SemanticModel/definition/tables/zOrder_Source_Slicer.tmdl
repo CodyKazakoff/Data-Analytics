@@ -1,0 +1,30 @@
+table zOrder_Source_Slicer
+	lineageTag: d278a5a9-43b9-4ce3-afab-cd129dcc8f61
+
+	column 'Order Source'
+		dataType: string
+		lineageTag: 5e51b1de-85bf-476d-901e-0436b339761c
+		summarizeBy: none
+		sourceColumn: Order Source
+
+		annotation SummarizationSetBy = Automatic
+
+	partition zOrder_Source_Slicer = m
+		mode: import
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_F_Order_Item = Value.NativeQuery(Source, "        
+				    SELECT DISTINCT ORDER_SOURCE_DESC AS [Order Source] FROM F_Order_Header
+				        UNION
+				    SELECT DISTINCT ORDER_SOURCE_DESC AS [Order Source] FROM F_Shipper_Item
+				        ", null, [EnableFolding = true]),
+				    #"Filtered Rows" = Table.SelectRows(dbo_F_Order_Item, each ([Order Source] <> null))
+				in
+				    #"Filtered Rows"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

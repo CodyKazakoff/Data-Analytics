@@ -1,0 +1,129 @@
+table Export
+	lineageTag: 78dd52ee-976e-45ef-b006-7326a8f14fde
+
+	column Start
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a8c3b8d4-7b2f-4170-b5a5-56a87add5832
+		summarizeBy: none
+		sourceColumn: Start
+
+		annotation SummarizationSetBy = Automatic
+
+	column Finish
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a7c87c11-3461-49e3-94f6-00ce09b30108
+		summarizeBy: none
+		sourceColumn: Finish
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hostname
+		dataType: string
+		lineageTag: f6d43535-be0a-4d50-a7c5-4fd6e4d9dccc
+		summarizeBy: none
+		sourceColumn: Hostname
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User ID'
+		dataType: string
+		lineageTag: e29af732-db63-470c-8c33-5e731973d055
+		summarizeBy: none
+		sourceColumn: User ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column App
+		dataType: string
+		lineageTag: 0a1d8003-59b3-47dd-9345-ef369af51ea1
+		summarizeBy: none
+		sourceColumn: App
+
+		annotation SummarizationSetBy = Automatic
+
+	column Object
+		dataType: string
+		lineageTag: a60859bc-88f8-43d8-9e7d-7fd824dc7ebb
+		summarizeBy: none
+		sourceColumn: Object
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Object Type'
+		dataType: string
+		lineageTag: 919f5b4a-7228-439a-b87b-6fda4220028a
+		summarizeBy: none
+		sourceColumn: Object Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Output Format'
+		dataType: string
+		lineageTag: b00b16a4-28b2-4c05-a360-ca69aa5bef74
+		summarizeBy: none
+		sourceColumn: Output Format
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Export Duration'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3aac5f4f-05af-40bf-9aa7-1c79fcd7d6cb
+		summarizeBy: none
+		sourceColumn: Export Duration
+
+		annotation SummarizationSetBy = Automatic
+
+	column Message
+		dataType: string
+		lineageTag: 48889aa2-6a34-40fc-948e-d2a0c7434950
+		summarizeBy: none
+		sourceColumn: Message
+
+		annotation SummarizationSetBy = Automatic
+
+	column Object/data
+		dataType: string
+		lineageTag: a1424182-c3c5-408d-97e5-c005c68d6023
+		summarizeBy: none
+		sourceColumn: Object/data
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'App Id'
+		dataType: string
+		lineageTag: 001b1e87-851f-4c44-9f8a-0d8cf60426d5
+		summarizeBy: none
+		sourceColumn: App Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column _
+		dataType: string
+		lineageTag: b34a6a49-ffdc-4dd0-87b2-3f54eb76b88a
+		summarizeBy: none
+		sourceColumn: _
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Export = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Non-Vortex Data Sources'
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SupportingFiles & "/Export Details.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Start", type datetime}, {"Finish", type datetime}, {"Hostname", type text}, {"User ID", type text}, {"App", type text}, {"Object", type text}, {"Object Type", type text}, {"Output Format", type text}, {"Export Duration", type datetime}, {"Message", type text}}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Changed Type", "Object/data", each if [Object Type] = "table" then "data" else if [Object Type] = "pivot-table" then "data" else "visual"),
+				    #"Duplicated Split Column" = Table.DuplicateColumn(#"Added Conditional Column", "Object", "Object_Split"),
+				    #"Split Column by Delimiter" = Table.SplitColumn(#"Duplicated Split Column", "Object_Split", Splitter.SplitTextByDelimiter("|", QuoteStyle.Csv), {"App Id", "_"})
+				in
+				    #"Split Column by Delimiter"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

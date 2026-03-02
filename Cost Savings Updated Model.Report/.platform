@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Cost Savings Updated Model"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ec558158-2948-8ee9-4d5c-8f32e605c27f"
+  }
+}

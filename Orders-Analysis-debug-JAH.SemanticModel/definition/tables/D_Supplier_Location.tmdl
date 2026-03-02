@@ -1,0 +1,60 @@
+table D_Supplier_Location
+	lineageTag: 97299aaf-01d3-4ebf-b222-75116a64a0b5
+
+	column 'Splr Loc Key'
+		dataType: string
+		lineageTag: 3c920bba-c9d2-4f66-8953-e449b809ed20
+		summarizeBy: none
+		sourceColumn: Splr Loc Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sup Loc No'
+		dataType: string
+		lineageTag: afe5999e-5fb8-4e7b-bf2e-b43fa8756a29
+		summarizeBy: none
+		sourceColumn: Sup Loc No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sup Loc Name'
+		dataType: string
+		lineageTag: c78eccdf-13c3-4cb8-91da-6de3f7911fdf
+		summarizeBy: none
+		sourceColumn: Sup Loc Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sup Loc No  Sup Loc Name'
+		dataType: string
+		lineageTag: 0c5da323-d48e-47b3-832c-817fe4a210ee
+		summarizeBy: none
+		sourceColumn: Sup Loc No  Sup Loc Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Supplier_Location = m
+		mode: import
+		queryGroup: Dimensions
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Supplier_Location =  Value.NativeQuery(Source,
+				    "
+				        SELECT DIM.* 
+				        FROM dbo.D_Supplier_Location DIM
+				        INNER JOIN (SELECT DISTINCT SUP_LOC_NO FROM dbo.F_Order_Item) FOI
+				            ON FOI.SUP_LOC_NO = DIM.SUP_LOC_NO", null, [EnableFolding = true]),
+				    #"Removed Other Columns" = Table.SelectColumns(dbo_D_Supplier_Location,{"SPLR_LOC_KEY", "SUP_LOC_NO", "SUP_LOC_NAME", "SUP_LOC_NO__SUP_LOC_NAME"}),
+				    #"Sorted Rows" = Table.Sort(#"Removed Other Columns",{{"SUP_LOC_NO", Order.Ascending}}),
+				    // Temporarily limiting the data when building on local desktop. This setting is toggled off on PBI online
+				    #"TEMP DEV STEP: LimitRecords" = fx_ConditionallyLimitRows(#"Sorted Rows",  LimitRecordCount, RecordCountLimit), 
+				    #"Bulk Column Rename" = Table.TransformColumnNames(#"TEMP DEV STEP: LimitRecords", each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," "))
+				in
+				    #"Bulk Column Rename"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

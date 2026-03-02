@@ -1,0 +1,69 @@
+table 'Complexity Scoring'
+	lineageTag: 2da5c7c8-34bd-4dbf-afed-d061ea562392
+
+	column Type
+		dataType: string
+		lineageTag: 337f5808-5b5c-432e-86bf-096425ebf369
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Component
+		dataType: string
+		lineageTag: 936ab242-df59-41a7-813e-e697d1ecfb5f
+		summarizeBy: none
+		sourceColumn: Component
+
+		annotation SummarizationSetBy = Automatic
+
+	column Complexity
+		dataType: double
+		lineageTag: 5de90128-9303-4e52-9c6c-8c4a505c6700
+		summarizeBy: none
+		sourceColumn: Complexity
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Automatability
+		dataType: string
+		lineageTag: d867ad22-c52f-45c4-98e1-c39973ff7bd5
+		summarizeBy: none
+		sourceColumn: Automatability
+
+		annotation SummarizationSetBy = Automatic
+
+	column Effort
+		dataType: string
+		lineageTag: 739e3acd-d7e1-4a25-8a6f-c3f143c23584
+		summarizeBy: none
+		sourceColumn: Effort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: 15f1cb19-23da-4bad-ba32-113382d26171
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Complexity Scoring' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Non-Vortex Data Sources'
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SupportingFiles & "/Complexity Scoring.xlsx"), null, true),
+				    #"Complexity Scoring_Sheet" = Source{[Item="Complexity Scoring",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Complexity Scoring_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Type", type text}, {"Component", type text}, {"Complexity", type number}, {"Automatability", type any}, {"Effort", type any}, {"Notes", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

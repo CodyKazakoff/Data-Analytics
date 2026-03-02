@@ -1,0 +1,127 @@
+table 'App Measure'
+	lineageTag: fd490b46-201d-4e07-b4aa-b073aa5c7052
+
+	column Name
+		dataType: string
+		lineageTag: 07cedc6d-9182-467f-86a4-834fe8d45835
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 9142c371-5584-41e6-b8de-ca7ff137e98e
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column StandardizedDefinition
+		dataType: string
+		lineageTag: 4b948585-a10d-4dbf-9d76-52967e4669da
+		summarizeBy: none
+		sourceColumn: StandardizedDefinition
+
+		annotation SummarizationSetBy = Automatic
+
+	column RawDefinition
+		dataType: string
+		lineageTag: 21775ddc-572e-4b07-be29-9e487aa2bfa4
+		summarizeBy: none
+		sourceColumn: RawDefinition
+
+		annotation SummarizationSetBy = Automatic
+
+	column Definition
+		dataType: string
+		lineageTag: 2cad1cc6-f1c2-408d-a1f0-81c173298995
+		summarizeBy: none
+		sourceColumn: Definition
+
+		annotation SummarizationSetBy = Automatic
+
+	column Format
+		dataType: string
+		lineageTag: 5c7dee3b-efe0-436e-a340-c94dbbceb3a5
+		summarizeBy: none
+		sourceColumn: Format
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		dataType: string
+		lineageTag: cc46dd14-5af0-44cb-9046-8bfe3c9fcd1c
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrigId
+		dataType: string
+		lineageTag: 390f86cb-c13d-43e9-b3cd-8f4207590e00
+		summarizeBy: none
+		sourceColumn: OrigId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Group
+		dataType: string
+		lineageTag: e923a8e4-7f4e-4fdb-b3b2-0feac62a4e44
+		summarizeBy: none
+		sourceColumn: Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasSetAnalysis =
+			
+			IF(
+			    CONTAINSSTRING( 'App Measure'[StandardizedDefinition], "{<" ),
+			    "Yes",
+			    "No"
+			)
+		lineageTag: b2690378-e126-4bc7-af56-1a5da473aec0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: 8acfd44c-4337-4533-a7a8-5435748622ce
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppKey
+		dataType: string
+		lineageTag: 4de9b955-8520-4903-97e1-a6956297d53a
+		summarizeBy: none
+		sourceColumn: AppKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppMeasureKey
+		dataType: string
+		lineageTag: fd28a3fc-c2d4-4d24-a8b2-85c09b0f75f1
+		summarizeBy: none
+		sourceColumn: AppMeasureKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'App Measure' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex\App Queries'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_app_measure"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Solution_ID", "Solution ID"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Solution ID", type text}, {"Name", type text}, {"Description", type text}, {"StandardizedDefinition", type text}, {"RawDefinition", type text}, {"Definition", type text}, {"Format", type text}, {"Id", type text}, {"OrigId", type text}, {"Group", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

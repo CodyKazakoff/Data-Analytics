@@ -1,0 +1,56 @@
+table z_prm_passed_cases
+	lineageTag: ced35eec-ae00-4794-b634-07344407309f
+
+	column z_prm_passed_cases
+		lineageTag: fe4a449e-0067-4aa6-9994-26381ce6073f
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_passed_cases Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_passed_cases Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_passed_cases Fields'
+		isHidden
+		lineageTag: 54283c4d-4d3c-44a0-bcf5-e81edefa8587
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_passed_cases Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_passed_cases Order'
+		isHidden
+		formatString: 0
+		lineageTag: 2977acf7-d639-4760-8445-860deafdf4b3
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		formatString: 0
+		lineageTag: 3b93e0aa-e28a-44c2-bd86-662ac3a48bb1
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_passed_cases = calculated
+		mode: import
+		source =
+				{
+				    ("24h Passed Test Cases", NAMEOF('Measure Table'[24h Total Passed Test Cases]), 0,1),
+				    ("Passed Test Cases", NAMEOF('Measure Table'[Total Passed Test Cases]), 1,0)
+				}
+
+	annotation PBI_Id = 1940cee09cfe43e5b2669c3f1a678abc
+

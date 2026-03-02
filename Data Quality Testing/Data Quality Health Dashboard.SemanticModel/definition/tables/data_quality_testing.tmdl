@@ -1,0 +1,215 @@
+table data_quality_testing
+	lineageTag: a3298613-0134-4a78-bbb1-f7a6f15b1b35
+
+	column TABLE_NAME
+		dataType: string
+		lineageTag: a3096be0-3dbf-44bd-9fba-74d6a9a34801
+		summarizeBy: none
+		sourceColumn: TABLE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PASS_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2a854a8e-d864-4fc1-b3ad-3d5a37df7ad4
+		summarizeBy: none
+		sourceColumn: PASS_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column RESULT
+		dataType: int64
+		formatString: #,0
+		lineageTag: a013d9ae-94f1-4d67-afe7-3a64f9a21ae6
+		summarizeBy: sum
+		sourceColumn: RESULT
+
+		annotation SummarizationSetBy = User
+
+	column TIMESTAMP
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: bc1dc544-e362-42b6-9e4a-7434bfd3b2d4
+		summarizeBy: none
+		sourceColumn: TIMESTAMP
+
+		annotation SummarizationSetBy = User
+
+	column TEST_TYPE
+		dataType: string
+		lineageTag: 144cdf0b-3a3a-4ce4-99c4-b12239193ed5
+		summarizeBy: none
+		sourceColumn: TEST_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PK
+		dataType: string
+		lineageTag: 54c04900-7e2c-4396-9458-323918cf49ed
+		summarizeBy: none
+		sourceColumn: PK
+
+		annotation SummarizationSetBy = Automatic
+
+	column FK
+		dataType: string
+		lineageTag: 8e68e5c0-6854-4444-8953-32d15a4c0071
+		summarizeBy: none
+		sourceColumn: FK
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUERY_ERROR
+		dataType: string
+		lineageTag: eb1ffa4b-749d-44e8-a6bf-9da59524e6fc
+		summarizeBy: none
+		sourceColumn: QUERY_ERROR
+
+		annotation SummarizationSetBy = Automatic
+
+	column GBQ_PK_TABLE
+		dataType: string
+		lineageTag: fc69eba5-e653-4842-b964-96c09ac08e57
+		summarizeBy: none
+		sourceColumn: GBQ_PK_TABLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TABLE_TYPE
+		dataType: string
+		lineageTag: 8515c25d-8f05-4b34-9b72-608922972f8b
+		summarizeBy: none
+		sourceColumn: TABLE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TEST_CASE_NAME
+		dataType: string
+		lineageTag: acec903e-260f-42bc-a21b-a4b725ed2c8e
+		summarizeBy: none
+		sourceColumn: TEST_CASE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PASS_FAIL_STATUS = IF([PASS_FLAG], "PASS","FAIL")
+		lineageTag: a9deb3aa-f8fe-4458-8943-574283103fdf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateOnly = ```
+			
+			FORMAT(data_quality_testing[TIMESTAMP], "YYYY-MM-DD")
+			
+			```
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ab95a170-35ed-4b9a-a749-4f1e40fa8e02
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column RESULT_DISTINCT
+		dataType: int64
+		formatString: 0
+		lineageTag: 024dbfcf-47ca-4284-84fd-2cd7763bd9d9
+		summarizeBy: sum
+		sourceColumn: RESULT_DISTINCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column TABLE_DISTINCT
+		dataType: int64
+		formatString: 0
+		lineageTag: 88004ad5-4741-420a-a2aa-ed222789e71d
+		summarizeBy: sum
+		sourceColumn: TABLE_DISTINCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column TABLE_ROWS
+		dataType: int64
+		formatString: 0
+		lineageTag: 97287426-42a5-4a19-8fb1-3363f45edab3
+		summarizeBy: sum
+		sourceColumn: TABLE_ROWS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TEST_TEMPLATE
+		dataType: string
+		lineageTag: e916f0e7-c614-4e24-ab05-e0d0c3f62ad2
+		summarizeBy: none
+		sourceColumn: TEST_TEMPLATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GBQ_TEST_TABLE
+		dataType: string
+		lineageTag: 12ed4019-83de-44f2-9bc5-91fb17777b15
+		summarizeBy: none
+		sourceColumn: GBQ_TEST_TABLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GBQ_TEST_FIELD
+		dataType: string
+		lineageTag: d3cae783-c661-4346-b279-38b75e1956fa
+		summarizeBy: none
+		sourceColumn: GBQ_TEST_FIELD
+
+		annotation SummarizationSetBy = Automatic
+
+	column LATEST_RUN
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1f17aa5b-ecb9-4c83-8c93-654566c51a29
+		summarizeBy: none
+		sourceColumn: LATEST_RUN
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Latest Run Slicer' = if(data_quality_testing[LATEST_RUN] = True, "Yes", blank())
+		lineageTag: 354961c1-9ab7-43d3-bcdd-e70f412d9068
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pass Flag Color' = if(data_quality_testing[PASS_FLAG] = False, 0, 1)
+		formatString: 0
+		lineageTag: 151bc958-d1d5-47f6-b6ca-c8790a278583
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition data_quality_testing = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"2adc819b-a4ee-4640-ac5e-ad4ecc27dc64" = Workspaces{[workspaceId="2adc819b-a4ee-4640-ac5e-ad4ecc27dc64"]}[Data],
+				    #"6a975293-04a0-4029-81e1-e1c5b427ae7d" = #"2adc819b-a4ee-4640-ac5e-ad4ecc27dc64"{[dataflowId="6a975293-04a0-4029-81e1-e1c5b427ae7d"]}[Data],
+				    data_quality_testing_ = #"6a975293-04a0-4029-81e1-e1c5b427ae7d"{[entity="data_quality_testing",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(data_quality_testing_,{{"RESULT", Int64.Type}, {"EXECUTION_TIMESTAMP", type datetime}}),
+				    #"Duplicated Column" = Table.DuplicateColumn(#"Changed Type", "TEST_CASE_NAME", "TEST_CASE_NAME - Copy"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Duplicated Column",{{"EXECUTION_TIMESTAMP", "TIMESTAMP"}}),
+				    #"Split Column by Delimiter" = Table.SplitColumn(#"Renamed Columns", "TEST_CASE_NAME", Splitter.SplitTextByDelimiter(" - ", QuoteStyle.None), {"TEST_CASE_NAME.1", "TEST_CASE_NAME.2"}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Split Column by Delimiter",{{"TEST_CASE_NAME.1", type text}, {"TEST_CASE_NAME.2", type text}}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Changed Type2",{{"TEST_CASE_NAME.1", "PK"}, {"TEST_CASE_NAME.2", "FK"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns1"," (pk)","",Replacer.ReplaceText,{"PK"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value"," (fk)","",Replacer.ReplaceText,{"FK"}),
+				    #"Added Custom" = Table.AddColumn(#"Replaced Value1", "TABLE_TYPE", each if Text.StartsWith([TABLE_NAME], "F_") then "FACT" else if Text.StartsWith([TABLE_NAME],"D_") then "DIMENSION" else [TABLE_NAME]),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Added Custom",{{"TEST_CASE_NAME - Copy", "TEST_CASE_NAME"}})
+				in
+				    #"Renamed Columns2"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

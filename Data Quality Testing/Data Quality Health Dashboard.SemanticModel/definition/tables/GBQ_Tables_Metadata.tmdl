@@ -1,0 +1,87 @@
+table GBQ_Tables_Metadata
+	lineageTag: 24fe207e-7bb6-4794-8789-185699d02d8e
+
+	column subject_area
+		dataType: string
+		lineageTag: 13416d7f-7c31-4d6e-beb3-8c2f5cc0eb52
+		summarizeBy: none
+		sourceColumn: subject_area
+
+		annotation SummarizationSetBy = Automatic
+
+	column table_name
+		dataType: string
+		lineageTag: 714c70a5-30ec-47ba-abc9-9d449693ed0b
+		summarizeBy: none
+		sourceColumn: table_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column table_id
+		dataType: string
+		lineageTag: 969369ad-7cd4-469b-8371-924003277d4f
+		summarizeBy: none
+		sourceColumn: table_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column size_bytes
+		dataType: int64
+		formatString: 0
+		lineageTag: c0abaec4-98c6-42b0-ae9e-5ce7fd47f89b
+		summarizeBy: sum
+		sourceColumn: size_bytes
+
+		annotation SummarizationSetBy = Automatic
+
+	column num_gigs
+		dataType: double
+		lineageTag: 5d0b3689-9d27-41f7-9fc6-4deafb12641a
+		summarizeBy: sum
+		sourceColumn: num_gigs
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column row_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 487249c3-eef9-49cf-a890-dfa1e548f8e3
+		summarizeBy: sum
+		sourceColumn: row_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column creation_time
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 14d877fa-59f0-407c-816f-527c90df0652
+		summarizeBy: none
+		sourceColumn: creation_time
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_modified_time
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a8c0e2a9-1845-42da-a4b8-d2c24f51e872
+		summarizeBy: none
+		sourceColumn: last_modified_time
+
+		annotation SummarizationSetBy = Automatic
+
+	partition GBQ_Tables_Metadata = m
+		mode: import
+		queryGroup: Metadata
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-65dovdhw5fzu3dq6tjfnqi7nyq.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_GBQ_Table_Metadata = Source{[Schema="dbo",Item="GBQ_Table_Metadata"]}[Data]
+				in
+				    dbo_GBQ_Table_Metadata
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

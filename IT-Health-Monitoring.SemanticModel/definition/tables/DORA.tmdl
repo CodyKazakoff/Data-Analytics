@@ -1,0 +1,150 @@
+table DORA
+	lineageTag: 9dbb909b-d218-431b-b692-80f5cfa128e3
+
+	column WorkItemId
+		dataType: int64
+		formatString: 0
+		lineageTag: 4010cf90-c910-44fa-bcca-9b21df643740
+		summarizeBy: count
+		sourceColumn: WorkItemId
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaSK
+		dataType: string
+		lineageTag: 3689a177-bce4-4b8b-876e-c6f3c40a3216
+		summarizeBy: none
+		sourceColumn: AreaSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 63d23b28-f322-43ae-b7e0-57e16c286bff
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkItemType
+		dataType: string
+		lineageTag: e687e7e5-2c8d-4510-b43d-c06cc0ddd835
+		summarizeBy: none
+		sourceColumn: WorkItemType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: abd3a403-2711-4d37-86aa-3e532a0fa88c
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: a1c56adf-63af-4370-ad11-d0c360649cfa
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b9ca5ffa-df58-4be3-b03e-7e890225eae4
+		summarizeBy: none
+		sourceColumn: ClosedDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Severity
+		dataType: string
+		lineageTag: 80b1d1df-d306-4cca-bfc4-765abc0f730a
+		summarizeBy: none
+		sourceColumn: Severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Custom_FoundInEnv
+		dataType: string
+		lineageTag: 29cf0444-5770-486d-9892-076735333077
+		summarizeBy: none
+		sourceColumn: Custom_FoundInEnv
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaPath
+		dataType: string
+		lineageTag: 3dd596d1-29fa-489c-8fce-c4f35ba9f15a
+		summarizeBy: none
+		sourceColumn: AreaPath
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ee7ec3bd-f26c-4aa9-84a0-ce143bcb9506
+		summarizeBy: none
+		sourceColumn: ActivatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.LinkTypeName'
+		dataType: string
+		lineageTag: 3fa2902d-f1ce-41bc-9d9a-a4f03d11ec71
+		summarizeBy: none
+		sourceColumn: Links.LinkTypeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.WorkItemId'
+		dataType: int64
+		formatString: 0
+		lineageTag: 16a06d57-bebe-4e0d-9479-53f96548fdc3
+		summarizeBy: count
+		sourceColumn: Links.TargetWorkItem.WorkItemId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.Title'
+		dataType: string
+		lineageTag: d5e51e0a-c201-42e2-b745-496ef80ac7ce
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.WorkItemType'
+		dataType: string
+		lineageTag: 3bfde94a-4c69-424e-87f8-ad008072f3d4
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.WorkItemType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.State'
+		dataType: string
+		lineageTag: 8ab38ff5-a9d9-4ce4-83c1-1c4d67f23d2c
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.State
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DORA = m
+		mode: import
+		source =
+				let
+				    Source = Table.Combine({Bugs, Stories, PIR, PIRStories})
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

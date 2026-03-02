@@ -1,0 +1,56 @@
+table z_prm_failed_items
+	lineageTag: 6b092759-6ed3-46a9-8c63-2c8ed6d6d0ee
+
+	column z_prm_failed_items
+		lineageTag: c1d09f69-b2ba-4aed-a587-38ade8e90ca5
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_failed_items Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_failed_items Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_failed_items Fields'
+		isHidden
+		lineageTag: 79ae9547-7a55-45da-b563-3d083877a6ab
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_failed_items Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_failed_items Order'
+		isHidden
+		formatString: 0
+		lineageTag: 0dc9a11b-b7e4-4250-863c-e264c2d31c4a
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		formatString: 0
+		lineageTag: a3008ac4-a881-41de-888a-8bce2ad1cd4b
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_failed_items = calculated
+		mode: import
+		source =
+				{
+				    ("24h Failed Items", NAMEOF('Measure Table'[24h Total Failed Items in Test Cases]), 0,1),
+				    ("Failed Items", NAMEOF('Measure Table'[Total Failed Items]), 1,0)
+				}
+
+	annotation PBI_Id = 6efb5c34cacd4d44883d86e267a3be2d
+

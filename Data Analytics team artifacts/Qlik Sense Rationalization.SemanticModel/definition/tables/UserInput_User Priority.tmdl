@@ -1,0 +1,28 @@
+table 'UserInput_User Priority'
+	lineageTag: f16400ee-f2f4-44fd-8ae9-332885dfd50e
+
+	measure 'User Priority Value' = SELECTEDVALUE('UserInput_User Priority'[User Priority], 0.25)
+		lineageTag: 52afcb86-564b-4f56-98e3-1267bfaddc10
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'User Priority'
+		lineageTag: c107c5aa-76fd-4484-a771-f8b50ec80374
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'UserInput_User Priority' = calculated
+		mode: import
+		source = GENERATESERIES(0, 1, 0.01)
+
+	annotation PBI_Id = 463587b025e04b35b26058e8058db55a
+

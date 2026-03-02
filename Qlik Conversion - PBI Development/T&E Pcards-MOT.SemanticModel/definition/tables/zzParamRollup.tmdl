@@ -1,0 +1,52 @@
+table zzParamRollup
+	lineageTag: 27a5bdc7-7758-4fec-aa52-0bab0c3e5674
+
+	column zzParamDash
+		lineageTag: d6cd4098-fd11-4889-a9a7-af2724422d39
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zzParamDash Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zzParamDash Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zzParamDash Fields'
+		isHidden
+		lineageTag: 9edcf157-dd91-42bc-ad90-148c807ba230
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zzParamDash Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zzParamDash Order'
+		isHidden
+		formatString: 0
+		lineageTag: a7b398f8-def5-4d92-9011-f3849d471e61
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition zzParamRollup = calculated
+		mode: import
+		source =
+				{
+				    ("Group", NAMEOF('D_Location'[GROUP_NAME]), 0),
+				    ("Division", NAMEOF('D_Location'[DIVISION_NAME]), 1),
+				    ("Branch", NAMEOF('F_T&E PCards 1'[Branch]), 2),
+				    ("Vendor", NAMEOF('F_T&E PCards 1'[Vendor]), 3),
+				    ("Employee", NAMEOF('F_T&E PCards 1'[Employee]), 4),
+				    ("Type", NAMEOF('F_T&E PCards 1'[Expense Type]), 5)
+				}
+
+	annotation PBI_Id = b8165bcde61843699c54b7f8f03e5b02
+

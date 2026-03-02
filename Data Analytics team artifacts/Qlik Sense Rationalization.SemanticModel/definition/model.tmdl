@@ -1,0 +1,134 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Metadata
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Metadata\Parameters
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Metadata\Functions
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Metadata\Profiling
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Metadata\Queries
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup Metadata\Axis
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup 'Metadata\Parameters\File Locations'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Metadata\Parameters\Activity Index Weights'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Activity Index Calculations'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Rationalization Dashboard'
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup 'Rationalization Dashboard\Non-Vortex Data Sources'
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup 'Automation Ratio Calculations'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Rationalization Dashboard\Tables From Vortex'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Rationalization Dashboard\Tables From Vortex\App Queries'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Rationalization Dashboard\Tables From Vortex\Page Queries'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'Rationalization Dashboard\Tables From Vortex\Script Queries'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'Clustering Calculations'
+
+	annotation PBI_QueryGroupOrder = 18
+
+annotation PBIDesktopVersion = 2.128.952.0 (24.04)
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Today","zLast Refresh Datetime","RangeStart","RangeEnd","zChange Log","zRelease Information","zData Dictionary","Measure","fx_CreateCalendar","fx_AddYearIndex","fx_AddQuarterIndex","fx_AddMonthIndex","fx_AddWeekIndex","fx_AddDateIndex","fx_CreateDimDate","fx_CreateDimWeek","fx_CreateDimMonth","fx_CreateDimQuarter","fx_CreateDimYear","zMeasure Definitions","zTime Series Definitions","fx_Loop","fx_TableProfile","fx_DistinctKeyChecker","fx_TestRelationship","fx_ConditionallyLimitRows","LimitRecordCount","RecordCountToKeep","ConfigFolder","zDataset Information","fx_FilterDimByFact","VortexAppDataFile","App","Dependency","Table","Column","Page","Page Object","Page Object Dimension","Page Object Measure","App Measure","App Measure Tag","Script Chunk","Script Chunk Tag","Script Lines","Relationship","Variables","Estimate Config","Complexity Scoring","Configs","Export","App Usage","USER_WEIGHT_PARAMETER","SESSION_WEIGHT_PARAMETER","ENGAGEMENT_WEIGHT_PARAMETER","activity_index","Automation Ratio Calculations","Tiers","App Owners","UsernameConversions","Power Users","EXPORT_LOCATION","AppsPresent","AppsWithBothSources","PreloadedFiles","SupportingFiles"]
+
+annotation TabularEditor_SerializeOptions = {"IgnoreInferredObjects":false,"IgnoreInferredProperties":false,"IgnoreTimestamps":false,"SplitMultilineStrings":true,"PrefixFilenames":false,"LocalTranslations":false,"LocalPerspectives":false,"LocalRelationships":false,"Levels":[]}
+
+annotation __TEdtr = 1
+
+ref table 'zLast Refresh Datetime'
+ref table 'zChange Log'
+ref table 'zData Dictionary'
+ref table 'zRelease Information'
+ref table Measure
+ref table 'zTime Series Definitions'
+ref table 'zMeasure Definitions'
+ref table 'zDataset Information'
+ref table App
+ref table Dependency
+ref table Table
+ref table Column
+ref table Page
+ref table 'Page Object'
+ref table 'Page Object Dimension'
+ref table 'Page Object Measure'
+ref table 'App Measure'
+ref table 'App Measure Tag'
+ref table 'Script Chunk'
+ref table 'Script Chunk Tag'
+ref table Relationship
+ref table 'Complexity Scoring'
+ref table 'Estimate Config'
+ref table Variables
+ref table 'Script Lines'
+ref table Configs
+ref table Export
+ref table 'App Usage'
+ref table 'zRunbook Config'
+ref table 'zRunbook Section Config'
+ref table activity_index
+ref table 'Automation Ratio Calculations'
+ref table Tiers
+ref table 'App Owners'
+ref table UsernameConversions
+ref table 'Power Users'
+ref table AppsWithBothSources
+ref table 'UserInput_Total Complexity'
+ref table 'UserInput_Normalized Sessions'
+ref table 'UserInput_Normalized Users'
+ref table 'UserInput_Data Reuse'
+ref table 'UserInput_Session Priority'
+ref table 'UserInput_User Priority'
+ref table 'UserInput_Complexity Priority'
+
+ref cultureInfo en-US
+

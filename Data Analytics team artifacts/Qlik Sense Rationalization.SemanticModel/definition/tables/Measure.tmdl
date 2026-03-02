@@ -1,0 +1,759 @@
+/// *Metadata*
+table Measure
+	lineageTag: a8294757-b64b-4c53-b5ab-01126ae532a5
+
+	measure 'Template Measure' = 1
+		formatString: 0
+		isHidden
+		lineageTag: f96c9c7b-562c-48cb-b7a8-fb53daee41e4
+
+	/// Current Release
+	measure 'Current Release' = ```
+			
+			VAR v_MaxReleaseDate = 
+			CALCULATE(
+			    MAX('zChange Log'[Release Index])
+			    , ALL('zChange Log')
+			)
+			
+			VAR vResult = 
+			CALCULATE(
+			    SELECTEDVALUE('zRelease Information'[Release])
+			    , 'zRelease Information'[Release Index] = v_MaxReleaseDate
+			    , ALL('zChange Log')
+			)
+			
+			RETURN vResult
+			```
+		formatString: Text
+		isHidden
+		displayFolder: Metadata
+		lineageTag: 8a15a564-3711-45de-b006-d4120de86d40
+
+		annotation Annotation = Current Release
+
+	/// Last Refresh Datetime
+	measure 'Last Refresh Datetime' =
+			
+			Max('zLast Refresh Datetime'[Last Refresh Datetime])
+		formatString: mm/dd/yyyy hh:nn:ss AM/PM
+		isHidden
+		displayFolder: Metadata
+		lineageTag: fcd2d4e0-e91e-4856-a765-3d9c3c9b4e69
+
+		annotation Annotation = Last Refresh Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	/// Latest Change Index
+	measure 'Latest Change Index' =
+			
+			Max('zChange Log'[Change Index])
+		formatString: Text
+		isHidden
+		displayFolder: Metadata
+		lineageTag: 996fd5ed-7d91-40de-b07a-4aca819a5599
+
+	/// Dataset information updated based on information from Axis Accelerator Suite Documentation Generator module.
+	measure 'Dataset Information' =
+			
+			VAR vSelectedLabel = SELECTEDVALUE('zDataset Information'[Id], 0)
+			
+			VAR vDatasetDatasource = LASTNONBLANK('zRunbook Config'[Data Sources], 0)
+			VAR vDatasetOwner = LASTNONBLANK('zRunbook Config'[Data Owner], 0)
+			VAR vDatasetTimePeriod = LASTNONBLANK('zRunbook Config'[Time Period], 0)
+			VAR vDatasetRefreshRate = LASTNONBLANK('zRunbook Config'[Refresh Rate], 0)
+			
+			VAR vResult = SWITCH(vSelectedLabel
+			    , 0, vDatasetDatasource
+			    , 1, vDatasetOwner
+			    , 2, vDatasetTimePeriod
+			    , 3, vDatasetRefreshRate
+			)
+			
+			RETURN vResult
+		formatString: Text
+		isHidden
+		displayFolder: Metadata
+		lineageTag: 6f1fd2a2-122a-4022-86b7-62c858718ebd
+
+	measure 'Relationship Count' = ```
+			
+			    COUNTROWS('Relationship')
+			```
+		formatString: #,##0
+		lineageTag: 78fbb12a-810e-474d-af21-72defaa62a26
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Dependency Count' = COUNTROWS('Dependency')
+		formatString: #,##0
+		lineageTag: ffe68729-35c5-4fe3-9c52-fc30af2fea9e
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Output Count' =
+			
+			CALCULATE(
+			    COUNTROWS('Dependency')
+			    , 'Dependency'[Type] in {"Store"}
+			)
+		formatString: #,##0
+		lineageTag: be859d60-1a27-41bb-90ad-3e58ddc55533
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Input Count' =
+			
+			CALCULATE(
+			    COUNTROWS('Dependency')
+			    , 'Dependency'[Type] in {"Load", "Binary"}
+			)
+		formatString: #,##0
+		lineageTag: 1f159e2b-9f60-4658-a28c-b87ac0b21187
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Table Count' =
+			
+			CALCULATE(
+			    COUNTROWS('Table')
+			    , 'App'[App Type] = "UI"
+			)
+		formatString: #,##0
+		lineageTag: 7f9fa3d0-e2d8-4c91-bf36-1e3ae6fb7ea6
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Measure Count' =
+			
+			CALCULATE(
+			    COUNTROWS('App Measure')
+			    , 'App'[App Type] = "UI"
+			)
+		formatString: #,##0
+		lineageTag: 7e22261e-2b5d-447c-9156-7969884f8b3a
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Page Count' =
+			
+			CALCULATE(
+			    COUNTROWS('Page')
+			    , 'App'[App Type] = "UI"
+			)
+		formatString: #,##0
+		lineageTag: f1d0fb1f-28e3-4f38-ae20-77b03a47977f
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Page Object Count' =
+			
+			CALCULATE(
+			    COUNTROWS('Page Object')
+			    , 'App'[App Type] = "UI"
+			)
+		formatString: #,##0
+		lineageTag: cf2c04fc-af7d-48da-8f2b-7ccf1ddd6ddc
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Object Count' = ```
+			
+			VAR vEstimateIndex = SELECTEDVALUE('Estimate Config'[Step Index])
+			
+			VAR vResult = 
+			SWITCH(vEstimateIndex
+			, 0, 1
+			, 1, [Dependency Count]
+			, 3, [Input Count]
+			, 4, [Output Count]
+			, 5, [Table Count]
+			, 6, [Field Count]
+			, 7, [Relationship Count]
+			, 8, [Measure Count]
+			, 9, [Page Count]
+			, 10, [Page Object Count]
+			, 11, [Variable Count]
+			, 12, 1
+			, 13, [Input Count]
+			, 14, [Dependency Count]
+			, 15, [Output Count]
+			, 16, [Output Count]
+			, 17, [Output Count]
+			, 18, [Table Count]
+			, 19, [Output Count]
+			, 20, [Table Count]
+			, 21, [Table Count]
+			, 22, [Measure Count]
+			//, 22, [Measure Complexity Multiplier]
+			, 23, [Table Count]
+			, 24, [Measure Count]
+			, 25, [Relationship Count]
+			, 26, [Page Count]
+			, 27, [Page Object Count]
+			, 28, [Table Count]
+			, 29, [Page Object Count]
+			, 30, [Measure Count]
+			
+			)
+			
+			RETURN vResult
+			```
+		formatString: #,##0
+		lineageTag: 249e1494-7036-4feb-a323-19183d044812
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Script Chunk Count' = COUNTROWS('Script Chunk')
+		formatString: 0
+		lineageTag: 6367b4e7-b6c2-4bbc-8130-e2e1cc76c9fd
+
+	measure 'Variable Count' = COUNTROWS('Variables')
+		formatString: 0
+		lineageTag: 37c6deea-2fcb-45af-b6be-df04da502c31
+
+	measure 'Field Count' =
+			
+			CALCULATE(
+			    COUNTROWS('Column')
+			    , 'App'[App Type] = "UI"
+			)
+		formatString: #,##0
+		lineageTag: 0210f2f0-0192-459d-b889-b76f65331ba1
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Calculated Per Item Manual Effort (Minutes)' = SUMX('Estimate Config', [Object Count Complexity Adjusted] * [Per Item Manual Effort (Minutes)])
+		formatString: #,##0.00
+		lineageTag: c4cd0943-2331-4612-9d5f-b399af51ad2e
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Automated Savings' = SUMX('Estimate Config', [Calculated Per Item Manual Effort (Minutes)] * [Automated Reduction])
+		formatString: #,##0.00
+		lineageTag: 74f64909-961d-4a84-bee8-663179104627
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Automation Assisted Effort (Minutes)' = [Calculated Per Item Manual Effort (Minutes)] - [Automated Savings]
+		formatString: #,##0.00
+		lineageTag: 9cc0996a-8362-4538-ba8d-f7ecac16f817
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Automation Ratio' = 1 - ([Automation Assisted Effort (Minutes)] / [Calculated Per Item Manual Effort (Minutes)])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 5444fece-db17-4d98-931f-8c1ed4bb98a9
+
+	measure 'Script Line Count' = COUNTROWS('Script Lines')
+		formatString: #,##0
+		lineageTag: e7d2460d-a989-4361-837b-cd69b42f2505
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Calculated Per Item Manual Effort ($)' = [Calculated Per Item Manual Effort (Hours)] * SELECTEDVALUE('Configs'[Average Hourly Rate])
+		formatString: $#,##0.00
+		lineageTag: 00838f23-efb6-415c-9e15-ef3902ee3573
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Calculated Per Item Manual Effort (Hours)' = [Calculated Per Item Manual Effort (Minutes)] / 60
+		formatString: #,0
+		lineageTag: 093c1214-3f2e-46d7-a6e8-9190916f1b13
+
+	measure 'Automation Assisted Effort (Hours)' = [Automation Assisted Effort (Minutes)] / 60
+		formatString: #,0
+		lineageTag: 8f3221f0-4786-497a-8c26-1f26c8f8cb30
+
+	measure 'Automation Assisted Effort ($)' = [Automation Assisted Effort (Hours)] * SELECTEDVALUE('Configs'[Average Hourly Rate])
+		formatString: $#,##0.00
+		lineageTag: 7b0e281e-01d8-4ec5-8d44-e00deb0be01e
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'App Count' = COUNTROWS('App')
+		formatString: #,##0
+		lineageTag: 886bdea8-143f-45e0-b036-e7e67bbb21e5
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Measure Complexity Multiplier' = 1+SUM('App Measure Tag'[Complexity])
+		formatString: #,##0.00
+		lineageTag: 19cb307f-9ea3-4526-b670-9f0674ae82da
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Object Count Complexity Adjusted' = ```
+			
+			VAR vEstimateIndex = SELECTEDVALUE('Estimate Config'[Step Index])
+			
+			VAR vResult = 
+			SWITCH(vEstimateIndex
+			, 0, 1
+			, 1, [Dependency Count]
+			, 3, [Input Count]
+			, 4, [Output Count]
+			, 5, [Table Complexity Multiplier]
+			, 6, [Field Count]
+			, 7, [Relationship Count]
+			, 8, [Measure Complexity Multiplier]
+			, 9, [Page Count]
+			, 10, [Page Object Complexity Multiplier]
+			, 11, [Variable Count]
+			, 12, 1
+			, 13, [Input Count]
+			, 14, [Dependency Count]
+			, 15, [Output Count]
+			, 16, [Output Count]
+			, 17, [Output Count]
+			, 18, [Table Complexity Multiplier]
+			, 19, [Output Count]
+			, 20, [Table Complexity Multiplier]
+			, 21, [Table Complexity Multiplier]
+			, 22, [Measure Complexity Multiplier]
+			, 23, [Table Complexity Multiplier]
+			, 24, [Measure Count]
+			, 25, [Relationship Count]
+			, 26, [Page Count]
+			, 27, [Page Object Complexity Multiplier]
+			, 28, [Table Complexity Multiplier]
+			, 29, [Page Object Complexity Multiplier]
+			, 30, [Measure Complexity Multiplier]
+			
+			)
+			
+			RETURN vResult
+			```
+		formatString: #,##0
+		lineageTag: ba15e00b-d4ca-4250-8027-994ec09205d9
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Table Complexity Multiplier' = 1 + SUM('Table'[Complexity])
+		lineageTag: 9284eaa2-2a85-4201-ba91-123a48e5ed3d
+
+	measure 'Page Object Complexity Multiplier' = 1 + SUM('Page Object'[Complexity])
+		lineageTag: 0a917707-fbbe-47e2-9295-6c4024226bb0
+
+	measure 'Script Function Count' = COUNT('Script Chunk Tag'[SectionId])
+		formatString: #,0
+		lineageTag: 89780a88-f6d1-4bbf-8db4-f466549ba1a1
+
+	measure 'App Count (Activity)' = DISTINCTCOUNT(App[Solution ID])
+		formatString: 0
+		lineageTag: 3013da4e-583e-47aa-b3a3-941e000e3818
+
+	measure 'Gold Automation' = CALCULATE([Automation Ratio], 'Estimate Config'[Phase] = "Gold Layer Creation")
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: f472249a-2e68-4680-8a28-0cb1b003b639
+
+	measure 'Bronze Automation' = CALCULATE([Automation Ratio], 'Estimate Config'[Phase] = "Bronze Layer Creation")
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: c44eb663-7553-43eb-95a3-792aef684307
+
+	measure 'UI Automation' = CALCULATE([Automation Ratio], 'Estimate Config'[Phase] = "UI Creation")
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 16264fed-2076-4951-895b-bbc02d453248
+
+	measure 'Distinct Users' = DISTINCTCOUNT('App Usage'[User ID])
+		formatString: 0
+		lineageTag: c414cbdc-e9b9-40f5-bdeb-8fdf1dc6e578
+
+	measure 'Session Count' =
+			// COUNT('App Usage'[AppId]) -- This is essentially a COUNT(*)
+			Format(COUNT('App Usage'[AppId]),"#,##0")
+		lineageTag: 61d27e2a-dcf6-47e1-acbe-c1c541c5adfe
+
+	measure 'Usage App Count' = CALCULATE(DISTINCTCOUNT('App Usage'[AppId]), Filter('App Usage', 'App Usage'[Active app] = "Yes"))
+		formatString: 0
+		lineageTag: b91ec317-30b5-481d-ba07-e1e5013c0630
+
+	measure '% Unused- Base' = CONCATENATE("% of Total: ", FORMAT(DIVIDE(SUM('Usage'[Unused Base Sheets 30+ Days]), SUM('Usage'[Base Sheets])), "Percent"))
+		lineageTag: b7a1c744-fa97-4a08-8f90-3d21292657fc
+
+	measure '% Unused- Community' = CONCATENATE("% of Total: ", FORMAT(DIVIDE(SUM('Sheet Usage'[Unused Sheets (30 Days)]), SUM('Sheet Usage'[])), "Percent"))
+		lineageTag: 262024fb-78f7-45bb-9fed-51c5f25bffee
+
+	measure '% Unused- Private' = CONCATENATE("% of Total: ", FORMAT(DIVIDE(SUM('Sheet Usage'[Unused Private Sheets 30+ Days] ), SUM('Sheet Usage'[Private Sheets])), "Percent"))
+		lineageTag: df831bae-5bdb-4526-992b-e5a6cf8f67dd
+
+	measure 'Avg. Exports per App' = DISTINCTCOUNT('Export'[Object])/ [App Count]
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 5c7d2ad0-2996-4776-95c5-a6c90cfa3571
+
+	measure MinDateRange = CALCULATE(MIN(Activity_index[Date]),ALLSELECTED(Activity_index[Date]))
+		formatString: Short Date
+		lineageTag: f6c8cb3e-6a5b-4408-9206-893abab7a54d
+
+	measure '% of Tier 1 Users' = ```
+			Divide([Tier 1 Users], DISTINCTCOUNT('App Usage'[User ID]))
+			
+			```
+		lineageTag: 30f44491-dec6-46a1-a8ce-b38602d796eb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% of recommended apps' = ```
+			
+			 var recommended = CALCULATE([App Count], Filter(Tiers, Tiers[Tier] = "Tier 1"))
+			 var calc = DIVIDE(recommended, [App Count])
+			 RETURN calc
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 04cfd2be-98ab-4742-9ba8-33e8c8130d67
+
+	measure '% of active app' = CALCULATE(Divide([Usage App Count], DISTINCTCOUNT('App Usage'[AppId])))
+		lineageTag: a7a74f33-7fbe-4c3b-be18-0289759d561d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Tier 1 apps' = CALCULATE(DISTINCTCOUNT('Tiers'[Solution ID]), Filter('Tiers', 'Tiers'[Tier] = "Tier 1"))
+		formatString: 0
+		lineageTag: 686c68e9-7686-43d8-a8f5-335f28c534dc
+
+	measure 'Title based on tier' =
+			IF(ISFILTERED(Tiers[Tier]),
+			CONCATENATEX (VALUES (Tiers[Tier]), Tiers[Tier]) & " apps", "All apps")
+		lineageTag: 587c8d5e-d46d-48df-ae1a-d19fd79ebed0
+
+	measure terst = SELECTEDVALUE(Tiers[Tier])
+		lineageTag: 9888023c-9fcc-4538-b4c4-7f415c0355e7
+
+	measure MaxDateRange = CALCULATE(MAX(Activity_index[Date]),ALLSELECTED(Activity_index[Date]))
+		formatString: Short Date
+		lineageTag: 7f5b884f-50ee-4405-9ed4-4c196cfecc53
+
+	measure 'Number of Tables2' =
+			"Number of Tables " &
+			CALCULATE(
+			    COUNTROWS('Table')
+			    , 'App'[App Type] = "UI"
+			)
+		lineageTag: 6e6c222d-d397-45e5-b2a0-a6accfbac96f
+
+	measure '% of Total Users' =
+			IF(SELECTEDVALUE(Tiers[Tier]) = BLANK(),Format(DISTINCTCOUNT('App Usage'[User ID]),"#,##0"),
+			FORMAT(DISTINCTCOUNT('App Usage'[User ID]) / Calculate(DISTINCTCOUNT('App Usage'[User ID]),REMOVEFILTERS(Tiers[Tier])), "Percent"))
+		lineageTag: 76ea89fb-f267-473d-a86e-9330013659b4
+
+	measure '% of Total Sessions' =
+			
+			IF(SELECTEDVALUE(Tiers[Tier]) = BLANK(),Format(COUNT('App Usage'[AppId]),"#,##0"),
+			FORMAT(Divide(COUNT('App Usage'[AppId]),  Calculate(COUNT('App Usage'[AppId]),REMOVEFILTERS(Tiers[Tier]))), "Percent"))
+		lineageTag: c2f22211-493b-4c65-adc4-88f63fb80b97
+
+	measure SelectedTiers =
+			
+			VAR SelectedValues = VALUES('Tiers'[Tier])
+			RETURN
+			    IF(
+			        COUNTROWS(SelectedValues) < 3,
+			        CONCATENATE(" ", CONCATENATE(CONCATENATEX(SelectedValues, 'Tiers'[Tier], ", "), " ")),
+			        " "
+			    )
+		lineageTag: c9249157-5682-4525-b685-89e16d1ae63a
+
+	measure SelectedTiers2 =
+			
+			VAR SelectedValues = VALUES('Tiers'[Tier])
+			RETURN
+			    IF(
+			        COUNTROWS(SelectedValues) < 3,
+			        CONCATENATE(CONCATENATEX(SelectedValues, 'Tiers'[Tier], ","), " "),
+			        "The environment "
+			    )
+		lineageTag: c3456788-c661-443d-bf88-34e529c8bf1d
+
+	measure 'Automation Ratio - Text Embedding' = CONVERT(ROUND([Automation Ratio] * 100, 1), STRING) & "%"
+		lineageTag: ffd4df6c-6fd5-49e8-81fb-f8c0849c5f6f
+
+	measure 'Number of Streams' = DISTINCTCOUNT('App Usage'[App Stream])
+		formatString: 0
+		lineageTag: 82a4711a-5167-4087-b675-c667a0341cf1
+
+	measure 'Number of Apps' = DISTINCTCOUNT('Tiers'[App])
+		formatString: 0
+		lineageTag: dcaa3f42-7d03-47b9-b520-cc249741cd8b
+
+	measure 'Number of Tables - Text Embedding' =
+			CALCULATE(
+			    COUNTROWS('Table')
+			    , 'App'[App Type] = "UI"
+			)
+		formatString: 0
+		lineageTag: f27004e8-fbe6-4c27-97b5-eb1c6c8629d7
+
+	measure 'Number of Measures - Text Embedding' =
+			CALCULATE(
+			    COUNTROWS('App Measure')
+			    , 'App'[App Type] = "UI"
+			)
+		formatString: 0
+		lineageTag: 0b00b9fb-0687-4b0f-ad7f-c89b22f1396f
+
+	measure 'Number of Fields - Text Embedding' =
+			CALCULATE(
+			    COUNTROWS('Column')
+			    , 'App'[App Type] = "UI"
+			)
+		formatString: 0
+		lineageTag: 870d88b0-1b71-44c4-9328-38b4f8f56f66
+
+	measure 'Number of Fields' =
+			CALCULATE(
+			    COUNTROWS('Column')
+			    , 'App'[App Type] = "UI"
+			)
+		formatString: 0
+		lineageTag: be6a0067-a217-441c-a09f-b6e515a02e48
+
+	measure 'Activity Index Measure' = SUM('Tiers'[Activity_Index])
+		lineageTag: 6fcffe5b-ac32-4a4b-8026-49bd68ca4208
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Activity Index Bins' =
+			
+			
+			VAR _val = TRUNC('Measure'[Activity Index Measure], 1)
+			
+			RETURN CONVERT(_val, STRING)
+		lineageTag: d2f7ffdb-73b8-4e68-8153-262697eaad2c
+
+	measure '# Apps' = DISTINCTCOUNT('Tiers'[Solution ID])
+		formatString: 0
+		lineageTag: 06000b57-4550-44dd-bff2-046ccaaee13b
+
+	measure '% of Total Users LABEL' = IF(SELECTEDVALUE(Tiers[Tier]) = BLANK(), "# of Total Users", "% of Total Users")
+		lineageTag: 5333d314-6d00-4adf-abc8-028317b165bf
+
+	measure '% of Total Sessions LABEL' = IF(SELECTEDVALUE(Tiers[Tier]) = BLANK(), "# of Total Sessions", "% of Total Sessions")
+		lineageTag: f59b39f6-bd09-4588-912d-48fcfe51ee33
+
+	measure 'NUMBER OF APPS - TEXT EMBEDDING' = [# Apps]
+		formatString: 0
+		lineageTag: 26b7d054-d896-4227-bebe-7754b68facaf
+
+	measure 'Tier 1 Users' = CALCULATE(DISTINCTCOUNT('App Usage'[User ID]), Filter('Tiers', 'Tiers'[Tier] = "Tier 1"))
+		formatString: 0
+		lineageTag: 44db59ec-f9d0-441d-bf6e-bc723e618f6a
+
+	measure 'Environment Overview Text Embedding 2' = ```
+			
+			
+			VAR _user_number = IF(
+			    SELECTEDVALUE(Tiers[Tier]) = BLANK(),
+			    Format(DISTINCTCOUNT('App Usage'[User ID]),"#,##0"),
+			    FORMAT(DISTINCTCOUNT('App Usage'[User ID]) / Calculate(DISTINCTCOUNT('App Usage'[User ID]),REMOVEFILTERS(Tiers[Tier])), "Percent")
+			)
+			
+			VAR _session_number = IF(
+			    SELECTEDVALUE(Tiers[Tier]) = BLANK(),
+			    Format(COUNT('App Usage'[AppId]),"#,##0"),
+			    FORMAT(Divide(COUNT('App Usage'[AppId]),  Calculate(COUNT('App Usage'[AppId]),REMOVEFILTERS(Tiers[Tier]))), "Percent")
+			)
+			
+			// CASE 1: The environment has a total of X users and Y sessions
+			VAR _case1 = CONCATENATE(
+			    CONCATENATE(CONCATENATE('Measure'[SelectedTiers2], "has a user base of "), CONCATENATE(_user_number, " users, contributing to ")), 
+			    CONCATENATE(_session_number, " total Qlik sessions.")
+			)
+			
+			// CASE 2: Tier X consists of X% of users and Y% of all sessions
+			VAR _case2 = CONCATENATE(
+			    CONCATENATE(CONCATENATE('Measure'[SelectedTiers2], " contains "), CONCATENATE(_user_number, " of all distinct users, which contribute to " )),
+			    CONCATENATE(_session_number, " of all Qlik sessions.")
+			)
+			
+			RETURN IF(
+			    SELECTEDVALUE(Tiers[Tier]) = BLANK(),
+			    _case1,
+			    _case2
+			)
+			// RETURN IF(
+			//     SELECTEDVALUE(Tiers[Tier]) <1,
+			//     _case1,
+			//     _case2
+			// )
+			```
+		lineageTag: bded3f8e-3b83-4fdc-a2fa-bde64959f981
+
+	measure 'Avg Complexity' = AVERAGEX(App, [Complexity Scaled])
+		formatString: 0.00000
+		lineageTag: 5d74d510-1565-40de-a748-fb90de1dc492
+
+	measure 'Avg # of Users' = AVERAGE(activity_index[Number of Users])
+		formatString: 0.0
+		lineageTag: 7d87478e-56b4-4296-94b7-0e77180ea2e0
+
+	measure 'Avg # of Sessions' = AVERAGE(activity_index[Total Sessions])
+		formatString: 0.0
+		lineageTag: bac59565-deab-48c8-a4b2-5f1ce44c2eac
+
+	measure 'Total Complexity' = [# Apps] * [Avg Complexity]
+		lineageTag: f49102e2-cc6d-4681-8e27-b469b64fcc1e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Complexity Scaled' = ```
+			DIVIDE(SUM(Tiers[[Calculated Per Item Manual Effort (Minutes)]]]), MAXX(ALL(Tiers), Tiers[[Calculated Per Item Manual Effort (Minutes)]]]))
+			
+			```
+		formatString: 0.0000
+		lineageTag: dc811f0d-f562-4daf-8f1e-4cd42f2d9c69
+
+	measure 'Normalized Complexity' =
+			
+			DIVIDE(
+			    [Total Complexity],
+			    MAXX(ALL(App[Group]), [Total Complexity])
+			)
+		lineageTag: 959573b6-57aa-4c09-adcf-862549e86719
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Normalized Sessions (Group)' =
+			
+			DIVIDE(
+			    [Avg # of Sessions],
+			    MAXX(ALL(App[Group]), [Avg # of Sessions])
+			)
+		lineageTag: 67d2bc04-c9f1-46e1-9ed5-1e9a20f5125f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Normalized Users (Group)' =
+			
+			DIVIDE(
+			    [Avg # of Users],
+			    MAXX(ALL(App[Group]), [Avg # of Users])
+			)
+		lineageTag: 251e1ab9-fd41-4794-93b2-1e37b983ddc3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Title Data Reuse' =
+			
+			IF(
+			    ISFILTERED('UserInput_Data Reuse'[Data Reuse]),
+			    "Data Reuse: WS " & SELECTEDVALUE('UserInput_Data Reuse'[Data Reuse]),
+			    "Data Reuse: WS 0.25 (default)")
+		lineageTag: 62a39b3b-09e1-4dd4-ac89-46f91b24f920
+
+	measure 'Title Total Complexity' =
+			
+			IF(
+			    ISFILTERED('UserInput_Total Complexity'[Total Complexity]),
+			    "Total Complexity: WS " & SELECTEDVALUE('UserInput_Total Complexity'[Total Complexity]),
+			    "Total Complexity: WS 0.18 (default)")
+		lineageTag: 786f27fa-5916-46b8-aec3-9f0f7bbe699b
+
+	measure 'Title Normalized Sessions' =
+			
+			IF(
+			    ISFILTERED('UserInput_Normalized Sessions'[Normalized Sessions]),
+			    "Normalized Sessions: WS " & SELECTEDVALUE('UserInput_Normalized Sessions'[Normalized Sessions]),
+			    "Normalized Sessions: WS 0.32 (default)")
+		lineageTag: 29adc388-327a-4c7e-8e8d-c7bfc1d786e3
+
+	measure 'Title Normalized Users' =
+			
+			IF(
+			    ISFILTERED('UserInput_Normalized Users'[Normalized Users]),
+			    "Normalized Users: WS " & SELECTEDVALUE('UserInput_Normalized Users'[Normalized Users]),
+			    "Normalized Users: WS 0.25 (default)")
+		lineageTag: f8060861-5709-4010-b2ed-3f0359e5c765
+
+	measure 'Stream Usage Score' = ([Normalized Sessions (Group)]*'UserInput_Normalized Sessions'[Normalized Sessions Value])+([Normalized Users (Group)]*'UserInput_Normalized Users'[Normalized Users Value])-([Normalized Complexity]*'UserInput_Total Complexity'[Total Complexity Value])
+		formatString: 0.0000
+		lineageTag: a30d6e90-99eb-4ada-b23f-37cdf114a478
+
+	measure 'Normalized Sessions (Name)' =
+			
+			DIVIDE(
+			    [# Sessions],
+			    MAXX(ALL(App), [# Sessions])
+			)
+		formatString: 0.0000
+		lineageTag: 90c00c38-78c1-4b3b-b638-60fe1174bb45
+
+	measure '# Sessions' = SUM(activity_index[Total Sessions])
+		formatString: 0
+		lineageTag: 53873591-dbb4-4026-8ea4-3ba64cd89b28
+
+	measure '# Users' = SUM(activity_index[Number of Users])
+		formatString: 0
+		lineageTag: e790b3b4-916d-48a7-930c-2976ec916567
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Normalized Users (Name)' =
+			
+			DIVIDE(
+			    [# Users],
+			    MAXX(ALL(App), [# Users])
+			)
+		formatString: 0.0000
+		lineageTag: 5f35e503-f35b-4757-9ef9-01236c35d449
+
+	measure 'Title Session Priority' =
+			
+			IF(
+			    ISFILTERED('UserInput_Session Priority'[Session Priority]),
+			    "Session Priority: WS " & SELECTEDVALUE('UserInput_Session Priority'[Session Priority]),
+			    "Session Priority: WS 0.32 (default)")
+		lineageTag: a1caee3d-19b6-44c0-a596-eabf7e9a5845
+
+	measure 'Session Priority' =
+			
+			'UserInput_Session Priority'[Session Priority Value] * 1.3333333333333
+		formatString: 0.0000
+		lineageTag: fbd92989-8dc0-4d0c-a2ec-941f2443caad
+
+	measure 'Title Users Priority' =
+			
+			IF(
+			    ISFILTERED('UserInput_User Priority'[User Priority]),
+			    "Users Priority: WS " & SELECTEDVALUE('UserInput_User Priority'[User Priority]),
+			    "Users Priority: WS 0.25 (default)")
+		lineageTag: 1e728aeb-36a7-4afd-983c-43feaac74e01
+
+	measure 'Users Priority' =
+			
+			'UserInput_User Priority'[User Priority Value] * 1.3333333333333
+		formatString: 0.0000
+		lineageTag: a3b3ce91-22f1-4caa-8f98-f7f19838fe6e
+
+	measure 'Title Complexity Priority' =
+			
+			IF(
+			    ISFILTERED('UserInput_Complexity Priority'[Complexity Priority]),
+			    "Complexity Priority: WS " & SELECTEDVALUE('UserInput_Complexity Priority'[Complexity Priority]),
+			    "Complexity Priority: WS 0.18 (default)")
+		lineageTag: 37353e30-549c-4aa0-8a98-37b4a989cdf2
+
+	measure 'Complexity Priority' =
+			
+			'UserInput_Complexity Priority'[Complexity Priority Value] * 1.3333333333333
+		formatString: 0.0000
+		lineageTag: a15095a0-2e27-4265-9c62-f52ca2ced394
+
+	measure 'App Score' = ([Session Priority]*[Normalized Sessions (Name)])+([Normalized Users (Name)]*[Users Priority])-([Complexity Scaled]*[Complexity Priority])
+		formatString: 0.0000
+		lineageTag: 15401861-e441-4fe3-bbd9-b032cd45cd26
+
+	partition Measure-a580f112-e526-4cb4-9c6d-43e4a740badd = m
+		mode: import
+		queryGroup: Metadata\Queries
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    // Change type for column, which will be deleted in next step.
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

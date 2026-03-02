@@ -1,0 +1,35 @@
+table D_Customer_ShipTo
+	lineageTag: 5a773f49-30f8-423e-b57a-5031deda60c0
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: 7ab3c3d2-b86c-4c75-ad00-5bb5d5bef5f7
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Customer_ShipTo = m
+		mode: import
+		queryGroup: Dimensions
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Customer_ShipTo = Value.NativeQuery(Source, "        
+				    SELECT
+				    SHIPTO.*
+				    FROM D_Customer_ShipTo AS SHIPTO
+				        INNER JOIN (
+				            SELECT DISTINCT SHIP_TO_CUST_KEY FROM F_Shipper_Item
+				        ) AS SHPR
+				        ON SHIPTO.SHIP_TO_CUST_KEY = SHPR.SHIP_TO_CUST_KEY
+				        ", null, [EnableFolding = true]),
+				    #"Remove Unused Columns"= Table.SelectColumns(dbo_D_Customer_ShipTo,{"SHIP_TO_CUST_KEY"})
+				in
+				    #"Remove Unused Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

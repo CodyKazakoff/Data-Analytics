@@ -1,0 +1,180 @@
+table F_ORD_HDR_AGG_P21
+	lineageTag: 37d44892-a287-4928-8bfa-563fd3535542
+
+	column ORD_HDR_KEY
+		dataType: string
+		lineageTag: c7eb2e91-cb34-4f3a-96c7-309ae8e8454e
+		summarizeBy: none
+		sourceColumn: ORD_HDR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILL_TO_CUST_KEY
+		dataType: string
+		lineageTag: 509bf2ca-806e-481d-a59a-6f69a1e20cf0
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 9bff8059-71bd-40a6-a666-6cd03febed42
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_CTL_NO
+		dataType: string
+		lineageTag: 361be29a-5915-4f3b-bf6a-eec32fd240dd
+		summarizeBy: none
+		sourceColumn: ORDER_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_NO
+		dataType: string
+		lineageTag: 79e9ccb1-6152-4f41-a2b0-3e05658b9ea6
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILL_TO_CUST_NO
+		dataType: string
+		lineageTag: 8af724ff-e6e5-4d51-aa08-a292ce5a3938
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_PO_NO
+		dataType: string
+		lineageTag: bf378c32-21c6-46e8-80f8-e25dcdfdfa57
+		summarizeBy: none
+		sourceColumn: CUST_PO_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROCESS_STATUS
+		dataType: string
+		lineageTag: c41092c1-3b6d-4b16-b50f-9841f752685e
+		summarizeBy: none
+		sourceColumn: PROCESS_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column MDSE_ORDERED_PRICE
+		dataType: double
+		lineageTag: c4e3cac8-1a3a-4a08-ae47-6237c4b4a450
+		summarizeBy: sum
+		sourceColumn: MDSE_ORDERED_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MDSE_ORDERED_COST
+		dataType: double
+		lineageTag: bbacaf3f-f78c-4269-a756-c6ca7441e1d3
+		summarizeBy: sum
+		sourceColumn: MDSE_ORDERED_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_FRT
+		dataType: double
+		lineageTag: 2b50d54a-0bb6-4884-acdd-8112c8216424
+		summarizeBy: sum
+		sourceColumn: TOTAL_FRT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OTHER_CHARGES
+		dataType: double
+		lineageTag: 6f3d9c74-5309-4124-af68-76107b31002b
+		summarizeBy: sum
+		sourceColumn: OTHER_CHARGES
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ORDER_AMT
+		dataType: double
+		lineageTag: f1c1e0b6-934f-47a8-a5ba-216c2ba5c0b0
+		summarizeBy: sum
+		sourceColumn: TOTAL_ORDER_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column LINES_ORDERED
+		dataType: double
+		lineageTag: f87cff18-122b-409c-8053-b6b0578196a3
+		summarizeBy: sum
+		sourceColumn: LINES_ORDERED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SALESMAN_ID
+		dataType: string
+		lineageTag: a6184fd8-3958-4e5c-b3b3-0804fa2dd660
+		summarizeBy: none
+		sourceColumn: SALESMAN_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 08fa764d-b9e6-4f2f-8e56-4deaa095fc0e
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DUE_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 29a3c3ef-2f39-45c8-a9a6-f939e97810fd
+		summarizeBy: none
+		sourceColumn: DUE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_REQ_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d436652f-0196-49ac-ba78-cbe84025d82c
+		summarizeBy: none
+		sourceColumn: CUST_REQ_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_ORD_HDR_AGG_P21 = m
+		mode: import
+		queryGroup: Facts
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4" = Workspaces{[workspaceId="8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"]}[Data],
+				    #"d646a64b-d8dc-4875-983f-fdbdaf561e2c" = #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"{[dataflowId="d646a64b-d8dc-4875-983f-fdbdaf561e2c"]}[Data],
+				    F_ORD_HDR_AGG_P21_ = #"d646a64b-d8dc-4875-983f-fdbdaf561e2c"{[entity="F_ORD_HDR_AGG_P21",version=""]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(F_ORD_HDR_AGG_P21_,{"SHIP_TO_CUST_KEY", "TAX_CODE", "SHIP_TO_OVERRIDE", "CUST_RELEASE_NO", "CUST_RFQ_NO", "HANDLING_INST", "ORDER_TYPE", "ORDER_TYPE_CD", "PROCESS_STATUS_DESC", "ORDER_SOURCE", "ORDER_SOURCE_CD", "SHIP_CHARGES", "SHIP_CHARGES_CD", "SHIP_METHOD", "SHIP_METHOD_CD", "CARRIER", "CARRIER_CD", "LOST_SALE_CD", "TAX_OUTBND_FRT", "SALES_TAX_PCT", "SALES_TAX_AMT", "SALES_TAX_TOTAL", "INBOUND_FRT", "OUTBOUND_FRT", "ENTERED_BY_ID", "TAKEN_BY", "DC_INST", "TRN_REQ_FLAG", "PROJECT_DIST_CD", "TAX_STATUS", "SPECIAL_TAX_CD", "TAX_OVERRIDE_TYPE", "EDI_CHG_FLAG", "EDI_DISCREPANCY", "SHIP_DATE", "SHIP_DATE_DESC", "EXPEDITE_DATE", "CONSIGN_ORDER_FLAG", "TOTAL_VAS", "SHIP_COMPLETE", "EMAIL_ADDRESS", "PST_TAX", "GST_TAX", "ORDER_EXCHANGE", "PROMOTION_CODE", "XML_LOCATION_ID", "XML_VENDOR_ID", "PROMOTION_CD", "NB_FLAG", "SERVICE_TYPE", "EBUS_SOURCE", "COD_FLAG", "CARRIER_CONSIGNEE", "PRICE_GUIDE", "STOREROOM_NO", "TOTAL_LIST_AMT", "CUST_ACK_DATE", "EXP_DELIVERY_DATE", "INTERNAL_EXP_DATE", "LOCK_FRT_CHARGE", "MDSE_ORD_FIN_COST", "MDSE_ORD_CUST_COST", "OCN_COPIED", "CC_ACCT_OVERRIDE", "STAGING_LOCATION", "ORDER_METHOD", "ORDER_METHOD_CD", "COMMERCIAL_CURRENCY", "CURRENCY_TYPE", "CUST_MDSE_ORDERED_PRICE", "CUST_SALES_TAX_AMT", "CUST_SALES_TAX_TOTAL", "CUST_INBOUND_FRT", "CUST_OUTBOUND_FRT", "CUST_TOTAL_FRT", "CUST_OTHER_CHARGES", "FUNCTIONAL_EXCHANGE", "CREDIT_OVERRIDE_USERID", "CREDIT_OVERRIDE_AMT", "PRICE_OVERRIDE_REASON", "PRICE_OVERRIDE_USERID", "ORIGINAL_FREIGHT_CHARGE", "FREIGHT_OVERRIDE_USERID", "FREIGHT_OVERRIDE_TMSTMP", "VAS_REQUIRED", "EXCLUDE_FROM_WEB", "FREIGHT_LOCKED_FLAG", "COPY_ALLOWED", "COPY_RESTRICT_USERID", "CALCULATED_FRT_TOTAL", "API_CALCULATED_FRT_TOTAL", "LOCAL_HD_OVERRIDE", "LOCAL_HD_OVERRIDE_USERID", "TOTAL_CALCULATED_FRT", "FREIGHT_TIER", "HAS_TRACKING", "ORIGINAL_CALC_FREIGHT_TOTAL", "HDR_LAST_UPD_USERID", "HDR_LAST_UPD_TERMID", "HDR_LAST_UPD_TMSTMP", "HDR_ORIGINAL_USERID", "HDR_CREATION_USERID", "HDR_CREATION_TMSTMP", "HDR_DELETE_FLAG"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

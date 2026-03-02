@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "P21 Validation"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c0991b5f-29d3-bee5-40c4-6d539b5fc7b1"
+  }
+}

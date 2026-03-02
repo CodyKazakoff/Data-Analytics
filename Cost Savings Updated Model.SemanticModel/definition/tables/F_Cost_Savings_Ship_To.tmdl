@@ -1,0 +1,213 @@
+table F_Cost_Savings_Ship_To
+	lineageTag: 383160ef-a3b0-4b21-aabd-b5b689708b8b
+
+	column MI_LOC
+		dataType: string
+		lineageTag: f8547b1a-22aa-4e80-9c89-b50fc842de97
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_NO
+		dataType: string
+		lineageTag: 417beb80-ecc0-4476-a4c1-4de89bc50fbc
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_ACCT
+		dataType: string
+		lineageTag: e8905b58-d562-4957-abed-ab5bdd7dfea6
+		summarizeBy: none
+		sourceColumn: CUST_ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CA_CTL_NO
+		dataType: string
+		lineageTag: 85a0d884-cb31-4747-8343-81e82840380b
+		summarizeBy: none
+		sourceColumn: CA_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMMIT_START_DATE
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 2c6b389a-91dd-461a-b486-bee9e8d84ef1
+		summarizeBy: none
+		sourceColumn: COMMIT_START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column COMMIT_END_DATE
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6a1c6321-b0f3-4b23-af2a-62c339d28b2a
+		summarizeBy: none
+		sourceColumn: COMMIT_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column COMMIT_PERCENT
+		dataType: double
+		lineageTag: 0a05c2e6-4348-462c-81fc-0e838a7e3382
+		summarizeBy: sum
+		sourceColumn: COMMIT_PERCENT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CUST_APPR_REQ
+		dataType: string
+		lineageTag: 62e68e4a-63ef-4eaa-8c11-94b217917a69
+		summarizeBy: none
+		sourceColumn: CUST_APPR_REQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORP_APPR_REQ
+		dataType: string
+		lineageTag: fe8cd8c6-b932-4d84-b2a9-3fcae527a0ee
+		summarizeBy: none
+		sourceColumn: CORP_APPR_REQ
+
+		annotation SummarizationSetBy = Automatic
+
+	column GUARANTEE_PAID
+		dataType: string
+		lineageTag: d8f128e9-d91a-404c-adee-b8b0c404e684
+		summarizeBy: none
+		sourceColumn: GUARANTEE_PAID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORP_ACCT_NO
+		dataType: string
+		lineageTag: b012a110-3602-49c0-9086-64fc619895e2
+		summarizeBy: none
+		sourceColumn: CORP_ACCT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column corp_acct_name
+		dataType: string
+		lineageTag: 9fc22799-d4d0-43b8-bba6-14af65db1f63
+		summarizeBy: none
+		sourceColumn: corp_acct_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column branch_manager
+		dataType: string
+		lineageTag: b2001a29-63be-4e54-8f4f-c32287a4d0c7
+		summarizeBy: none
+		sourceColumn: branch_manager
+
+		annotation SummarizationSetBy = Automatic
+
+	column sales_rep
+		dataType: string
+		lineageTag: b04309b7-9893-4c5f-a971-9dbaa4a0c2e4
+		summarizeBy: none
+		sourceColumn: sales_rep
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALES
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 4fca4e3a-f986-4345-983a-944416969d45
+		summarizeBy: sum
+		sourceColumn: SALES
+
+		annotation SummarizationSetBy = Automatic
+
+	column commit_on_cur_sales
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 651f6c9e-c29a-451f-9700-9448838a59c9
+		summarizeBy: sum
+		sourceColumn: commit_on_cur_sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column proj_sales
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: c637a6a7-64c5-4034-8325-f23da27dbe66
+		summarizeBy: sum
+		sourceColumn: proj_sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column APPROVED
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 78bf7b68-4d89-4f47-b80b-b4d4c4329aec
+		summarizeBy: sum
+		sourceColumn: APPROVED
+
+		annotation SummarizationSetBy = Automatic
+
+	column PENDING
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 440d44f1-68bb-42a4-bb4e-24ac66e2d199
+		summarizeBy: sum
+		sourceColumn: PENDING
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISAPPROVED
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: b7ddf69f-f5b5-4f6f-92f8-1fd2462a54ae
+		summarizeBy: sum
+		sourceColumn: DISAPPROVED
+
+		annotation SummarizationSetBy = Automatic
+
+	column APPROVED_COUNT
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a218992-4343-4c05-9356-b25809073a88
+		summarizeBy: sum
+		sourceColumn: APPROVED_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PENDING_COUNT
+		dataType: int64
+		formatString: 0
+		lineageTag: 5669b234-47c9-4ac9-ad40-37ea129144d1
+		summarizeBy: sum
+		sourceColumn: PENDING_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DISAPPROVED_COUNT
+		dataType: int64
+		formatString: 0
+		lineageTag: e9a9dc5d-193d-4ac2-8b50-0022018a4042
+		summarizeBy: sum
+		sourceColumn: DISAPPROVED_COUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_Cost_Savings_Ship_To = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-255cr47brb7ubl4dmbam3tblom.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_F_Cost_Savings_Ship_To = Source{[Schema="dbo",Item="F_Cost_Savings_Ship_To"]}[Data]
+				in
+				    dbo_F_Cost_Savings_Ship_To
+

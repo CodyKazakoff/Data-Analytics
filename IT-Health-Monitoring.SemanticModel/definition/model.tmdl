@@ -1,0 +1,75 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Dimensions
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Facts
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Metadata
+
+	annotation PBI_QueryGroupOrder = 4
+
+/// Workspace names for dataflows are referenced
+queryGroup Parameters
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Functions
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup 'Temp tables'
+
+	annotation PBI_QueryGroupOrder = 5
+
+annotation PBI_QueryOrder = ["_Measure_Table","RangeStart","RangeEnd","FilePath","Dataflow_LimitRecordCount","Dataflow_RecordCountLimit","Workspace","zLast Refresh Datetime","fx_ConditionallyLimitRows","fx_Loop","fx_TableProfile","fx_DistinctKeyChecker","fx_FilterDimByFact","fx_ConvertUTCtoET","fx_CreateCalendar","F_Shipper_Item","D_Calendar","Delivery_Details","Append1","APMO_Predictability_COPY","Team_Names","Acquisition_Synergy_Realization","Competitor_Sales","Competitor_Sales_New","Return_On_Sales","Bugs","PIR","Stories","PIRStories","D_Employee","DORA","APMO_Predictability_COPY_Unpivoted","Delivery_Details_New","F_Order_Item","fx_CurrentIterationPI","fx_OriginalIterationPI"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.140.1454.0 (25.02)+e2197f0c4ba3450e119e1aea750568d97991832a
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table _Measure_Table
+ref table 'zLast Refresh Datetime'
+ref table F_Shipper_Item
+ref table D_Calendar
+ref table Delivery_Details
+ref table _Date_Table
+ref table Append1
+ref table APMO_Predictability_COPY
+ref table Team_Names
+ref table Acquisition_Synergy_Realization
+ref table Competitor_Sales
+ref table Return_On_Sales
+ref table Bugs
+ref table PIR
+ref table Stories
+ref table PIRStories
+ref table D_Employee
+ref table 'test_Active Employees Year Ago'
+ref table 'test_Current Employees Table'
+ref table IT_Employee_Retention
+ref table DORA
+ref table DORA_Matrix
+ref table APMO_Predictability_COPY_Unpivoted
+ref table Delivery_Details_New
+ref table _Distinct_PI
+ref table F_Order_Item
+ref table APMO_Predictability_SortTable
+ref table _Distinct_Year
+ref table Competitor_Sales_New
+
+ref cultureInfo en-US
+

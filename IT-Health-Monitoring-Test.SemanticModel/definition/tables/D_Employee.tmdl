@@ -1,0 +1,552 @@
+table D_Employee
+	lineageTag: 1a1e2237-9f17-4d3d-a1b3-7148f0fd8ddf
+
+	column EMPLOYEE_KEY
+		dataType: string
+		lineageTag: b0728e09-fa0d-479e-b798-8d03de7b44a1
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_ID
+		dataType: string
+		lineageTag: c8cd4029-d92b-4dbc-9c59-24672e05adec
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_ACCOUNT
+		dataType: string
+		lineageTag: 2ed34164-f35a-4ce9-9392-a13e83e9bb52
+		summarizeBy: none
+		sourceColumn: MI_ACCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_NAME_CN
+		dataType: string
+		lineageTag: a4f3709e-cc81-45c7-ac9d-4e8c995a885a
+		summarizeBy: none
+		sourceColumn: EMP_NAME_CN
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_MI_LOC
+		dataType: string
+		lineageTag: e42e8b88-654f-40f5-8e1a-1ec3a57f92cc
+		summarizeBy: none
+		sourceColumn: EMP_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_EMAIL
+		dataType: string
+		lineageTag: e2da81f6-bf40-4183-909b-2a76892e3a51
+		summarizeBy: none
+		sourceColumn: EMP_EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_TELEPHONE
+		dataType: string
+		lineageTag: 2fdf1b68-bb43-4d76-8faf-7a3284a18fb9
+		summarizeBy: none
+		sourceColumn: EMP_TELEPHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_FAX_NO
+		dataType: string
+		lineageTag: 0a27d0e3-387d-4c04-b28f-6cfc44874648
+		summarizeBy: none
+		sourceColumn: EMP_FAX_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_TITLE
+		dataType: string
+		lineageTag: 4a85c159-03cc-4e09-bfe0-64af5bcc1f87
+		summarizeBy: none
+		sourceColumn: EMP_TITLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_DEPT
+		dataType: string
+		lineageTag: 307a9410-83e0-4f78-8302-38c4f60e6b80
+		summarizeBy: none
+		sourceColumn: EMP_DEPT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_ADDRESS
+		dataType: string
+		lineageTag: 343ed2cf-cd10-47a9-8546-69e9ffa23dd6
+		summarizeBy: none
+		sourceColumn: EMP_ADDRESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_DESCRIPTION
+		dataType: string
+		lineageTag: 3bf09850-4137-4d7e-83a9-2556ca38d153
+		summarizeBy: none
+		sourceColumn: EMP_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_DISPLAY_NAME
+		dataType: string
+		lineageTag: 4032391c-f4d5-43d2-b4f6-a4d8b9150add
+		summarizeBy: none
+		sourceColumn: EMP_DISPLAY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_GIVEN_NAME
+		dataType: string
+		lineageTag: e4844d07-7f71-426d-9ebc-21ecf657e583
+		summarizeBy: none
+		sourceColumn: EMP_GIVEN_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_CITY
+		dataType: string
+		lineageTag: b58debef-8657-4e96-8b5f-4bf7f91f5645
+		summarizeBy: none
+		sourceColumn: EMP_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_OBJ_CLASS
+		dataType: string
+		lineageTag: 10c719b2-2d2e-402f-a76f-cc4b6407bc78
+		summarizeBy: none
+		sourceColumn: EMP_OBJ_CLASS
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_POSTAL_CD
+		dataType: string
+		lineageTag: a86120cf-1531-43ab-90fe-444e4c760723
+		summarizeBy: none
+		sourceColumn: EMP_POSTAL_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_NAME
+		dataType: string
+		lineageTag: 07e74ffb-9bdc-4795-bb82-4bb14b583006
+		summarizeBy: none
+		sourceColumn: EMP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_STATE
+		dataType: string
+		lineageTag: d9b01fbe-ba21-4a5a-b3fc-ae95684be4b4
+		summarizeBy: none
+		sourceColumn: EMP_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_SIR_NAME
+		dataType: string
+		lineageTag: 733bb36a-8103-4983-a9bf-3a0615f51b77
+		summarizeBy: none
+		sourceColumn: EMP_SIR_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_HOME_PHONE
+		dataType: string
+		lineageTag: cb57be58-3259-4696-971b-0aec5e585069
+		summarizeBy: none
+		sourceColumn: EMP_HOME_PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_MOBILE_PHONE
+		dataType: string
+		lineageTag: 1e720af1-1174-453f-80d9-bfd9d9c302a0
+		summarizeBy: none
+		sourceColumn: EMP_MOBILE_PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_PAGER
+		dataType: string
+		lineageTag: cf0bd155-8b6c-4405-90d0-ce61a0dad90a
+		summarizeBy: none
+		sourceColumn: EMP_PAGER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPERVISOR_ID
+		dataType: string
+		lineageTag: 9b1aa493-c4f0-4589-a994-d8aa291a1ace
+		summarizeBy: none
+		sourceColumn: SUPERVISOR_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOB_CODE
+		dataType: string
+		lineageTag: 2e0f2226-0ca3-4607-8c48-400c0376e79e
+		summarizeBy: none
+		sourceColumn: JOB_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOB_POSITION
+		dataType: string
+		lineageTag: 4b841ac2-46cd-4411-8b93-ccd412429981
+		summarizeBy: none
+		sourceColumn: JOB_POSITION
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOB_STATUS
+		dataType: string
+		lineageTag: d64daffb-33e2-42b9-b392-98ce3ddea358
+		summarizeBy: none
+		sourceColumn: JOB_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SSN_LAST4
+		dataType: string
+		lineageTag: d89c3d67-2245-4358-9cf9-633ac7f205f7
+		summarizeBy: none
+		sourceColumn: SSN_LAST4
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_HIRED
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: c0d5da75-4d45-463a-b435-53455e76f007
+		summarizeBy: none
+		sourceColumn: DATE_HIRED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DATE_ADJUSTED_HIRE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a761dd6f-9f17-455d-ad12-93f672b59fd9
+		summarizeBy: none
+		sourceColumn: DATE_ADJUSTED_HIRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_TERMINATED
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: c15c52ab-395b-48f6-b840-c75dd39b6a1e
+		summarizeBy: none
+		sourceColumn: DATE_TERMINATED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CORP_ACCOUNTS_FLAG
+		dataType: string
+		lineageTag: d389b45a-7985-4290-8ba4-6b3b89f9ba64
+		summarizeBy: none
+		sourceColumn: CORP_ACCOUNTS_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORP_ACCT_TYPE
+		dataType: string
+		lineageTag: 6f831cd6-7205-4a39-91db-4372487cf508
+		summarizeBy: none
+		sourceColumn: CORP_ACCT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AREA_VP_SUPPORT_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ef5d0257-f202-4ad9-94f4-2482594cbf5d
+		summarizeBy: none
+		sourceColumn: AREA_VP_SUPPORT_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column AREA_VP_SUPERVISOR_ID
+		dataType: string
+		lineageTag: 269561b7-ef8d-48f2-baac-97ddf9526b73
+		summarizeBy: none
+		sourceColumn: AREA_VP_SUPERVISOR_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_LOCATION_NAME
+		dataType: string
+		lineageTag: 8f9caae4-880e-4223-88f2-d49eb700e138
+		summarizeBy: none
+		sourceColumn: EMP_LOCATION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_OBJ_CLASS
+		dataType: string
+		lineageTag: d667eaee-40d8-47f5-928c-2722b84d95d5
+		summarizeBy: none
+		sourceColumn: SUPV_OBJ_CLASS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_MI_LOC
+		dataType: string
+		lineageTag: 81141658-e0a5-4e5d-ab2b-7f6c1bc545fe
+		summarizeBy: none
+		sourceColumn: SUPV_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_LOCATION_NAME
+		dataType: string
+		lineageTag: 958240c8-f24e-4be4-b191-9577fae9832c
+		summarizeBy: none
+		sourceColumn: SUPV_LOCATION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_NAME_CN
+		dataType: string
+		lineageTag: d5b1266b-f8e3-4534-8c48-bd644602dd53
+		summarizeBy: none
+		sourceColumn: SUPV_NAME_CN
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_NAME
+		dataType: string
+		lineageTag: ff6488a6-8b03-48e3-a409-159e35928a90
+		summarizeBy: none
+		sourceColumn: SUPV_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_DISPLAY_NAME
+		dataType: string
+		lineageTag: 5087789e-b8fd-4133-8e60-d838c44811c7
+		summarizeBy: none
+		sourceColumn: SUPV_DISPLAY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_GIVEN_NAME
+		dataType: string
+		lineageTag: b82731df-3e9f-4f8f-8c67-54031105a29d
+		summarizeBy: none
+		sourceColumn: SUPV_GIVEN_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_SIR_NAME
+		dataType: string
+		lineageTag: 924c6a24-41d9-4b0b-b19d-afb85039a7df
+		summarizeBy: none
+		sourceColumn: SUPV_SIR_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_JOB_CODE
+		dataType: string
+		lineageTag: f0d04997-bbbd-4b9d-b087-b468108afcf6
+		summarizeBy: none
+		sourceColumn: SUPV_JOB_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_JOB_POSITION
+		dataType: string
+		lineageTag: 965d797d-0a77-4097-817b-5eb1bfc10b48
+		summarizeBy: none
+		sourceColumn: SUPV_JOB_POSITION
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_JOB_STATUS
+		dataType: string
+		lineageTag: 8d756b18-bf49-460d-a67b-47c453edf6bd
+		summarizeBy: none
+		sourceColumn: SUPV_JOB_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_TITLE
+		dataType: string
+		lineageTag: a136f2ef-3abb-4456-a871-51471bc9c8ee
+		summarizeBy: none
+		sourceColumn: SUPV_TITLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_DEPT
+		dataType: string
+		lineageTag: db0b30ba-1549-49a4-9e89-94b3b99c022d
+		summarizeBy: none
+		sourceColumn: SUPV_DEPT
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_DESCRIPTION
+		dataType: string
+		lineageTag: c8a35b6f-860a-42d5-a203-cc931f2f7380
+		summarizeBy: none
+		sourceColumn: SUPV_DESCRIPTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_EMAIL
+		dataType: string
+		lineageTag: bf0b4e2f-9e8b-45a4-9775-3df487173e57
+		summarizeBy: none
+		sourceColumn: SUPV_EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_TELEPHONE
+		dataType: string
+		lineageTag: 6ad3b6ef-dbf1-404d-b65b-9f4ecbe41590
+		summarizeBy: none
+		sourceColumn: SUPV_TELEPHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_MOBILE_PHONE
+		dataType: string
+		lineageTag: 079e9245-1bee-475b-abc9-4eb832b07b66
+		summarizeBy: none
+		sourceColumn: SUPV_MOBILE_PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_HOME_PHONE
+		dataType: string
+		lineageTag: 62f24c3f-0153-4c37-9abf-537219f59496
+		summarizeBy: none
+		sourceColumn: SUPV_HOME_PHONE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_FAX_NO
+		dataType: string
+		lineageTag: b46b5fb9-0bbe-46ed-b4dc-4752c915f867
+		summarizeBy: none
+		sourceColumn: SUPV_FAX_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_PAGER
+		dataType: string
+		lineageTag: 10bfb6ac-2fd7-497b-abb4-5562bb74255a
+		summarizeBy: none
+		sourceColumn: SUPV_PAGER
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_ADDRESS
+		dataType: string
+		lineageTag: 9c4d6b9f-273d-442a-aac2-e3c4ecaecc30
+		summarizeBy: none
+		sourceColumn: SUPV_ADDRESS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_CITY
+		dataType: string
+		lineageTag: a1ea58e4-0bf6-402b-8c84-6ef740c0d4b1
+		summarizeBy: none
+		sourceColumn: SUPV_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_STATE
+		dataType: string
+		lineageTag: 16242fcf-8c5d-43df-988f-72553445be00
+		summarizeBy: none
+		sourceColumn: SUPV_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_POSTAL_CD
+		dataType: string
+		lineageTag: cc00e32e-0a9c-4c84-a41c-5129e07db26a
+		summarizeBy: none
+		sourceColumn: SUPV_POSTAL_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_SSN_LAST4
+		dataType: string
+		lineageTag: 03f224b8-46fb-46bd-8f5b-da799516d00b
+		summarizeBy: none
+		sourceColumn: SUPV_SSN_LAST4
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_DATE_HIRED
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c2f6720c-a301-4cba-96e7-6d5797e25866
+		summarizeBy: none
+		sourceColumn: SUPV_DATE_HIRED
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_DATE_ADJUSTED_HIRE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f4cc2a79-be28-4b33-bbd7-5c404276364c
+		summarizeBy: none
+		sourceColumn: SUPV_DATE_ADJUSTED_HIRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SUPV_DATE_TERMINATED
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f087fbf9-1cba-46b4-a2be-6d837fa7853e
+		summarizeBy: none
+		sourceColumn: SUPV_DATE_TERMINATED
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMP_NAME_CN__MI_LOC
+		dataType: string
+		lineageTag: 4fa5573c-53f7-4f0b-b670-8a1e3dde18d5
+		summarizeBy: none
+		sourceColumn: EMP_NAME_CN__MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Employee = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-255cr47brb7ubl4dmbam3tblom.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Employee = Source{[Schema="dbo",Item="D_Employee"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(dbo_D_Employee,{{"DATE_HIRED", type date}, {"DATE_TERMINATED", type date}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

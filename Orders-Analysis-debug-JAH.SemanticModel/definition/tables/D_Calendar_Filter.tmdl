@@ -1,0 +1,243 @@
+table D_Calendar_Filter
+	lineageTag: af4e4b1c-f7b9-4aac-91b8-3e9574d11b90
+	dataCategory: Time
+
+	column 'Calendar Date'
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: 8c8430bb-e241-4811-b57a-8cc9d08da446
+		summarizeBy: none
+		sourceColumn: Calendar Date
+		sortByColumn: 'Calendar Date Sort Order Desc'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: fe5f2409-b838-4adb-86a1-1340d4671bcf
+		summarizeBy: none
+		sourceColumn: Year
+		sortByColumn: 'Year Sort Order Desc'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 65282601-40a5-4915-8663-0f6691e895c9
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 89b36113-33e2-4b7b-919c-08ef2660d0d2
+		summarizeBy: none
+		sourceColumn: Month Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year'
+		dataType: string
+		lineageTag: 2aacae36-4dca-4f48-8c3c-0c5c5f1e1a6e
+		summarizeBy: none
+		sourceColumn: Month Year
+		sortByColumn: 'Month Index'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Of Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b186bc0-5166-434d-92f1-9f2d1ac1853e
+		summarizeBy: none
+		sourceColumn: Day Of Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 6b08d52b-aa42-4258-96fe-6b65b011d483
+		summarizeBy: none
+		sourceColumn: Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter'
+		dataType: string
+		lineageTag: af379d1a-a42d-415e-8e7c-11b272af9292
+		summarizeBy: none
+		sourceColumn: Year Quarter
+		sortByColumn: 'Quarter Index Sort Order Desc'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workday Of Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: 97cdc1a6-79b3-4477-b2f6-5933f43aeed8
+		summarizeBy: none
+		sourceColumn: Workday Of Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workday Of Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 594bd8b2-7bc7-4813-9c49-61b1c7fa63a0
+		summarizeBy: none
+		sourceColumn: Workday Of Year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1421d7cf-cfba-4ea1-8a6e-6a2ece1413f2
+		summarizeBy: none
+		sourceColumn: Month Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: f07b1b88-f0fb-4266-9c47-4b23300fe7af
+		summarizeBy: none
+		sourceColumn: Quarter Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Of Quarter'
+		dataType: int64
+		formatString: 0
+		lineageTag: 80fdabff-25ee-49c9-8676-16a1a3b2b691
+		summarizeBy: none
+		sourceColumn: Day Of Quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Calendar Date Sort Order Desc'
+		dataType: int64
+		formatString: 0
+		lineageTag: 99a8f9c2-fe19-4603-9c9d-d0c802fae576
+		summarizeBy: none
+		sourceColumn: Calendar Date Sort Order Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Index Sort Order Desc'
+		dataType: int64
+		formatString: 0
+		lineageTag: bea2d102-559e-4ba9-bf53-c2582b22cff0
+		summarizeBy: none
+		sourceColumn: Month Index Sort Order Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Index Sort Order Desc'
+		dataType: int64
+		formatString: 0
+		lineageTag: bc6f56f0-bfbf-4893-88ec-dfdc306ae09b
+		summarizeBy: none
+		sourceColumn: Quarter Index Sort Order Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Sort Order Desc'
+		dataType: int64
+		formatString: 0
+		lineageTag: 41e74c82-49bb-45c2-bc39-207b990ad187
+		summarizeBy: none
+		sourceColumn: Year Sort Order Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2e3b0def-5f18-42ec-8e24-6b2ec4e4fa07
+		summarizeBy: none
+		sourceColumn: Month Start Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Day Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f28dcb40-2a39-4c23-862a-078958b7abba
+		summarizeBy: none
+		sourceColumn: Business Day Flag
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Calendar_Filter = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+				    Source = D_Calendar_Visual,
+				    #"Removed Other Columns" = Table.SelectColumns(Source,{"Calendar Date", "Year", "Quarter", "Month Number", "Month Year", "Day Of Month", "Month", "Month Start Date", "Year Quarter", "Workday Of Month", "Workday Of Year", "Business Day Flag", "Month Index", "Quarter Index", "Day Of Quarter"}),
+				    #"Inserted Calendar Date Sort Order" = Table.AddColumn(#"Removed Other Columns", "Calendar Date Sort Order Desc", each Number.From([Calendar Date]) * -1, Int64.Type),
+				    #"Inserted Month Index Sort Order" = Table.AddColumn(#"Inserted Calendar Date Sort Order", "Month Index Sort Order Desc", each [Month Index] * -1, Int64.Type),
+				    #"Inserted Quarter Index Sort Order" = Table.AddColumn(#"Inserted Month Index Sort Order", "Quarter Index Sort Order Desc", each [Quarter Index] * -1, Int64.Type),
+				    #"Inserted Year Sort Order" = Table.AddColumn(#"Inserted Quarter Index Sort Order", "Year Sort Order Desc", each [Year] * -1, Int64.Type)
+				in
+				    #"Inserted Year Sort Order"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

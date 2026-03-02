@@ -1,0 +1,48 @@
+table z_Param_Prior_Period
+	lineageTag: 9dea353a-8c11-4250-bea9-6e3146a1a24d
+
+	column zPrior_Period_Parameter
+		lineageTag: 6b0340b4-7829-4a8e-b263-a7f6417892f2
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zPrior_Period_Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zPrior_Period_Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zPrior_Period_Parameter Fields'
+		lineageTag: f604d189-0fdb-40dd-a839-8826b2568974
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zPrior_Period_Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zPrior_Period_Parameter Order'
+		formatString: 0
+		lineageTag: 83a58c83-230b-482a-99c2-704707f883ac
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Prior_Period = calculated
+		mode: import
+		source =
+				{
+				    ("PYTD Display", NAMEOF('Measure Table'[PYTD Display]), 0),
+				    ("PMTD Display", NAMEOF('Measure Table'[PMTD Display]), 1),
+				    ("PQTD Display", NAMEOF('Measure Table'[PQTD Display]), 2),
+				    ("Prior 24 Start", NAMEOF('Measure Table'[Prior 24 Start]), 3)
+				}
+
+	annotation PBI_Id = 485c18b262d545c69f0b5b4c9cd76f6a
+

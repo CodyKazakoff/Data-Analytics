@@ -1,0 +1,150 @@
+table Append1
+	lineageTag: dc416d8b-4749-4090-abb3-4194a6d6c0c1
+
+	column WorkItemId
+		dataType: int64
+		formatString: 0
+		lineageTag: 5309044e-98f6-4f33-9e04-4b06aa55b1ba
+		summarizeBy: count
+		sourceColumn: WorkItemId
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaSK
+		dataType: string
+		lineageTag: fabbe13d-f7e8-4c52-ba7b-54eead4cf331
+		summarizeBy: none
+		sourceColumn: AreaSK
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: ee28175e-a501-4484-93b3-441b12129049
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column WorkItemType
+		dataType: string
+		lineageTag: e5b4662a-ed02-4c53-a893-c1d366d1a0f5
+		summarizeBy: none
+		sourceColumn: WorkItemType
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: b5bcd717-efd0-4255-9b91-a4ebfb4a02ce
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClosedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 77b6c813-c06f-4f08-b114-9e6dcb2b939b
+		summarizeBy: none
+		sourceColumn: ClosedDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Links.LinkTypeName'
+		dataType: string
+		lineageTag: 0f48e3ec-b28e-4113-8fe8-28c34e6f5af3
+		summarizeBy: none
+		sourceColumn: Links.LinkTypeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.WorkItemId'
+		dataType: int64
+		formatString: 0
+		lineageTag: 967bfedc-2772-4379-b556-a3c7047a3f09
+		summarizeBy: count
+		sourceColumn: Links.TargetWorkItem.WorkItemId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.Title'
+		dataType: string
+		lineageTag: 0de9b19d-10cb-4c92-9264-18b7c06e7f17
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.WorkItemType'
+		dataType: string
+		lineageTag: 0dacce5f-6adb-45b3-8731-2e668dc0068c
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.WorkItemType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Links.TargetWorkItem.State'
+		dataType: string
+		lineageTag: 54cae2e1-d409-43c9-9918-556f361a9987
+		summarizeBy: none
+		sourceColumn: Links.TargetWorkItem.State
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c450c91d-25ec-4415-9897-ea83440a53b3
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column Severity
+		dataType: string
+		lineageTag: b00dd2dc-aa51-4132-9385-287b847c6d47
+		summarizeBy: none
+		sourceColumn: Severity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Custom_FoundInEnv
+		dataType: string
+		lineageTag: 81704433-8936-4dd7-8ee7-5f713ef4c43a
+		summarizeBy: none
+		sourceColumn: Custom_FoundInEnv
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaPath
+		dataType: string
+		lineageTag: db185fdb-f9f1-40a3-8425-a25d4774602f
+		summarizeBy: none
+		sourceColumn: AreaPath
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActivatedDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 36ad3ce3-0e29-4357-a549-3348f5cfeae1
+		summarizeBy: none
+		sourceColumn: ActivatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Append1 = m
+		mode: import
+		source =
+				let
+				    Source = Table.Combine({Bugs, Stories, PIR})
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

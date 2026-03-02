@@ -1,0 +1,28 @@
+table z_min_order_amt
+	lineageTag: d6507a23-67c1-44ca-9c46-09d876e6d0ef
+
+	measure 'z_min_order_amt Value' = SELECTEDVALUE('z_min_order_amt'[z_min_order_amt])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: d119c1cb-e299-425a-9b6a-408177cea03e
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column z_min_order_amt
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 2fa89247-9585-4ad4-9648-81b8cd048e4f
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition z_min_order_amt = calculated
+		mode: import
+		source = GENERATESERIES(CURRENCY(0), CURRENCY(2000000), CURRENCY(5000))
+
+	annotation PBI_Id = d00902dc9efe43988f11e6c27fe8555e
+

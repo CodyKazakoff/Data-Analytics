@@ -1,0 +1,93 @@
+table RLS_HR_Hierarchy
+	lineageTag: 7a77eb19-e3b5-413d-9259-387f372904ba
+
+	column EMPLOYEE_UPN
+		dataType: string
+		lineageTag: ae1a0d91-a16f-4af3-b3f9-fa2c2649b008
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_UPN
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_ID
+		dataType: string
+		lineageTag: 23e2284a-2c2b-4637-bca4-a034b3782f86
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_MI_ACCOUNT
+		dataType: string
+		lineageTag: d9648cd7-d95d-4aca-9969-4d969155622f
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_MI_ACCOUNT
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_MI_DIVISION_LOC
+		dataType: string
+		lineageTag: 70a5f4f9-1882-4a3a-b6dd-e9545629001a
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_MI_DIVISION_LOC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_MI_GROUP_LOC
+		dataType: string
+		lineageTag: 9f50db21-8c5f-4f53-bcc4-8d89e3398277
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_MI_GROUP_LOC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AVP_EMPLOYEE_ID
+		dataType: string
+		lineageTag: 2cb829bf-4246-49f0-a1ab-ca7c626421bd
+		summarizeBy: none
+		sourceColumn: AVP_EMPLOYEE_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column EMPLOYEE_MI_REGION_LOC
+		dataType: string
+		lineageTag: 64af09b9-bee1-4271-923f-fbbd33f22e79
+		summarizeBy: none
+		sourceColumn: EMPLOYEE_MI_REGION_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition RLS_HR_Hierarchy = m
+		mode: import
+		queryGroup: Security
+		source =
+				let
+				    Source = Sql.Database(Lakehouse&".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    RLS_HR_Hierarchy = Source{[Schema="dbo",Item="RLS_HR_HIERARCHY"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(RLS_HR_Hierarchy,{"SUPERVISOR_UPN", "SUPERVISOR_EMPLOYEE_ID", "EMPLOYEE_ID", "EMPLOYEE_MI_ACCOUNT", "EMPLOYEE_MI_DIVISION_LOC", "EMPLOYEE_MI_REGION_LOC", "EMPLOYEE_MI_GROUP_LOC", "AVP_EMPLOYEE_ID"}),
+				    #"Remove Blank UPNs" = Table.SelectRows(#"Removed Other Columns", each [SUPERVISOR_UPN] <> null and [SUPERVISOR_UPN] <> ""),
+				    #"Add Employee Row Flag" = Table.AddColumn(#"Remove Blank UPNs", "Employee Flag", each if [SUPERVISOR_EMPLOYEE_ID]=[EMPLOYEE_ID] then "Yes" else "No"),
+				    #"Remove Supervisor Rows" = Table.SelectRows(#"Add Employee Row Flag", each ([Employee Flag] = "Yes")),
+				    #"Remove Flag Column" = Table.SelectColumns(#"Remove Supervisor Rows",{"SUPERVISOR_UPN", "EMPLOYEE_ID", "EMPLOYEE_MI_ACCOUNT", "EMPLOYEE_MI_DIVISION_LOC", "EMPLOYEE_MI_REGION_LOC", "EMPLOYEE_MI_GROUP_LOC", "AVP_EMPLOYEE_ID"}),
+				    #"Renamed Supervisor Field" = Table.RenameColumns(#"Remove Flag Column",{{"SUPERVISOR_UPN", "EMPLOYEE_UPN"}})
+				in
+				    #"Renamed Supervisor Field"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

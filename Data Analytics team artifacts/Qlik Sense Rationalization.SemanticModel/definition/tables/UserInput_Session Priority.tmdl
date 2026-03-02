@@ -1,0 +1,28 @@
+table 'UserInput_Session Priority'
+	lineageTag: bc3def5c-cdab-4abf-8486-904a1cbf1140
+
+	measure 'Session Priority Value' = SELECTEDVALUE('UserInput_Session Priority'[Session Priority], 0.32)
+		lineageTag: 4490e8cf-e635-4185-bc04-ac9ada3928dd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Session Priority'
+		lineageTag: e966d904-778b-4e75-b68d-fede92bb4538
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'UserInput_Session Priority' = calculated
+		mode: import
+		source = GENERATESERIES(0, 1, 0.01)
+
+	annotation PBI_Id = 9ae3b2e1a7884e9fb7bccf822d401c1c
+

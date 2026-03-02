@@ -1,0 +1,47 @@
+table z_Param_Current_Open_Order_Amount_KPI
+	lineageTag: 35186ce1-8a1a-4a34-89db-ca3f404911e5
+
+	column Parameter
+		lineageTag: dd5e7ac9-52bd-4cce-b99d-1e21bad5c577
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		lineageTag: f15b0499-953c-4ac7-85e9-c3e35a8b6dc8
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		formatString: 0
+		lineageTag: d701ace5-139a-4d33-8ee1-ab2d3cfd8bcf
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Current_Open_Order_Amount_KPI = calculated
+		mode: import
+		source =
+				{
+				    ("Open Order $ YTD", NAMEOF('Measure Table'[Open Order $ CYTD]), 0),
+				    ("Open Order $ MTD", NAMEOF('Measure Table'[Open Order $ CMTD]), 1),
+				    ("Open Order $ QTD", NAMEOF('Measure Table'[Open Order $ CQTD]), 2)
+				}
+
+	annotation PBI_Id = 0dc694ab4cad44d384f3043529a77e67
+

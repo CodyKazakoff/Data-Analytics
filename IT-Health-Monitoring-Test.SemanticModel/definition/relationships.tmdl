@@ -1,0 +1,152 @@
+relationship 95f0b39a-9896-4391-5200-bda0a519d996
+	isActive: false
+	fromColumn: F_Shipper_Item.SALES_POSTED_DATE
+	toColumn: D_Calendar.CALENDAR_DATE
+
+relationship 1a0c55c7-1692-109a-bba1-f1b05db0a813
+	fromColumn: Delivery_Details.'Activated Date'
+	toColumn: D_Calendar.CALENDAR_DATE
+
+relationship AutoDetected_fb6b8fc8-da74-47ea-9ba8-5bfbec77a5bb
+	fromColumn: Delivery_Details.'Area Path'
+	toColumn: Team_Names.'Area Path'
+
+relationship AutoDetected_25f1de53-7994-449a-8fa8-aaaad8722ce2
+	fromColumn: Bugs.AreaPath
+	toColumn: Team_Names.'Area Path'
+
+relationship AutoDetected_8b7ddd89-f7c9-4573-911f-6a02ab092515
+	isActive: false
+	fromColumn: Stories.AreaPath
+	toColumn: Team_Names.'Area Path'
+
+relationship f8c9e3eb-efbb-21db-d4d9-42857fdcb0fc
+	crossFilteringBehavior: bothDirections
+	fromColumn: PIR.'Links.TargetWorkItem.WorkItemId'
+	toColumn: Bugs.WorkItemId
+
+relationship 83cdce1a-19b3-279e-c9a8-61c8560acb78
+	fromColumn: Append1.AreaSK
+	toColumn: Team_Names.AreaSK
+
+relationship AutoDetected_92fda99a-8e00-4868-b944-0faac9c3b648
+	fromColumn: PIRStories.AreaSK
+	toColumn: Team_Names.AreaSK
+
+relationship 4f638ca0-d114-b37b-a920-8559785c05d8
+	fromColumn: PIRStories.'Links.TargetWorkItem.WorkItemId'
+	toColumn: Stories.WorkItemId
+
+relationship ebd1bbd1-6f5d-156d-df05-e91d4b6e0753
+	isActive: false
+	fromColumn: PIR.'Links.TargetWorkItem.WorkItemId'
+	toColumn: Stories.WorkItemId
+
+relationship AutoDetected_21793afd-310d-4372-a234-0c6e2f941482
+	fromColumn: DORA.AreaPath
+	toColumn: Team_Names.'Area Path'
+
+relationship AutoDetected_8d29b110-cc8e-4153-9b95-c31c3ee16a72
+	isActive: false
+	fromColumn: APMO_Predictability_COPY_Unpivoted.PI
+	toColumn: APMO_Predictability_COPY.PI
+
+relationship b7fb0b42-6993-e02b-565f-57e7cf8c48f7
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: D_Calendar.YEAR_QUARTER
+	toColumn: Competitor_Sales.Year_Quarter
+
+relationship 970b4dd7-b492-b320-f4f5-e8a70430f975
+	fromColumn: Delivery_Details_New.'Area Path'
+	toColumn: Team_Names.'Area Path'
+
+relationship 694416ce-605b-b07f-a8d2-75f529164ad5
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: D_Calendar.CALENDAR_DATE
+	toColumn: _Date_Table.Date
+
+relationship aed1a95c-67b8-1553-95df-b63fec9363c4
+	fromColumn: Acquisition_Synergy_Realization.'Date Acquired'
+	toColumn: _Date_Table.Date
+
+relationship 1b80583e-7083-75f9-a262-6b6be9669b55
+	fromColumn: Append1.ClosedDate
+	toColumn: _Date_Table.Date
+
+relationship da5d798d-5915-4f37-9bf9-2ee91a212f1d
+	isActive: false
+	fromColumn: D_Employee.DATE_HIRED
+	toColumn: _Date_Table.Date
+
+relationship a1157d87-ea8f-c187-fbac-75e52c64f975
+	isActive: false
+	fromColumn: D_Employee.DATE_TERMINATED
+	toColumn: _Date_Table.Date
+
+relationship 6ca4e48e-b692-4d4e-0967-dafcae1dbf15
+	fromColumn: Stories.ClosedDate
+	toColumn: _Date_Table.Date
+
+relationship be2b0034-e13f-1394-a4b5-8c01fc206a69
+	fromColumn: Bugs.ClosedDate
+	toColumn: _Date_Table.Date
+
+relationship c0ec2c60-af58-11bc-3430-490aed4d51f0
+	fromColumn: F_Order_Item.ITM_CREATION_DATE
+	toColumn: _Date_Table.Date
+
+relationship 4b94a90a-dac5-5cdf-abcf-520bc40c696a
+	fromColumn: F_Shipper_Item.SALES_POSTED_DATE
+	toColumn: _Date_Table.Date
+
+relationship 7bdefd6d-767e-978d-b678-bca8026ec937
+	fromColumn: Competitor_Sales_New.Reporting_Date
+	toColumn: _Date_Table.Date
+
+relationship 55ac3aa8-3ed8-5df6-8e19-a70213a318d0
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: Return_On_Sales.Month_Year
+	toColumn: _Date_Table.Month_Year
+
+relationship 9bb32ece-ff42-bd61-e10d-3b5f2a1acff0
+	fromColumn: _Date_Table.Year
+	toColumn: _Distinct_Year.Year
+
+relationship cc63e01c-03a0-a045-b354-8e76c04c30dc
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromColumn: _Date_Table.PI_Number
+	toColumn: APMO_Predictability_COPY.PI
+
+relationship 6977726d-685d-5a84-0021-bccef7526cab
+	fromColumn: _Date_Table.PI_Number
+	toColumn: _Distinct_PI.PI_Number
+
+relationship c8039e66-eaef-00dc-1b4a-00b242471e14
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: _Date_Table.PI_Number
+	toColumn: DORA_Matrix.PI_Number
+
+relationship 41a10006-fff3-f47c-0f75-fedbce4dc7b9
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: APMO_Predictability_COPY_Unpivoted.PI
+	toColumn: _Date_Table.PI_Number
+
+relationship 447f0d4d-a5f1-8790-477c-15d2b227ec99
+	fromColumn: Delivery_Details_New.PI_Current_Iteration_Path_Int
+	toColumn: _Distinct_PI.PI_Number
+
+relationship fb589340-cf45-ddf2-c54d-893738975f05
+	isActive: false
+	fromColumn: APMO_Predictability_COPY_Unpivoted.PI
+	toColumn: _Distinct_PI.PI_Number
+
+relationship d160f812-5faf-053a-ad51-9c369f65f6e0
+	fromColumn: APMO_Predictability_COPY_Unpivoted.Attribute
+	toColumn: APMO_Predictability_SortTable.Attribute
+

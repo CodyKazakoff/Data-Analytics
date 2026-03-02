@@ -1,0 +1,3810 @@
+/// Sum of total Reportable Accidents
+table 'Measure Table'
+	lineageTag: ce2aa14d-6693-4b71-be30-f49cd138f021
+
+	/// Refresh Date for Loss Run Report
+	measure 'Report Refresh Date' = "Report as of: " & Max('zLast Refresh Datetime'[Last Refresh Datetime])
+		displayFolder: Metadata
+		lineageTag: 2360455c-966c-4ea4-af74-a5137572a971
+
+		changedProperty = IsHidden
+
+	measure 'Total $' = ```
+			VAR vSelectedValue = SELECTEDVALUE('z_Currency_Slicer'[Key])
+			
+			 VAR vResult =
+			 Switch( True, 
+			 vSelectedValue = 1 , sum(F_Order_Item[Itm Unit Sell Amt USD]), 
+			 vSelectedValue = 2, sum(F_Order_Item[Itm Unit Sell Amt Local]), 
+			 sum(F_Order_Item[Itm Unit Sell Amt USD]))
+			 
+			 RETURN
+			 vResult
+			```
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: 24cdceb1-e8e8-44e5-8d17-6aedaa05b79c
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order GP %' = DIVIDE ([Order Gross Profit] ,[Order $])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: 6fa4b0c3-530d-44e3-80c1-77412c303185
+
+		changedProperty = IsHidden
+
+	measure 'Average Order $' = DIVIDE([Order $],  [Order #])
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order $
+		lineageTag: e21f812a-7366-4ae1-8a7d-ea7bf67d3966
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order #' =
+			CALCULATE(
+			    [Total #],
+			     F_Order_Item[Order Type Desc] = "Order"
+			)
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: 28c9fa81-a6e1-4667-89c6-2947f244ad57
+
+		changedProperty = IsHidden
+
+	measure 'Average Daily Order $' = DIVIDE([Order $], [Workday of Year])
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: a5d18a36-4e1d-4d1d-818c-4fb4298c99a3
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Average Lines per Order' = ```
+			
+			Divide(
+			    [Order Line #], 
+			    [Order #],
+			    0
+			)
+			
+			```
+		formatString: #,0.0
+		displayFolder: Average Lines Per Order
+		lineageTag: eb4d295b-ffb5-4157-a5cd-c13696ed07cd
+
+		changedProperty = IsHidden
+
+	measure 'Quote $' =
+			
+			CALCULATE(
+			    [Total $]
+			    , F_Order_Item[Order Type Desc] = "Quote"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Quote $
+		lineageTag: b4e4ca17-fe44-4582-a152-17321a424088
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Final Cost' = ```
+			CALCULATE(
+			    [Total Final Cost], 
+			     F_Order_Item[Order Type Desc] = "Order"
+			)
+			```
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Final Cost
+		lineageTag: 8e1e90dd-4196-42be-b090-616bbdeba859
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO CYTD' = ```
+			CALCULATE( [Average Daily Order $], 'Time Intelligence'[Time Period]= "CYTD")
+			
+			```
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: 24be8af5-1414-405e-aa6b-82f6cff1b6f2
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure Pricing = AVERAGE(F_Order_Item[Itm Unit Sell Price])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Unit Sell Price
+		lineageTag: c336bcea-a9f4-4262-a4f7-6a511ec6f8d7
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total $ CYTD' = CALCULATE([Total $], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: cf186cce-e495-4689-a24c-036bc1e2be51
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total $ CMTD' = CALCULATE([Total $], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: 6bd8f714-93a7-4513-933f-6ef9d7b4d107
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total $ PYTD' = CALCULATE([Total $], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: 341cb97a-8a05-4b6f-bf67-039bf3ff6e90
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total $ PMTD' = CALCULATE([Total $], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: d509e790-b72c-4614-84f0-6546f4543b16
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total $ CQTD' = CALCULATE([Total $], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: 5bd14abd-7f86-45c0-9062-bc35b2b04293
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total $ PQTD' = CALCULATE([Total $], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: 33cc7482-debc-4284-a9ef-eff60cc3175f
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO CMTD' = CALCULATE( [Average Daily Order $], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: cfb81392-570d-45cb-a9c1-1c1c722fee11
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO PMTD' = CALCULATE( [Average Daily Order $], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: 4453cc7b-aa8f-4300-8b49-2604aa3096c7
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO PYTD' = CALCULATE( [Average Daily Order $], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: 94a631c7-c172-4912-b514-97603dbde6c0
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Final Cost CQTD' = CALCULATE([Order Final Cost], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Final Cost
+		lineageTag: b9586fee-a6c1-4b8f-a38f-434dd61032d9
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Final Cost CYTD' = CALCULATE([Order Final Cost], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Final Cost
+		lineageTag: 8748b4f0-90a1-405e-8cf0-4fa5f8602f5e
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Final Cost CMTD' = CALCULATE([Order Final Cost], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Final Cost
+		lineageTag: bda7b258-e6c8-4468-a1d9-0f4ad1aee2f8
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Final Cost PYTD' = CALCULATE([Order Final Cost], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Final Cost
+		lineageTag: 15da3ec0-601a-44f3-b03b-2b112835dd60
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Final Cost PMTD' = CALCULATE([Order Final Cost], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Final Cost
+		lineageTag: 629a58c0-2a80-4cfb-9538-eb0d6cedc6a5
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Final Cost PQTD' = CALCULATE([Order Final Cost], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Final Cost
+		lineageTag: e5b8f111-305c-4387-a922-a57a0174794c
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order # CMTD' = CALCULATE([Order #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: cdd35e92-3c2c-406d-ad0e-935c560656e3
+
+		changedProperty = IsHidden
+
+	measure 'Order # PMTD' = CALCULATE([Order #], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: 49bdbcfa-9d49-4cc2-a1e8-32e52c829248
+
+		changedProperty = IsHidden
+
+	measure 'Order # CYTD' = CALCULATE([Order #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: f268af7e-88c0-4458-8912-8e3258e0d088
+
+		changedProperty = IsHidden
+
+	measure 'Order # PYTD' = CALCULATE([Order #], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: 77abb7bb-6bc8-4012-94e5-5f983a96c753
+
+		changedProperty = IsHidden
+
+	measure 'Order # CQTD' = CALCULATE([Order #], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: 3345142b-b75a-4d95-bb38-e9d7137ac798
+
+		changedProperty = IsHidden
+
+	measure 'Order # PQTD' = CALCULATE([Order #], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: 84403377-b7c4-4a15-8536-1f323ef604b7
+
+		changedProperty = IsHidden
+
+	measure 'Blank Measure' = BLANK()
+		formatString: 0
+		displayFolder: Metadata
+		lineageTag: 71bb8be6-12e4-4e88-a385-6f0eba99bed1
+
+		changedProperty = IsHidden
+
+	measure 'Billed Item Qty' = SUM(F_Order_Item[Itm Op Qty Billed])
+		formatString: #,0
+		displayFolder: Item Quantity
+		lineageTag: 5489f0d6-3801-4a0d-a55d-e3d5edb812b7
+
+		changedProperty = IsHidden
+
+	measure 'Ordered Item Qty' = SUM(F_Order_Item[Itm Op Qty Ordered])
+		formatString: #,0
+		displayFolder: Item Quantity
+		lineageTag: ab708768-64b8-4eee-9fd4-4651c9a767a5
+
+		changedProperty = IsHidden
+
+	measure 'Shipped Item Qty' = SUM(F_Order_Item[Itm Op Qty Shipped])
+		formatString: #,0
+		displayFolder: Item Quantity
+		lineageTag: dcabcc97-3c60-4ac4-b410-0899c3405875
+
+		changedProperty = IsHidden
+
+	measure 'Total $ MTD Var' = ```
+			
+			    DIVIDE([Total $ CMTD] - [Total $ PMTD],[Total $ PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total $
+		lineageTag: 49b295af-eb35-47ad-a970-44cbba26f8a1
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % CYTD' = CALCULATE([Order GP %], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: fbb8a477-9fc3-467d-a2e8-ca18495473cd
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % PYTD' = CALCULATE([Order GP %], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: 33183fbb-8af4-49e2-8207-8da6666e781a
+
+		changedProperty = IsHidden
+
+	measure 'Order GP BPS YTD' = ```
+			
+			    ([Order GP % CYTD] - [Order GP % PYTD])*10000
+			```
+		formatString: #,0
+		displayFolder: Order Gross Profit %
+		lineageTag: 2b36fde8-2d73-4c90-a6d8-750043243a8e
+
+		changedProperty = IsHidden
+
+	measure 'Bar Chart Color Comparisons' =
+			
+			Var MeasureIndex = SelectedValue('z_Bar_Chart_Measures_Slicer'[Measure Index])
+			Var KPISlicer = SELECTEDVALUE('z_KPI_Slicer'[Index])
+			Var Red = "#FF1010"
+			Var Green = "#72FFB7"
+			Var ColorSwitch = Switch(TRUE(),
+			
+			    KPISlicer = 0  && [Total $ CYTD] < [Total $ PYTD], Red,
+			    KPISlicer  = 0  && [Total $ CYTD] > [Total $ PYTD], Green,
+			    KPISlicer = 1  && [Total $ CMTD] > [Total $ PMTD], Green,
+			    KPISlicer = 1  && [Total $ CMTD] < [Total $ PMTD], Red,
+			    KPISlicer = 2  && [Total $ CQTD] < [Total $ PQTD], Red,
+			    KPISlicer = 2  && [Total $ CQTD] > [Total $ PQTD], Green
+			
+			)
+			/*
+			 KPISlicer = 0 && MeasureIndex = 1 && [Order Amount YTD] < [Order Amount PYTD], Red,
+			    KPISlicer  = 0 && MeasureIndex = 1 && [Order Amount YTD] > [Order Amount PYTD], Green,
+			    KPISlicer = 1 && MeasureIndex = 1 && [Order Amount MTD] > [Order Amount PMTD], Green,
+			    KPISlicer = 1 && MeasureIndex = 1 && [Order Amount MTD] < [Order Amount PMTD], Red,
+			    KPISlicer = 2 && MeasureIndex = 1 && [Order Amount CQTD] < [Order Amount PQTD], Red,
+			    KPISlicer = 2 && MeasureIndex = 1 && [Order Amount CQTD] > [Order Amount PQTD], Green,
+			
+			    KPISlicer = 0 && MeasureIndex = 2 && [ADO YTD] < [ADO PYTD], Red,
+			    KPISlicer = 0 && MeasureIndex = 2 && [ADO YTD] > [ADO PYTD], Green,
+			    KPISlicer = 1 && MeasureIndex = 2 && [ADO MTD] > [ADO PMTD], Green,
+			    KPISlicer = 1 && MeasureIndex = 2 && [ADO MTD] < [ADO PMTD], Red,
+			    KPISlicer = 2 && MeasureIndex = 2 && [ADO CQTD] < [ADO PQTD], Red,
+			    KPISlicer = 2 && MeasureIndex = 2 && [ADO CQTD] > [ADO PQTD], Green
+			*/
+			Return ColorSwitch
+		displayFolder: Metadata
+		lineageTag: 0b547d62-0245-4752-8600-a75c691db379
+
+		changedProperty = IsHidden
+
+	measure RowCount = "Record Count: " & FORMAT(COUNTROWS('F_Order_Item'), "#,##0" )
+		displayFolder: Metadata
+		lineageTag: 5c2d40ee-2db0-48ef-af23-72a1cba5136a
+
+		changedProperty = IsHidden
+
+	measure 'Report as of Date' = "Report as of: " & CALCULATE(Max(F_Order_Item[Converted To Order Date]), ALL(F_Order_Item))
+		displayFolder: Metadata
+		lineageTag: f2bb3f09-f887-4ce7-8eb5-a57497deec98
+
+		changedProperty = IsHidden
+
+	measure 'Allocated Item Qty' = SUM(F_Order_Item[Itm Allocated Qty])
+		formatString: #,0
+		displayFolder: Item Quantity
+		lineageTag: c6e4c30d-a0c9-4b36-8afc-6a3d833a05f3
+
+		changedProperty = IsHidden
+
+	measure 'Workday of Year' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(D_Calendar_Filter[Calendar Date])
+			    , D_Calendar_Filter[Business Day Flag] = TRUE(),filter(D_Calendar_Filter,D_Calendar_Filter[Calendar Date]<=[Max Date] && D_Calendar_Filter[Calendar Date]>=[Min Date])
+			)
+			
+			```
+		formatString: 0
+		displayFolder: Time
+		lineageTag: 02f70435-6e35-4d47-b0ae-e183fde910ba
+
+		changedProperty = IsHidden
+
+	measure 'ADO CQTD' = CALCULATE( [Average Daily Order $], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: 549cb2f4-40dc-4b1e-9717-663ded82a576
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO PQTD' = CALCULATE( [Average Daily Order $], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: 904270c1-8673-45d6-80aa-34d0882264cf
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order GP % CMTD' = CALCULATE([Order GP %], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: 793322f4-c1e1-46ed-97b1-2a3dab51d4fb
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % PMTD' = CALCULATE([Order GP %], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: 86d06bcf-1b16-47d3-b3a4-b9f5e860ed53
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % CQTD' = CALCULATE([Order GP %], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: dab92c75-1b47-4f1d-929e-0a2c1be5d4f6
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % PQTD' = CALCULATE([Order GP %], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: b64521d8-1d65-4fc6-9f06-016e201f1db4
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $' = CALCULATE([Order $], OR(OR(F_Order_Item[Itm Item Status Cd]="OP",F_Order_Item[Itm Item Status Cd]="PL"),F_Order_Item[Itm Item Status Cd]="PS"))
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: f73528ba-d425-420b-98e7-168ee4e6b771
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Open Order $ CYTD' = CALCULATE([Open Order $], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: 4fc5a453-7873-4946-b62a-ca1c97fd4e5a
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Open Order $ PYTD' = CALCULATE([Open Order $], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: d73bf2d6-e26f-4fea-a3a7-261b8e8da3da
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Open Order $ CMTD' = CALCULATE([Open Order $], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: 842d2a0e-aa64-4c10-b3b6-3b1ca4b4f183
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Open Order $ PMTD' = CALCULATE([Open Order $], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: 0b8d0c89-406d-4161-a97f-b3c1bc01bc91
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Open Order $ CQTD' = CALCULATE([Open Order $], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: f305bdaa-96b0-47f7-a899-d3bdac6b2d19
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Open Order $ PQTD' = CALCULATE([Open Order $], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: 1c269186-cf24-4b0d-8be7-226e3e77b570
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order $ MTD Colors' = if([Order $ CMTD] < [Order $ PMTD],"#FF1010", "#17AF68" )
+		displayFolder: Order $
+		lineageTag: e5717f78-268b-4acc-bd13-512397f926e5
+
+		changedProperty = IsHidden
+
+	measure 'Total $ QTD Var' = ```
+			
+			    DIVIDE([Total $ CQTD] - [Total $ PQTD],[Total $ PQTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total $
+		lineageTag: e5b86b6b-362a-41f3-acaa-3a59a58de1fc
+
+		changedProperty = IsHidden
+
+	measure 'Total $ YTD Var' = ```
+			
+			    DIVIDE([Total $ CYTD] - [Total $ PYTD],[Total $ PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total $
+		lineageTag: a692b0e6-3f4b-446d-a449-c03d1b6c64ee
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $ MTD Var' = ```
+			
+			    DIVIDE([Open Order $ CMTD] - [Open Order $ PMTD],[Open Order $ PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Open Order $
+		lineageTag: 22321f3a-9afc-4419-9661-2d367d5232da
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $ QTD Var' = ```
+			
+			    DIVIDE([Open Order $ CQTD] - [Open Order $ PQTD],[Open Order $ PQTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Open Order $
+		lineageTag: 90ea1e88-5c0f-47a0-a172-7c73bfedf186
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $ YTD Var' = ```
+			
+			    DIVIDE([Open Order $ CYTD] - [Open Order $ PYTD],[Open Order $ PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Open Order $
+		lineageTag: a5ca3ef0-7ec4-4b6e-953d-dc3b55a3fce2
+
+		changedProperty = IsHidden
+
+	measure 'Order # YTD Var' = ```
+			
+			    DIVIDE([Order # CYTD] - [Order # PYTD],[Order # PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order #
+		lineageTag: 2bdc93bf-1a29-40ee-927a-a35fd50f255c
+
+		changedProperty = IsHidden
+
+	measure 'Order # QTD Var' = ```
+			
+			    DIVIDE([Order # CQTD] - [Order # PQTD],[Order # PQTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order #
+		lineageTag: 364b14ad-d4a4-4d00-a5e4-a3808cb84364
+
+		changedProperty = IsHidden
+
+	measure 'Order # MTD Var' = ```
+			
+			    DIVIDE([Order # CMTD] - [Order # PMTD],[Order # PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order #
+		lineageTag: 66dd25a1-5902-4c38-bd4f-5976613a56b0
+
+		changedProperty = IsHidden
+
+	measure 'Order GP BPS MTD' = ```
+			
+			    ([Order GP % CMTD] - [Order GP % PMTD]) * 10000
+			```
+		formatString: #,0
+		displayFolder: Order Gross Profit %
+		lineageTag: 0d5c3cb0-3e34-4b10-ab2d-8f4ba7df23c0
+
+		changedProperty = IsHidden
+
+	measure 'Order GP BPS QTD' = ```
+			
+			    ([Order GP % CQTD] - [Order GP % PQTD]) * 10000
+			```
+		formatString: #,0
+		displayFolder: Order Gross Profit %
+		lineageTag: a9137b8e-f05d-4673-8461-7fc69ed0f33e
+
+		changedProperty = IsHidden
+
+	measure 'ADO YTD Var' = ```
+			
+			    DIVIDE([ADO CYTD] - [ADO PYTD],[ADO PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order $
+		lineageTag: 3bd14496-e19e-45cf-a6f6-fbd4291ece62
+
+		changedProperty = IsHidden
+
+	measure 'ADO MTD Var' = ```
+			
+			    DIVIDE([ADO CMTD] - [ADO PMTD],[ADO PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order $
+		lineageTag: 1804ffbc-99f5-4579-ad47-71052378d3b5
+
+		changedProperty = IsHidden
+
+	measure 'ADO QTD Var' = ```
+			
+			    DIVIDE([ADO CQTD] - [ADO PQTD],[ADO PQTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order $
+		lineageTag: 53423c18-0a67-452d-b959-58982256c12d
+
+		changedProperty = IsHidden
+
+	measure 'Order $ QTD Colors' = if([Order $ CQTD] < [Order $ PQTD],"#FF1010", "#17AF68" )
+		displayFolder: Order $
+		lineageTag: 2b44d871-53c1-4113-97c0-cfc2a89ccc84
+
+		changedProperty = IsHidden
+
+	measure 'Order $ YTD Colors' = if([Order $ CYTD] < [Order $ PYTD],"#FF1010", "#17AF68" )
+		displayFolder: Order $
+		lineageTag: d841648b-34f6-4ed3-87f9-9648273db4ae
+
+		changedProperty = IsHidden
+
+	measure 'Order # MTD Colors' = if([Order # CMTD] < [Order # PMTD],"#FF1010", "#17AF68" )
+		displayFolder: Order #
+		lineageTag: d07887bb-57d3-47b8-b4d8-96273cd31c7d
+
+		changedProperty = IsHidden
+
+	measure 'Order # QTD Colors' = if([Order # CQTD] < [Order # PQTD],"#FF1010", "#17AF68" )
+		displayFolder: Order #
+		lineageTag: 82df7591-f4d9-4b59-8fc7-60e7acd532eb
+
+		changedProperty = IsHidden
+
+	measure 'Order # YTD Colors' = if([Order # CYTD] < [Order # PYTD],"#FF1010", "#17AF68" )
+		displayFolder: Order #
+		lineageTag: ef20a964-380d-4d40-86b0-853d050c7511
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $ QTD Colors' = if([Open Order $ CQTD] < [Open Order $ PQTD],"#FF1010", "#17AF68" )
+		displayFolder: Open Order $
+		lineageTag: cf5b44f2-ddd3-4050-afc2-e4dcca75807e
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $ MTD Colors' = if([Open Order $ CMTD] < [Open Order $ PMTD],"#FF1010", "#17AF68" )
+		displayFolder: Open Order $
+		lineageTag: 5153abd5-9140-462b-b171-c790de0d827f
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $ YTD Colors' = if([Open Order $ CYTD] < [Open Order $ PYTD],"#FF1010", "#17AF68" )
+		displayFolder: Open Order $
+		lineageTag: fe6952db-0a09-4c64-a3c7-0b04ebbb4cc8
+
+		changedProperty = IsHidden
+
+	measure 'ADO MTD Colors' = if([ADO CMTD] < [ADO PMTD],"#FF1010", "#17AF68" )
+		displayFolder: Average Daily Order $
+		lineageTag: 6adc18e9-a022-4cee-9d2f-c88717a5ae2b
+
+		changedProperty = IsHidden
+
+	measure 'ADO YTD Colors' = if([ADO CYTD] < [ADO PYTD],"#FF1010", "#17AF68" )
+		displayFolder: Average Daily Order $
+		lineageTag: 08952e37-4d1a-4cfa-ade9-2595adbb5798
+
+		changedProperty = IsHidden
+
+	measure 'ADO QTD Colors' = if([ADO CQTD] < [ADO PQTD],"#FF1010", "#17AF68" )
+		displayFolder: Average Daily Order $
+		lineageTag: 67b36da3-eb96-4eb7-84fe-86cb65b33069
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % QTD Colors' = if([Order GP % CQTD] < [Order GP % PQTD],"#FF1010", "#17AF68" )
+		displayFolder: Order Gross Profit %
+		lineageTag: fbebc3a9-d14b-4ac3-a564-cd59ae5fe6f6
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % MTD Colors' = if([Order GP % CMTD] < [Order GP % PMTD],"#FF1010", "#17AF68" )
+		displayFolder: Order Gross Profit %
+		lineageTag: a4622da8-9371-446b-8b28-7ae0bc3c1333
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % YTD Colors' = if([Order GP % CYTD] < [Order GP % PYTD],"#FF1010", "#17AF68" )
+		displayFolder: Order Gross Profit %
+		lineageTag: a345a1a7-4daf-4121-bd86-c195b6c45025
+
+		changedProperty = IsHidden
+
+	measure 'Average Order $ CYTD' = CALCULATE([Average Order $], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order $
+		lineageTag: bef110fc-4f8b-4292-ac64-e3f520078b7b
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Average Order $ PYTD' = CALCULATE([Average Order $], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order $
+		lineageTag: 90c640cf-be7e-43b5-91ce-5eecdfe9f4b6
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Average Order $ CMTD' = CALCULATE([Average Order $], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order $
+		lineageTag: be89527a-f179-464c-8a15-81d96170265d
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Average Order $ PMTD' = CALCULATE([Average Order $], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order $
+		lineageTag: 99e968bc-49d6-4e24-85cb-4f157e3e7db7
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Average Order $ CQTD' = CALCULATE([Average Order $], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order $
+		lineageTag: 6a23d103-620d-420b-99b2-14007451f784
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Average Order $ PQTD' = CALCULATE([Average Order $], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order $
+		lineageTag: 46a8301a-140f-4730-8ad2-cbea75019475
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Detail Error Message' = "Please select under 150,000 Order Lines using the filters to the right. The number of Order Lines is on the top right hand corner for reference."
+		displayFolder: Metadata
+		lineageTag: 978e9766-0f2d-4897-96aa-4ee5aa874c8c
+
+		changedProperty = IsHidden
+
+	measure 'RowCount Hide Condition' = COUNTROWS('F_Order_Item')
+		formatString: #,0
+		displayFolder: Metadata
+		lineageTag: 1a36ef78-71d5-4238-a05e-9e418af0c64c
+
+		changedProperty = IsHidden
+
+	measure 'Show Condition' =
+			
+			//Determines what is selected from the parameter
+			VAR vSelectedValue = SELECTEDVALUE ( 'z_Param_Calc_Condition_Details'[Show/Hide])
+			
+			//The number of rows available with current selections
+			VAR vRowCount =
+			CALCULATE(
+			    [RowCount Hide Condition]
+			    , ALLSELECTED()
+			)
+			
+			//Returns Show if < 100 rows and Hide if > 100 rows
+			VAR vResult = (vRowCount < 150000 && vSelectedValue = "Show") || (vRowCount >= 150000 && vSelectedValue = "Hide")
+			
+			RETURN vResult
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: Metadata
+		lineageTag: a80cb080-c166-4cd2-820f-85a874322c4f
+
+		changedProperty = IsHidden
+
+	measure 'zSelected Time Frame' = ```
+			
+			
+			VAR vCY = 
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Month Index])
+			,ALLSELECTED('D_Calendar_Filter')
+			)
+			
+			VAR vCM =
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Month Number])
+			, FILTER(ALLSELECTED('D_Calendar_Filter')
+			, 'D_Calendar_Filter'[Month Index] = vCY
+			))
+			
+			VAR vCDayOfMonth =
+			CALCULATE(
+			"MTD:" & MIN('D_Calendar_Filter'[Calendar Date]) & " - " & MAX('D_Calendar_Filter'[Calendar Date])
+			, FILTER(ALLSELECTED('D_Calendar_Filter')
+			, 'D_Calendar_Filter'[Month Number] = vCM
+			)
+			)
+			
+			Return vCDayOfMonth
+			```
+		displayFolder: Metadata
+		lineageTag: 1d76f7c9-08d0-4b3d-be91-4b30626b9416
+
+		changedProperty = IsHidden
+
+	measure 'zSelected Time Frame - Previous' = ```
+			
+			
+			VAR vCY = 
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Month Index])
+			,ALLSELECTED('D_Calendar_Filter')
+			)
+			
+			VAR vCM =
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Month Number])
+			, FILTER(ALLSELECTED('D_Calendar_Filter')
+			, 'D_Calendar_Filter'[Month Index] = vCY -1
+			))
+			
+			VAR vCDayOfMonth =
+			CALCULATE(
+			"PMTD: " & MIN('D_Calendar_Filter'[Calendar Date]) & " - " & MAX('D_Calendar_Filter'[Calendar Date])
+			, FILTER(ALLSELECTED('D_Calendar_Filter')
+			, 'D_Calendar_Filter'[Month Number] = vCM
+			)
+			)
+			
+			Return vCDayOfMonth
+			```
+		displayFolder: Metadata
+		lineageTag: 50e71c5d-fb9e-4cba-98c6-66c273511fb5
+
+		changedProperty = IsHidden
+
+	measure 'Average Order $ MTD Var' = ```
+			
+			    DIVIDE([Average Order $ CMTD] - [Average Order $ PMTD],[Average Order $ PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Order $
+		lineageTag: 4316cbac-81da-47ee-b3a6-42c1b9c8d18c
+
+		changedProperty = IsHidden
+
+	measure 'Average Order $ QTD Var' = ```
+			
+			    DIVIDE([Average Order $ CQTD] - [Average Order $ PQTD],[Average Order $ PQTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Order $
+		lineageTag: 6187d5d8-1d55-4927-a146-b22424edf780
+
+		changedProperty = IsHidden
+
+	measure 'Average Order $ YTD Var' = ```
+			
+			    DIVIDE([Average Order $ CYTD] - [Average Order $ PYTD],[Average Order $ PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Order $
+		lineageTag: 89cce2de-d622-48aa-a157-ce8ed8856c4e
+
+		changedProperty = IsHidden
+
+	measure 'Average Order $ YTD Colors' = if([Average Order $ CYTD] < [Average Order $ PYTD],"#FF1010", "#17AF68" )
+		displayFolder: Average Order $
+		lineageTag: 0c008baa-7b14-453c-926c-5502864a87ea
+
+		changedProperty = IsHidden
+
+	measure 'Average Order $ MTD Colors' = if([Average Order $ CMTD] < [Average Order $ PMTD],"#FF1010", "#17AF68" )
+		displayFolder: Average Order $
+		lineageTag: 0936485c-949f-458c-8f18-f08538e7eecd
+
+		changedProperty = IsHidden
+
+	measure 'Average Order $ QTD Colors' = if([Average Order $ CQTD] < [Average Order $ PQTD],"#FF1010", "#17AF68" )
+		displayFolder: Average Order $
+		lineageTag: 6c1c6e36-839b-4b49-a881-9229169eea6d
+
+		changedProperty = IsHidden
+
+	measure 'CMTD Period' = ```
+			
+			
+			VAR vCY = 
+			CALCULATE(
+			MAX('D_Calendar_Filter'[YEAR])
+			,ALLSELECTED('D_Calendar_Filter')
+			)
+			
+			VAR vCM =
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Month Number])
+			, FILTER(ALLSELECTED('D_Calendar_Filter')
+			, 'D_Calendar_Filter'[YEAR] = vCY
+			))
+			
+			VAR vCDayOfMonth =
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Day Of Month])
+			, FILTER(ALLSELECTED('D_Calendar_Filter')
+			, 'D_Calendar_Filter'[Month Number] = vCM
+			)
+			)
+			
+			VAR vMinDate =
+			 Calculate(Min('D_Calendar_Filter'[Calendar Date])
+			, 'D_Calendar_Filter'[Month Number] = vCM
+			&& 'D_Calendar_Filter'[Day Of Month] <= vCDayOfMonth
+			&& 'D_Calendar_Filter'[Year] = vCY)
+			
+			VAR vMaxDate =
+			 Calculate(Max('D_Calendar_Filter'[Calendar Date])
+			, 'D_Calendar_Filter'[Month Number] = vCM
+			&& 'D_Calendar_Filter'[Day Of Month] <= vCDayOfMonth
+			&& 'D_Calendar_Filter'[Year] = vCY)
+			
+			Var vResult = 
+			"CMTD: " & vMinDate & " - " & vMaxDate
+			
+			RETURN vResult
+			```
+		displayFolder: Metadata
+		lineageTag: f4247d80-6603-4fa1-851a-3f627668f92a
+
+		changedProperty = IsHidden
+
+	measure 'PMTD Period' = ```
+			
+			
+			VAR vCY = 
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Year])
+			,ALLSELECTED('D_Calendar_Filter')
+			)
+			
+			VAR vPM =
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Month Number])-1
+			, FILTER(ALLSELECTED('D_Calendar_Filter')
+			, 'D_Calendar_Filter'[YEAR] = vCY
+			))
+			
+			VAR vCM =
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Month Number])
+			, FILTER(ALLSELECTED('D_Calendar_Filter')
+			, 'D_Calendar_Filter'[YEAR] = vCY
+			))
+			
+			VAR vCDayOfMonth =
+			CALCULATE(
+			MAX('D_Calendar_Filter'[Day Of Month])
+			, FILTER(ALLSELECTED('D_Calendar_Filter')
+			, 'D_Calendar_Filter'[Month Number] = vCM
+			)
+			)
+			
+			VAR vMinDate =
+			 Calculate(Min('D_Calendar_Filter'[Calendar Date])
+			, 'D_Calendar_Filter'[Month Number] = vPM
+			&& 'D_Calendar_Filter'[Day Of Month] <= vCDayOfMonth
+			&& 'D_Calendar_Filter'[Year] = vCY)
+			
+			VAR vMaxDate =
+			 Calculate(Max('D_Calendar_Filter'[Calendar Date])
+			, 'D_Calendar_Filter'[Month Number] = vPM
+			&& 'D_Calendar_Filter'[Day Of Month] <= vCDayOfMonth
+			&& 'D_Calendar_Filter'[Year] = vCY)
+			
+			Var vResult = 
+			"PMTD: " & vMinDate & " - " & vMaxDate
+			
+			RETURN vResult
+			```
+		displayFolder: Metadata
+		lineageTag: 0bd3c7c5-c13b-4f55-88c5-2aca3f4b9b5b
+
+		changedProperty = IsHidden
+
+	measure 'Quote GP %' =
+			
+			CALCULATE([Total GP %],F_Order_Item[Order Type Desc] = "Quote")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote Gross Profit %
+		lineageTag: 106efad5-254d-4008-a211-5519f54bbd99
+
+		changedProperty = IsHidden
+
+	measure 'Order $ YTD Var' = ```
+			
+			    DIVIDE(([Order $ CYTD] - [Order $ PYTD]), [Order $ PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order $
+		lineageTag: e395b4c8-0fc9-4c46-9406-e3d8a5bb6335
+
+		changedProperty = IsHidden
+
+	measure 'Order $ MTD Var' = ```
+			
+			    DIVIDE(([Order $ CMTD] - [Order $ PMTD]), [Order $ PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order $
+		lineageTag: ada8a53f-d9f6-451a-9f9e-07bc2642ee22
+
+		changedProperty = IsHidden
+
+	measure 'Order $ QTD Var' = ```
+			
+			    DIVIDE(([Order $ CQTD] - [Order $ PQTD]), [Order $ PQTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order $
+		lineageTag: 518c5b29-b275-42e5-8870-05db88dba956
+
+		changedProperty = IsHidden
+
+	measure 'Order $ Growth KPI' =
+			
+			SWITCH(
+			    SELECTEDVALUE('z_KPI_Slicer'[Index]),
+			    0, [Order $ YTD Var],
+			    1, [Order $ MTD Var],
+			    2, [Order $ QTD Var],
+			    3, [Order $ Rolling 12M Var]
+			)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order $
+		lineageTag: 47b638ab-6692-4b42-b40f-b84a3221fc04
+
+		changedProperty = IsHidden
+
+	measure 'Order $ Growth KPI Title' =
+			
+			SWITCH(
+			    SELECTEDVALUE('z_KPI_Slicer'[Index]),
+			    0, "Y/Y Growth %",
+			    1, "M/M Growth %",
+			    2, "Q/Q Growth %"
+			)
+		displayFolder: Order $
+		lineageTag: 7d4c8776-1aca-4b9b-9621-c971c2216f85
+
+		changedProperty = IsHidden
+
+	measure 'Order $ Growth KPI Colors' =
+			
+			SWITCH(
+			    SELECTEDVALUE('z_KPI_Slicer'[Index]),
+			    0, if([Order $ YTD Var] < 0,"#FF1010" ,"#17AF68"),
+			    1, if([Order $ MTD Var] < 0,"#FF1010" ,"#17AF68"),
+			    2, if([Order $ QTD Var] < 0,"#FF1010" ,"#17AF68")
+			)
+		displayFolder: Order $
+		lineageTag: b1b43e49-73aa-4468-bc6a-a95dc47e0a2b
+
+		changedProperty = IsHidden
+
+	measure 'Current Period Selection' =
+			
+			SWITCH(
+			    SELECTEDVALUE('z_KPI_Slicer'[Index]),
+			    0, "CYTD: " & Max(D_Calendar_Filter[YEAR]),
+			    1, "CMTD: " & Calculate(FIRSTNONBLANK(D_Calendar_Filter[Month Year],1), Filter(D_Calendar_Filter, D_Calendar_Filter[Month Index] =Max(D_Calendar_Filter[Month Index])) ),
+			    //CALCULATE(SELECTEDVALUE(D_Calendar[MONTH_YEAR]),Max(D_Calendar[MONTH_INDEX]),
+			    2, "CQTD: " & Max(D_Calendar_Filter[Year Quarter])
+			    //CALCULATE(SELECTEDVALUE(D_Calendar[YEAR_QUARTER]),Max(D_Calendar[QUARTER_INDEX])
+			)
+		displayFolder: Metadata
+		lineageTag: 3e991066-c5f8-483c-8769-4b104d95f259
+
+		changedProperty = IsHidden
+
+	measure 'Prior Period Selection' = ```
+			
+			SWITCH(
+			    SELECTEDVALUE('z_KPI_Slicer'[Index]),
+			    0, "PYTD: " & Max(D_Calendar_Filter[Year])-1,
+			    1, "PMTD: " & Calculate(Max(D_Calendar_Filter[Month Year]), 'Time Intelligence'[Time Period] = "PMTD" ),
+			    2, "PQTD: " & Calculate(MAX(D_Calendar_Filter[Year Quarter]), 'Time Intelligence'[Time Period] = "PQTD" )
+			)
+			
+			```
+		displayFolder: Metadata
+		lineageTag: 3493be9a-24a6-4328-8a53-c573afccb551
+
+		changedProperty = IsHidden
+
+	measure 'Order # Rolling 12M' = CALCULATE([Order #], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: c91abfd1-5547-46bb-aba8-a36b59a2c034
+
+		changedProperty = IsHidden
+
+	measure 'Average Order $ Rolling 12M' = CALCULATE([Average Order $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order $
+		lineageTag: 4301b0b3-0edf-4663-8cfb-a3439b213359
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order GP % Rolling 12M' = CALCULATE([Order GP %], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: 9ea83b0a-2905-4d0d-b7f8-658341ea3680
+
+		changedProperty = IsHidden
+
+	measure 'ADO Rolling 12M' = CALCULATE( [Average Daily Order $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: c6c89539-99a3-4766-a820-8bfca5093dee
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total $ Rolling 12M' = CALCULATE([Total $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: 2a721e2f-4b9f-4a8f-bbb1-f0668d1d1077
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total $ Rolling P12M' = CALCULATE([Total $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_PREVIOUS_YEAR")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: 4d9d36be-254b-4e52-bc18-28d68940b0c2
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order # Rolling P12M' = CALCULATE([Order #], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_PRIOR_YEAR")
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: c4a853b3-f052-42d0-acae-2c4b5258cb36
+
+		changedProperty = IsHidden
+
+	measure 'ADO Rolling P12M' = CALCULATE([Average Daily Order $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_PRIOR_YEAR")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: 90e92605-0083-45f6-b44e-a3a9507ba3f9
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order GP % Rolling P12M' = CALCULATE([Order GP %], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_PRIOR_YEAR")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: 6914e58b-bf2f-4816-bf2c-733adbe4223f
+
+		changedProperty = IsHidden
+
+	measure 'Total $ Rolling 12M Var' = ```
+			
+			    DIVIDE([Total $ Rolling 12M] - [Total $ Rolling P12M],[Total $ Rolling P12M])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total $
+		lineageTag: f94c1982-7c68-4e42-b524-a12eefd32128
+
+		changedProperty = IsHidden
+
+	measure 'Order # Rolling 12M Var' = ```
+			
+			    DIVIDE([Order # Rolling 12M] - [Order # Rolling P12M],[Order # Rolling P12M])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order #
+		lineageTag: 7e503f24-2669-46c1-91c4-cbd4e32289e1
+
+		changedProperty = IsHidden
+
+	measure 'ADO Rolling 12M Var' = ```
+			
+			    DIVIDE([ADO Rolling 12M] - [ADO Rolling P12M],[ADO Rolling P12M])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order $
+		lineageTag: 81ff1598-a037-4556-9f02-1cf8cf72e057
+
+		changedProperty = IsHidden
+
+	measure 'Order $ Rolling 12M Var' = ```
+			
+			    DIVIDE(([Order $ Rolling 12M] - [Order $ Rolling P12M]), [Order $ Rolling P12M])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order $
+		lineageTag: d39c5cae-76b6-4e1c-ac7b-d277dec12fbe
+
+		changedProperty = IsHidden
+
+	measure MonthYear = ```
+			MAX(D_Calendar_Filter[Month Year])
+			 
+			```
+		displayFolder: Metadata
+		lineageTag: 1189e8dd-6e45-4970-939b-5d8f7901b64f
+
+		changedProperty = IsHidden
+
+	measure 'Order GP BPS Rolling 12M' = ```
+			
+			    ([Order GP % Rolling 12M] - [Order GP % Rolling P12M]) * 10000
+			```
+		formatString: #,0
+		displayFolder: Order Gross Profit %
+		lineageTag: 9f0b9273-863c-4b91-bde2-02cfb6f6d0d1
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % Rolling 12 Colors' = if([Order GP % Rolling 12M] < [Order GP % Rolling P12M],"#FF1010", "#17AF68" )
+		displayFolder: Order Gross Profit %
+		lineageTag: 36d79bcf-20b4-4f18-af92-8daeb21782c9
+
+		changedProperty = IsHidden
+
+	measure 'ADO Rolling 12M Colors' = if([ADO Rolling 12M] < [ADO Rolling P12M],"#FF1010", "#17AF68" )
+		displayFolder: Average Daily Order $
+		lineageTag: 4843530c-9d3f-4e5e-a776-326d152f7279
+
+		changedProperty = IsHidden
+
+	measure 'Order # Rolling 12M Colors' = if([Order # Rolling 12M] < [Order # Rolling P12M],"#FF1010", "#17AF68" )
+		displayFolder: Order #
+		lineageTag: 4bafa48a-814f-49c1-86aa-c22c8b30f39d
+
+		changedProperty = IsHidden
+
+	measure 'Order $ Rolling 12M Colors' = if([Order $ Rolling 12M] < [Order $ Rolling P12M],"#FF1010", "#17AF68" )
+		displayFolder: Order $
+		lineageTag: f822a846-4ac5-4587-a905-5fd508fc649d
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $ Rolling 12M' = CALCULATE([Open Order $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: 70570816-1d2b-44f6-b072-30e7230c9eec
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Open Order $ Rolling P12M' = CALCULATE([Open Order $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_PRIOR_YEAR")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: 2e68b6aa-284d-4f01-bdbc-a55136469ac2
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Open Order $ Rolling 12M Colors' = if([Open Order $ Rolling 12M] < [Open Order $ Rolling P12M],"#FF1010", "#17AF68" )
+		displayFolder: Open Order $
+		lineageTag: 36b095a7-a18f-4dc7-9ca8-923bf68375e0
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $ Rolling 12M Var' = ```
+			
+			    DIVIDE([Open Order $ Rolling 12M] - [Open Order $ Rolling P12M],[Open Order $ Rolling P12M])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Open Order $
+		lineageTag: f322788c-968c-400c-a177-d2b94c954ee6
+
+		changedProperty = IsHidden
+
+	measure 'Total $ Rolling 24M' = CALCULATE([Total $], 'Time Intelligence'[Time Period]= "24_MONTH_ROLLING")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total $
+		lineageTag: 38207e9a-8ea0-45c3-b998-b73f56d3f2e6
+
+		changedProperty = IsHidden
+
+	measure 'ADO Rolling 24M' = CALCULATE( [Average Daily Order $], 'Time Intelligence'[Time Period]= "24_MONTH_ROLLING")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: 64346e5e-249a-42bb-bf50-cd08203d10bc
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order # Rolling 24M' = CALCULATE([Order #], 'Time Intelligence'[Time Period]= "24_MONTH_ROLLING")
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: 970fbeab-9a67-4a96-9e45-ad253158a306
+
+		changedProperty = IsHidden
+
+	measure 'Order GP % Rolling 24M' = CALCULATE( [Order GP %], 'Time Intelligence'[Time Period]= "24_MONTH_ROLLING")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: 37c53028-7ad8-4811-b8b5-6dc259ab573d
+
+		changedProperty = IsHidden
+
+	measure 'Open Order $ Rolling 24M' = CALCULATE( [Open Order $], 'Time Intelligence'[Time Period]= "24_MONTH_ROLLING")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order $
+		lineageTag: 370ca304-3b71-40fa-9e97-813078931f67
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'PYTD Display' = "PY: " & Max(D_Calendar_Filter[YEAR])-1
+		displayFolder: Time Period Metadata
+		lineageTag: 342382d7-1ba1-44be-8496-593ad0ec1b56
+
+		changedProperty = IsHidden
+
+	measure 'Prior 24 Start' = ```
+			
+			
+			VAR vCYEnd = Calculate(FIRSTNONBLANK(D_Calendar_Filter[Month Year],1), Filter(D_Calendar_Filter, D_Calendar_Filter[Month Index] =Max(D_Calendar_Filter[Month Index])-13) )
+			VAR vCYStart = Calculate(FIRSTNONBLANK(D_Calendar_Filter[Month Year],1), Filter(D_Calendar_Filter, D_Calendar_Filter[Month Index] =Max(D_Calendar_Filter[Month Index])-24) ) 
+			RETURN "P12M: " & vCYStart & " - " & vCYEnd
+			```
+		displayFolder: Time Period Metadata
+		lineageTag: 226b0a92-3cd4-4277-8976-4236817d4083
+
+		changedProperty = IsHidden
+
+	measure 'PQTD Display' = ```
+			
+			VAR vCQ =
+			    CALCULATE (
+			        MAX ( 'D_Calendar_Filter'[Quarter Index] ),
+			        ALLSELECTED ( 'D_Calendar_Filter' )
+			    )
+			
+			    
+			VAR vResult =
+			    CALCULATE (
+			        MAX(D_Calendar_Filter[Year Quarter]),
+			        FILTER (
+			            ALL ( 'D_Calendar_Filter'),
+			            'D_Calendar_Filter'[Quarter Index] = ( vCQ - 4 )
+			
+			        )
+			    ) 
+			RETURN "PQ: " & vResult
+			```
+		formatString: 0
+		displayFolder: Time Period Metadata
+		lineageTag: f815e40f-0db8-417b-af53-7d97051c879d
+
+		changedProperty = IsHidden
+
+	measure 'PMTD Display' = ```
+			
+			
+			VAR vCM =
+			    CALCULATE (
+			        MAX ( 'D_Calendar_Filter'[Month Index] ),
+			        ALLSELECTED ( 'D_Calendar_Filter' )
+			    )
+			VAR vCDayOfMonth =
+			    CALCULATE (
+			        MAX('D_Calendar_Filter'[Workday Of Month]),
+			        FILTER ( ALLSELECTED ( 'D_Calendar_Filter' ), 'D_Calendar_Filter'[Month Index] = vCM )
+			    )
+			VAR vResult =
+			    CALCULATE (
+			        MAX(D_Calendar_Filter[Month Year]),
+			        FILTER (
+			            ALL ( 'D_Calendar_Filter' ),
+			            'D_Calendar_Filter'[Month Index] =  vCM - 12 && 
+			            'D_Calendar_Filter'[Workday Of Month] <= vCDayOfMonth
+			        )
+			    )
+			RETURN
+			   "PM: " & vResult
+			```
+		displayFolder: Time Period Metadata
+		lineageTag: d03ab6d3-a6c9-4370-8332-803dc2f4bac9
+
+		changedProperty = IsHidden
+
+	measure 'Max Month Year' = ```
+			
+			VAR vCYEnd = Calculate(FIRSTNONBLANK(D_Calendar_Filter[Month Year],1), Filter(D_Calendar_Filter, D_Calendar_Filter[Month Index] =Max(D_Calendar_Filter[Month Index])-1) )
+			VAR vCYStart = Calculate(FIRSTNONBLANK(D_Calendar_Filter[Month Year],1), Filter(D_Calendar_Filter, D_Calendar_Filter[Month Index] =Max(D_Calendar_Filter[Month Index])-12) ) 
+			RETURN "12M: " & vCYStart & " - " & vCYEnd
+			```
+		displayFolder: Time Period Metadata
+		lineageTag: ad3bcda8-4369-424c-bbf2-5bbe22df7d04
+
+		changedProperty = IsHidden
+
+	measure 'CYTD Display' = ```
+			
+			VAR vYear = Max(D_Calendar_Filter[Year])
+			RETURN
+			"CY: " & vYear 
+			```
+		displayFolder: Time Period Metadata
+		lineageTag: bbd03706-66d8-475c-b541-c5f828234cbd
+
+		changedProperty = IsHidden
+
+	measure 'CQTD Display' = "CQ: " & Max(D_Calendar_Filter[Year Quarter])
+		displayFolder: Time Period Metadata
+		lineageTag: b7abe602-0f42-47ad-8c5d-07d5d9cb4bb8
+
+		changedProperty = IsHidden
+
+	measure 'CMTD Display' = "CM: " & Calculate(FIRSTNONBLANK(D_Calendar_Filter[Month Year],1), Filter(D_Calendar_Filter, D_Calendar_Filter[Month Index] =Max( D_Calendar_Filter[Month Index])) )
+		displayFolder: Time Period Metadata
+		lineageTag: 4d0400f8-e0c1-48a8-bc61-b9a046fcc2a0
+
+		changedProperty = IsHidden
+
+	measure 'Quote #' =
+			
+			CALCULATE([Total #], F_Order_Item[Order Type Desc] = "Quote")
+		formatString: #,0
+		displayFolder: Quote #
+		lineageTag: d6cfe1f4-e663-409f-bacd-72d6b73a13e0
+
+		changedProperty = IsHidden
+
+	measure 'Open Quote $' = CALCULATE([Quote $],F_Order_Item[Process Status Desc] = "OPEN")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Quote $
+		lineageTag: 7906ae9c-83a6-4a3d-937f-d1fd7c947ec5
+
+		changedProperty = IsHidden
+
+	measure 'Open Order #' = ```
+			CALCULATE(
+			    [Order #], 
+			    OR(F_Order_Item[Process Status Desc] = "OPEN",F_Order_Item[Process Status Desc] = "PARTIALLY SHIPPED")
+			)
+			```
+		formatString: #,0
+		displayFolder: Open Order #
+		lineageTag: 89b66547-4500-4057-bcee-37b30a92f5e3
+
+		changedProperty = IsHidden
+
+	measure 'Open Quote #' = ```
+			CALCULATE(
+			    [Quote #], 
+			    F_Order_Item[Process Status Desc] <> "CLOSED"     
+			)
+			```
+		formatString: #,0
+		displayFolder: Open Quote #
+		lineageTag: f4b04989-0795-45ae-99a6-93f42d38c217
+
+		changedProperty = IsHidden
+
+	measure 'Open Quote Line #' = ```
+			CALCULATE(
+			    [Quote Line #], 
+			    F_Order_Item[Itm Item Status Cd]="OP"
+			)
+			```
+		formatString: #,0
+		displayFolder: Open Quote Line #
+		lineageTag: 4194cde5-b103-4d0c-92b2-0a79c9dc58f0
+
+		changedProperty = IsHidden
+
+	measure 'Open Order Line #' = ```
+			CALCULATE(
+			    [Order Line #], 
+			    OR(F_Order_Item[Itm Item Status Cd]="OP",OR(F_Order_Item[Itm Item Status Cd]="PL",F_Order_Item[Itm Item Status Cd]="PS"
+			)))
+			```
+		formatString: #,0
+		displayFolder: Open Order Line #
+		lineageTag: a22cddca-da4e-46c8-8b59-d28386782ce0
+
+		changedProperty = IsHidden
+
+	measure 'Order $' =
+			CALCULATE([Total $],
+			    F_Order_Item[Order Type Desc] = "Order"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: 030a42d8-3332-4876-a3d6-d24db9e57610
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order $ CMTD' = CALCULATE([Order $], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: 53018634-3923-421f-871c-f375ba3ee927
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order $ PMTD' = CALCULATE([Order $], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: 4f64d97b-e1e8-442e-84f6-dafb972ddc33
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order $ CQTD' = CALCULATE([Order $], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: 4b647de4-cdad-43d3-8edc-38c6d57a0277
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order $ PQTD' = CALCULATE([Order $], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: d6c79d12-3ad3-4858-9769-754f822a6e3f
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order $ Rolling 12M' = CALCULATE([Order $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: e210d6b0-2c9c-4791-b436-51b4b767393d
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order $ Rolling P12M' = CALCULATE([Order $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_PREVIOUS_YEAR")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: 3be54261-31ef-446f-b3db-e57e8d66f472
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order $ CYTD' = CALCULATE([Order $], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: e8562fb6-eb70-4e3b-9d4f-5fc26b37fa96
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order $ PYTD' = CALCULATE([Order $], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: b6c28434-e419-4d0e-becf-f7c0a70716f8
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Email Order Line #' = CALCULATE([Order Line #],F_Order_Item[Order Source Desc]="AUTOMATED EMAIL" || F_Order_Item[Order Source Desc]="E-MAIL ORDER")
+		formatString: #,0
+		displayFolder: Order Line # Details
+		lineageTag: 71b2ca8d-e2c4-4e9e-9f6e-ec8d18fe8008
+
+		changedProperty = IsHidden
+
+	measure 'EDI Order Line #' = CALCULATE([Order Line #],F_Order_Item[Order Source Desc]="EDI")
+		formatString: #,0
+		displayFolder: Order Line # Details
+		lineageTag: 4b7b8c43-6cb9-4202-890b-9539f92aa6a7
+
+		changedProperty = IsHidden
+
+	measure 'Telephone Order Line #' = CALCULATE([Order Line #],F_Order_Item[Order Source Desc]="TELEPHONE")
+		formatString: #,0
+		displayFolder: Order Line # Details
+		lineageTag: 18038ea0-14de-43d8-9adc-550b37dd232a
+
+		changedProperty = IsHidden
+
+	measure 'Counter Order Line #' = CALCULATE([Order Line #],F_Order_Item[Order Source Desc]="COUNTER")
+		formatString: #,0
+		displayFolder: Order Line # Details
+		lineageTag: 905a02f6-644c-4cfc-bad4-38fa47c2c88b
+
+		changedProperty = IsHidden
+
+	measure 'Web Order Line #' = CALCULATE([Order Line #],F_Order_Item[Order Source Desc]="WEB ENTER ORDER")
+		formatString: #,0
+		displayFolder: Order Line # Details
+		lineageTag: 45d6f233-390b-406d-8e4b-d74a9b097a9c
+
+		changedProperty = IsHidden
+
+	measure 'Other Order Line #' = [Order Line #] - [Counter Order Line #] - [EDI Order Line #] - [Email Order Line #] - [Telephone Order Line #] - [Web Order Line #]
+		formatString: #,0
+		displayFolder: Order Line # Details
+		lineageTag: 7b545628-aa92-40bd-b502-5b445f1ca2e8
+
+		changedProperty = IsHidden
+
+	measure 'Order Gross Profit' = [Order $] - [Order Final Cost]
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit
+		lineageTag: d103834e-c7bf-465e-8fca-67db942a8059
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Gross Profit CMTD' = CALCULATE([Order Gross Profit], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit
+		lineageTag: 806289e5-ae6c-4efd-9347-1a70fa3e2eea
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Gross Profit PMTD' = CALCULATE([Order Gross Profit], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit
+		lineageTag: 438d3fa7-4917-4907-af3c-900285520cdd
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Gross Profit CYTD' = CALCULATE([Order Gross Profit], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit
+		lineageTag: 136680df-1fe0-4bb7-b780-95660cf9df25
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Gross Profit PYTD' = CALCULATE([Order Gross Profit], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit
+		lineageTag: c74cc9fb-c9e4-4b0d-8365-cd5f0fbc7d70
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order Gross Profit MTD Var' = DIVIDE(([Order Gross Profit CMTD]-[Order Gross Profit PMTD]), [Order Gross Profit PMTD])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit
+		lineageTag: f0abf8a8-4b3d-4b2f-80d4-5cf1e2e8b41e
+
+		changedProperty = IsHidden
+
+	measure 'Order Gross Profit YTD Var' = DIVIDE(([Order Gross Profit CYTD]-[Order Gross Profit PYTD]), [Order Gross Profit PYTD])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit
+		lineageTag: 7481ed84-3b10-4440-9e34-b00a8a29de5c
+
+		changedProperty = IsHidden
+
+	measure 'Late Order Line #' = CALCULATE([Order Line #], F_Order_Item,F_Order_Item[Late Line]="Yes")
+		formatString: #,0
+		displayFolder: Order Line # Details
+		lineageTag: adf8a84b-aed5-472d-a716-67d3df177314
+
+		changedProperty = IsHidden
+
+	measure 'Late Order Line %' = DIVIDE([Late Order Line #], [Order Line #])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Line # Details
+		lineageTag: 832073e4-4c69-4932-83f9-aadf4e3495ba
+
+		changedProperty = IsHidden
+
+	measure 'Override Order Line #' = CALCULATE([Order Line #],F_Order_Item,F_Order_Item[Itm Price Override Reason]<>BLANK())
+		formatString: #,0
+		displayFolder: Order Line # Details
+		lineageTag: 19ff96a1-7d7d-4d4d-b9e9-7e7f5be24736
+
+		changedProperty = IsHidden
+
+	measure 'Override Order Line %' = DIVIDE([Override Order Line #], [Order Line #])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Line # Details
+		lineageTag: 616ead30-c578-42b2-90c4-467366e10f44
+
+		changedProperty = IsHidden
+
+	measure 'Average Daily Order Lines' = DIVIDE([Order Line #], [Workday of Year])
+		formatString: #,0
+		displayFolder: Average Daily Order Line #
+		lineageTag: 41f235b1-af2e-4918-b2f2-92c74613caa3
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL CMTD' = CALCULATE( [Average Daily Order Lines], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Average Daily Order Line #
+		lineageTag: bac20085-d38f-4aab-9270-1749a2fa6413
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL PMTD' = CALCULATE( [Average Daily Order Lines], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Average Daily Order Line #
+		lineageTag: 0e8f0aa6-fc15-4d0a-8d41-2dc581b7a14d
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL CYTD' = CALCULATE( [Average Daily Order Lines], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Average Daily Order Line #
+		lineageTag: 1dbf0f19-aeae-4904-89a5-f632febda9c6
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL PYTD' = CALCULATE( [Average Daily Order Lines], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Average Daily Order Line #
+		lineageTag: f8ee97b1-3fed-4cfa-88b4-a54910803e6c
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL MTD Var' = DIVIDE([Order ADL CMTD] - [Order ADL PMTD] ,[Order ADL PMTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order Line #
+		lineageTag: 3a9c7a93-a043-41fd-b23b-187aad54dd44
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL YTD Var' = DIVIDE([Order ADL CYTD] - [Order ADL PYTD] ,[Order ADL PYTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order Line #
+		lineageTag: 2f984f26-e1b3-41e2-89bd-c6d9e69549e1
+
+		changedProperty = IsHidden
+
+	measure 'Average Daily Quote Lines' = DIVIDE([Quote Line #], [Workday of Year])
+		formatString: #,0
+		displayFolder: Average Daily Quote Line #
+		lineageTag: e04856d5-bae5-42ab-9d56-484d551bf75b
+
+		changedProperty = IsHidden
+
+	measure 'Quote Line #' = ```
+			CALCULATE(
+			    [Total Line #], 
+			     F_Order_Item[Order Type Desc] = "Quote"
+			)
+			```
+		formatString: #,0
+		displayFolder: Quote Line #
+		lineageTag: d7fc0e4e-f5d6-4477-9c28-fa8d1bfa8251
+
+		changedProperty = IsHidden
+
+	measure 'Quote Line # CMTD' = CALCULATE( [Quote Line #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Quote Line #
+		lineageTag: 98ac7273-f85d-4728-9d69-5c5df4f64bff
+
+		changedProperty = IsHidden
+
+	measure 'Quote Line # PMTD' = CALCULATE( [Quote Line #], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Quote Line #
+		lineageTag: 848282df-9110-4ecb-a9a9-efde01d9a793
+
+		changedProperty = IsHidden
+
+	measure 'Quote Line # CYTD' = CALCULATE( [Quote Line #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Quote Line #
+		lineageTag: 7b4d7679-ecae-41a6-af4f-4cf8472f1878
+
+		changedProperty = IsHidden
+
+	measure 'Quote Line # PYTD' = CALCULATE( [Quote Line #], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Quote Line #
+		lineageTag: 0013c82d-48c7-43cb-b6bb-602900100334
+
+		changedProperty = IsHidden
+
+	measure 'Quote Line # MTD Var' = DIVIDE([Quote Line # CMTD]- [Quote Line # PMTD] ,[Quote Line # PMTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote Line #
+		lineageTag: 23bca1e2-098f-41b7-8083-38e5ea4d8c62
+
+		changedProperty = IsHidden
+
+	measure 'Quote Line # YTD Var' = DIVIDE([Quote Line # CYTD]- [Quote Line # PYTD] ,[Quote Line # PYTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote Line #
+		lineageTag: 338c9a9f-50d7-466d-92d7-da5a90191d55
+
+		changedProperty = IsHidden
+
+	measure 'Quote ADL CMTD' = CALCULATE( [Average Daily Quote Lines], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Average Daily Quote Line #
+		lineageTag: 227869b1-bff4-434a-826c-e7da308fe78d
+
+		changedProperty = IsHidden
+
+	measure 'Quote ADL PMTD' = CALCULATE( [Average Daily Quote Lines], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Average Daily Quote Line #
+		lineageTag: 0452701d-1ea8-4802-b801-84e9291a2fea
+
+		changedProperty = IsHidden
+
+	measure 'Quote ADL CYTD' = CALCULATE( [Average Daily Quote Lines], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Average Daily Quote Line #
+		lineageTag: 321ad310-aa7c-4d1b-88a3-24cd89aca915
+
+		changedProperty = IsHidden
+
+	measure 'Quote ADL PYTD' = CALCULATE( [Average Daily Quote Lines], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Average Daily Quote Line #
+		lineageTag: 2c832539-ac4c-4523-a2ec-78b963ccd474
+
+		changedProperty = IsHidden
+
+	measure 'Quote ADL MTD Var' = DIVIDE([Quote ADL CMTD] - [Quote ADL PMTD] ,[Quote ADL PMTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Quote Line #
+		lineageTag: b0ddbcac-26b4-4ab9-a924-090649f75937
+
+		changedProperty = IsHidden
+
+	measure 'Quote ADL YTD Var' = DIVIDE([Quote ADL CYTD] - [Quote ADL PYTD] ,[Quote ADL PYTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Quote Line #
+		lineageTag: 25114943-2a1e-4a6a-8c86-83d16f29b17b
+
+		changedProperty = IsHidden
+
+	measure 'Hours per Day' = 8
+		formatString: #,0
+		displayFolder: Time
+		lineageTag: ffc6bcf4-3b31-4639-8cef-dbc93839be1d
+
+		changedProperty = IsHidden
+
+	measure 'Quote $ CMTD' = CALCULATE([Quote $], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Quote $
+		lineageTag: d95d8518-2d5a-4bb7-9b47-af90153eb523
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Quote $ PMTD' = CALCULATE([Quote $], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Quote $
+		lineageTag: d8c4cdca-48bd-4c21-8ca2-6214326bb39b
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Quote $ CYTD' = CALCULATE([Quote $], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Quote $
+		lineageTag: d3d60a53-e0ba-4970-81a5-412dd28974ff
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Quote $ PYTD' = CALCULATE([Quote $], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Quote $
+		lineageTag: 5e3c934d-94be-4577-a5e2-5d063b1cff1a
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Quote $ MTD Var' = DIVIDE([Quote $ CMTD]- [Quote $ PMTD] ,[Quote $ PMTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote $
+		lineageTag: f8808262-c8a7-4d93-9de4-741a88f3f317
+
+		changedProperty = IsHidden
+
+	measure 'Quote $ YTD Var' = DIVIDE([Quote $ CYTD]- [Quote $ PYTD] ,[Quote $ PYTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote $
+		lineageTag: acc7941e-c5dd-4917-8c22-af9f795e864c
+
+		changedProperty = IsHidden
+
+	measure 'Total Lines per Hour' = DIVIDE([Total Line #], [Hours per Day])
+		formatString: #,0.0
+		displayFolder: Total Lines Per Hour
+		lineageTag: 4c691d14-206a-4a2e-9bb0-983bb9ac3426
+
+		changedProperty = IsHidden
+
+	measure 'Total Lines/Hr CMTD' = CALCULATE([Total Lines per Hour], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0.0
+		displayFolder: Total Lines Per Hour
+		lineageTag: 655bf1ce-c8b6-4274-9f8a-2ecbed02562e
+
+		changedProperty = IsHidden
+
+	measure 'Total Lines/Hr CYTD' = CALCULATE([Total Lines per Hour], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0.0
+		displayFolder: Total Lines Per Hour
+		lineageTag: 869a0c53-fe8c-4693-ab73-b29393b58da8
+
+		changedProperty = IsHidden
+
+	measure 'Total Lines/Hr PMTD' = CALCULATE([Total Lines per Hour], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0.0
+		displayFolder: Total Lines Per Hour
+		lineageTag: a9b7256e-6c8d-460b-a144-296033c04e32
+
+		changedProperty = IsHidden
+
+	measure 'Total Lines/Hr PYTD' = CALCULATE([Total Lines per Hour], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0.0
+		displayFolder: Total Lines Per Hour
+		lineageTag: 546acd2a-8d1f-4946-afb7-8e2318c3145f
+
+		changedProperty = IsHidden
+
+	measure 'Total Lines/Hr MTD Var' = DIVIDE([Total Lines/Hr CMTD] - [Total Lines/Hr PMTD] , [Total Lines/Hr PMTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Lines Per Hour
+		lineageTag: d1e8f116-18bc-456e-b1fe-197b635dc1c5
+
+		changedProperty = IsHidden
+
+	measure 'Total Line/HR YTD Var' = DIVIDE([Total Lines/Hr CYTD] - [Total Lines/Hr PYTD], [Total Lines/Hr PYTD])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Lines Per Hour
+		lineageTag: c1e731a9-a86d-448a-bceb-4f99f9557458
+
+		changedProperty = IsHidden
+
+	measure 'Order Gross Profit Per Hour' = DIVIDE([Order Gross Profit], [Hours per Day])
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit Per Hour
+		lineageTag: 092fc6d7-d087-4a10-a219-650300c2f08d
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Employee #' = DISTINCTCOUNT(D_Customer_ShipTo[Territory Employee ID])
+		formatString: #,0
+		displayFolder: Employee #
+		lineageTag: 234da0d8-ad9c-41f7-a816-dc3d269726f8
+
+		changedProperty = IsHidden
+
+	measure 'Employee # CMTD' = CALCULATE([Employee #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Employee #
+		lineageTag: 549b1bae-a1d5-48a3-96e0-f88459c17492
+
+		changedProperty = IsHidden
+
+	measure 'Employee # PMTD' = CALCULATE([Employee #], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Employee #
+		lineageTag: a6481444-3324-4ff4-8785-e7a453053d85
+
+		changedProperty = IsHidden
+
+	measure 'Employee # CYTD' = CALCULATE([Employee #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Employee #
+		lineageTag: d6f266c9-4f5d-41e4-99ec-a81b72f59166
+
+		changedProperty = IsHidden
+
+	measure 'Employee # PYTD' = CALCULATE([Employee #], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Employee #
+		lineageTag: 9f88a7e9-8e83-45e1-be60-4894b10bc702
+
+		changedProperty = IsHidden
+
+	measure 'Employee # MTD Var' = ```
+			
+			    DIVIDE(([Employee # CMTD] - [Employee # PMTD]), [Employee # PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Employee #
+		lineageTag: 589f9d24-c537-4c99-ad27-13dd765eb9cc
+
+		changedProperty = IsHidden
+
+	measure 'Employee # VTD Var' = ```
+			
+			    DIVIDE(([Employee # CYTD] - [Employee # PYTD]), [Employee # PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Employee #
+		lineageTag: 5e86d21c-ed83-4e4f-94f6-aa0738eebb35
+
+		changedProperty = IsHidden
+
+	measure 'Order GPD/Hr $ CMTD' = CALCULATE([Order Gross Profit Per Hour], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit Per Hour
+		lineageTag: 5cf0beb5-2f3f-4c26-9ddf-96fc8ffb916f
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order GPD/Hr $ PMTD' = CALCULATE([Order Gross Profit Per Hour], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit Per Hour
+		lineageTag: 2bffcc59-bf51-4f3f-9140-b45868717f04
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order GPD/Hr $ CYTD' = CALCULATE([Order Gross Profit Per Hour], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit Per Hour
+		lineageTag: 204e6522-f005-4332-8070-4ae8a8811f01
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order GPD/Hr $ PYTD' = CALCULATE([Order Gross Profit Per Hour], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order Gross Profit Per Hour
+		lineageTag: be0a24a3-3a8a-4f67-9aaf-badfef894690
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Order GPD/Hr $ MTD Var' = ```
+			
+			    DIVIDE([Order GPD/Hr $ CMTD] - [Order GPD/Hr $ PMTD],[Order GPD/Hr $ PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit Per Hour
+		lineageTag: f70caeb2-9a38-40dd-811a-054a7fcdeb98
+
+		changedProperty = IsHidden
+
+	measure 'Order GPD/Hr $ YTD Var' = ```
+			
+			    DIVIDE([Order GPD/Hr $ CYTD] - [Order GPD/Hr $ PYTD],[Order GPD/Hr $ PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Gross Profit Per Hour
+		lineageTag: 5e870d68-8bb8-4d5e-a75f-a2117159ba1d
+
+		changedProperty = IsHidden
+
+	measure 'Average Daily Order Lines Per Employee' = DIVIDE([Average Daily Order Lines], [Employee #])
+		formatString: #,0
+		displayFolder: Average Daily Order Lines Per Employee
+		lineageTag: 8474ca7a-6950-4050-afdb-a8e6273c0e41
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL/Employee CMTD' = CALCULATE( [Average Daily Order Lines Per Employee], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Average Daily Order Lines Per Employee
+		lineageTag: 83bd558c-d75d-4d41-bc55-48986eff8956
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL/Employee PMTD' = CALCULATE( [Average Daily Order Lines Per Employee], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Average Daily Order Lines Per Employee
+		lineageTag: 15e09985-35cd-4416-b15e-e3e78b462231
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL/Employee PYTD' = CALCULATE( [Average Daily Order Lines Per Employee], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Average Daily Order Lines Per Employee
+		lineageTag: 20991919-a28c-45fe-b82b-cd6ced39324c
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL/Employee CYTD' = CALCULATE( [Average Daily Order Lines Per Employee], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Average Daily Order Lines Per Employee
+		lineageTag: d7d7ea9f-02b4-423c-a70e-0e01e230f531
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL/Employee MTD Var' = DIVIDE([Order ADL/Employee CMTD] - [Order ADL/Employee PMTD] ,[Order ADL/Employee PMTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order Lines Per Employee
+		lineageTag: 604d0f9a-3939-4a4c-bdec-ed5154017f5a
+
+		changedProperty = IsHidden
+
+	measure 'Order ADL/Employee YTD Var' = DIVIDE([Order ADL/Employee CYTD] - [Order ADL/Employee PYTD] ,[Order ADL/Employee PYTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order Lines Per Employee
+		lineageTag: b68955cf-2fb6-4ef8-a086-2b7a02886fb6
+
+		changedProperty = IsHidden
+
+	measure 'Average Daily Order Gross Profit $' = DIVIDE([Order Gross Profit], [Workday of Year])
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order Gross Profit $
+		lineageTag: 9d99ab5a-d905-419e-b219-b32fca18a4dd
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO GP $ CMTD' = CALCULATE( [Average Daily Order Gross Profit $], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order Gross Profit $
+		lineageTag: 7d8515e3-f423-4e42-b5d8-79cbb35abf03
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO GP $ PMTD' = CALCULATE( [Average Daily Order Gross Profit $], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order Gross Profit $
+		lineageTag: cb804249-8470-4332-8341-04a1a6afbb1a
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO GP $ PYTD' = CALCULATE( [Average Daily Order Gross Profit $], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order Gross Profit $
+		lineageTag: 67fba8b3-739e-4380-b3a5-d9621d4c227a
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO GP $ CYTD' = CALCULATE( [Average Daily Order Gross Profit $], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order Gross Profit $
+		lineageTag: 0f3fcc05-3e5a-4889-8fcb-d50c1c396e92
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'ADO GP $ MTD Var' = ```
+			
+			    DIVIDE([ADO GP $ CMTD] - [ADO GP $ PMTD],[ADO GP $ PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order Gross Profit $
+		lineageTag: 451628e8-2c32-4e45-95d2-1ae91423f1c5
+
+		changedProperty = IsHidden
+
+	measure 'ADO GP $ YTD Var' = ```
+			
+			    DIVIDE([ADO GP $ CYTD] - [ADO GP $ PYTD],[ADO GP $ PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Daily Order Gross Profit $
+		lineageTag: 845f4dd0-574b-49bd-adde-8e44b16a093f
+
+		changedProperty = IsHidden
+
+	measure 'Total Line #' = DISTINCTCOUNT(F_Order_Item[MI Loc  Order Ctl No  Order Line No])
+		formatString: #,0
+		displayFolder: Total Line #
+		lineageTag: 8cbce926-91a1-46e8-b17e-ae9b4b34183a
+
+		changedProperty = IsHidden
+
+	measure 'Total Line # PYTD' = CALCULATE([Total Line #], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Total Line #
+		lineageTag: 6b98947e-8b2c-4522-8741-bb07baae3f80
+
+		changedProperty = IsHidden
+
+	measure 'Total Line # PQTD' = CALCULATE([Total Line #], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: #,0
+		displayFolder: Total Line #
+		lineageTag: 09ffab84-f214-4974-b4c5-8cda5dd34dda
+
+		changedProperty = IsHidden
+
+	measure 'Total Line # PMTD' = CALCULATE([Total Line #], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Total Line #
+		lineageTag: c6deadec-fcca-4208-8a69-d8033da854b3
+
+		changedProperty = IsHidden
+
+	measure 'Total Line # CYTD' = CALCULATE([Total Line #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Total Line #
+		lineageTag: dc33b4da-968e-40d5-a7a0-7e2ed6c714b6
+
+		changedProperty = IsHidden
+
+	measure 'Total Line # CQTD' = CALCULATE([Total Line #], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: #,0
+		displayFolder: Total Line #
+		lineageTag: 18705d11-389a-4a5b-bcd3-99ca1afeeb46
+
+		changedProperty = IsHidden
+
+	measure 'Total Line # CMTD' = CALCULATE([Total Line #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Total Line #
+		lineageTag: 0b3b22b2-50ae-4e6f-b755-322a8127eee2
+
+		changedProperty = IsHidden
+
+	measure 'Order Line #' = ```
+			CALCULATE(
+			    [Total Line #], 
+			     F_Order_Item[Order Type Desc] = "Order"
+			)
+			```
+		formatString: #,0
+		displayFolder: Order Line #
+		lineageTag: 58ace684-f839-4075-9c6c-9806723403ef
+
+		changedProperty = IsHidden
+
+	measure 'Order Line # CMTD' = CALCULATE( [Order Line #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Order Line #
+		lineageTag: c66b9567-3f8b-4f3d-bef0-5f5c98e0985c
+
+		changedProperty = IsHidden
+
+	measure 'Order Line # CYTD' = CALCULATE( [Order Line #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Order Line #
+		lineageTag: 9d3dceb1-6668-478e-ab80-ffdc56e9d378
+
+		changedProperty = IsHidden
+
+	measure 'Order Line # MTD Var' = DIVIDE([Order Line # CMTD]- [Order Line # PMTD] ,[Order Line # PMTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Line #
+		lineageTag: a91256cf-7c4d-4eb6-90b0-1ec6e0f5f011
+
+		changedProperty = IsHidden
+
+	measure 'Order Line # PMTD' = CALCULATE( [Order Line #], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Order Line #
+		lineageTag: 6007e527-e29e-4adf-869e-64c9264341a7
+
+		changedProperty = IsHidden
+
+	measure 'Order Line # PYTD' = CALCULATE( [Order Line #], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Order Line #
+		lineageTag: 62a36da1-3d4e-46b4-9ca0-2104d3c2f06c
+
+		changedProperty = IsHidden
+
+	measure 'Order Line # YTD Var' = DIVIDE([Order Line # CYTD]- [Order Line # PYTD] ,[Order Line # PYTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Order Line #
+		lineageTag: 247ab445-d29e-4a5d-bd5b-8f69db763f56
+
+		changedProperty = IsHidden
+
+	measure 'Total Final Cost' = ```
+			
+			 VAR vSelectedValue = SELECTEDVALUE('z_Currency_Slicer'[Key])
+			
+			 VAR vResult =
+			 Switch( True, 
+			    vSelectedValue = 1 , SUM(F_Order_Item[Itm Final Cost Amt USD]), 
+			    vSelectedValue = 2, SUM(F_Order_Item[Itm Final Cost Amt Local]), 
+			    SUM(F_Order_Item[Itm Final Cost Amt USD]))
+			 
+			 RETURN
+			 vResult
+			```
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Final Cost
+		lineageTag: 104ac8c8-10ea-4cf1-8eae-fea9c1edcc53
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total #' = DISTINCTCOUNT(F_Order_Item[Ord Hdr Key])
+		formatString: #,0
+		displayFolder: Total #
+		lineageTag: 8a6483a7-08b5-4278-b85e-68f4176eec25
+
+		changedProperty = IsHidden
+
+	measure 'Total # CMTD' = CALCULATE([Total #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Total #
+		lineageTag: ace06bcd-2a57-4a55-b1d5-44e09f4421cd
+
+		changedProperty = IsHidden
+
+	measure 'Total # CYTD' = CALCULATE([Total #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Total #
+		lineageTag: 2b49bce6-3030-483e-9303-c2153daf79e3
+
+		changedProperty = IsHidden
+
+	measure 'Total # MTD Var' = ```
+			
+			    DIVIDE([Total # CMTD] - [Total # PMTD],[Total # PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total #
+		lineageTag: 50eb1009-a311-4e14-aef9-1130667d0547
+
+		changedProperty = IsHidden
+
+	measure 'Total # PMTD' = CALCULATE([Total #], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Total #
+		lineageTag: a7aef498-faf4-4197-b99d-ebf7e63e572b
+
+		changedProperty = IsHidden
+
+	measure 'Total # PYTD' = CALCULATE([Total #], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Total #
+		lineageTag: 1e21f674-caa7-4e1c-b8f5-f5bb95e106ff
+
+		changedProperty = IsHidden
+
+	measure 'Total # YTD Var' = ```
+			
+			    DIVIDE([Total # CYTD] - [Total # PYTD],[Total # PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total #
+		lineageTag: 36daa514-bd32-4ea5-a5ec-6c2faea19cfd
+
+		changedProperty = IsHidden
+
+	measure 'Total Gross Profit' = [Total $] - [Total Final Cost]
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Gross Profit
+		lineageTag: c6305a1a-6a05-46ce-874f-37e6ed76c8b1
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Final Cost CMTD' = CALCULATE([Total Final Cost], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Final Cost
+		lineageTag: 3b95d7b9-6529-4296-937c-3923a5dd796a
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Final Cost CYTD' = CALCULATE([Total Final Cost], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Final Cost
+		lineageTag: 5dd2ad85-7fe6-4560-a463-55a314e06576
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Final Cost MTD Var' = DIVIDE(([Total Final Cost CMTD]-[Total Final Cost PMTD]), [Total Final Cost PMTD])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Final Cost
+		lineageTag: 332bfa10-a9cb-46bd-b4ec-e35291393899
+
+		changedProperty = IsHidden
+
+	measure 'Total Final Cost PMTD' = CALCULATE([Total Final Cost], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Final Cost
+		lineageTag: 82a6debc-0141-45a7-9d69-d4eeebd041f4
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Final Cost PYTD' = CALCULATE([Total Final Cost], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Final Cost
+		lineageTag: e2152237-ed4f-458a-8546-b5ebcec175d8
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Final Cost YTD Var' = DIVIDE(([Total Final Cost CYTD]-[Total Final Cost PYTD]), [Total Final Cost PYTD])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Final Cost
+		lineageTag: ab8292d0-f4e8-4e4f-93a6-d8d90c8906f8
+
+		changedProperty = IsHidden
+
+	measure 'Total Gross Profit CMTD' = CALCULATE([Total Gross Profit], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Gross Profit
+		lineageTag: 7d8cd1db-d71f-485f-ad58-2e2ac093a752
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Gross Profit CYTD' = CALCULATE([Total Gross Profit], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Gross Profit
+		lineageTag: 5f117881-8141-499f-ba75-76fb702faa7f
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Gross Profit MTD Var' = DIVIDE(([Total Gross Profit CMTD]-[Total Gross Profit PMTD]), [Total Gross Profit PMTD])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Gross Profit
+		lineageTag: dd3d8c7d-15d7-45ef-8be1-ce9a50e0d5ac
+
+		changedProperty = IsHidden
+
+	measure 'Total Gross Profit PMTD' = CALCULATE([Total Gross Profit], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Gross Profit
+		lineageTag: 704f4d51-2a1d-435b-8831-f85149deb0bf
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Gross Profit PYTD' = CALCULATE([Total Gross Profit], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Gross Profit
+		lineageTag: f5b0a202-e7fe-44a1-bd72-447ff107e070
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Gross Profit YTD Var' = DIVIDE(([Total Gross Profit CYTD]-[Total Gross Profit PYTD]), [Total Gross Profit PYTD])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Gross Profit
+		lineageTag: 272dea42-4e02-4336-9b4b-d70f5d3f5161
+
+		changedProperty = IsHidden
+
+	measure 'Total GP %' = DIVIDE ([Total Gross Profit] ,[Total $])
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Gross Profit %
+		lineageTag: b6e4d732-6cc6-4c60-88e2-a0acd4d25554
+
+		changedProperty = IsHidden
+
+	measure 'Total GP % CMTD' = CALCULATE([Total GP %], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Total Gross Profit %
+		lineageTag: 835e08b0-1a0a-413b-9817-eda1d4386915
+
+		changedProperty = IsHidden
+
+	measure 'Total GP % CYTD' = CALCULATE([Total GP %], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Gross Profit %
+		lineageTag: bd84c2cc-adf5-4939-8ed4-12a84177b758
+
+		changedProperty = IsHidden
+
+	measure 'Total GP % PMTD' = CALCULATE([Total GP %], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Total Gross Profit %
+		lineageTag: d5a61d4c-170e-4f09-a71d-898733a38261
+
+		changedProperty = IsHidden
+
+	measure 'Total GP % PYTD' = CALCULATE([Total GP %], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Gross Profit %
+		lineageTag: d844cdfb-8970-47dd-9ce9-59f3c827789d
+
+		changedProperty = IsHidden
+
+	measure 'Total GP BPS MTD' = ```
+			
+			    ([Total GP % CMTD] - [Total GP % PMTD]) * 10000
+			```
+		formatString: #,0
+		displayFolder: Total Gross Profit %
+		lineageTag: 38dd4759-66cc-4a1b-8a70-f55c27d969ba
+
+		changedProperty = IsHidden
+
+	measure 'Total GP BPS YTD' = ```
+			
+			    ([Total GP % CYTD] - [Total GP % PYTD])*10000
+			```
+		formatString: #,0
+		displayFolder: Total Gross Profit %
+		lineageTag: 2177e9b2-33e0-4d5e-9bb4-8c2b41367948
+
+		changedProperty = IsHidden
+
+	measure 'Quote GP % CMTD' = CALCULATE([Quote GP %], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote Gross Profit %
+		lineageTag: 38af58a9-5fae-455b-81b1-7ce30e04c40f
+
+		changedProperty = IsHidden
+
+	measure 'Quote GP % CYTD' = CALCULATE([Quote GP %], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote Gross Profit %
+		lineageTag: 66e6d18a-9a0f-4772-a9cd-b2dfc88d1e91
+
+		changedProperty = IsHidden
+
+	measure 'Quote GP % PMTD' = CALCULATE([Quote GP %], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote Gross Profit %
+		lineageTag: 17ea5296-7207-481b-8ee1-1cfcdc6f1be0
+
+		changedProperty = IsHidden
+
+	measure 'Quote GP % PYTD' = CALCULATE([Quote GP %], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote Gross Profit %
+		lineageTag: e1d9c603-4c95-4374-a684-b2d86624a7db
+
+		changedProperty = IsHidden
+
+	measure 'Quote GP BPS MTD' = ```
+			
+			    ([Quote GP % CMTD] - [Quote GP % PMTD]) * 10000
+			```
+		formatString: #,0
+		displayFolder: Quote Gross Profit %
+		lineageTag: 534bf0e9-853f-479c-b6d5-6fa45e9b9231
+
+		changedProperty = IsHidden
+
+	measure 'Quote GP BPS YTD' = ```
+			
+			    ([Quote GP % CYTD] - [Quote GP % PYTD])*10000
+			```
+		formatString: #,0
+		displayFolder: Quote Gross Profit %
+		lineageTag: 767ccb40-02d2-4c4d-ac19-1c9b44781519
+
+		changedProperty = IsHidden
+
+	measure 'Quote # CMTD' = CALCULATE([Quote #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Quote #
+		lineageTag: 71ef6400-645f-4fb9-b0b9-c53e57226530
+
+		changedProperty = IsHidden
+
+	measure 'Quote # CYTD' = CALCULATE([Quote #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Quote #
+		lineageTag: 9a91fd6f-69b2-4643-9c68-ce00c615b272
+
+		changedProperty = IsHidden
+
+	measure 'Quote # MTD Var' = DIVIDE([Quote # CMTD]- [Quote # PMTD] ,[Quote # PMTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote #
+		lineageTag: c44d7451-cf6c-4265-9a70-a8c5bd14b9a4
+
+		changedProperty = IsHidden
+
+	measure 'Quote # PMTD' = CALCULATE([Quote #], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Quote #
+		lineageTag: 5d19ffed-8bbe-43a5-9878-1100d50b648f
+
+		changedProperty = IsHidden
+
+	measure 'Quote # PYTD' = CALCULATE([Quote #], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Quote #
+		lineageTag: fd6301dd-a9cf-42b2-bb52-569640633cc4
+
+		changedProperty = IsHidden
+
+	measure 'Quote # YTD Var' = DIVIDE([Quote # CYTD]- [Quote # PYTD] ,[Quote # PYTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Quote #
+		lineageTag: 765755bd-4326-4524-a0ab-da84c33ada00
+
+		changedProperty = IsHidden
+
+	measure 'Avg Order GP/Line $ YTD Var' = ```
+			
+			    DIVIDE([Avg Order GP/Line $ CYTD] - [Avg Order GP/Line $ PYTD],[Avg Order GP/Line $ PYTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Order Gross Profit Per Line
+		lineageTag: 7cffcaea-b45d-4995-a7b7-9b03562b6aca
+
+		changedProperty = IsHidden
+
+	measure 'Avg Order GP/Line $ MTD Var' = ```
+			
+			    DIVIDE([Avg Order GP/Line $ CMTD] - [Avg Order GP/Line $ PMTD],[Avg Order GP/Line $ PMTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Order Gross Profit Per Line
+		lineageTag: f864a775-737d-4e33-b43d-6b5a86eb9fe3
+
+		changedProperty = IsHidden
+
+	measure 'Avg Order GP/Line $ PYTD' = CALCULATE([Average Order Gross Profit Per Line], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order Gross Profit Per Line
+		lineageTag: 436f1c46-2ac0-441d-89df-c400ff4afbe0
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg Order GP/Line $ PMTD' = CALCULATE([Average Order Gross Profit Per Line], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order Gross Profit Per Line
+		lineageTag: 6018765a-3caa-408d-a460-871656e155d1
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg Order GP/Line $ CYTD' = CALCULATE([Average Order Gross Profit Per Line], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order Gross Profit Per Line
+		lineageTag: 26306f14-2984-42bb-a9b0-f5c3ba198889
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg Order GP/Line $ CMTD' = CALCULATE([Average Order Gross Profit Per Line], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order Gross Profit Per Line
+		lineageTag: 8cca9b53-fecd-4370-847e-2f418223a907
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Average Order Gross Profit Per Line' = DIVIDE([Order Gross Profit], [Order Line #])
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Order Gross Profit Per Line
+		lineageTag: 1db3f56d-cf53-43d4-9a4b-9f52724297cc
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Avg Lines Per Order CMTD' = CALCULATE( [Average Lines per Order], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Average Lines per Order
+		lineageTag: d18ec883-ef91-49d6-82e9-9575f75ff038
+
+		changedProperty = IsHidden
+
+	measure 'Avg Lines per Order CYTD' = CALCULATE( [Average Lines per Order], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Average Lines per Order
+		lineageTag: e827ccd2-1c0c-4776-bbc0-c0f1126cd776
+
+		changedProperty = IsHidden
+
+	measure 'Avg Lines per Order MTD Var' = DIVIDE([Avg Lines per Order CMTD] - [Avg Lines per Order PMTD] ,[Avg Lines per Order PMTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Lines per Order
+		lineageTag: 7ee4079d-1f77-4c67-9b25-3ee305da2a67
+
+		changedProperty = IsHidden
+
+	measure 'Avg Lines per Order PMTD' = CALCULATE( [Average Lines per Order], 'Time Intelligence'[Time Period]= "PMTD")
+		formatString: #,0
+		displayFolder: Average Lines per Order
+		lineageTag: f8444e5a-576a-42cf-9d03-4aa022aae26f
+
+		changedProperty = IsHidden
+
+	measure 'Avg Lines per Order PYTD' = CALCULATE( [Average Lines per Order], 'Time Intelligence'[Time Period]= "PYTD")
+		formatString: #,0
+		displayFolder: Average Lines per Order
+		lineageTag: c24d88c0-4f16-4cac-a304-889b01c1db77
+
+		changedProperty = IsHidden
+
+	measure 'Avg Lines per Order YTD Var' = DIVIDE([Avg Lines per Order CYTD] - [Avg Lines per Order PYTD] ,[Avg Lines per Order PYTD] )
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Average Lines per Order
+		lineageTag: fd6618be-66f4-464f-989c-3addfc3f7865
+
+		changedProperty = IsHidden
+
+	measure 'Open Order # CMTD' = CALCULATE( [Open Order #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Open Order #
+		lineageTag: a1be9dfc-3c72-4f62-ac1c-263e4b0b45c7
+
+		changedProperty = IsHidden
+
+	measure 'Open Order # CYTD' = CALCULATE( [Open Order #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Open Order #
+		lineageTag: ea27b46b-d408-4fdb-96e1-9c052ad82fee
+
+		changedProperty = IsHidden
+
+	measure 'Open Order Line # CMTD' = CALCULATE( [Open Order Line #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Open Order Line #
+		lineageTag: 6649831b-cf33-4a3a-a904-1163f6c77fe3
+
+		changedProperty = IsHidden
+
+	measure 'Open Order Line # CYTD' = CALCULATE( [Open Order Line #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Open Order Line #
+		lineageTag: c156c5ef-4d0b-430b-a6d0-3d657540418b
+
+		changedProperty = IsHidden
+
+	measure 'Open Quote # CMTD' = CALCULATE( [Open Quote #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Open Quote #
+		lineageTag: dce7fa8b-1f9d-4766-9f90-3e89e16d5f57
+
+		changedProperty = IsHidden
+
+	measure 'Open Quote # CYTD' = CALCULATE( [Open Quote #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Open Quote #
+		lineageTag: 21e7254e-b3b2-411c-9610-4906a6d3c8b9
+
+		changedProperty = IsHidden
+
+	measure 'Open Quote $ CMTD' = CALCULATE( [Open Quote $], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Open Quote $
+		lineageTag: 62ce3eee-6153-46ce-b466-8b4ebe7a979c
+
+		changedProperty = IsHidden
+
+	measure 'Open Quote $ CYTD' = CALCULATE( [Open Quote $], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Open Quote $
+		lineageTag: 818f3173-5331-4a40-a6c1-8f5460e858db
+
+		changedProperty = IsHidden
+
+	measure 'Open Quote Line # CMTD' = CALCULATE( [Open Quote Line #], 'Time Intelligence'[Time Period]= "CMTD")
+		formatString: #,0
+		displayFolder: Open Quote Line #
+		lineageTag: 80cdd0cd-a633-4c05-99e8-e40c790f5657
+
+		changedProperty = IsHidden
+
+	measure 'Open Quote Line # CYTD' = CALCULATE( [Open Quote Line #], 'Time Intelligence'[Time Period]= "CYTD")
+		formatString: #,0
+		displayFolder: Open Quote Line #
+		lineageTag: a256f674-35c7-4dcb-b5c0-97fbff332143
+
+		changedProperty = IsHidden
+
+	measure 'Order $ Rolling 12M incl CM' = CALCULATE([Order $], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_CM")
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: Order $
+		lineageTag: a2643de2-64f1-4784-a1d5-ba8d0585ce65
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Final Cost CQTD' = CALCULATE([Total Final Cost], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Final Cost
+		lineageTag: 2c539f88-263d-43dc-b52e-345f1c39dddd
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Final Cost PQTD' = CALCULATE([Total Final Cost], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Final Cost
+		lineageTag: fcaabe44-5488-4d5d-9cfd-3f110f49ecec
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Final Cost Rolling 12M' = CALCULATE([Total Final Cost], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Final Cost
+		lineageTag: bb43a5e3-72fb-49d5-9877-eedc443e339e
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Final Cost QTD Var' = ```
+			
+			    DIVIDE([Total Final Cost CQTD] - [Total Final Cost PQTD],[Total Final Cost PQTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Final Cost
+		lineageTag: b7e11e72-6c50-4654-86af-658285ec4dfc
+
+		changedProperty = IsHidden
+
+	measure 'Total Final Cost Rolling 12M Var' = ```
+			
+			    DIVIDE([Total Final Cost Rolling 12M] - [Total Final Cost Rolling P12M],[Total Final Cost Rolling P12M])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Final Cost
+		lineageTag: 3bc17a27-15ba-4d4b-9255-4825ed2e9963
+
+		changedProperty = IsHidden
+
+	measure 'Total Final Cost Rolling P12M' = CALCULATE([Total Final Cost], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_PREVIOUS_YEAR")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Total Final Cost
+		lineageTag: bdc4f5a4-e016-4cdf-adaf-9651b7cdcb9d
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total # CQTD' = CALCULATE([Total #], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: #,0
+		displayFolder: Total #
+		lineageTag: f97cce92-b843-4e1a-8357-8fb0a2420417
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total # PQTD' = CALCULATE([Total #], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: #,0
+		displayFolder: Total #
+		lineageTag: 59ab9e6d-bc48-4f91-82e5-297cd0472a59
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total # Rolling 12M' = CALCULATE([Total #], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: #,0
+		displayFolder: Total #
+		lineageTag: 20803dfe-13d9-442b-a5e1-609227e9b357
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total # QTD Var' = ```
+			
+			    DIVIDE([Total # CQTD] - [Total # PQTD],[Total # PQTD])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total #
+		lineageTag: b32f13f4-0d77-4104-893e-42612d5c04b1
+
+		changedProperty = IsHidden
+
+	measure 'Total # Rolling 12M Var' = ```
+			
+			    DIVIDE([Total # Rolling 12M] - [Total # Rolling P12M],[Total # Rolling P12M])
+			```
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total #
+		lineageTag: 11acd415-897d-4627-868e-447f0a9b9fe3
+
+		changedProperty = IsHidden
+
+	measure 'Total # Rolling P12M' = CALCULATE([Total #], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_PREVIOUS_YEAR")
+		formatString: #,0
+		displayFolder: Total #
+		lineageTag: f757e063-5622-4221-9296-280e5a922ca2
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total GP % CQTD' = CALCULATE([Total GP %], 'Time Intelligence'[Time Period]= "CQTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Gross Profit %
+		lineageTag: faefde1e-230a-4615-ae7b-889eade42d2e
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total GP % PQTD' = CALCULATE([Total GP %], 'Time Intelligence'[Time Period]= "PQTD")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Gross Profit %
+		lineageTag: 586b5556-f291-4f47-a79f-8aa5d884124b
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total GP % Rolling 12M' = CALCULATE([Total GP %], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Gross Profit %
+		lineageTag: bb407dfa-5ed8-406d-b456-afb49fe3a968
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total GP BPS QTD' = ```
+			
+			    ([Total GP % CQTD] - [Total GP % PQTD]) * 10000
+			```
+		formatString: #,0
+		displayFolder: Total Gross Profit %
+		lineageTag: bd1bcaad-abad-430e-ba3d-be29deb05d41
+
+		changedProperty = IsHidden
+
+	measure 'Total GP BPS Rolling 12M' = ```
+			
+			    ([Total GP % Rolling 12M] - [Total GP % Rolling P12M]) * 10000
+			```
+		formatString: #,0
+		displayFolder: Total Gross Profit %
+		lineageTag: 6adde7b7-c8cd-4643-bfb4-4b2ea9e3dafa
+
+		changedProperty = IsHidden
+
+	measure 'Total GP % Rolling P12M' = CALCULATE([Total GP %], 'Time Intelligence'[Time Period]= "12_MONTH_ROLLING_PREVIOUS_YEAR")
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: Total Gross Profit %
+		lineageTag: 66267363-96f6-4c7d-bc81-733a0d261fa8
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total $ MTD Colors' = if([Total $ CMTD] < [Total $ PMTD],"#FF1010", "#17AF68" )
+		displayFolder: Total $
+		lineageTag: 6de0bf7f-990d-4561-9d15-c3e7d4883455
+
+		changedProperty = IsHidden
+
+	measure 'Total $ QTD Colors' = if([Total $ CQTD] < [Total $ PQTD],"#FF1010", "#17AF68" )
+		displayFolder: Total $
+		lineageTag: 04a9721d-8814-4c42-8e8c-621e1fcab635
+
+		changedProperty = IsHidden
+
+	measure 'Total $ Rolling 12M Colors' = if([Total $ Rolling 12M] < [Total $ Rolling P12M],"#FF1010", "#17AF68" )
+		displayFolder: Total $
+		lineageTag: 4b4278e5-6c4b-4677-aa33-e6df67874225
+
+		changedProperty = IsHidden
+
+	measure 'Total $ YTD Colors' = if([Total $ CYTD] < [Total $ PYTD],"#FF1010", "#17AF68" )
+		displayFolder: Total $
+		lineageTag: 3506c944-0bb8-4010-b1ae-1e0e87e075cb
+
+		changedProperty = IsHidden
+
+	measure 'Total # MTD Colors' = if([Total # CMTD] < [Total # PMTD],"#FF1010", "#17AF68" )
+		displayFolder: Total #
+		lineageTag: f04a22e1-079f-4046-ae73-baf77bf2d2ba
+
+		changedProperty = IsHidden
+
+	measure 'Total # QTD Colors' = if([Total # CQTD] < [Total # PQTD],"#FF1010", "#17AF68" )
+		displayFolder: Total #
+		lineageTag: 2eb522a5-4718-4000-8784-f74ddf683920
+
+		changedProperty = IsHidden
+
+	measure 'Total # Rolling 12M Colors' = if([Total # Rolling 12M] < [Total # Rolling P12M],"#FF1010", "#17AF68" )
+		displayFolder: Total #
+		lineageTag: 20fc140c-3910-4ec6-b832-e1aabdfd5b03
+
+		changedProperty = IsHidden
+
+	measure 'Total # YTD Colors' = if([Total # CYTD] < [Total # PYTD],"#FF1010", "#17AF68" )
+		displayFolder: Total #
+		lineageTag: 334df63f-50f0-4666-89c8-2753106fc878
+
+		changedProperty = IsHidden
+
+	measure 'Total GP % YTD Colors' = if([Total GP % CYTD] < [Total GP % PYTD],"#FF1010", "#17AF68" )
+		displayFolder: Total Gross Profit %
+		lineageTag: dbefb168-6a90-4383-87a3-e4e1dd387ded
+
+		changedProperty = IsHidden
+
+	measure 'Total GP % Rolling 12 Colors' = if([Total GP % Rolling 12M] < [Total GP % Rolling P12M],"#FF1010", "#17AF68" )
+		displayFolder: Total Gross Profit %
+		lineageTag: 3d2b2679-2bc9-452f-93cd-fea7f16eb6f5
+
+		changedProperty = IsHidden
+
+	measure 'Total GP % QTD Colors' = if([Total GP % CQTD] < [Total GP % PQTD],"#FF1010", "#17AF68" )
+		displayFolder: Total Gross Profit %
+		lineageTag: b4258064-c4a3-431f-8f57-5ce0f713d865
+
+		changedProperty = IsHidden
+
+	measure 'Total GP % MTD Colors' = if([Total GP % CMTD] < [Total GP % PMTD],"#FF1010", "#17AF68" )
+		displayFolder: Total Gross Profit %
+		lineageTag: 934914d7-489f-45d2-a498-211f0847db05
+
+		changedProperty = IsHidden
+
+	measure 'Expected Date' =
+			
+			VAR expDate = MAX(F_Order_Item[Internal Exp Date])
+			RETURN
+			    IF(expDate > DATE(2015,1,1), expDate, BLANK())
+		formatString: Short Date
+		displayFolder: Corp Accts Orders
+		lineageTag: c37ac9e5-1cc4-4647-b165-4a61296d52b0
+
+	measure 'Order Line # Converted to Order Date' = ```
+			
+			CALCULATE(
+			    [Total Line #],
+			    F_Order_Item[Order Type Cd] = "O"
+			)
+			
+			```
+		formatString: #,0
+		displayFolder: Corp Accts Orders
+		lineageTag: ea8ce26b-d179-4d8f-a809-71e0b8d0cf82
+
+	measure 'Order Line # Due Date' = ```
+			
+			CALCULATE(
+			    [Total Line #],
+			    USERELATIONSHIP(F_Order_Item[Due Date], D_Calendar_Visual[Calendar Date]),
+			    F_Order_Item[Order Type Cd] = "O"
+			)
+			
+			```
+		formatString: #,0
+		displayFolder: Corp Accts Orders
+		lineageTag: cd9e0174-475a-42cc-8aa7-0c434ff600df
+
+	measure 'Order Line # Order Date' = ```
+			
+			CALCULATE(
+			    [Total Line #],
+			    USERELATIONSHIP(F_Order_Item[Order Date], D_Calendar_Visual[Calendar Date]),
+			    F_Order_Item[Order Type Cd] = "O"
+			)
+			
+			```
+		formatString: #,0
+		displayFolder: Corp Accts Orders
+		lineageTag: 319f6d8b-5fec-48b0-ab72-8d5676a91444
+
+	measure 'Total VAS $' = SUM(F_Order_Item[Total Vas])
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Corp Accts Orders
+		lineageTag: b3b8ad06-52d8-47c5-bb03-9fad96e97f36
+
+	measure 'Order $ Include VAS' = ```
+			VAR vSelectedValue = SELECTEDVALUE('z_Currency_Slicer'[Key])
+			
+			 VAR vResult =
+			 Switch( True, 
+			 vSelectedValue = 1 , sum(F_Order_Item[Total Order Incl Vas USD]), 
+			 vSelectedValue = 2, sum(F_Order_Item[Total Order Incl Vas Local]), 
+			 sum(F_Order_Item[Total Order Incl Vas USD]))
+			 
+			 RETURN
+			 vResult
+			```
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Corp Accts Orders
+		lineageTag: 0e99347f-fa68-434c-a671-366a2b8e0c46
+
+	measure 'Calculation Condition' = ```
+			
+			"Select one of the following to display data:" & UNICHAR(10) & 
+			"• Parent" & UNICHAR(10) & 
+			"• Natl Acct No"
+			```
+		isHidden
+		displayFolder: Metadata
+		lineageTag: 994137f1-d144-48a1-a4e3-1cc7c34547e7
+
+		changedProperty = IsHidden
+
+	measure 'Check Filter Dashboard' = ```
+			
+			VAR vSelectedValue = SELECTEDVALUE (z_param_dashboard_table[Show/Hide])
+			VAR FilterCheck =
+			    NOT ISFILTERED('D_Customer_BillTo'[Natl Acct Parent Company Name]) &&
+			    NOT ISFILTERED('D_Customer_BillTo'[Natl Acct No])
+			
+			VAR Result = (FilterCheck = FALSE() && vSelectedValue = 0) || (FilterCheck = TRUE() && vSelectedValue = 1)
+			RETURN
+			    Result
+			
+			```
+		displayFolder: Metadata
+		lineageTag: 8be49364-71a4-4358-9a01-b8e1b79f0188
+
+		changedProperty = IsHidden
+
+	measure 'Check Filter Details' = ```
+			
+			VAR vSelectedValue = SELECTEDVALUE (z_param_details_table[Show/Hide])
+			VAR FilterCheck =
+			    NOT ISFILTERED('D_Customer_BillTo'[Natl Acct Parent Company Name]) &&
+			    NOT ISFILTERED('D_Customer_BillTo'[Natl Acct No])
+			
+			VAR Result = (FilterCheck = FALSE() && vSelectedValue = 0) || (FilterCheck = TRUE() && vSelectedValue = 1)
+			RETURN
+			    Result
+			
+			```
+		displayFolder: Metadata
+		lineageTag: 5187c24a-6072-4ec4-9d61-4155bd577962
+
+		changedProperty = IsHidden
+
+	measure 'Total Line # Due Date' =
+			
+			CALCULATE(
+			    [Total Line #],
+			    USERELATIONSHIP(F_Order_Item[Due Date], D_Calendar_Visual[Calendar Date])
+			)
+		formatString: #,0
+		displayFolder: Corp Accts Orders
+		lineageTag: e6128b98-17a9-4766-9902-34791e4063a2
+
+	measure 'Open Order Line $' = CALCULATE([Order $], OR(F_Order_Item[Itm Item Status Cd]="OP", OR(F_Order_Item[Itm Item Status Cd]="PL", F_Order_Item[Itm Item Status Cd]="PS")))
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Order Line $
+		lineageTag: 23ae1d55-1000-4bf1-b19c-01a3ef4c3c50
+
+	measure 'Open Quote Line $' = CALCULATE([Quote $], F_Order_Item[Itm Item Status Cd]="OP")
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Quote Line $
+		lineageTag: c7f012de-e535-449f-9920-fec41efebf06
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'OCN Count' = DISTINCTCOUNT(F_Order_Item[Ord Hdr Key])
+		formatString: #,0
+		displayFolder: Mid Month Maint
+		lineageTag: 0dbba399-5d8c-4f3b-a53a-2162934c3e88
+
+	measure 'OCN Count - Last Year' = CALCULATE([OCN Count - Late Line Source],DATEADD(D_Calendar_Filter[Calendar Date],-1,YEAR))
+		formatString: #,0
+		displayFolder: Mid Month Maint
+		lineageTag: 0784b2a7-c717-434b-b92a-5486df77d882
+
+	measure 'OCN Count - Late Line Source' = IF(DISTINCTCOUNT(F_Order_Item[Ord Ln Key])=BLANK(),0,DISTINCTCOUNT(F_Order_Item[Ord Ln Key]))
+		formatString: #,0
+		displayFolder: Mid Month Maint
+		lineageTag: f437fc2a-e346-4607-ba7b-1e58343d59db
+
+	measure 'Late Line - Acknowledge It' = CALCULATE([OCN Count - Late Line Source],F_Order_Item[Itm Acknowledge It Flag]="Y")
+		formatString: #,0
+		displayFolder: Mid Month Maint
+		lineageTag: de608184-d978-4bce-9d07-585f7b05a425
+
+	measure 'Late Line - Expedite It' = CALCULATE([OCN Count - Late Line Source],F_Order_Item[Itm Expedite It Flag]="Y")
+		formatString: #,0
+		displayFolder: Mid Month Maint
+		lineageTag: a116fba2-8238-411b-a464-1422124b3a00
+
+	measure 'Late Line - Purchase It' = CALCULATE([OCN Count - Late Line Source],F_Order_Item[Itm Purchase It Flag]="Y")
+		formatString: #,0
+		displayFolder: Mid Month Maint
+		lineageTag: 94e8dd6e-00f7-4555-9f08-14e5c86957a3
+
+	measure 'Late Line - Ship It' = CALCULATE([OCN Count - Late Line Source],F_Order_Item[Itm Ship It Flag]="Y")
+		formatString: #,0
+		displayFolder: Mid Month Maint
+		lineageTag: c475de10-c967-40e8-b5e8-ef99335cee42
+
+	measure 'Late Line - Source It' = CALCULATE([OCN Count - Late Line Source],F_Order_Item[Itm Source It Flag]="Y")
+		formatString: #,0
+		displayFolder: Mid Month Maint
+		lineageTag: 77bb988f-1fc5-4c8f-b8a7-8a86fe1164ee
+
+	measure 'Itm Op Qty Ordered' = SUM(F_Order_Item[Itm Op Qty Ordered])
+		formatString: #,0
+		displayFolder: Item Quantity
+		lineageTag: 6151b797-cbc7-45b4-9806-bdeb35e5af6c
+
+	measure 'Itm Op Qty Shipped' = SUM(F_Order_Item[Itm Op Qty Shipped])
+		formatString: #,0
+		displayFolder: Item Quantity
+		lineageTag: dc896b82-e9a6-4dac-b46d-767cf7b791ed
+
+	measure 'Open Order Bucket #' = IF([Open Order Line #]=BLANK(),0,[Open Order Line #])
+		formatString: 0
+		displayFolder: Open Order #
+		lineageTag: beac8674-a542-403b-9662-485e60488264
+
+	measure 'Order Amt Min Flag' = IF([Order $]>=SELECTEDVALUE(z_min_order_amt[z_min_order_amt]),1,0)
+		formatString: 0
+		displayFolder: Latest Order Page
+		lineageTag: 07b5f240-43d2-47ba-9457-b28c1e080b58
+
+	measure 'Order Amt Max Flag' = IF([Order $]<=SELECTEDVALUE(z_max_order_amt[z_max_order_amt]),1,0)
+		formatString: 0
+		displayFolder: Latest Order Page
+		lineageTag: ca9b22f7-2f44-492e-8b5b-8ea652bd93b8
+
+	measure 'Y/PYTD Order $ Chg with Icon' = IF([Order $ YTD Var]>0,CONCATENATE(FORMAT([Order $ YTD Var],"0%"),UNICHAR(129141)),IF([Order $ YTD Var]=0,Blank(),IF([Order $ YTD Var]<0,CONCATENATE(FORMAT([Order $ YTD Var],"0%"),UNICHAR(129142)),BLANK())))
+		displayFolder: Icons
+		lineageTag: b16cf955-54f7-4a35-8f9b-564eb5c5b7e5
+
+	measure 'Y/PYTD Order GP % Chg with Icon' = IF([Order GP BPS YTD]>0,CONCATENATE(FORMAT([Order GP BPS YTD],"#,##0.0"),UNICHAR(129141)),IF([Order GP BPS YTD]=0,Blank(),IF([Order GP BPS YTD]<0,CONCATENATE(FORMAT([Order GP BPS YTD],"#,##0.0"),UNICHAR(129142)),BLANK())))
+		displayFolder: Icons
+		lineageTag: 34cfee37-34f7-4343-a7fe-b4883c9231fe
+
+	measure 'Y/PYTD Order # Chg with Icon' = IF([Order # YTD Var]>0,CONCATENATE(FORMAT([Order # YTD Var],"0%"),UNICHAR(129141)),IF([Order # YTD Var]=0,Blank(),IF([Order # YTD Var]<0,CONCATENATE(FORMAT([Order # YTD Var],"0%"),UNICHAR(129142)),BLANK())))
+		displayFolder: Icons
+		lineageTag: 0000c74f-9ead-4514-8f0a-e202a3da0305
+
+	measure 'Y/PYTD ADO Chg with Icon' = IF([ADO YTD Var]>0,CONCATENATE(FORMAT([ADO YTD Var],"0%"),UNICHAR(129141)),IF([ADO YTD Var]=0,Blank(),IF([ADO YTD Var]<0,CONCATENATE(FORMAT([ADO YTD Var],"0%"),UNICHAR(129142)),BLANK())))
+		displayFolder: Icons
+		lineageTag: e1474809-d654-4798-9403-a1b1dcc4fd39
+
+	measure 'Open Order Late Line #' = CALCULATE([Open Order Line #], F_Order_Item[Days Past Delivery]>0,'Due Date Order'[Due Date Bucket]<>"Due Date Missing")
+		formatString: #,0
+		displayFolder: Open Order Line #
+		lineageTag: b8b6d199-54a0-4720-9864-8ffae749d58c
+
+	measure 'Open Late Lines %' = IFERROR(DIVIDE([Open Order Late Line #],[Open Order Line #]),0)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Open Order Line #
+		lineageTag: 4f6bc753-2698-4741-804c-7e180b77aa60
+
+	measure 'Prior Year - Order Line #' = CALCULATE([Order Line #],DATEADD(D_Calendar_Filter[Calendar Date],-365,DAY))
+		formatString: #,0
+		displayFolder: Order Line #
+		lineageTag: 4d379679-2015-4770-b9ee-436f34d42a29
+
+	measure 'Prior Year - Order $' = CALCULATE([Order $],DATEADD(D_Calendar_Filter[Calendar Date],-365,DAY))
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: 77b4a939-fe15-46fd-a259-2ba4bf2280d8
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'YoY Order $ Growth %' = IFERROR((CALCULATE([Order $],D_Calendar_Visual[Year]>=2024)-[Prior Year - Order $])/[Prior Year - Order $],blank())
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Order $
+		lineageTag: 31db5109-65a0-44b7-81e4-023ba3eef84f
+
+	measure 'YoY Order Line # Growth %' = IFERROR((CALCULATE([Order Line #],D_Calendar_Visual[Year]>=2024)-[Prior Year - Order Line #])/[Prior Year - Order Line #],blank())
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Order Line #
+		lineageTag: a260d8a5-2382-49ea-8c65-c567dadf55d5
+
+	measure 'Open Quote $ - Last 60 Days' =
+			
+			CALCULATE(
+			    [Open Quote $],
+			    FILTER(
+			        ALL(D_Calendar_Filter[Calendar Date]),
+			        D_Calendar_Filter[Calendar Date] >= TODAY() - 60 &&
+			        D_Calendar_Filter[Calendar Date] <= TODAY()
+			    )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Open Quote $
+		lineageTag: bb31268a-e99c-40e3-9aea-d6c04dddb92f
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Prior Year - Order #' = CALCULATE([Order #],DATEADD(D_Calendar_Filter[Calendar Date],-365,DAY))
+		formatString: #,0
+		displayFolder: Order #
+		lineageTag: 7a083863-3f6a-491c-aff6-d4d1117c5c23
+
+	measure 'Prior Year - Order GP %' = CALCULATE([Order GP %],DATEADD(D_Calendar_Filter[Calendar Date],-365,DAY))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: 9bf74e27-34be-447c-b806-29376e8b5175
+
+	measure 'Prior Year - ADO' = CALCULATE([Average Daily Order $],DATEADD(D_Calendar_Filter[Calendar Date],-365,DAY))
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Average Daily Order $
+		lineageTag: af4e03fb-f259-4106-a439-f51cbefff1b8
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'YoY ADO $ Growth %' = IFERROR((CALCULATE([Average Daily Order $],D_Calendar_Visual[Year]>=2024)-[Prior Year - ADO])/[Prior Year - ADO],blank())
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Average Daily Order $
+		lineageTag: b442e8a9-19cf-4299-8c43-ec2cc588dffc
+
+	measure 'YoY Order GP % Growth %' = IFERROR((CALCULATE([Order GP %],D_Calendar_Visual[Year]>=2024)-[Prior Year - Order GP %])/[Prior Year - Order GP %],blank())
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Order Gross Profit %
+		lineageTag: 48b8c591-3cb8-4766-9a91-fab7f0cb0601
+
+	measure 'YoY Order # Growth %' = IFERROR((CALCULATE([Order #],D_Calendar_Visual[Year]>=2024)-[Prior Year - Order #])/[Prior Year - Order #],blank())
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Order #
+		lineageTag: e5dc120a-48ee-4c32-be13-a24318c82468
+
+	measure 'Order $ Icon' = IF([YoY Order $ Growth %]>0,CONCATENATE(FORMAT([YoY Order $ Growth %],"0%"),UNICHAR(129141)),IF([YoY Order $ Growth %]=0,Blank(),IF([YoY Order $ Growth %]<0,CONCATENATE(FORMAT([YoY Order $ Growth %],"0%"),UNICHAR(129142)),BLANK())))
+		displayFolder: Icons
+		lineageTag: 1b7099c0-8289-4d31-8e54-3ad66b4fe4db
+
+	measure 'Order # Icon' = IF([YoY Order # Growth %]>0,CONCATENATE(FORMAT([YoY Order # Growth %],"0%"),UNICHAR(129141)),IF([YoY Order # Growth %]=0,Blank(),IF([YoY Order # Growth %]<0,CONCATENATE(FORMAT([YoY Order # Growth %],"0%"),UNICHAR(129142)),BLANK())))
+		displayFolder: Icons
+		lineageTag: 47f33894-1bd7-4a86-a28d-a28ce52980b0
+
+	measure 'Order GP % Icon' = IF([YoY Order GP % Growth %]>0,CONCATENATE(FORMAT([YoY Order GP % Growth %],"0%"),UNICHAR(129141)),IF([YoY Order GP % Growth %]=0,Blank(),IF([YoY Order GP % Growth %]<0,CONCATENATE(FORMAT([YoY Order GP % Growth %],"0%"),UNICHAR(129142)),BLANK())))
+		displayFolder: Icons
+		lineageTag: 0bb7b78c-109c-41b9-9ad8-e84b6aaa582f
+
+	measure 'ADO Icon' = IF([YoY ADO $ Growth %]>0,CONCATENATE(FORMAT([YoY ADO $ Growth %],"0%"),UNICHAR(129141)),IF([YoY ADO $ Growth %]=0,Blank(),IF([YoY ADO $ Growth %]<0,CONCATENATE(FORMAT([YoY ADO $ Growth %],"0%"),UNICHAR(129142)),BLANK())))
+		displayFolder: Icons
+		lineageTag: bdb66ebd-c350-4127-96d7-9b71d873d8bc
+
+	measure 'YoY Order $ Growth $' = [Order $]-[Prior Year - Order $]
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Order $
+		lineageTag: e47f39f6-55a1-4f4c-837e-acc4f62c9c6d
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Min Date' = min(D_Calendar_Filter[Calendar Date])
+		formatString: Short Date
+		displayFolder: Metadata
+		lineageTag: 7cfd8951-eec2-495e-906f-f5cd0f0e33b3
+
+	measure 'Max Date' =
+			
+			VAR maxsalesdate = CALCULATE(max(F_Order_Item[Converted To Order Date]),REMOVEFILTERS(F_Order_Item))
+			
+			RETURN
+			CALCULATE(max(D_Calendar_Filter[Calendar Date]),Filter(D_Calendar_Filter,D_Calendar_Filter[Calendar Date]<=maxsalesdate))
+		formatString: Short Date
+		displayFolder: Metadata
+		lineageTag: e3b295a9-94b8-4836-b2fe-9ac6110e9cdc
+
+	measure 'Filters Applied' =
+			
+			VAR MaxFilters = 3
+			RETURN
+			IF(
+			    ISFILTERED(D_Calendar_Filter[Year]),
+			    VAR ___f = FILTERS(D_Calendar_Filter[Year])
+			    VAR ___d = CONCATENATEX(___f,D_Calendar_Filter[Year],", ")
+			    VAR ___x = "𝗬𝗲𝗮𝗿: " & ___d & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Calendar_Filter[Quarter]),
+			    VAR ___f = FILTERS(D_Calendar_Filter[Quarter])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Calendar_Filter[Quarter])
+			    VAR ___d = CONCATENATEX(___t,D_Calendar_Filter[Quarter],", ")
+			    VAR ___x = "𝗤𝘂𝗮𝗿𝘁𝗲𝗿:  " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Calendar_Filter[Month]),
+			    VAR ___f = FILTERS(D_Calendar_Filter[Month])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Calendar_Filter[Month])
+			    VAR ___d = CONCATENATEX(___t,D_Calendar_Filter[Month],", ")
+			    VAR ___x = "𝗠𝗼𝗻𝘁𝗵: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Calendar_Filter[Calendar Date]),
+			    VAR ___f = FILTERS(D_Calendar_Filter[Calendar Date])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Calendar_Filter[Calendar Date])
+			    VAR ___d = CONCATENATEX(___t,D_Calendar_Filter[Calendar Date],", ")
+			    VAR ___x = "𝗖𝗮𝗹𝗲𝗻𝗱𝗮𝗿 𝗗𝗮𝘁𝗲: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Location[Country]),
+			    VAR ___f = FILTERS(D_Location[Country])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Location[Country])
+			    VAR ___d = CONCATENATEX(___t,D_Location[Country],", ")
+			    VAR ___x = "𝗖𝗼𝘂𝗻𝘁𝗿𝘆: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Location[MI Corp Loc]),
+			    VAR ___f = FILTERS(D_Location[MI Corp Loc])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Location[MI Corp Loc])
+			    VAR ___d = CONCATENATEX(___t,D_Location[MI Corp Loc],", ")
+			    VAR ___x = "𝗗𝗶𝘀𝘁𝗿𝗶𝗯𝘂𝘁𝗶𝗼𝗻: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Location[MI Group Loc]),
+			    VAR ___f = FILTERS(D_Location[MI Group Loc])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Location[MI Group Loc])
+			    VAR ___d = CONCATENATEX(___t,D_Location[MI Group Loc],", ")
+			    VAR ___x = "𝗚𝗿𝗼𝘂𝗽: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Location[MI Group No & Name]),
+			    VAR ___f = FILTERS(D_Location[MI Group No & Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Location[MI Group No & Name])
+			    VAR ___d = CONCATENATEX(___t,D_Location[MI Group No & Name],", ")
+			    VAR ___x = "𝗚𝗿𝗼𝘂𝗽: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Location[MI Division Loc]),
+			    VAR ___f = FILTERS(D_Location[MI Division Loc])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Location[MI Division Loc])
+			    VAR ___d = CONCATENATEX(___t,D_Location[MI Division Loc],", ")
+			    VAR ___x = "𝗗𝗶𝘃𝗶𝘀𝗶𝗼𝗻: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Location[Division No & Name]),
+			    VAR ___f = FILTERS(D_Location[Division No & Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Location[Division No & Name])
+			    VAR ___d = CONCATENATEX(___t,D_Location[Division No & Name],", ")
+			    VAR ___x = "𝗗𝗶𝘃𝗶𝘀𝗶𝗼𝗻: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Location[MI Region Loc]),
+			    VAR ___f = FILTERS(D_Location[MI Region Loc])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Location[MI Region Loc])
+			    VAR ___d = CONCATENATEX(___t,D_Location[MI Region Loc],", ")
+			    VAR ___x = "𝗥𝗲𝗴𝗶𝗼𝗻: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Location[MI Loc]),
+			    VAR ___f = FILTERS(D_Location[MI Loc])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Location[MI Loc])
+			    VAR ___d = CONCATENATEX(___t,D_Location[MI Loc],", ")
+			    VAR ___x = "𝗕𝗿𝗮𝗻𝗰𝗵: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Location[MI Loc  Location Name]),
+			    VAR ___f = FILTERS(D_Location[MI Loc  Location Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Location[MI Loc  Location Name])
+			    VAR ___d = CONCATENATEX(___t,D_Location[MI Loc  Location Name],", ")
+			    VAR ___x = "𝗕𝗿𝗮𝗻𝗰𝗵: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(F_Order_Item[Territory Short Name]),
+			    VAR ___f = FILTERS(F_Order_Item[Territory Short Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, F_Order_Item[Territory Short Name])
+			    VAR ___d = CONCATENATEX(___t,F_Order_Item[Territory Short Name],", ")
+			    VAR ___x = "𝗔𝗰𝗰𝘁 𝗥𝗲𝗽: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(F_Order_Item[Territory Employee Job Code]),
+			    VAR ___f = FILTERS(F_Order_Item[Territory Employee Job Code])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, F_Order_Item[Territory Employee Job Code])
+			    VAR ___d = CONCATENATEX(___t,F_Order_Item[Territory Employee Job Code],", ")
+			    VAR ___x = "𝗝𝗼𝗯 𝗖𝗼𝗱𝗲: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Customer_ShipTo[Industry]),
+			    VAR ___f = FILTERS(D_Customer_ShipTo[Industry])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Customer_ShipTo[Industry])
+			    VAR ___d = CONCATENATEX(___t,D_Customer_ShipTo[Industry],", ")
+			    VAR ___x = "𝗜𝗻𝗱𝘂𝘀𝘁𝗿𝘆: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(F_Order_Item[MI Loc  Ship To Customer No  Ship To Customer Name]),
+			    VAR ___f = FILTERS(F_Order_Item[MI Loc  Ship To Customer No  Ship To Customer Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, F_Order_Item[MI Loc  Ship To Customer No  Ship To Customer Name])
+			    VAR ___d = CONCATENATEX(___t,F_Order_Item[MI Loc  Ship To Customer No  Ship To Customer Name],", ")
+			    VAR ___x = "𝗖𝘂𝘀𝘁𝗼𝗺𝗲𝗿: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Customer_ShipTo[Cust Size]),
+			    VAR ___f = FILTERS(D_Customer_ShipTo[Cust Size])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Customer_ShipTo[Cust Size])
+			    VAR ___d = CONCATENATEX(___t,D_Customer_ShipTo[Cust Size],", ")
+			    VAR ___x = "𝗖𝘂𝘀𝘁 𝗦𝗶𝘇𝗲: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Customer_BillTo[Natl Acct Parent Company Name]),
+			    VAR ___f = FILTERS(D_Customer_BillTo[Natl Acct Parent Company Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Customer_BillTo[Natl Acct Parent Company Name])
+			    VAR ___d = CONCATENATEX(___t,D_Customer_BillTo[Natl Acct Parent Company Name],", ")
+			    VAR ___x = "𝗣𝗮𝗿𝗲𝗻𝘁 𝗖𝗼𝗺𝗽𝗮𝗻𝘆: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Customer_BillTo[Natl Acct Full Name]),
+			    VAR ___f = FILTERS(D_Customer_BillTo[Natl Acct Full Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Customer_BillTo[Natl Acct Full Name])
+			    VAR ___d = CONCATENATEX(___t,D_Customer_BillTo[Natl Acct Full Name],", ")
+			    VAR ___x = "𝗡𝗮𝘁𝗹 𝗔𝗰𝗰𝘁: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Manufacturer[Enterprise No  Enterprise Name]),
+			    VAR ___f = FILTERS(D_Manufacturer[Enterprise No  Enterprise Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Manufacturer[Enterprise No  Enterprise Name])
+			    VAR ___d = CONCATENATEX(___t,D_Manufacturer[Enterprise No  Enterprise Name],", ")
+			    VAR ___x = "𝗘𝗻𝘁𝗲𝗿𝗽𝗿𝗶𝘀𝗲: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Manufacturer[Mfr Ctl No  Mfr Name]),
+			    VAR ___f = FILTERS(D_Manufacturer[Mfr Ctl No  Mfr Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Manufacturer[Mfr Ctl No  Mfr Name])
+			    VAR ___d = CONCATENATEX(___t,D_Manufacturer[Mfr Ctl No  Mfr Name],", ")
+			    VAR ___x = "𝗠𝗮𝗻𝘂𝗳𝗮𝗰𝘁𝘂𝗿𝗲𝗿: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Supplier_Location[Sup Loc No  Sup Loc Name]),
+			    VAR ___f = FILTERS(D_Supplier_Location[Sup Loc No  Sup Loc Name])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Supplier_Location[Sup Loc No  Sup Loc Name])
+			    VAR ___d = CONCATENATEX(___t, D_Supplier_Location[Sup Loc No  Sup Loc Name],", ")
+			    VAR ___x = "𝗦𝘂𝗽𝗽𝗹𝗶𝗲𝗿: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Product_Group[Product Category Desc]),
+			    VAR ___f = FILTERS(D_Product_Group[Product Category Desc])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Product_Group[Product Category Desc])
+			    VAR ___d = CONCATENATEX(___t, D_Product_Group[Product Category Desc],", ")
+			    VAR ___x = "𝗣𝗿𝗼𝗱𝘂𝗰𝘁 𝗖𝗮𝘁𝗲𝗴𝗼𝗿𝘆: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Product_Group[Product Group Label1]),
+			    VAR ___f = FILTERS(D_Product_Group[Product Group Label1])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Product_Group[Product Group Label1])
+			    VAR ___d = CONCATENATEX(___t, D_Product_Group[Product Group Label1],", ")
+			    VAR ___x = "𝗣𝗚𝗖(𝟭 𝗗𝗶𝗴𝗶𝘁): " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Product_Group[Product Group Label2]),
+			    VAR ___f = FILTERS(D_Product_Group[Product Group Label2])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Product_Group[Product Group Label2])
+			    VAR ___d = CONCATENATEX(___t, D_Product_Group[Product Group Label2],", ")
+			    VAR ___x = "𝗣𝗚𝗖(𝟮 𝗗𝗶𝗴𝗶𝘁): " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Product_Group[Product Group Label3]),
+			    VAR ___f = FILTERS(D_Product_Group[Product Group Label3])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Product_Group[Product Group Label3])
+			    VAR ___d = CONCATENATEX(___t, D_Product_Group[Product Group Label3],", ")
+			    VAR ___x = "𝗣𝗚𝗖(𝟯 𝗗𝗶𝗴𝗶𝘁): " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Product_Group[Product Group Label4]),
+			    VAR ___f = FILTERS(D_Product_Group[Product Group Label4])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Product_Group[Product Group Label4])
+			    VAR ___d = CONCATENATEX(___t, D_Product_Group[Product Group Label4],", ")
+			    VAR ___x = "𝗣𝗚𝗖(𝟰 𝗗𝗶𝗴𝗶𝘁): " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(F_Order_Item[Order Source Desc]),
+			    VAR ___f = FILTERS(F_Order_Item[Order Source Desc])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, F_Order_Item[Order Source Desc])
+			    VAR ___d = CONCATENATEX(___t, F_Order_Item[Order Source Desc],", ")
+			    VAR ___x = "𝗢𝗿𝗱𝗲𝗿 𝗦𝗼𝘂𝗿𝗰𝗲: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(F_Order_Item[Price Card Type]),
+			    VAR ___f = FILTERS(F_Order_Item[Price Card Type])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, F_Order_Item[Price Card Type])
+			    VAR ___d = CONCATENATEX(___t, F_Order_Item[Price Card Type],", ")
+			    VAR ___x = "𝐏𝐫𝐢𝐜𝐞 𝐂𝐚𝐫𝐝:  " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(D_Customer_BillTo[Corp Acct Status]),
+			    VAR ___f = FILTERS(D_Customer_BillTo[Corp Acct Status])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, D_Customer_BillTo[Corp Acct Status])
+			    VAR ___d = CONCATENATEX(___t, D_Customer_BillTo[Corp Acct Status],", ")
+			    VAR ___x = "𝗖𝗼𝗿𝗽 𝗔𝗰𝗰𝘁 𝗦𝘁𝗮𝘁𝘂𝘀: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(F_Order_Item[Process Status Desc]),
+			    VAR ___f = FILTERS(F_Order_Item[Process Status Desc])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, F_Order_Item[Process Status Desc])
+			    VAR ___d = CONCATENATEX(___t, F_Order_Item[Process Status Desc],", ")
+			    VAR ___x = "𝐏𝐫𝐨𝐜𝐞𝐬𝐬 𝐒𝐭𝐚𝐭𝐮𝐬: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(F_Order_Item[Order Ctl No]),
+			    VAR ___f = FILTERS(F_Order_Item[Order Ctl No])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, F_Order_Item[Order Ctl No])
+			    VAR ___d = CONCATENATEX(___t, F_Order_Item[Order Ctl No],", ")
+			    VAR ___x = "𝐎𝐂𝐍: ⁣" & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(F_Order_Item[Itm Order Size Bucket]),
+			    VAR ___f = FILTERS(F_Order_Item[Itm Order Size Bucket])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, F_Order_Item[Itm Order Size Bucket])
+			    VAR ___d = CONCATENATEX(___t, F_Order_Item[Itm Order Size Bucket],", ")
+			    VAR ___x = "𝐎𝐫𝐝𝐞𝐫 𝐒𝐢𝐳𝐞: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+			& IF(
+			    ISFILTERED(F_Order_Item[Itm Mino]),
+			    VAR ___f = FILTERS(F_Order_Item[Itm Mino])
+			    VAR ___r = COUNTROWS(___f)
+			    VAR ___t = TOPN (MaxFilters, ___f, F_Order_Item[Itm Mino])
+			    VAR ___d = CONCATENATEX(___t, F_Order_Item[Itm Mino],", ")
+			    VAR ___x = "𝗠𝗜𝗡𝗢: " & ___d & IF(___r > MaxFilters, ", ... [" & ___r & " items selected]") & " "
+			    RETURN ___x & UNICHAR(13) & UNICHAR(10)
+			)
+		displayFolder: Metadata
+		lineageTag: 4c2d7711-b081-4feb-b48e-436142c9219c
+
+	partition 'Measure Table-8188158d-03d4-437e-a691-07154e8833cf' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

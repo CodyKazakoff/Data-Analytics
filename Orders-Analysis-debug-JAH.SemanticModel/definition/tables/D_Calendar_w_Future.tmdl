@@ -1,0 +1,186 @@
+table D_Calendar_w_Future
+	lineageTag: ccbbf6f0-e504-4eca-9bbb-60813c270432
+
+	column 'Calendar Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f9c3fd29-0cbc-4ea4-a14c-880cdf77f68d
+		summarizeBy: none
+		sourceColumn: Calendar Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 718d3c04-38b3-429a-ac6e-77230163647a
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 35b4d8c2-fcd7-48c2-aec8-ebda397a3bcf
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 135b0409-ead7-4352-9619-1b61ea835bb0
+		summarizeBy: none
+		sourceColumn: Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Year'
+		dataType: string
+		lineageTag: 16aff3ad-0097-4258-8950-297450a53d30
+		summarizeBy: none
+		sourceColumn: Month Year
+		sortByColumn: 'Month Index'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Of Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: 088e4181-716b-4810-bf17-193934afce34
+		summarizeBy: none
+		sourceColumn: Day Of Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		dataType: string
+		lineageTag: 3bb508ec-70db-4240-b2a6-ffd8e1b001f5
+		summarizeBy: none
+		sourceColumn: Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: 01d0d060-f6a7-49d3-af92-3c1170036960
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Start Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c3cf822f-e867-4b89-9b26-a2c38afe493c
+		summarizeBy: none
+		sourceColumn: Month Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: 156d73c9-4de7-4144-95c9-8c62f000ea14
+		summarizeBy: none
+		sourceColumn: Week Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Week End Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: eb6de524-d15f-4b8f-9445-4c7945ca998f
+		summarizeBy: none
+		sourceColumn: Week End Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter'
+		dataType: string
+		lineageTag: 45865601-684b-4b60-a706-02bc3def0a8c
+		summarizeBy: none
+		sourceColumn: Year Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workday Of Month'
+		dataType: int64
+		formatString: 0
+		lineageTag: c3cb7e5a-93d5-4fa1-9afb-ce0b63185990
+		summarizeBy: none
+		sourceColumn: Workday Of Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Workday Of Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 9f2c6b30-94ff-448f-ac41-76d127111a2f
+		summarizeBy: none
+		sourceColumn: Workday Of Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Business Day Flag'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3b2d5ef0-0a33-4f70-ae3c-6867153f80ba
+		summarizeBy: none
+		sourceColumn: Business Day Flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: ee0af773-242f-4841-9ddf-669bc418d6ef
+		summarizeBy: none
+		sourceColumn: Month Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quarter Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5fd76d41-8fcb-402a-b9ba-b17474929b3c
+		summarizeBy: none
+		sourceColumn: Quarter Index
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day Of Quarter'
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c4cc561-39bd-4cca-9e55-4ba2906abe5e
+		summarizeBy: none
+		sourceColumn: Day Of Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Calendar_w_Future = m
+		mode: import
+		queryGroup: Dimensions
+		source =
+				let
+				    Source = Sql.Database(Lakehouse&".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Calendar = Source{[Schema="dbo",Item="D_Calendar"]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(dbo_D_Calendar,{"CALENDAR_DATE", "YEAR", "QUARTER", "MONTH_NUMBER", "MONTH_YEAR", "DAY_OF_MONTH", "WEEK", "MONTH", "MONTH_START_DATE", "WEEK_NUMBER", "WEEK_END_DATE", "YEAR_QUARTER", "WORKDAY_OF_MONTH", "WORKDAY_OF_YEAR", "BUSINESS_DAY_FLAG", "MONTH_INDEX", "QUARTER_INDEX", "DAY_OF_QUARTER"}),
+				    #"Changed Date Key Type" = Table.TransformColumnTypes(#"Removed Other Columns",{{"CALENDAR_DATE", type date}}),
+				    MinDate= List.Max(#"Fact Table Date Range"[Min Transaction Date]),
+				    #"Limit to Fact Table Date Range" = Table.SelectRows(#"Changed Date Key Type", each DateTime.Date([CALENDAR_DATE]) >= DateTime.Date(MinDate)),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Limit to Fact Table Date Range",{{"WORKDAY_OF_MONTH", Int64.Type}, {"WORKDAY_OF_YEAR", Int64.Type}, {"YEAR", Int64.Type}, {"QUARTER", Int64.Type}, {"QUARTER_INDEX", Int64.Type}}),
+				    #"Bulk Column Rename" = Table.TransformColumnNames(#"Changed Type", each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," "))
+				in
+				    #"Bulk Column Rename"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

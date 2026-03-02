@@ -1,0 +1,9 @@
+role 'Acct Lvl (Terr Emp ID)'
+	modelPermission: read
+
+	tablePermission RLS_Customer_ShipTo = 'RLS_Customer_ShipTo'[SUPERVISOR_UPN] = USERPRINCIPALNAME()
+
+	tablePermission D_Customer_ShipTo
+
+	annotation PBI_Id = 300f72b8000c45dc99b86066c22c4ed2
+

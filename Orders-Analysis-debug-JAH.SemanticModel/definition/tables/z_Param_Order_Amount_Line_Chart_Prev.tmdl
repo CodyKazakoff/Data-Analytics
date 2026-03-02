@@ -1,0 +1,48 @@
+table z_Param_Order_Amount_Line_Chart_Prev
+	lineageTag: 3d4f34c8-4394-4769-8374-75f60745b0ad
+
+	column 'zParamPrev - OrdAmtLine'
+		lineageTag: a91e7a3b-293c-4591-83c7-eda1de585718
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParamPrev - OrdAmtLine Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParamPrev - OrdAmtLine Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrev - OrdAmtLine Fields'
+		lineageTag: bf0c6174-380b-44d9-b391-c7630a8ba9c6
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParamPrev - OrdAmtLine Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParamPrev - OrdAmtLine Order'
+		formatString: 0
+		lineageTag: 7fcc3aa7-95cf-4d6b-80dc-3a12458270ba
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Order_Amount_Line_Chart_Prev = calculated
+		mode: import
+		source =
+				{
+				    ("PYTD", NAMEOF('Measure Table'[Order $ PYTD]), 0),
+				    ("PMTD", NAMEOF('Measure Table'[Order $ PMTD]), 1),
+				    ("PQTD", NAMEOF('Measure Table'[Order $ PQTD]), 2)
+				    //,("Prior Year", NAMEOF('Measure Table'[Order Amount Rolling 12 PY]), 3)
+				}
+
+	annotation PBI_Id = 46fa24a7801c433a9178be581510413f
+

@@ -1,0 +1,170 @@
+table 'Qlik App Migration Progress'
+	lineageTag: 3f455774-b4ad-4c0f-b3d7-edbe72105954
+
+	measure 'App Count' = COUNT('Qlik App Migration Progress'[App])
+		formatString: 0
+		lineageTag: b524e19d-8b4f-4e73-bd35-c6ecc612f539
+
+	measure 'App State' =
+			
+			VAR AppState = MAX('Qlik App Migration Progress'[State])
+			RETURN
+			MAXX(
+			    FILTER(ALLSELECTED('Qlik App Migration Progress'), 'Qlik App Migration Progress'[State]=AppState),
+			    CALCULATE(MAX('Qlik App Migration Progress'[State]))
+			    )
+		lineageTag: 80b62393-67fb-4ff7-8bb2-406b796b2965
+
+	measure 'App Stream Ranking' = ```
+			
+			VAR Stream = MAX('Qlik App Migration Progress'[Stream])
+			RETURN
+			RANKX(
+			    FILTER(ALLSELECTED('Qlik App Migration Progress'), 'Qlik App Migration Progress'[Stream]=Stream),
+			    CALCULATE(MAX('Qlik App Migration Progress'[App])),
+			    ,ASC
+			    )
+			
+			```
+		formatString: 0
+		lineageTag: c215e70a-8fea-46e1-892c-b876e09dd717
+
+	measure 'Apps by Stream' = ```
+			
+			VAR CurrentRow = MAX(Range[Value])
+			VAR Virtual = 
+			SUMMARIZE(
+			    'Qlik App Migration Progress',
+			    'Qlik App Migration Progress'[App],
+			    "Ranking",'Qlik App Migration Progress'[App Stream Ranking]
+			)
+			RETURN
+			MAXX(
+			    FILTER(Virtual,'Qlik App Migration Progress'[App Stream Ranking]=CurrentRow),
+			    'Qlik App Migration Progress'[App]
+			)
+			```
+		lineageTag: 0117d928-fd0b-4eeb-a918-620e19c397bf
+
+	measure 'State Color by App' = ```
+			
+			VAR CurrentRow = MAX(Range[Value])
+			VAR Virtual = 
+			SUMMARIZE(
+			    'Qlik App Migration Progress',
+			    'Qlik App Migration Progress'[App],
+			    "State",'Qlik App Migration Progress'[App State]
+			)
+			RETURN
+			MAXX(
+			    FILTER(Virtual,'Qlik App Migration Progress'[App Stream Ranking]=CurrentRow),
+			    'Qlik App Migration Progress'[App State]
+			)
+			```
+		lineageTag: 4cf075a4-0c50-4bbb-b367-b3a7016b902d
+
+	column Stream
+		dataType: string
+		lineageTag: 950147c3-55fa-4cb8-a30f-446928ac72e0
+		summarizeBy: none
+		sourceColumn: Stream
+		sortByColumn: 'Stream Order.Stream Sort Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column App
+		dataType: string
+		lineageTag: 2d1430cf-6c9c-4770-9e11-9e20632ab9f1
+		summarizeBy: none
+		sourceColumn: App
+		sortByColumn: 'App Order.App Sort Order'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: bb51c78b-c96d-465d-ae2a-21085851a659
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PI Period'
+		dataType: string
+		lineageTag: 1bda3df9-af0c-44f5-925b-1df322d9856e
+		summarizeBy: none
+		sourceColumn: PI Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Sort Order'
+		dataType: int64
+		formatString: 0
+		lineageTag: b2c1684c-9480-4720-acb7-4dbf8a118b90
+		summarizeBy: none
+		sourceColumn: State Sort Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Stream Order.Stream Sort Order'
+		dataType: string
+		lineageTag: af55bb2d-bc42-4c81-b626-17394a6a2f09
+		summarizeBy: none
+		sourceColumn: Stream Order.Stream Sort Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'App Order.App Sort Order'
+		dataType: string
+		lineageTag: a3384ed1-56c2-4e1d-a696-f6521c859fe5
+		summarizeBy: none
+		sourceColumn: App Order.App Sort Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deprecated State'
+		dataType: string
+		lineageTag: aa19bfb9-85da-4e0e-b9a7-f23bd0e62cc1
+		summarizeBy: none
+		sourceColumn: Deprecated State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Manual Override'
+		dataType: string
+		lineageTag: 3d63d60d-0060-487e-a348-2fc7472f00b3
+		summarizeBy: none
+		sourceColumn: State Manual Override
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GBQ Table Detail Key'
+		dataType: string
+		lineageTag: 878a5f3e-8d37-42ea-b527-f020a844db52
+		summarizeBy: none
+		sourceColumn: GBQ Table Detail Key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Qlik App Migration Progress' = m
+		mode: import
+		source =
+				let
+				    Source = Table.NestedJoin(#"Qlik App Migration Progress Temp", {"Stream"}, #"Stream Order", {"Stream"}, "Stream Order", JoinKind.LeftOuter),
+				    #"Expanded Stream Order" = Table.ExpandTableColumn(Source, "Stream Order", {"Stream Sort Order"}, {"Stream Order.Stream Sort Order"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Expanded Stream Order", {"App"}, #"App Order", {"App"}, "App Order", JoinKind.LeftOuter),
+				    #"Expanded App Order" = Table.ExpandTableColumn(#"Merged Queries", "App Order", {"App Sort Order"}, {"App Order.App Sort Order"}),
+				    #"Inserted Table Detail Key" = Table.AddColumn(#"Expanded App Order", "Merged", each Text.Combine({Text.BeforeDelimiter([App], " (Workspace:"), "(", [Stream], ")"}), type text),
+				    #"Renamed Columns" = Table.RenameColumns(#"Inserted Table Detail Key",{{"Merged", "GBQ Table Detail Key"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"Column7"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,77 @@
+table z_builder_metrics_2
+	lineageTag: b4c68179-abf1-45fe-a2df-52bc9160388c
+
+	column z_builder_metrics_2
+		lineageTag: c47f92ea-541c-4b60-8150-2ec4fd22b683
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_builder_metrics_2 Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_builder_metrics_2 Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_builder_metrics_2 Fields'
+		lineageTag: 1af568d1-2ed0-4a9b-81ce-fbd03b0d6608
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_builder_metrics_2 Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_builder_metrics_2 Order'
+		isHidden
+		formatString: 0
+		lineageTag: 0e080fc0-dca4-4d3e-9269-de4cc21c4f22
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value4
+		lineageTag: 1dce52b6-e7f4-4901-88dc-13891f5216b8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_builder_metrics_2 = calculated
+		mode: import
+		source =
+				{
+				    ("ADO", NAMEOF([Average Daily Order $]), 1, "Base"),
+				    ("Avg Lines per Order", NAMEOF([Average Lines per Order]), 2, "Base"),
+				    ("Avg Order $", NAMEOF([Average Order $]), 3, "Base"),
+				    ("Open Order #", NAMEOF([Open Order #]), 4, "Base"),
+				    ("Open Order $", NAMEOF([Open Order $]), 5, "Base"),
+				    ("Open Order Line #", NAMEOF('Measure Table'[Open Order Line #]), 6, "Base"),
+					("Open Order Line $", NAMEOF('Measure Table'[Open Order Line $]), 7, "Base"),
+					("Order #", NAMEOF('Measure Table'[Order #]), 8, "Base"),
+					("Order $", NAMEOF('Measure Table'[Order $]), 9, "Base"),
+					("Order Line #", NAMEOF('Measure Table'[Order Line #]), 10, "Base"),
+				    ("Order Final Cost", NAMEOF([Order Final Cost]), 11, "Base"),
+				    ("Order Gross Profit $", NAMEOF([Order Gross Profit]), 12, "Base"),
+				    ("Order Gross Profit %", NAMEOF([Order GP %]), 13, "Base"),
+				    ("ADO - PY", NAMEOF([Prior Year - ADO]), 14, "Prior Year"),
+				    ("Order # - PY", NAMEOF([Prior Year - Order #]), 15, "Prior Year"),
+				    ("Order $ - PY", NAMEOF([Prior Year - Order $]), 16, "Prior Year"),
+				    ("Order Gross Profit % - PY", NAMEOF([Prior Year - Order GP %]), 17, "Prior Year"),
+				    ("Order Line # - PY", NAMEOF([Prior Year - Order Line #]), 18, "Prior Year"),
+				    ("Order $ Y/PY % Chg", NAMEOF([YoY Order $ Growth %]), 19, "Y/PYTD Var"),
+				    ("Order $ Y/PY $ Chg", NAMEOF([YoY Order $ Growth $]), 20, "Y/PYTD Var"),
+				    ("Order Line # Y/PY % Chg", NAMEOF([YoY Order Line # Growth %]), 21, "Y/PYTD Var"),
+				    ("ADO Y/PY % Chg", NAMEOF([YoY ADO $ Growth %]), 22, "Y/PYTD Var"),
+				    ("Order Gross Profit % Y/PY % Chg", NAMEOF([YoY Order GP % Growth %]), 23, "Y/PYTD Var"),
+				    ("Order # Y/PY % Chg", NAMEOF([YoY Order # Growth %]), 24, "Y/PYTD Var")
+				}
+
+	annotation PBI_Id = e5beacb0c5ee4f6783cd0293316017d6
+

@@ -1,0 +1,7 @@
+role 'Acct Lvl (CAM Emp ID)'
+	modelPermission: read
+
+	tablePermission RLS_Customer_BillTo = 'RLS_Customer_BillTo'[SUPERVISOR_UPN] = USERPRINCIPALNAME()
+
+	annotation PBI_Id = 3519e6504c644564a6377f584dae7ef0
+

@@ -1,0 +1,936 @@
+table D_Customer
+	lineageTag: e49c82ff-75d7-4c4b-81b0-d34720ab7f8e
+
+	column LOC_KEY
+		dataType: string
+		lineageTag: 0db551e6-df71-45bb-abb6-1c8d145d30a0
+		summarizeBy: none
+		sourceColumn: LOC_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_CUST_KEY
+		dataType: string
+		lineageTag: ca75b2c5-aac1-4a88-8ad8-93713bccb174
+		summarizeBy: none
+		sourceColumn: BILLING_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: 60f16527-5b7e-48ac-b6b5-19e168241721
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_CORP_LOC
+		dataType: string
+		lineageTag: 8275565c-3d05-409f-9b67-4d142f398365
+		summarizeBy: none
+		sourceColumn: MI_CORP_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_DIVISION_LOC
+		dataType: string
+		lineageTag: d4d748f6-b05c-4a66-8447-30ba20819ae0
+		summarizeBy: none
+		sourceColumn: MI_DIVISION_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_GROUP_LOC
+		dataType: string
+		lineageTag: a017c055-a1e8-4dcf-a601-9a3e1056fcb0
+		summarizeBy: none
+		sourceColumn: MI_GROUP_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 03c82200-f402-4862-934c-66f09f7e28bb
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_ACCT
+		dataType: string
+		lineageTag: d2df634f-8a8e-4a03-81c5-8ab121620ed3
+		summarizeBy: none
+		sourceColumn: CUST_ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_NO
+		dataType: string
+		lineageTag: b37a3925-a89c-4185-9d9e-99016a4c2b7c
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_CUSTOMER_NO
+		dataType: string
+		lineageTag: 08e0e224-67b2-4741-97c0-670f56e00a60
+		summarizeBy: none
+		sourceColumn: BILLING_CUSTOMER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_ACCOUNT_REP
+		dataType: string
+		lineageTag: a7d1f3a5-cd15-42ef-b700-6356354de72b
+		summarizeBy: none
+		sourceColumn: BILLING_ACCOUNT_REP
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_ADDR_LINE_1
+		dataType: string
+		lineageTag: 812c1d4f-a295-4689-beb4-6a9c1053cb42
+		summarizeBy: none
+		sourceColumn: BILLING_ADDR_LINE_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_ADDR_LINE_2
+		dataType: string
+		lineageTag: 5d288856-f6b5-402d-a792-a57f01056dd0
+		summarizeBy: none
+		sourceColumn: BILLING_ADDR_LINE_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_ADDR_LINE_3
+		dataType: string
+		lineageTag: ded5b774-f83b-43ae-9f12-30d80900acea
+		summarizeBy: none
+		sourceColumn: BILLING_ADDR_LINE_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_CITY
+		dataType: string
+		lineageTag: 87f90ee7-c797-40f3-8fa9-2974b1b64143
+		summarizeBy: none
+		sourceColumn: BILLING_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_COUNTY
+		dataType: string
+		lineageTag: 71af0973-89b6-4aeb-8b9a-b409895fbb7d
+		summarizeBy: none
+		sourceColumn: BILLING_COUNTY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_STATE
+		dataType: string
+		lineageTag: 96bbc838-9794-48b7-b625-f9f91bf199b5
+		summarizeBy: none
+		sourceColumn: BILLING_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_ZIP_CODE
+		dataType: string
+		lineageTag: 69b043e9-8df2-4fe6-950d-a86ab81fdb97
+		summarizeBy: none
+		sourceColumn: BILLING_ZIP_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_COUNTRY
+		dataType: string
+		lineageTag: 357977bf-7acd-43dd-aceb-31abac506276
+		summarizeBy: none
+		sourceColumn: BILLING_COUNTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_COUNTRY_CD
+		dataType: string
+		lineageTag: b1c75393-46de-4fdf-8253-913b1b880722
+		summarizeBy: none
+		sourceColumn: BILLING_COUNTRY_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_GEO_CODE
+		dataType: string
+		lineageTag: bb605d9d-a320-496c-b1d5-0c2536b427bb
+		summarizeBy: none
+		sourceColumn: BILLING_GEO_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_SUMMARY_BILL_FMT
+		dataType: string
+		lineageTag: 7216b3c3-a85d-4a58-88bd-8c53fe701a96
+		summarizeBy: none
+		sourceColumn: BILLING_SUMMARY_BILL_FMT
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAID
+		dataType: string
+		lineageTag: d86b760e-0c78-4a35-a416-38888628f411
+		summarizeBy: none
+		sourceColumn: TAID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CR_ANALYST
+		dataType: string
+		lineageTag: 5e0ba117-c299-43db-a156-5d72b1af21ab
+		summarizeBy: none
+		sourceColumn: CR_ANALYST
+
+		annotation SummarizationSetBy = Automatic
+
+	column CRANLYST_NAME
+		dataType: string
+		lineageTag: a41842fe-a238-4b6f-a17b-8fbcb3691c76
+		summarizeBy: none
+		sourceColumn: CRANLYST_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIV_CR_MGR
+		dataType: string
+		lineageTag: fdd44162-7524-4572-bea5-b4b335e08c95
+		summarizeBy: none
+		sourceColumn: DIV_CR_MGR
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIVCRMGR_NAME
+		dataType: string
+		lineageTag: df60e6b9-7d8b-48f2-9252-acd8181ed69e
+		summarizeBy: none
+		sourceColumn: DIVCRMGR_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column PYMNT_TERM
+		dataType: string
+		lineageTag: e1d16e9c-c0e0-49e6-ac1c-1d06cdb876f6
+		summarizeBy: none
+		sourceColumn: PYMNT_TERM
+
+		annotation SummarizationSetBy = Automatic
+
+	column DSCNT_TERM
+		dataType: string
+		lineageTag: ce960aa9-75c5-4e43-8423-db9c62709cc2
+		summarizeBy: none
+		sourceColumn: DSCNT_TERM
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHECK_CREDIT_LIMIT
+		dataType: string
+		lineageTag: a9d63c6d-54c8-4fb1-b28e-935b234a519a
+		summarizeBy: none
+		sourceColumn: CHECK_CREDIT_LIMIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREDIT_STATUS
+		dataType: string
+		lineageTag: 0defbc76-6f2d-43a2-8a1b-44855a04298b
+		summarizeBy: none
+		sourceColumn: CREDIT_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURR
+		dataType: string
+		lineageTag: 7ef2f9bf-262a-459e-a5d4-4d8a526a1e12
+		summarizeBy: none
+		sourceColumn: CURR
+
+		annotation SummarizationSetBy = Automatic
+
+	column DSCNT_METH
+		dataType: string
+		lineageTag: d149fb28-9abd-4f7b-9283-a2d957cda229
+		summarizeBy: none
+		sourceColumn: DSCNT_METH
+
+		annotation SummarizationSetBy = Automatic
+
+	column DSCNT_METH_DESC
+		dataType: string
+		lineageTag: c7760b8c-2966-4c54-b544-87eb8741cb1f
+		summarizeBy: none
+		sourceColumn: DSCNT_METH_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTER_COMPANY
+		dataType: string
+		lineageTag: 5d835efc-3a27-42e5-b4fe-24ab063a4646
+		summarizeBy: none
+		sourceColumn: INTER_COMPANY
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAICS
+		dataType: string
+		lineageTag: b50d3ba2-e18a-4cf8-a685-ef0d5112dc6b
+		summarizeBy: none
+		sourceColumn: NAICS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTER_COMPANY_AFFILIATE
+		dataType: string
+		lineageTag: 2e61067f-05be-4423-a8bd-13367c5090b7
+		summarizeBy: none
+		sourceColumn: INTER_COMPANY_AFFILIATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STOP_CREDIT_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b10ae3c1-360b-4f05-a9f9-ae07fd63683b
+		summarizeBy: none
+		sourceColumn: STOP_CREDIT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column STOP_CREDIT
+		dataType: string
+		lineageTag: 88646abe-1a5e-406c-ac1f-c793663b9660
+		summarizeBy: none
+		sourceColumn: STOP_CREDIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATION_TMSTMP
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9f2704fc-a2ac-4d4b-8994-2d571fa392bf
+		summarizeBy: none
+		sourceColumn: CREATION_TMSTMP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CREATION_USERID
+		dataType: string
+		lineageTag: ee5a7d4a-fa7b-4803-a629-dcede0123f88
+		summarizeBy: none
+		sourceColumn: CREATION_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_UPD_USERID
+		dataType: string
+		lineageTag: ebf35bd1-035f-45be-87a8-51e9fc0e575c
+		summarizeBy: none
+		sourceColumn: LAST_UPD_USERID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUSTOMER_NO
+		dataType: string
+		lineageTag: 52ef8316-8059-43df-b3c7-8a89318527ea
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUSTOMER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ACCOUNT_REP
+		dataType: string
+		lineageTag: 77e56e5f-614d-4a4b-a241-ae5ca3eaa3a4
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ACCOUNT_REP
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ADDR_LINE_1
+		dataType: string
+		lineageTag: acd35a7b-2591-462b-b728-b058acd04003
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ADDR_LINE_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ADDR_LINE_2
+		dataType: string
+		lineageTag: fd1cb331-6a23-4282-9229-b9ac8f9aca6c
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ADDR_LINE_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ADDR_LINE_3
+		dataType: string
+		lineageTag: 54bef059-41f4-427d-9168-34d5bc92c449
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ADDR_LINE_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CITY
+		dataType: string
+		lineageTag: 1840dd14-db7f-4cc7-9368-761e881645eb
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_COUNTY
+		dataType: string
+		lineageTag: f5eb0bde-a15b-4f6f-86f3-9c85093a3ba8
+		summarizeBy: none
+		sourceColumn: SHIP_TO_COUNTY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_STATE
+		dataType: string
+		lineageTag: aa28bdaa-1eea-4ca5-92b7-aa43437e46e5
+		summarizeBy: none
+		sourceColumn: SHIP_TO_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_NON_US_ZIP
+		dataType: string
+		lineageTag: 473bb4cf-81ae-4441-875d-4bac62380566
+		summarizeBy: none
+		sourceColumn: SHIP_TO_NON_US_ZIP
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ZIP
+		dataType: string
+		lineageTag: 22648d71-80f0-47f6-b64a-d37163d782f5
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ZIP
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ZIP_PLUS_FOUR
+		dataType: string
+		lineageTag: bc5702d3-ce01-46b8-b3df-d772ebdffc13
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ZIP_PLUS_FOUR
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_COUNTRY
+		dataType: string
+		lineageTag: 927af060-cc9a-40f0-86af-c894d899f2ac
+		summarizeBy: none
+		sourceColumn: SHIP_TO_COUNTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_GEO_CODE
+		dataType: string
+		lineageTag: 81d0fae7-28dc-4c78-a798-7db48e2f0663
+		summarizeBy: none
+		sourceColumn: SHIP_TO_GEO_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ALTERNATE_SIC
+		dataType: string
+		lineageTag: 22fe1db4-841b-4689-8632-14431276aee1
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ALTERNATE_SIC
+
+		annotation SummarizationSetBy = Automatic
+
+	column REMIT_CRTE_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: db596c3d-8f2d-4240-9833-6f5ad9136363
+		summarizeBy: none
+		sourceColumn: REMIT_CRTE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column REMIT_TO_CTL_NO
+		dataType: string
+		lineageTag: 712ec49b-9978-4175-bff8-68d02a59160b
+		summarizeBy: none
+		sourceColumn: REMIT_TO_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column REMIT_UPDT_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c9c80664-ca1c-4fa6-9ef2-a2bfb7e00910
+		summarizeBy: none
+		sourceColumn: REMIT_UPDT_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_SUMMARY_BILL_FMT
+		dataType: string
+		lineageTag: 34df3a56-d3b8-495e-9d1c-a6147d4802d9
+		summarizeBy: none
+		sourceColumn: SHIP_TO_SUMMARY_BILL_FMT
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_TAID
+		dataType: string
+		lineageTag: 310e69b6-30d1-49e2-bb25-03671ffcf420
+		summarizeBy: none
+		sourceColumn: SHIP_TO_TAID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_EXEMPT
+		dataType: string
+		lineageTag: 68c301b7-7417-472f-a996-0494d0b7c912
+		summarizeBy: none
+		sourceColumn: TAX_EXEMPT
+
+		annotation SummarizationSetBy = Automatic
+
+	column TAX_EXEMPT_NO
+		dataType: string
+		lineageTag: 28c83e92-7884-4ca0-9a41-cfaaa1fdc503
+		summarizeBy: none
+		sourceColumn: TAX_EXEMPT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column VENDING
+		dataType: string
+		lineageTag: 59f0908d-ec0f-47e0-8ff0-5ac096fff966
+		summarizeBy: none
+		sourceColumn: VENDING
+
+		annotation SummarizationSetBy = Automatic
+
+	column CA_CTL_NO
+		dataType: string
+		lineageTag: a5b68b1f-48d7-4999-ab62-66b935682c0f
+		summarizeBy: none
+		sourceColumn: CA_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONTRACT_FLAG
+		dataType: string
+		lineageTag: 25208bb9-765c-4bd3-a901-c4bd8dc278bf
+		summarizeBy: none
+		sourceColumn: CONTRACT_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_COST
+		dataType: string
+		lineageTag: c2a384bb-ae92-4e6c-b5fa-4fc0f62492fe
+		summarizeBy: none
+		sourceColumn: DC_COST
+
+		annotation SummarizationSetBy = Automatic
+
+	column INS_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0c1555c2-b883-47bd-ab7a-16a701dc3a4c
+		summarizeBy: none
+		sourceColumn: INS_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column INS_PROC_LOG_ID
+		dataType: string
+		lineageTag: 39188f4c-8753-4c07-afed-125d433a70ec
+		summarizeBy: none
+		sourceColumn: INS_PROC_LOG_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPD_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c24e25e7-df42-4f46-b0ec-b55764300d0a
+		summarizeBy: none
+		sourceColumn: UPD_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPD_PROC_LOG_ID
+		dataType: string
+		lineageTag: 0977cff5-1caa-4a90-a794-8248939b368a
+		summarizeBy: none
+		sourceColumn: UPD_PROC_LOG_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIM_KEY_CHKSUM_VAL
+		dataType: string
+		lineageTag: e54d953d-da29-46c7-a388-aee02c5b0a24
+		summarizeBy: none
+		sourceColumn: PRIM_KEY_CHKSUM_VAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHKSUM_VAL
+		dataType: string
+		lineageTag: becaedc1-4c16-47c8-a0ce-608ae00862c2
+		summarizeBy: none
+		sourceColumn: CHKSUM_VAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_KEY
+		dataType: string
+		lineageTag: e841a59e-452e-472c-b0cc-d2af21a2f211
+		summarizeBy: none
+		sourceColumn: CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_SIC_NAME
+		dataType: string
+		lineageTag: bc4a43fb-bece-47eb-a260-efc6253417e1
+		summarizeBy: none
+		sourceColumn: BILLING_SIC_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_SIC_NAME
+		dataType: string
+		lineageTag: bd7ebf26-89cb-4ec3-9326-2ea3cdc9f565
+		summarizeBy: none
+		sourceColumn: SHIP_TO_SIC_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_SIC
+		dataType: string
+		lineageTag: 6cb60812-e64a-4488-bded-a346444d2cc5
+		summarizeBy: none
+		sourceColumn: BILLING_SIC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_SIC
+		dataType: string
+		lineageTag: fb7515a9-a2df-4109-b9e6-4e5f7ab175f6
+		summarizeBy: none
+		sourceColumn: SHIP_TO_SIC
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_NAME
+		dataType: string
+		lineageTag: 9c61268c-c1e5-4702-b8b6-6fb8f39ea2e7
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_PARENT_COMPANY_NAME
+		dataType: string
+		lineageTag: d810f754-7b61-44e5-9592-d3854d06ed75
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_PARENT_COMPANY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_CAM_NAME
+		dataType: string
+		lineageTag: 454d3733-fdd7-4456-8394-a9055d7e9b1d
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_CAM_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_AREA_VP_NAME
+		dataType: string
+		lineageTag: 602b8507-4df4-4f8d-aa79-074a29a7fae1
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_AREA_VP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_CS01_MGR
+		dataType: string
+		lineageTag: ef3d3d40-6b7d-4d93-8a9c-a3d18a3c5d56
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_CS01_MGR
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_CUSTOMER_NAME
+		dataType: string
+		lineageTag: 1fe3a7d6-704a-4f68-98f8-5905c9430714
+		summarizeBy: none
+		sourceColumn: BILLING_CUSTOMER_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_KEY
+		dataType: string
+		lineageTag: 8066dfee-9b67-46e0-8435-9b3b30123a19
+		summarizeBy: none
+		sourceColumn: TERRITORY_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustId
+		dataType: string
+		lineageTag: a549c7f5-9df3-4692-aa0f-32e4e14c0bac
+		summarizeBy: none
+		sourceColumn: CustId
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_GROUP
+		dataType: string
+		lineageTag: ea35c035-a46b-400b-9d3f-2c32f0c2ba8d
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_GROUP
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_NAME
+		dataType: string
+		lineageTag: d147b974-34c5-4871-b383-ca3d00d55e18
+		summarizeBy: none
+		sourceColumn: CUSTOMER_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column SIC_NAME
+		dataType: string
+		lineageTag: cc2faf80-9182-4148-b6e2-00829199df39
+		summarizeBy: none
+		sourceColumn: SIC_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATIONAL_ACCOUNT_KEY
+		dataType: string
+		lineageTag: c1521673-bf52-4077-8f1c-7beabd32fac8
+		summarizeBy: none
+		sourceColumn: NATIONAL_ACCOUNT_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column NatlAcctID
+		dataType: string
+		lineageTag: 2014c274-4718-4f5d-86ff-1f71c8aa317c
+		summarizeBy: none
+		sourceColumn: NatlAcctID
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_FULL_NAME
+		dataType: string
+		lineageTag: 26dcaa97-1b94-428f-bf4c-447a5f35ef1d
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_FULL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_DISABLED
+		dataType: string
+		lineageTag: 7f41fe89-5604-4f87-9046-6839d9abed9d
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_DISABLED
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_SIC_CD
+		dataType: string
+		lineageTag: ac8dfc07-cae4-40e5-8033-ab5b021e12cf
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_SIC_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_SIC_DESC
+		dataType: string
+		lineageTag: 39653ae8-ccf3-4766-aaf5-317fbff593d9
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_SIC_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column USERCOUNT
+		dataType: int64
+		formatString: 0
+		lineageTag: 71e4e291-7dc6-4252-9108-5ad978ab3500
+		summarizeBy: none
+		sourceColumn: USERCOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+	column PUNCHOUT_FLAG
+		dataType: int64
+		formatString: 0
+		lineageTag: b51787ae-ecc3-4960-8961-65a2c1a654fa
+		summarizeBy: none
+		sourceColumn: PUNCHOUT_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEB_FLAG
+		dataType: int64
+		formatString: 0
+		lineageTag: d7c3af63-4f6a-4979-bc7d-eeb6ce2a9637
+		summarizeBy: none
+		sourceColumn: WEB_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column PUNCHOUT_USERS
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c5622fa-b64b-4d4a-9c1b-86ebd277f9a9
+		summarizeBy: none
+		sourceColumn: PUNCHOUT_USERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEB_USERS
+		dataType: int64
+		formatString: 0
+		lineageTag: 675a1c71-be6f-40b6-8a1e-abf36d3cab35
+		summarizeBy: none
+		sourceColumn: WEB_USERS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_EMP_ID
+		dataType: string
+		lineageTag: 6657901f-676d-4577-928a-0ccf40d8981e
+		summarizeBy: none
+		sourceColumn: TERRITORY_EMP_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_EMP_LOC
+		dataType: string
+		lineageTag: e90e8258-da2a-498f-a611-aee1af120ade
+		summarizeBy: none
+		sourceColumn: TERRITORY_EMP_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_EMP_JOB_CODE
+		dataType: string
+		lineageTag: e66bf5af-f7a6-477d-a8d8-8dfd9c1a22e6
+		summarizeBy: none
+		sourceColumn: TERRITORY_EMP_JOB_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_EMP_JOB_TITLE
+		dataType: string
+		lineageTag: d301e99f-79aa-4fd4-abe5-406a217c6b62
+		summarizeBy: none
+		sourceColumn: TERRITORY_EMP_JOB_TITLE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_EMP_EMAIL
+		dataType: string
+		lineageTag: ec587874-e26d-4cd9-97f3-78270cba724f
+		summarizeBy: none
+		sourceColumn: TERRITORY_EMP_EMAIL
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_EMP_JOB_POSITION
+		dataType: string
+		lineageTag: 9e176793-f579-4002-81e7-6d0e3c079ee7
+		summarizeBy: none
+		sourceColumn: TERRITORY_EMP_JOB_POSITION
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_EMP_NAME
+		dataType: string
+		lineageTag: ed23e966-ffc5-4e69-883f-de9228d70ff4
+		summarizeBy: none
+		sourceColumn: TERRITORY_EMP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_EMP_SUPERVISOR_ID
+		dataType: string
+		lineageTag: b264acdc-f8bb-4b39-8211-37618ce1ae2e
+		summarizeBy: none
+		sourceColumn: TERRITORY_EMP_SUPERVISOR_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_FULL_NAME
+		dataType: string
+		lineageTag: d3308e5c-62c8-41b7-a40e-d6ffb00c4773
+		summarizeBy: none
+		sourceColumn: TERRITORY_FULL_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_SHORT_NAME
+		dataType: string
+		lineageTag: b4c1f039-173b-4109-a21b-8859042f8973
+		summarizeBy: none
+		sourceColumn: TERRITORY_SHORT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORP_ACCOUNTS_FLAG
+		dataType: string
+		lineageTag: d77a5d2c-2472-42a8-a51b-c0b34bc50deb
+		summarizeBy: none
+		sourceColumn: CORP_ACCOUNTS_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORP_ACCT_TYPE
+		dataType: string
+		lineageTag: 25460f43-af7d-4192-8921-b00b96f7c9b9
+		summarizeBy: none
+		sourceColumn: CORP_ACCT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column TERRITORY_UNIQUE_NAME
+		dataType: string
+		lineageTag: 0ac5d168-e3b7-49db-9086-8292224df6d3
+		summarizeBy: none
+		sourceColumn: TERRITORY_UNIQUE_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Customer = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-65dovdhw5fzu3dq6tjfnqi7nyq.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Customer = Source{[Schema="dbo",Item="D_Customer"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dbo_D_Customer,{"SHIP_TO_CONTACT_NAME_1", "SHIP_TO_CONTACT_PHONE_1", "SHIP_TO_CONTACT_NAME_2", "SHIP_TO_CONTACT_PHONE_2", "SHIP_TO_DUNS_NO_CUST", "SHIP_TO_DUNS_NO_HDQ", "SHIP_TO_DUNS_NO_PARENT", "SHIP_TO_DUNS_NO_ULTIMATE", "SHIP_TO_EMAIL_ADDRESS", "SHIP_TO_PRICE_NON_CODED", "SHIP_TO_PARTICIPATE_COST_SAVING", "SHIP_TO_PARTICIPATE_PRICING", "SHIP_TO_LAST_ORDER_DATE", "SHIP_TO_SHIP_COMPLETE", "SHIP_TO_LONGITUDE", "SHIP_TO_LATITUDE", "SHIP_TO_OEM_FLAG", "SHIP_TO_SIC_NAICS_MANUALLY_SET", "SHIP_TO_STAX_EXEMPT_CERT", "SHIP_TO_CUSTOMER_SOURCE", "SHIP_TO_DUNS_CORP_EMP", "SHIP_TO_DUNS_LOC_EMP", "NATL_ACCT_AGREE_START_DATE", "NATL_ACCT_AGREE_END_DATE", "SHIP_TO_FAX_NO", "SHIP_TO_CUSTOMER_NAME"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Columns", {"BILLING_CUSTOMER_NAME"}),
+				    #"Removed Duplicates1" = Table.Distinct(#"Removed Duplicates", {"BILLING_CUST_KEY"}),
+				    #"Added CustID" = Table.AddColumn(#"Removed Duplicates1", "CustId", each [MI_LOC] & [CUST_ACCT]),
+				    #"Added Custom" = Table.AddColumn(#"Added CustID", "NatlAcctID", each [MI_LOC] &[NATL_ACCT_NO])
+				in
+				    #"Added Custom"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

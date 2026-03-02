@@ -1,0 +1,226 @@
+table D_Product_Group
+	lineageTag: 991eab42-170a-4ec8-a0ed-b9c4a8b74776
+
+	column 'Product Group Cd4'
+		dataType: string
+		lineageTag: 0ffe3bec-9a13-4a38-81f9-16ea0cf824bc
+		summarizeBy: none
+		sourceColumn: Product Group Cd4
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Cd3'
+		dataType: string
+		lineageTag: 20eb872c-6a1d-4066-b2eb-00abbfca7f84
+		summarizeBy: none
+		sourceColumn: Product Group Cd3
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Cd2'
+		dataType: string
+		lineageTag: 001f22e8-d135-4f2e-8643-ba78f88d97cc
+		summarizeBy: none
+		sourceColumn: Product Group Cd2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Cd1'
+		dataType: string
+		lineageTag: 735d2c72-aae0-4ad6-a2cf-0bb7cf67ecf0
+		summarizeBy: none
+		sourceColumn: Product Group Cd1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Desc4'
+		dataType: string
+		lineageTag: b3a0a043-73ed-4b82-b7cd-66691612dac2
+		summarizeBy: none
+		sourceColumn: Product Group Desc4
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Desc3'
+		dataType: string
+		lineageTag: 3a2d644c-f7f7-4635-a526-77f593359c53
+		summarizeBy: none
+		sourceColumn: Product Group Desc3
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Desc2'
+		dataType: string
+		lineageTag: d20fe261-da9c-4fb1-b897-140f19b8cc23
+		summarizeBy: none
+		sourceColumn: Product Group Desc2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Desc1'
+		dataType: string
+		lineageTag: f82b3c54-ce54-4169-9781-239048ca9caa
+		summarizeBy: none
+		sourceColumn: Product Group Desc1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Label4'
+		dataType: string
+		lineageTag: 17e965ba-b21b-4c74-9ab2-c27bc45aed34
+		summarizeBy: none
+		sourceColumn: Product Group Label4
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Label3'
+		dataType: string
+		lineageTag: 5061974b-05a9-479c-aca6-fc870b2d50cd
+		summarizeBy: none
+		sourceColumn: Product Group Label3
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Label2'
+		dataType: string
+		lineageTag: ddacd60e-4cac-4e1e-a649-56ac4f7fc323
+		summarizeBy: none
+		sourceColumn: Product Group Label2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Label1'
+		dataType: string
+		lineageTag: 093a7e36-7835-4992-9be7-7ef462f86756
+		summarizeBy: none
+		sourceColumn: Product Group Label1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category Cd'
+		dataType: string
+		lineageTag: 28c6c509-179e-4c2e-a0e1-b835cfe2b72f
+		summarizeBy: none
+		sourceColumn: Product Category Cd
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category Desc'
+		dataType: string
+		lineageTag: 2c43a068-fe95-4566-ab20-71c359e1b01b
+		summarizeBy: none
+		sourceColumn: Product Category Desc
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Category Label'
+		dataType: string
+		lineageTag: 38a15cc6-d03d-4318-bd2d-3899cdf0d352
+		summarizeBy: none
+		sourceColumn: Product Category Label
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pgc Key'
+		dataType: string
+		isKey
+		lineageTag: 7bbf3209-b5ac-49cc-9864-ed60b3239693
+		summarizeBy: none
+		sourceColumn: Pgc Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Cd1  Product Group Desc1'
+		dataType: string
+		lineageTag: d7ff6d9f-c408-4cc1-85b5-fbb6cb75e9c1
+		summarizeBy: none
+		sourceColumn: Product Group Cd1  Product Group Desc1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Cd2  Product Group Desc2'
+		dataType: string
+		lineageTag: 3b86ff0b-d9a5-40b5-9e36-29dbf9fd3a9e
+		summarizeBy: none
+		sourceColumn: Product Group Cd2  Product Group Desc2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Cd3  Product Group Desc3'
+		dataType: string
+		lineageTag: 99b3c27b-e4ec-41c1-906e-07cf29fe8871
+		summarizeBy: none
+		sourceColumn: Product Group Cd3  Product Group Desc3
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Group Cd4  Product Group Desc4'
+		dataType: string
+		lineageTag: bb362f15-cfbc-4f95-a490-f88a2a6cedc2
+		summarizeBy: none
+		sourceColumn: Product Group Cd4  Product Group Desc4
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Product_Group = m
+		mode: import
+		queryGroup: Dimensions
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse&".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Product_Group = Value.NativeQuery(Source, 
+				    "SELECT PRD.* 
+				    FROM dbo.D_Product_Group PRD
+				    INNER JOIN (SELECT DISTINCT ITM_PGC_KEY FROM dbo.F_Order_Item) ORD
+				        ON ORD.ITM_PGC_KEY = PRD.PGC_KEY", null, [EnableFolding = true]),
+				    #"Removed Other Columns" = Table.SelectColumns(dbo_D_Product_Group,{"PRODUCT_GROUP_CD4", "PRODUCT_GROUP_CD3", "PRODUCT_GROUP_CD2", "PRODUCT_GROUP_CD1", "PRODUCT_GROUP_DESC4", "PRODUCT_GROUP_DESC3", "PRODUCT_GROUP_DESC2", "PRODUCT_GROUP_DESC1", "PRODUCT_GROUP_LABEL4", "PRODUCT_GROUP_LABEL3", "PRODUCT_GROUP_LABEL2", "PRODUCT_GROUP_LABEL1", "PRODUCT_CATEGORY_CD", "PRODUCT_CATEGORY_DESC", "PRODUCT_CATEGORY_LABEL", "PGC_KEY", "PRODUCT_GROUP_CD1__PRODUCT_GROUP_DESC1", "PRODUCT_GROUP_CD2__PRODUCT_GROUP_DESC2", "PRODUCT_GROUP_CD3__PRODUCT_GROUP_DESC3", "PRODUCT_GROUP_CD4__PRODUCT_GROUP_DESC4"}),
+				    #"TEMP DEV STEP: LimitRecords" = fx_ConditionallyLimitRows(#"Removed Other Columns", LimitRecordCount, RecordCountLimit),
+				    #"Bulk Column Rename" = Table.TransformColumnNames(#"TEMP DEV STEP: LimitRecords", each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," "))
+				in
+				    #"Bulk Column Rename"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

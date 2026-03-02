@@ -1,0 +1,219 @@
+table 'Data Analytics Parent'
+	lineageTag: d4169245-a1b8-4d8c-97df-f404b6b00fc6
+
+	column 'Area Path'
+		dataType: string
+		lineageTag: 4533a1c8-26b4-4480-b128-d8c63241d81e
+		summarizeBy: none
+		sourceColumn: Area Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assigned To'
+		dataType: string
+		lineageTag: 47284a8b-f454-4107-bd7a-36fa278c73a4
+		summarizeBy: none
+		sourceColumn: Assigned To
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Iteration Path'
+		dataType: string
+		lineageTag: 2b9d3934-f82b-4cf3-bc61-39b9d8113b57
+		summarizeBy: none
+		sourceColumn: Iteration Path
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created By'
+		dataType: string
+		lineageTag: 92b482d6-719a-4d60-83f8-6b1523c7b3f5
+		summarizeBy: none
+		sourceColumn: Created By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed By'
+		dataType: string
+		lineageTag: ade179f2-db3b-479a-9d7a-c381c9eabc8f
+		summarizeBy: none
+		sourceColumn: Closed By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Item Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 34cb7200-cf3a-4da1-9a13-e9f385438dd8
+		summarizeBy: none
+		sourceColumn: Work Item Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Title
+		dataType: string
+		lineageTag: 8dd4f7df-9791-4a61-b22c-03ba1820ba4f
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		lineageTag: 267e5174-64d5-45ca-a7e8-e428cef0cdfc
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Work Item Type'
+		dataType: string
+		lineageTag: b0b16668-a46c-471d-84eb-a42068febde7
+		summarizeBy: none
+		sourceColumn: Work Item Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parent Work Item Id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 12a4fefd-c963-4179-9408-a2fdc72099bf
+		summarizeBy: none
+		sourceColumn: Parent Work Item Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Completed Effort'
+		dataType: int64
+		formatString: 0
+		lineageTag: 21c812f6-36ea-49ad-ba99-3b751131cf1b
+		summarizeBy: none
+		sourceColumn: Completed Effort
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Original Estimate'
+		dataType: double
+		lineageTag: 4e19edc1-1145-4e43-9950-917e8bfdc8ea
+		summarizeBy: none
+		sourceColumn: Original Estimate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Expense Type'
+		dataType: string
+		lineageTag: da02c1dd-eb39-48fd-89d4-a2e9733f81c2
+		summarizeBy: none
+		sourceColumn: Expense Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Closed Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 62b5265b-ec63-42fe-824c-646914f47578
+		summarizeBy: none
+		sourceColumn: Closed Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tags
+		dataType: string
+		lineageTag: 0cd922ae-b9ee-4947-8c6f-6e3136e44ce4
+		summarizeBy: none
+		sourceColumn: Tags
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Story Points'
+		dataType: double
+		lineageTag: 7064b220-cb64-4ad9-bb02-df0f02ef1c73
+		summarizeBy: none
+		sourceColumn: Story Points
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Requested By'
+		dataType: string
+		lineageTag: a92dc582-2b61-49dc-99b8-32f7ade50b77
+		summarizeBy: none
+		sourceColumn: Requested By
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Created Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1760efbc-d30c-4faf-b676-1f79c8078f1b
+		summarizeBy: none
+		sourceColumn: Created Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Path_Assignee [Tasks]'
+		dataType: string
+		lineageTag: 42c05081-ad25-41a7-9246-7d5b11ef40cd
+		summarizeBy: none
+		sourceColumn: Path_Assignee [Tasks]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Activated Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e2f2b017-c60e-4af3-837e-ab540eeb83a6
+		summarizeBy: none
+		sourceColumn: Activated Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual Start'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 966a8b63-66c9-4113-8e97-f25852689937
+		summarizeBy: none
+		sourceColumn: Actual Start
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actual End'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0cf99818-0632-4b04-ad4f-619d9a85aefe
+		summarizeBy: none
+		sourceColumn: Actual End
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'InProgress Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: f3d8b9a1-a43e-482d-a58a-516c6ffc95df
+		summarizeBy: none
+		sourceColumn: InProgress Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Change Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 819755e6-ee4f-4d80-bbee-6b0100a9e6ce
+		summarizeBy: none
+		sourceColumn: State Change Date
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Data Analytics Parent' = m
+		mode: import
+		source =
+				let
+				    Source = #"Data Analytics Child"
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,289 @@
+relationship 6191839f-89c9-c04b-1db1-733fdc4b1d4d
+	fromColumn: F_Order_Item.'Bill To Cust Key'
+	toColumn: D_Customer_BillTo.'Billing Cust Key'
+
+relationship 797e49fe-38ee-d94f-2598-6c13f8829652
+	fromColumn: F_Order_Item.'Converted To Order Date'
+	toColumn: D_Calendar_Filter.'Calendar Date'
+
+relationship 5a9c247a-8d42-376f-e182-33e6dac17b9d
+	fromColumn: F_Order_Item.'Converted To Order Date'
+	toColumn: D_Calendar_Visual.'Calendar Date'
+
+relationship 4a78dce0-b5f0-10e2-c9fc-0ccba57f2cc2
+	fromColumn: F_Order_Item.'Loc Key'
+	toColumn: D_Location.'Loc Key'
+
+relationship f4384b5c-50c7-6193-1bfc-caefc1c3afbb
+	fromColumn: F_Order_Item.'Mfr Key'
+	toColumn: D_Manufacturer.'Mfr Key'
+
+relationship 0b4357cd-4bb9-118a-3e0b-5e7af35214cb
+	fromColumn: F_Order_Item.'Ship To Cust Key'
+	toColumn: D_Customer_ShipTo.'Ship To Cust Key'
+
+relationship 51a3788f-4e28-f0c4-9484-a6366469c5b6
+	fromColumn: F_Order_Item.'Itm Pgc Key'
+	toColumn: D_Product_Group.'Pgc Key'
+
+relationship d5c3e209-1ea8-467d-dfd9-a2c1594cc977
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_Param_Current_Period.'zCurrent_Period_Parameter Order'
+	toColumn: z_KPI_Slicer.Index
+
+relationship e379d020-6a7a-99ec-0bfc-0aa48fe21c06
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Prior_Period.'zPrior_Period_Parameter Order'
+
+relationship 244f7069-3230-2c06-cd33-a0236a275fbd
+	fromColumn: z_Param_Point_In_Time_Metric_Table_2.'Time Intelligence Index'
+	toColumn: z_KPI_Slicer_Line_Chart_2.Index
+
+relationship a90c79ae-d43d-dc8a-4b2a-3b77f7c93525
+	fromColumn: z_Param_Point_In_Time_Metric_Table_2.'Measure Index'
+	toColumn: z_Time_Series_Measure_Selector_2.'Measure Index'
+
+relationship 60b11d8a-0f86-f59c-ad13-17c851970867
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_ADO_Var.'zParam - ADO Var Order'
+
+relationship 0d5a81f4-2023-9c3c-37cf-b9cc8fb6483c
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_GP%_Var.'zParam - Ord Count Var Order'
+
+relationship 4d5da7ef-48cb-9fbf-8d43-e2db00e4bc79
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Avg_Order_Amount_Var.'zParam Avg Order Amount - Var Order'
+
+relationship e4a9a2a1-bd4b-ed60-43d6-91c7121fa146
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Previous_Open_Order_Amount_KPI.'zParamPrevious - Open Ord Amount KPI Order'
+
+relationship 3f967ecc-172a-de2b-285a-9472aae34d49
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_Param_Previous_Avg_Order_Amount_KPI.'Parameter Order'
+	toColumn: z_KPI_Slicer.Index
+
+relationship 2af5b346-d537-be55-1742-5dd488c37a23
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Prev_Order_Count_KPI.'zParamPrev - Ord Cnt KPI Order'
+
+relationship 105df108-5025-3b79-60fa-34c25a7dfa4e
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Prev_ADO_KPI.'zParamPrev - ADOKPI Order'
+
+relationship 30f58801-2dc4-eab0-09e2-75639928a4aa
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Current_Order_Count_Var.'zparam Order'
+
+relationship 83547a72-34df-e87b-8aa6-436174a1ef6d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Previous_GP%.'zParamCurrent - GP% Order'
+
+relationship 6d2f0e48-6eee-3431-52f6-ce4ff01ed47a
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Prev_Final_Cost_KPI.'zParamPrev - Final Cost KPI Order'
+
+relationship 9caab1ff-7a4e-6edc-b871-4639e0f3c3f9
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Current_Order_Count_KPI.'zParamCurrent - Ord Cnt KPI Order'
+
+relationship f333bc54-214c-e93d-139a-29e6c2a0fb34
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Current_Open_Order_Amount_KPI.'Parameter Order'
+
+relationship a37d7ba1-5693-6a54-0fa8-f8a925bbcf8f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Current_GP%.'zParamCurrent - GP% Order'
+
+relationship 8432c080-4b96-2160-176f-c620b97e8982
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Current_Final_Cost_KPI.'zParamCurrent - Final Cost KPI Order'
+
+relationship 23933130-5947-732d-bee0-548acd7d3944
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_Param_Current_Avg_Order_Amount_KPI.'Parameter Order'
+	toColumn: z_KPI_Slicer.Index
+
+relationship 0f75d124-41a9-e5b2-303c-3335126860af
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Current_ADO_KPI.'zParamCurrent - ADOKPI Order'
+
+relationship 04464874-235c-c6d4-1892-8d257cc96713
+	fromColumn: z_Param_Bar_Chart_Measures_Current_Year.'zParam Order'
+	toColumn: z_KPI_Slicer.Index
+
+relationship 8d54e785-5924-baab-1daa-62d76144a660
+	fromColumn: z_Param_Bar_Chart_Measures_Current_Year.'Measure Index'
+	toColumn: z_Bar_Chart_Measures_Slicer.'Measure Index'
+
+relationship 3ba6c25c-bc07-4cf3-e4c1-7ea35d502ab8
+	fromColumn: z_Param_Bar_Chart_Measures_Previous_Year.'Parameter Order'
+	toColumn: z_KPI_Slicer.Index
+
+relationship 8bca1154-630c-71bb-c31f-1652f2fd9384
+	fromColumn: z_Param_Bar_Chart_Measures_Previous_Year.Value4
+	toColumn: z_Bar_Chart_Measures_Slicer.'Measure Index'
+
+relationship e83d486c-2bb7-f9f6-ff57-c618871b1b8a
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Bar_Chart_Date.'Parameter Order'
+
+relationship 362cabc5-816d-be4b-33f1-8222a8a0875a
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer_Line_Chart_2.Index
+	toColumn: z_Param_Bar_Chart_Date_2.'zParam Bar Chart Date2 Order'
+
+relationship ae9d12c4-20dd-3242-a6a0-39d834eb9187
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Prev_Order_Amount_KPI.'zParamPreviousTS Order'
+
+relationship f9da31d3-a4af-2b77-10dd-d89e70cd3094
+	fromColumn: z_Param_Point_In_Time_Metric_Line_Chart_2.'KPI Selector'
+	toColumn: z_KPI_Slicer_Line_Chart_2.Index
+
+relationship d70da120-7772-94f2-ccd3-3f9c639cdb2f
+	fromColumn: z_Param_Point_In_Time_Metric_Line_Chart_2.'Measure Selector'
+	toColumn: z_Time_Series_Measure_Selector_2.'Measure Index'
+
+relationship 7cd1696f-9d01-c9aa-7d3b-2fd89903d043
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Current_Order_Amount_KPI.'zParamCurrentTS Order'
+
+relationship 28c255d9-39ad-e137-4a53-15fd13501ead
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Current_Order_Amount_Var.'zParam Ord Amount Variance Order'
+
+relationship 24f171b1-e0f3-2ec7-998d-3577c9ea21e3
+	fromColumn: z_Param_Point_In_Time_Metric_Line_Chart.'Time Index'
+	toColumn: z_KPI_Slicer.Index
+
+relationship ecf0a3af-2faf-cbd9-3800-77443323fb70
+	fromColumn: z_Param_Point_In_Time_Metric_Line_Chart.'Metric Index'
+	toColumn: z_Time_Series_Measure_Selector.'Measure Index'
+
+relationship 5ad65378-4cd6-4b4c-578c-07ee7dbe7090
+	fromColumn: z_Param_Point_In_Time_Metric_Table.'Time Intelligence Index'
+	toColumn: z_KPI_Slicer.Index
+
+relationship ecccd40c-58b2-08c2-cfff-b12f4149af6a
+	fromColumn: z_Param_Point_In_Time_Metric_Table.'Measure Index'
+	toColumn: z_Time_Series_Measure_Selector.'Measure Index'
+
+relationship 0e690aa0-b917-06f2-9f4c-166ca5c40337
+	fromColumn: z_Param_Point_In_Time_Metric_Table.Value6
+	toColumn: z_Calculation_Bridge.Condition
+
+relationship e311e12a-609f-73f6-262c-708a0d6a6a9a
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Order_Amount_Line_Chart.'zParam_OrderAmount_LineChart Order'
+
+relationship 61447399-ed0d-c5a2-6fe6-5b224fe3f056
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: z_KPI_Slicer.Index
+	toColumn: z_Param_Order_Amount_Line_Chart_Prev.'zParamPrev - OrdAmtLine Order'
+
+relationship e3b7a431-84f1-250d-982a-192bd272edae
+	isActive: false
+	fromColumn: F_Order_Item.'Due Date'
+	toColumn: D_Calendar_Visual.'Calendar Date'
+
+relationship ba1228bc-cb62-0de9-13b5-485a870050d1
+	isActive: false
+	fromColumn: F_Order_Item.'Order Date'
+	toColumn: D_Calendar_Visual.'Calendar Date'
+
+relationship AutoDetected_fd5145e4-107a-485a-94c6-23af0aa28241
+	toCardinality: many
+	fromColumn: F_Order_Item.'Ship To Cust Key'
+	toColumn: RLS_Customer_ShipTo.SHIP_TO_CUST_KEY
+
+relationship 125edcc2-e99f-4286-2d78-6213d0245ae1
+	toCardinality: many
+	fromColumn: F_Order_Item.'Bill To Cust Key'
+	toColumn: RLS_Customer_BillTo.BILLING_CUST_KEY
+
+relationship 1882dfe5-7c8f-fa47-4fe0-2cbcb5690790
+	toCardinality: many
+	fromColumn: F_Order_Item.'Bill To Cust Key'
+	toColumn: RLS_Customer_BillTo_AVP.BILLING_CUST_KEY
+
+relationship 4b25ee8a-aa14-ecc7-c6bd-487887231862
+	fromColumn: F_Order_Item.'Due Date Bucket'
+	toColumn: 'Due Date Order'.'Due Date Bucket'
+
+relationship 6e2e44cb-5f49-02df-0993-538496ade644
+	fromColumn: F_Order_Item.'Past Due Bucket'
+	toColumn: 'Past Due'.'Past Due Bucket'
+
+relationship ae3462b5-9438-acd1-2c52-86f730fb8433
+	fromColumn: F_Order_Item.'Itm Promised Delivery Date'
+	toColumn: D_Calendar_w_Future.'Calendar Date'
+
+relationship AutoDetected_e182a603-8a37-42bb-b72e-9733a67e2d83
+	isActive: false
+	fromColumn: D_Customer_BillTo.'Loc Key'
+	toColumn: D_Location.'Loc Key'
+
+relationship AutoDetected_70070b35-4c56-4e0e-94db-f1b43a43fda1
+	isActive: false
+	fromColumn: D_Customer_ShipTo.'Loc Key'
+	toColumn: D_Location.'Loc Key'
+
+relationship AutoDetected_be99a317-a006-45aa-85a9-f1802af0888f
+	fromColumn: TEMP_Corp_Industry_Mapping.NAICS6_CD
+	toColumn: TEMP_NAICS.NAICS6_CD
+
+relationship AutoDetected_a82e0f55-c2bd-4337-b3b8-120d35ad9e45
+	fromColumn: F_Order_Item.'Sup Loc No'
+	toColumn: D_Supplier_Location.'Sup Loc No'
+
+relationship 41320514-c471-81cc-4b67-3a9c76a06f7f
+	fromColumn: z_Param_Dim_Rollup_Dimension.Show/Hide
+	toColumn: z_Calculation_Bridge.Condition
+

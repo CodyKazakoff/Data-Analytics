@@ -1,0 +1,56 @@
+table z_prm_test_cases
+	lineageTag: c4a12a68-cb12-4790-b909-566ce3fa9ad6
+
+	column z_prm_test_cases
+		lineageTag: 2b76fafb-1668-4334-b043-daa32cf84f8f
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_test_cases Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_test_cases Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_test_cases Fields'
+		isHidden
+		lineageTag: 9f15cd1b-4274-41e2-948a-f446fa2bb9ce
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_test_cases Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_test_cases Order'
+		isHidden
+		formatString: 0
+		lineageTag: 5bc29034-b18c-4452-97ad-0b59d3cdf03d
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		formatString: 0
+		lineageTag: c9b6cf0a-01ff-42f1-b7b5-1bcf5bbdf978
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_test_cases = calculated
+		mode: import
+		source =
+				{
+				    ("24h Total Test Cases", NAMEOF('Measure Table'[24h Total Test Cases]), 0,1),
+				    ("Total Test Cases", NAMEOF('Measure Table'[Total Test Cases]), 1,0)
+				}
+
+	annotation PBI_Id = 6fc14e00de1947d79d5d0434d0557778
+

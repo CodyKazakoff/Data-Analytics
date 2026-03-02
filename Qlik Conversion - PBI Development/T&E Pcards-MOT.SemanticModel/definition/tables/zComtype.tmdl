@@ -1,0 +1,78 @@
+table zComtype
+	lineageTag: 4cb6867e-42c8-43d1-a33d-cc2e68bf11e3
+
+	column zComtype
+		lineageTag: c96bdbea-fdd3-482f-8b42-01c9654b50a3
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zComtype Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zComtype Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zComtype Fields'
+		isHidden
+		lineageTag: 479b36ae-eb64-4c03-9008-3f27fabb6853
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zComtype Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zComtype Order'
+		isHidden
+		formatString: 0
+		lineageTag: 61f406ec-59a2-451e-8976-52e3df0630ed
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Comtype = ```
+			
+			SWITCH(
+			    TRUE(),
+			    SEARCH("CMFuel", 'zComtype'[zComtype], 1, 0) > 0, "Prior 3MA vs CM",
+			    SEARCH("3MAFuel", 'zComtype'[zComtype], 1, 0) > 0, "Prior 3MA vs 3MA",
+			    SEARCH("Ppg", 'zComtype'[zComtype], 1, 0) > 0, "CM vs Prior 3MA PPG",
+			    SEARCH("Gal", 'zComtype'[zComtype], 1, 0) > 0, "CM vs Prior 3MA Gal"
+			   
+			)
+			```
+		lineageTag: 21eb5863-d2e9-40f6-a37e-cca2fbfb019e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition zComtype = calculated
+		mode: import
+		source =
+				{
+				    ("Prior 3MAFuel", NAMEOF('Measure Table'[Prior 3MAFuel]), 0),
+				    ("Prior 3MA/CMFuel", NAMEOF('Measure Table'[Prior3MAvsCMFuel]), 1),
+				    ("Prior 3MA(PPG)", NAMEOF('Measure Table'[Prior 3MA(PPG)]), 2),
+				    ("Prior 3MA(Gal)", NAMEOF('Measure Table'[Prior 3MA(Gal)]), 3),
+				    ("CMFuel", NAMEOF('Measure Table'[CMFuel Amount]), 4),
+				    ("CM (PPG)", NAMEOF('Measure Table'[CM Amount(PPG)]), 5),
+				    ("CM (Gal)", NAMEOF('Measure Table'[CM Amount(Gal)]), 6),
+				    ("3MAFuel", NAMEOF('Measure Table'[3MAFuel]), 7),
+				    ("$Change.PPG", NAMEOF('Measure Table'[$Change.PPG]), 8),
+				    ("$Change.Gal", NAMEOF('Measure Table'[$Change.Gal]), 9),
+				    ("$Change.CMFuel", NAMEOF('Measure Table'[$Change.CMFuel]), 10),
+				    ("$Change.3MAFuel", NAMEOF('Measure Table'[$Change.3MAFuel]), 11),
+				    ("%Change.PPG", NAMEOF('Measure Table'[%Change.PPG]), 12),
+				    ("%Change.Gal", NAMEOF('Measure Table'[%Change.Gal]), 13),
+				    ("%Change.CMFuel", NAMEOF('Measure Table'[%Change.CMFuel]), 14),
+				    ("%Change.3MAFuel", NAMEOF('Measure Table'[%Change.3MAFuel]), 15)
+				}
+
+	annotation PBI_Id = 5826e9e3eb9a49f68a8a970a6d2053c2
+

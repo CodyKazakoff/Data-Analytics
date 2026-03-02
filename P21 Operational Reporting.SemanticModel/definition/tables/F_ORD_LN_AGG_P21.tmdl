@@ -1,0 +1,219 @@
+table F_ORD_LN_AGG_P21
+	lineageTag: 363f84ea-167f-4fdb-a738-ef3359aeb56b
+
+	column ORD_LN_KEY
+		dataType: string
+		lineageTag: 1b7635fa-5883-4e5d-9bb8-20961b0fcc84
+		summarizeBy: none
+		sourceColumn: ORD_LN_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORD_HDR_KEY
+		dataType: string
+		lineageTag: 2ae354aa-9560-4f66-99c5-24cee48c5e32
+		summarizeBy: none
+		sourceColumn: ORD_HDR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_KEY
+		dataType: string
+		lineageTag: e9fd13f3-349f-46e4-a145-167782b1c9b4
+		summarizeBy: none
+		sourceColumn: ITM_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: ca746cb2-f30a-48a1-9f5a-b0f93bb71444
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILL_TO_CUST_KEY
+		dataType: string
+		lineageTag: b425cb8e-312b-4df0-ad89-48588f577d4c
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 2eba8c17-9293-4b11-8c7a-16d196243892
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_CTL_NO
+		dataType: string
+		lineageTag: d53a2a8e-db12-4bd7-b07c-b3b3f12d0ee5
+		summarizeBy: none
+		sourceColumn: ORDER_CTL_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_LINE_NO
+		dataType: double
+		formatString: 0
+		lineageTag: ae4d1b99-9a09-4eca-9115-da10d45069bf
+		summarizeBy: sum
+		sourceColumn: ORDER_LINE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column ORDER_LINE_SUF
+		dataType: double
+		lineageTag: ab7d1453-a2b7-4473-a0ed-ad0db893823c
+		summarizeBy: sum
+		sourceColumn: ORDER_LINE_SUF
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIP_TO_CUST_NO
+		dataType: string
+		lineageTag: 77cd882d-6347-4210-99de-2482eeb7dd27
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILL_TO_CUST_NO
+		dataType: string
+		lineageTag: 00c0d741-a400-4137-a03b-062d7b413bfb
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_PO_NO
+		dataType: string
+		lineageTag: 16b8ac71-c3fe-410f-aeb4-cb19caabab63
+		summarizeBy: none
+		sourceColumn: CUST_PO_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROCESS_STATUS
+		dataType: string
+		lineageTag: e7dd424e-77a3-4694-a945-e058823260b1
+		summarizeBy: none
+		sourceColumn: PROCESS_STATUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALESMAN_ID
+		dataType: string
+		lineageTag: 1bb9e941-7942-4ca6-940b-cb2c5f1a6308
+		summarizeBy: none
+		sourceColumn: SALESMAN_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_DATE
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e23a81bb-615e-4335-9954-721b39c010d3
+		summarizeBy: none
+		sourceColumn: ORDER_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column DUE_DATE
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ee59d0d8-8f43-49a3-83c3-f17c0c7dbda0
+		summarizeBy: none
+		sourceColumn: DUE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUST_REQ_DATE
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 4d14dfd7-f541-454f-a446-ab3049663715
+		summarizeBy: none
+		sourceColumn: CUST_REQ_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_SUPPLIER_NO
+		dataType: string
+		lineageTag: 9e9e2766-5197-44d6-8f18-b503d488e281
+		summarizeBy: none
+		sourceColumn: ITM_SUPPLIER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_MFG_PART_NO
+		dataType: string
+		lineageTag: b354d3e7-b2cb-457c-8dc2-6eaf5bcccecd
+		summarizeBy: none
+		sourceColumn: ITM_MFG_PART_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ITM_OP_QTY_ORDERED
+		dataType: double
+		lineageTag: f1509999-ed12-4555-83c2-43f52689c566
+		summarizeBy: sum
+		sourceColumn: ITM_OP_QTY_ORDERED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_UNIT_SELL_PRICE
+		dataType: double
+		lineageTag: e6981862-a527-4528-b925-af4ace50d941
+		summarizeBy: sum
+		sourceColumn: ITM_UNIT_SELL_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_UNIT_COST
+		dataType: double
+		lineageTag: 5311e1d8-e7ca-4fde-99d1-7cbdde3dcb7c
+		summarizeBy: sum
+		sourceColumn: ITM_UNIT_COST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ITM_ITEM_NO
+		dataType: string
+		lineageTag: 42898c52-08ac-45f2-a467-83d4ec52d2a4
+		summarizeBy: none
+		sourceColumn: ITM_ITEM_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_ORD_LN_AGG_P21 = m
+		mode: import
+		queryGroup: Facts
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4" = Workspaces{[workspaceId="8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"]}[Data],
+				    #"d646a64b-d8dc-4875-983f-fdbdaf561e2c" = #"8cea46f7-e9f6-4d73-8e1e-9a4ad823edc4"{[dataflowId="d646a64b-d8dc-4875-983f-fdbdaf561e2c"]}[Data],
+				    F_ORD_LN_AGG_P21_ = #"d646a64b-d8dc-4875-983f-fdbdaf561e2c"{[entity="F_ORD_LN_AGG_P21",version=""]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(F_ORD_LN_AGG_P21_,{"TAX_CODE", "SHIP_TO_OVERRIDE", "CUST_RELEASE_NO", "CUST_RFQ_NO", "HANDLING_INST", "ORDER_TYPE", "ORDER_TYPE_CD", "PROCESS_STATUS_DESC", "ORDER_SOURCE", "ORDER_SOURCE_CD", "SHIP_CHARGES", "SHIP_CHARGES_CD", "SHIP_METHOD", "SHIP_METHOD_CD", "CARRIER", "CARRIER_CD", "LOST_SALE_CD", "TAX_OUTBND_FRT", "ENTERED_BY_ID", "TAKEN_BY", "DC_INST", "TRN_REQ_FLAG", "PROJECT_DIST_CD", "TAX_STATUS", "SPECIAL_TAX_CD", "TAX_OVERRIDE_TYPE", "EDI_CHG_FLAG", "EDI_DISCREPANCY", "SHIP_DATE", "SHIP_DATE_DESC", "EXPEDITE_DATE", "CONSIGN_ORDER_FLAG", "SHIP_COMPLETE", "EMAIL_ADDRESS", "PROMOTION_CODE", "XML_LOCATION_ID", "XML_VENDOR_ID", "PROMOTION_CD", "NB_FLAG", "SERVICE_TYPE", "EBUS_SOURCE", "COD_FLAG", "CARRIER_CONSIGNEE", "PRICE_GUIDE", "STOREROOM_NO", "CUST_ACK_DATE", "EXP_DELIVERY_DATE", "INTERNAL_EXP_DATE", "LOCK_FRT_CHARGE", "OCN_COPIED", "CC_ACCT_OVERRIDE", "STAGING_LOCATION", "ORDER_METHOD", "ORDER_METHOD_CD", "COMMERCIAL_CURRENCY", "CURRENCY_TYPE", "CREDIT_OVERRIDE_USERID", "PRICE_OVERRIDE_REASON", "PRICE_OVERRIDE_USERID", "FREIGHT_OVERRIDE_USERID", "FREIGHT_OVERRIDE_TMSTMP", "VAS_REQUIRED", "EXCLUDE_FROM_WEB", "FREIGHT_LOCKED_FLAG", "COPY_ALLOWED", "COPY_RESTRICT_USERID", "LOCAL_HD_OVERRIDE", "LOCAL_HD_OVERRIDE_USERID", "FREIGHT_TIER", "HAS_TRACKING", "ORIGINAL_CALC_FREIGHT_TOTAL", "ITM_CUST_PO_LINE_NO", "ITM_REGULAR_SALES_ITEM", "ITM_NO_SUB_FLAG", "ITM_MO_ASSOC_FLAG", "ITM_COMP_ASSOC_FLAG", "ITM_STK_NO_FLAG", "ITM_GROUP_SERIAL", "ITM_PROD_GROUP_NO", "ITM_OP_QTY_SHIPPED", "ITM_OP_QTY_BILLED", "ITM_HOW_PRICED_FLAG", "ITM_SYSCON_BRANCH", "ITM_SYSCON_NO", "ITM_PA_TYPE", "ITM_PRICE_OVERRIDE", "ITM_U_OF_M_CD", "ITM_MAN_COST_FLAG", "ITM_PROMSD_DELIV_DT", "ITM_ITEM_STATUS", "ITM_PA_CALC_PRICE", "ITM_TRN_REQ_FLAG", "ITM_SCRUNCH_PART_NO", "ITM_CLOSURE_DATE", "ITM_EDI_CHG_FLAG", "ITM_EDI_DISCREPANCY", "ITM_COST_AVAIL", "ITM_ALLOCATED_QTY", "ITM_SUPPLIER", "ITM_SOURCED_QTY", "ITM_OP_TOT_SHIP", "ITM_COST_SOURCE", "ITM_NB_FLAG", "ITM_XML_CANCEL_QTY", "ITM_XML_RETURN_QTY", "ITM_ORIGINAL_COST", "ITM_WORK_ORDER_FLAG", "ITM_FREIGHT_ADDED", "ITM_OLD_PRICE", "ITM_LAST_SOLD_PRICE", "ITM_INDEX_CARD_PRICE", "ITM_STOREROOM_NO", "ITM_AFFECT_USAGE_FLAG", "ITM_TAX_CODE", "ITM_SPECIAL_RATE", "ITM_TAX_AMT", "ITM_PST_TAX", "ITM_LIST_PRICE", "ITM_CUST_REQ_DATE", "ITM_CUST_ACK_DATE", "ITM_EXP_DELIVERY_DATE", "ITM_INTERNAL_EXP_DATE", "ITM_COST_CHANGE", "ITM_PRICE_COMP_FLAG", "ITM_LAST_UPD_PGM", "ITM_SYSCON_BRANCH_2", "ITM_SYSCON_NO_2", "ITM_PA_TYPE_2", "ITM_UNIT_SELL_PRICE_2", "ITM_SYSCON_BRANCH_3", "ITM_SYSCON_NO_3", "ITM_PA_TYPE_3", "ITM_UNIT_SELL_PRICE_3", "ITM_PRICE_OVERRIDE_REASON", "ITM_PRICE_OVERRIDE_USERID", "ITM_OWNERSHIP", "ITM_FINAL_COST", "ITM_CUSTOMER_COST", "ITM_CATALOG_ITEM_FLAG", "ITM_CREATION_APPLICATION", "ITM_PRICE_INCREASE", "ITM_STK_UOM", "ITM_SALES_UOM", "ITM_SALES_UOM_QTY", "ITM_SALES_CONV_FACTOR", "ITM_SALES_UNIT_PRICE", "ITM_SALES_QTY_ORDERED", "ITM_SALES_QTY_SHIPPED", "ITM_SALES_QTY_BILLED", "ITM_INCIDENTAL_QUALIFY", "ITM_INCIDENTAL_PRICE", "ITM_SKIP_LOCK_PRICING", "ITM_PPIF_EDP_NO", "ITM_SSS_CUST_COST", "ITM_SSS_WORK_ORDER_FLAG", "ITM_IMMEDIATE_PICK", "ITM_EDI_FOUND", "ITM_ADD_ON_ITEM", "ITM_FC_SOURCED", "ITM_SCH_LINE_NO", "ITM_SCH_SEQ_NO", "ITM_SCH_PROCESS_DATE", "ITM_SCH_CUST_RELEASE_NO", "ITM_PROMOTION_NO", "ITM_ADD_ON_ITEM_NO", "ITM_CUSTOMER_PRICE", "ITM_SALES_CUST_PRICE", "ITM_CUST_TAX_AMT", "ITM_CUST_INBOUND_FRT", "ITM_CUST_OUTBOUND_FRT", "ITM_CUST_UNIT_COST", "ITM_QUOTE_FOR_BELT_ITEM", "ITM_SSS_Z_CODE", "ITM_SHIP_COMPLETE", "ITM_SHIP_CHARGES", "ITM_SHIP_CHARGES_CD", "ITM_SHIP_METHOD", "ITM_SHIP_METHOD_CD", "ITM_CARRIER", "ITM_CARRIER_CD", "ITM_CARRIER_CONSIGNEE", "ITM_SCH_FIRM_LINE", "ITM_EDI_ORDER_CTL_NO", "ITM_FREIGHT_EXCEPTION_NO", "ITM_CALCULATED_FRT", "ITM_FRT_FACTOR", "ITM_LOWER_COST_AVAIL", "ITM_EXPECTED_DATE_CHANGED", "ITM_PA_PROD_GROUP_NO", "ITM_PA_SUPPLIER_NO", "ITM_PA_ITEM_NO", "ITM_API_CALCULATED_FRT", "ITM_API_FRT_FACTOR", "ITM_ORIGINAL_CALC_FREIGHT", "ITM_ORIGINAL_CALC_FREIGHT_SOURCE", "ITM_MAN_OUTBOUND_FRT_FLAG", "ITM_FREIGHT_TIER", "ITM_TOTAL_SOURCED_QTY", "HDR_LAST_UPD_USERID", "HDR_LAST_UPD_TERMID", "HDR_LAST_UPD_TMSTMP", "HDR_ORIGINAL_USERID", "HDR_CREATION_USERID", "HDR_CREATION_TMSTMP", "ITM_LAST_UPD_USERID", "ITM_LAST_UPD_TMSTMP", "ITM_CREATION_TMSTMP", "ITM_CREATION_USERID", "HDR_DELETE_FLAG", "ITM_DELETE_FLAG", "ITM_GST_TAX", "ITM_TAX_PCT", "ITM_INBOUND_FRT", "ITM_OUTBOUND_FRT"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

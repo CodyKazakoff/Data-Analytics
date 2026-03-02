@@ -1,0 +1,77 @@
+table z_Param_Customer_Summary
+	lineageTag: 9d1a0278-e3db-4667-acc0-111a55753c8a
+
+	column 'zParam - Customer Summary'
+		lineageTag: c52d34ca-b9f7-47fe-abf7-c5b877638d70
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam - Customer Summary Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam - Customer Summary Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam - Customer Summary Fields'
+		lineageTag: 88764163-de21-4d06-ba04-ab1a0dd9014f
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam - Customer Summary Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam - Customer Summary Order'
+		formatString: 0
+		lineageTag: e3c99d76-ee95-4508-808f-2f3aa4b00212
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	column Index
+		formatString: 0
+		lineageTag: a17a1891-e57a-44ef-963d-d2d934ee7c1c
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Customer_Summary = calculated
+		mode: import
+		source =
+				{
+				
+				//All Customer Summary
+				    ("Branch", NAMEOF(D_Location[MI Loc]), 0, 0),
+				    ("Br/Cust No", NAMEOF('D_Customer_ShipTo'[MI Loc  Ship To Customer No  Ship To Customer Name]), 1, 0),
+				    ("Customer Name", NAMEOF('D_Customer_ShipTo'[Ship To Customer Name]), 2, 0),
+				    ("Territory", NAMEOF('D_Customer_ShipTo'[Territory Full Name]), 3, 0),
+				    ("Order Amount", NAMEOF('Measure Table'[Total $]), 4, 0),
+				    ("GP %", NAMEOF('Measure Table'[Order GP %]), 5, 0),
+				    ("Open Order Amount", NAMEOF('Measure Table'[Total $]), 6, 0),
+				    ("CY Order Amount", NAMEOF('Measure Table'[Total $ CYTD]), 7, 0),
+				    ("CY GP %", NAMEOF('Measure Table'[Order GP %]), 8, 0),
+				    ("PY Order Amount", NAMEOF('Measure Table'[Total $ PYTD]), 9, 0),
+				    ("PY GP %", NAMEOF('Measure Table'[Order GP %]), 10, 0),
+				    ("Total # Orders", NAMEOF('Measure Table'[Order #]), 11, 0),
+				
+				//New Customer Summary
+				    ("Br/Cust No", NAMEOF('D_Customer_ShipTo'[MI Loc  Ship To Customer No  Ship To Customer Name]), 12, 1),
+				    ("Customer Name", NAMEOF('D_Customer_ShipTo'[Ship To Customer Name]), 13, 1),
+				    ("Territory", NAMEOF('D_Customer_ShipTo'[Territory Full Name]), 14, 1),
+				    ("Order Amount", NAMEOF('Measure Table'[Total $]), 15, 1),
+				    ("Account Creation Date", NAMEOF('D_Customer_BillTo'[Creation Date]), 16, 1),
+				    ("Pick 12 Acct", NAMEOF('Measure Table'[Blank Measure]), 17, 1)
+				
+				
+				
+				}
+
+	annotation PBI_Id = 8c87d0b4692445daaa037d388d194ef9
+

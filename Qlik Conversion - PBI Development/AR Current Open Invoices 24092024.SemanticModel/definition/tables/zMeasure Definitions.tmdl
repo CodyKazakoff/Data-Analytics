@@ -1,0 +1,90 @@
+/// *Metadata*
+table 'zMeasure Definitions'
+	isHidden
+	lineageTag: 7c523538-d67d-4ce8-96d7-badc29a48aa5
+
+	column 'Measure Name'
+		dataType: string
+		isHidden
+		lineageTag: 0cc1ab77-c060-4322-a3ef-29769f163a13
+		summarizeBy: none
+		sourceColumn: Measure Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure Definition'
+		dataType: string
+		isHidden
+		lineageTag: c8a27356-e9cc-42f3-b435-a7aa70f8c242
+		summarizeBy: none
+		sourceColumn: Measure Definition
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Display Folder'
+		dataType: string
+		isHidden
+		lineageTag: c236644f-01ac-4faf-8b0d-748c4eca54a3
+		summarizeBy: none
+		sourceColumn: Display Folder
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Format
+		dataType: string
+		isHidden
+		lineageTag: 3c90be77-6917-4c2e-a3d4-59c10b15a795
+		summarizeBy: none
+		sourceColumn: Format
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsHidden
+		dataType: boolean
+		isHidden
+		lineageTag: 071f6042-c613-4048-8325-75a32d0a2fa1
+		summarizeBy: none
+		sourceColumn: IsHidden
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: ef7c45c0-ad22-47c9-8363-e8791d57fbba
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Generate Time Series Defs'
+		dataType: boolean
+		lineageTag: 5353c1ad-945d-4105-ba52-1384cc2dc1f6
+		summarizeBy: none
+		sourceColumn: Generate Time Series Defs
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'zMeasure Definitions-500aba44-35b6-406e-87da-b10dd9cde3ce' = m
+		mode: import
+		queryGroup: Metadata\Axis
+		source =
+				let
+				    // Location to store measure definitions.
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("lVTbjtMwEP0Vq8tDF0XbsDwgLeIhpAEi3Au5LEhthdzE3UY0NnJs6PL1TBI7baiL2qiSLc+cmTMzZ7pYDDCRtJLI3xL2RFHIcrofOIMJ2Q+XynXv3/zRFsyf2ofFsevqtnamkuREErjaoyV0L+tDKArHB7Kr6GDlLAa+EoIyiSK6o6SqbY9ehH59h+z6aQzx0Du0ZL6H/RR7STBcMgTfxPt2lqDGGoYtwEEexucg4AO/JWvSR7RSO2nNGgc48JNg/OjhNDDBDuk2XJREFpz1iRwoXIrQ1IHDv824opgoSNJoaurpz+m08+dmhElVu20ErbaoZiCLkvYVYnXRBVltp6qx5yjLUZ6PnuFD2+0DYw9VhbzJaD6xEQUcVCKPm2oEFUOVmaQ5Jmu6g6Zax2jB6xrCfOUg9yAQ7dkcXImsVij24mQ6m77H3vRzJwzF1pz/QD5nm8KIs0ahuIFVOuxx0NlvRsXV8RqUJVoCfZxTUfD8mpA1CrUwS0w9p6jdzIuDmvHWuH47u32Lv4aJ/2nYH5cRvOtYGm+Mr5x+A837vWNphTG+dmw1XbA8RinFQSlI/QQjzdEaLDmCh2PjRvASefsC1JtlUJwgkgsUqwJaOOaZKmEVW8+PlGlryXO1o3f/2cyZyEEqPldMGqF3rRyHcRJO/cSfpdNEz6Xxr/Q4WnA4XtmrbX3NpUty49zcuG+HzXHbkdHcDpy80koqTic2KikrJJqLIoP/BfTynNcXRZgs5PNlhDsGLxqudy6w7q6nzFd/AQ==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Measure Name" = _t, #"Measure Definition" = _t, #"Display Folder" = _t, Description = _t, Format = _t, IsHidden = _t, #"Generate Time Series Defs" = _t]),
+				    // Change output type
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Measure Name", type text}, {"Measure Definition", type text}, {"Display Folder", type text}, {"Description", type text}, {"IsHidden", type logical}, {"Generate Time Series Defs", type logical}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

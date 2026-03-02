@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "AR Current Open Invoices 24092024"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6d90f2c3-ed3c-a71f-495f-b73b6a22f3dd"
+  }
+}

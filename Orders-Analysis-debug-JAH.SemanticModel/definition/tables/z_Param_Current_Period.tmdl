@@ -1,0 +1,48 @@
+table z_Param_Current_Period
+	lineageTag: d5875766-68d9-48c1-afce-825b6df3257f
+
+	column zCurrent_Period_Parameter
+		lineageTag: 7bcb819a-6b70-4537-8068-006428bef0a7
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zCurrent_Period_Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zCurrent_Period_Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zCurrent_Period_Parameter Fields'
+		lineageTag: d36c17b5-08db-4644-8b4c-bda5e24af89d
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zCurrent_Period_Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zCurrent_Period_Parameter Order'
+		formatString: 0
+		lineageTag: 27ae4051-7ad0-4866-bbe5-729659ef1746
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Current_Period = calculated
+		mode: import
+		source =
+				{
+				    ("CMTD Display", NAMEOF('Measure Table'[CMTD Display]), 1),
+				    ("CQTD Display", NAMEOF('Measure Table'[CQTD Display]), 2),
+				    ("CYTD Display", NAMEOF('Measure Table'[CYTD Display]), 0),
+				    ("Max Month Year", NAMEOF('Measure Table'[Max Month Year]), 3)
+				}
+
+	annotation PBI_Id = 93bb2160d1c14cd3a0b88be2aed5b064
+

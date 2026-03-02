@@ -1,0 +1,197 @@
+table 'Page Object'
+	lineageTag: 07e5ef59-3aba-4167-aae3-48c405ec7677
+
+	column OrigId
+		dataType: string
+		lineageTag: ffcc2efa-e4cb-4831-951f-b14a0e30e4af
+		summarizeBy: none
+		sourceColumn: OrigId
+
+		annotation SummarizationSetBy = User
+
+	column Name
+		dataType: string
+		lineageTag: 58b195a4-c43f-4255-a9cb-b80bbc45d203
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = User
+
+	column ObjectLeft
+		dataType: int64
+		formatString: 0
+		lineageTag: 7bbf19f8-1c18-472a-a4e3-3663b4bf2739
+		summarizeBy: none
+		sourceColumn: ObjectLeft
+
+		annotation SummarizationSetBy = User
+
+	column ObjectTop
+		dataType: int64
+		formatString: 0
+		lineageTag: dc879c9a-d2cd-4b38-bd7c-439f03ed5382
+		summarizeBy: none
+		sourceColumn: ObjectTop
+
+		annotation SummarizationSetBy = User
+
+	column ObjectZLayer
+		dataType: int64
+		formatString: 0
+		lineageTag: a6460261-64df-4a36-890b-98ef8499d5b2
+		summarizeBy: none
+		sourceColumn: ObjectZLayer
+
+		annotation SummarizationSetBy = User
+
+	column ObjectWidth
+		dataType: int64
+		formatString: 0
+		lineageTag: c98c29ec-6d03-4dfc-bd4e-abd7e6dac661
+		summarizeBy: none
+		sourceColumn: ObjectWidth
+
+		annotation SummarizationSetBy = User
+
+	column ObjectHeight
+		dataType: int64
+		formatString: 0
+		lineageTag: bfd2162f-f310-45c4-8e25-bf80b7835302
+		summarizeBy: none
+		sourceColumn: ObjectHeight
+
+		annotation SummarizationSetBy = User
+
+	column RawPageObjectType
+		dataType: string
+		lineageTag: 181f79cc-6771-419d-9149-fbb6248ab9f3
+		summarizeBy: none
+		sourceColumn: RawPageObjectType
+
+		annotation SummarizationSetBy = User
+
+	column ObjectType
+		dataType: string
+		lineageTag: b59f752b-c140-4083-b62f-3670a1b8808b
+		summarizeBy: none
+		sourceColumn: ObjectType
+
+		annotation SummarizationSetBy = User
+
+	column CalculationCondition
+		dataType: string
+		lineageTag: 378b72af-78d4-4877-92cc-545bb3d9aebb
+		summarizeBy: none
+		sourceColumn: CalculationCondition
+
+		annotation SummarizationSetBy = User
+
+	column Orientation
+		dataType: string
+		lineageTag: 3d8ff2a0-81fe-4c69-8030-ce3c969bf955
+		summarizeBy: none
+		sourceColumn: Orientation
+
+		annotation SummarizationSetBy = User
+
+	column Grouping
+		dataType: string
+		lineageTag: 71a36689-c95f-44ac-9ead-7c47e7df88de
+		summarizeBy: none
+		sourceColumn: Grouping
+
+		annotation SummarizationSetBy = User
+
+	column Text
+		dataType: string
+		lineageTag: 3a55aa01-6d6b-43aa-aac4-3f8aefd6f0f3
+		summarizeBy: none
+		sourceColumn: Text
+
+		annotation SummarizationSetBy = User
+
+	column Query
+		dataType: string
+		lineageTag: 4dd2aeb3-e886-4197-a984-ee77f63065c8
+		summarizeBy: none
+		sourceColumn: Query
+
+		annotation SummarizationSetBy = User
+
+	column Complexity
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 84dfed62-8a48-4433-81a7-cd2fe389c2c7
+		summarizeBy: sum
+		sourceColumn: Complexity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column Id
+		dataType: string
+		lineageTag: 7cd3f0de-78e8-4f4b-8ad7-7f01eb5ba53e
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Page Id'
+		dataType: string
+		lineageTag: f42e1202-2019-403e-a7a4-604d4f2f9b8b
+		summarizeBy: none
+		sourceColumn: Page Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Object Type Complexity'
+		dataType: double
+		lineageTag: 691c3dfc-a218-4b03-b24e-d378b4d9c832
+		summarizeBy: sum
+		sourceColumn: Object Type Complexity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Data Object'
+		dataType: string
+		lineageTag: d7e93956-63ba-483c-9d41-43b38f6aecd3
+		summarizeBy: none
+		sourceColumn: Data Object
+
+		annotation SummarizationSetBy = Automatic
+
+	column PageKey
+		dataType: string
+		lineageTag: 2f4bfed3-f7f7-4ce1-8e96-88081c2357f1
+		summarizeBy: none
+		sourceColumn: PageKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PageObjectKey
+		dataType: string
+		lineageTag: 1a1f5b5b-6757-4dcb-b4f2-0105def960a6
+		summarizeBy: none
+		sourceColumn: PageObjectKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Page Object' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex\Page Queries'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_page_object"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Object_Type_Complexity", "Object Type Complexity"}, {"Data_Object", "Data Object"}, {"Page_Id", "Page Id"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Object Type Complexity", type number}, {"Complexity", type number}, {"ObjectWidth", Int64.Type}, {"ObjectHeight", Int64.Type}, {"ObjectZLayer", Int64.Type}, {"ObjectTop", Int64.Type}, {"ObjectLeft", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,665 @@
+table D_Location
+	lineageTag: 9e9fb199-42ec-409d-9e5e-e029cd4b18d2
+
+	column LOC_KEY
+		dataType: string
+		lineageTag: 4db9e739-9e6d-45cd-8547-b25b61556bf4
+		summarizeBy: none
+		sourceColumn: LOC_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_CORP_LOC
+		dataType: string
+		lineageTag: 8b769a34-1e94-44d9-994b-9808db70fd9b
+		summarizeBy: none
+		sourceColumn: MI_CORP_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_GROUP_LOC
+		dataType: string
+		lineageTag: fbfe35c0-d394-4bf7-9715-7474986b488f
+		summarizeBy: none
+		sourceColumn: MI_GROUP_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_DIVISION_LOC
+		dataType: string
+		lineageTag: f3803d93-f41d-404c-82fa-9d5a8208c923
+		summarizeBy: none
+		sourceColumn: MI_DIVISION_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: c57dfa70-b98e-464c-84d3-711d95410df2
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CORP_NAME
+		dataType: string
+		lineageTag: 0e040f1e-afc3-4db3-b182-f0ccbbe03d93
+		summarizeBy: none
+		sourceColumn: CORP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column GROUP_NAME
+		dataType: string
+		lineageTag: 83dc697c-4621-40f1-afb4-dea42281d4ba
+		summarizeBy: none
+		sourceColumn: GROUP_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DIVISION_NAME
+		dataType: string
+		lineageTag: 3efa8c40-544f-4eee-9982-9de8e1ea29fe
+		summarizeBy: none
+		sourceColumn: DIVISION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCATION_NAME
+		dataType: string
+		lineageTag: 7d2a1827-67f2-4a28-8671-121717be247c
+		summarizeBy: none
+		sourceColumn: LOCATION_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_CD
+		dataType: string
+		lineageTag: 59162d92-e7bd-4fca-a461-493c773875fb
+		summarizeBy: none
+		sourceColumn: COUNTRY_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY
+		dataType: string
+		lineageTag: efc1c23b-5c1d-43da-985a-78ec380b765c
+		summarizeBy: none
+		sourceColumn: COUNTRY
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCATION_TYPE_CD
+		dataType: string
+		lineageTag: 9debcf0a-c900-4323-88ad-29e9b3e62d63
+		summarizeBy: none
+		sourceColumn: LOCATION_TYPE_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOCATION_TYPE
+		dataType: string
+		lineageTag: 08046ba8-e552-4fdf-8a68-94aaf6a9606e
+		summarizeBy: none
+		sourceColumn: LOCATION_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_MGR_DISPLAY_NAME
+		dataType: string
+		lineageTag: 6ec3b97c-9bd1-443d-abbb-93106ce72618
+		summarizeBy: none
+		sourceColumn: LOC_MGR_DISPLAY_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_MGR_GIVEN_NAME
+		dataType: string
+		lineageTag: b7339027-fe89-46aa-9c01-0b0c2ec8cd7f
+		summarizeBy: none
+		sourceColumn: LOC_MGR_GIVEN_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_MGR_SURNAME
+		dataType: string
+		lineageTag: ef23a636-143a-4926-9fcc-93f0462fa7f7
+		summarizeBy: none
+		sourceColumn: LOC_MGR_SURNAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_MGR_EMPLOYEE_ID
+		dataType: string
+		lineageTag: 3e784e93-6612-4825-b938-cf7bad20b7f8
+		summarizeBy: none
+		sourceColumn: LOC_MGR_EMPLOYEE_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column GEN_MANAGER
+		dataType: string
+		lineageTag: 2534b82a-0281-4ff9-947c-55ea8eb61851
+		summarizeBy: none
+		sourceColumn: GEN_MANAGER
+
+		annotation SummarizationSetBy = Automatic
+
+	column REG_MANAGER
+		dataType: string
+		lineageTag: 70265e74-ea59-45b9-8a1c-e3e159a69275
+		summarizeBy: none
+		sourceColumn: REG_MANAGER
+
+		annotation SummarizationSetBy = Automatic
+
+	column REPORT_MGR
+		dataType: string
+		lineageTag: 9ec40dfb-0802-4290-abf2-5be89e08dca4
+		summarizeBy: none
+		sourceColumn: REPORT_MGR
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTEGRATED_BRANCH
+		dataType: string
+		lineageTag: 534283b2-04ff-4a1e-b1ad-c6eeb99aaff5
+		summarizeBy: none
+		sourceColumn: INTEGRATED_BRANCH
+
+		annotation SummarizationSetBy = Automatic
+
+	column PS_BU
+		dataType: string
+		lineageTag: f4337951-baca-4684-94d0-df8bfdb25070
+		summarizeBy: none
+		sourceColumn: PS_BU
+
+		annotation SummarizationSetBy = Automatic
+
+	column PS_DEPARTMENT_CODE
+		dataType: string
+		lineageTag: cf00badd-8f34-47ca-a427-209d4ad7e19a
+		summarizeBy: none
+		sourceColumn: PS_DEPARTMENT_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PS_OPERATING_UNIT
+		dataType: string
+		lineageTag: dad18d96-a5bd-40bc-a2f3-99cfd18f1b14
+		summarizeBy: none
+		sourceColumn: PS_OPERATING_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column EXCLUDE_FROM_OTD
+		dataType: string
+		lineageTag: 1290dc6e-0abc-44c0-a701-5948052a213f
+		summarizeBy: none
+		sourceColumn: EXCLUDE_FROM_OTD
+
+		annotation SummarizationSetBy = Automatic
+
+	column USAGE_TYPE
+		dataType: string
+		lineageTag: 7aceab4f-74ce-422f-8085-34c836d25f88
+		summarizeBy: none
+		sourceColumn: USAGE_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPEN_CLOSED
+		dataType: string
+		lineageTag: 41d7b773-c87c-4c16-a760-128d0fdc2bd7
+		summarizeBy: none
+		sourceColumn: OPEN_CLOSED
+
+		annotation SummarizationSetBy = Automatic
+
+	column OPEN_CLOSED_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8bbe0775-0e58-4531-8f55-64e7ba3109b6
+		summarizeBy: none
+		sourceColumn: OPEN_CLOSED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column PHONE_NO
+		dataType: string
+		lineageTag: 9c8c33de-0a1c-4a7d-a0e1-43bb54f67f5f
+		summarizeBy: none
+		sourceColumn: PHONE_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column AFTER_HOURS_NO
+		dataType: string
+		lineageTag: 63e7061f-c9ec-4b63-931b-87a112b37e0c
+		summarizeBy: none
+		sourceColumn: AFTER_HOURS_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column FAX_NO
+		dataType: string
+		lineageTag: 6c8f1cf2-65ac-4c10-89a5-d37ee6648ee7
+		summarizeBy: none
+		sourceColumn: FAX_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIL_TO_ADDR1
+		dataType: string
+		lineageTag: b15b3304-a362-4c49-ac01-2788309a1a16
+		summarizeBy: none
+		sourceColumn: MAIL_TO_ADDR1
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIL_TO_ADDR2
+		dataType: string
+		lineageTag: e992d5b5-278a-4a98-ada4-d61abb165742
+		summarizeBy: none
+		sourceColumn: MAIL_TO_ADDR2
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIL_TO_ADDR3
+		dataType: string
+		lineageTag: 91474ccc-2e82-476c-8a40-673fd28c9ed1
+		summarizeBy: none
+		sourceColumn: MAIL_TO_ADDR3
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIL_TO_CITY
+		dataType: string
+		lineageTag: 3f40c035-bd9f-41a1-80ff-f0be44e53b09
+		summarizeBy: none
+		sourceColumn: MAIL_TO_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIL_TO_STATE
+		dataType: string
+		lineageTag: 510c6238-c7c5-4a06-85e3-51cf98fb874e
+		summarizeBy: none
+		sourceColumn: MAIL_TO_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIL_TO_ZIP
+		dataType: string
+		lineageTag: 4c00ca01-3276-49b0-a425-f9ca657526c2
+		summarizeBy: none
+		sourceColumn: MAIL_TO_ZIP
+
+		annotation SummarizationSetBy = Automatic
+
+	column MAIL_TO_ZIP_NONUSA
+		dataType: string
+		lineageTag: 59c87147-6005-4b9f-8752-7edfb05c640e
+		summarizeBy: none
+		sourceColumn: MAIL_TO_ZIP_NONUSA
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ADDR2
+		dataType: string
+		lineageTag: f0c0c637-5f95-4e36-a508-4abd046d50cc
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ADDR2
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_CITY
+		dataType: string
+		lineageTag: d82de0f0-bc9f-4e1c-92ed-46dac184705e
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CITY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_STATE
+		dataType: string
+		lineageTag: 91e9a46a-28de-4517-9343-a4b904b2413b
+		summarizeBy: none
+		sourceColumn: SHIP_TO_STATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ZIP
+		dataType: string
+		lineageTag: 0dfa972e-cbcc-442b-a4ca-bf9bbd038cd9
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ZIP
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_ZIP_NONUSA
+		dataType: string
+		lineageTag: f6f197c1-9d65-4e25-b945-04b980edda2a
+		summarizeBy: none
+		sourceColumn: SHIP_TO_ZIP_NONUSA
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHIP_TO_LATITUDE
+		dataType: double
+		lineageTag: 8961487c-78a4-4a1e-8026-12bab6680f96
+		summarizeBy: none
+		sourceColumn: SHIP_TO_LATITUDE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SHIP_TO_LONGITUDE
+		dataType: double
+		lineageTag: 0d4186d0-9eb8-4178-b8aa-c9813dfc2c0d
+		summarizeBy: none
+		sourceColumn: SHIP_TO_LONGITUDE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORDERS_EMAIL_FLAG
+		dataType: string
+		lineageTag: 3f85cf66-0609-4f1a-8e87-dbb2fb19cb29
+		summarizeBy: none
+		sourceColumn: ORDERS_EMAIL_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDERS_EMAIL_ADDR
+		dataType: string
+		lineageTag: 2e3230df-16d3-48bf-8fb0-312129498380
+		summarizeBy: none
+		sourceColumn: ORDERS_EMAIL_ADDR
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAYS_FROM_WHSA
+		dataType: double
+		lineageTag: ff4ec829-5acb-4945-9493-381e507000ef
+		summarizeBy: none
+		sourceColumn: DAYS_FROM_WHSA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ATTACHED_DC_MI_LOC
+		dataType: string
+		lineageTag: f3c757cb-7027-4e84-b713-6674ec398119
+		summarizeBy: none
+		sourceColumn: ATTACHED_DC_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ATTACHED_DC
+		dataType: string
+		lineageTag: a9178cfb-a672-4c70-aa17-627337279f60
+		summarizeBy: none
+		sourceColumn: ATTACHED_DC
+
+		annotation SummarizationSetBy = Automatic
+
+	column FULFILLMENT_DC_MI_LOC
+		dataType: string
+		lineageTag: 5d8c0054-c68c-42e2-a86f-4358ad89c7b6
+		summarizeBy: none
+		sourceColumn: FULFILLMENT_DC_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column FULFILLMENT_DC
+		dataType: string
+		lineageTag: fdd60aed-2b8c-492c-8478-d01db3fee337
+		summarizeBy: none
+		sourceColumn: FULFILLMENT_DC
+
+		annotation SummarizationSetBy = Automatic
+
+	column FC_MI_LOC
+		dataType: string
+		lineageTag: 62c9a342-5936-47d1-bd18-87cb9b22037f
+		summarizeBy: none
+		sourceColumn: FC_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column FC_LOC
+		dataType: string
+		lineageTag: 60b34cfc-96db-4d4d-88c4-ce64b0cac43b
+		summarizeBy: none
+		sourceColumn: FC_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_PRIORITY1_MI_LOC
+		dataType: string
+		lineageTag: 2c9151a9-dfdb-4763-8a06-f22b130f7c09
+		summarizeBy: none
+		sourceColumn: DC_PRIORITY1_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_PRIORITY1
+		dataType: string
+		lineageTag: b67bf54d-3eef-4390-aa62-f53630cdf25e
+		summarizeBy: none
+		sourceColumn: DC_PRIORITY1
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_PRIORITY2_MI_LOC
+		dataType: string
+		lineageTag: 3d805aef-3f45-4727-91e3-9f4e59948dd7
+		summarizeBy: none
+		sourceColumn: DC_PRIORITY2_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_PRIORITY2
+		dataType: string
+		lineageTag: 89286ecf-ca0a-4f52-8fcf-b98817c010d5
+		summarizeBy: none
+		sourceColumn: DC_PRIORITY2
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_PRIORITY3_MI_LOC
+		dataType: string
+		lineageTag: 28a387b7-899e-4742-8240-91803b463cf7
+		summarizeBy: none
+		sourceColumn: DC_PRIORITY3_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_PRIORITY3
+		dataType: string
+		lineageTag: 5680b006-1707-4dbb-ace4-6c2ecdfcf901
+		summarizeBy: none
+		sourceColumn: DC_PRIORITY3
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_SRC_PRIORITY_1_MI_LOC
+		dataType: string
+		lineageTag: 36b18c8d-ca28-497f-911b-8f722399fb3f
+		summarizeBy: none
+		sourceColumn: DC_SRC_PRIORITY_1_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_SRC_PRIORITY_1
+		dataType: string
+		lineageTag: bbff4815-055d-4cbd-a4ce-861fc25c6e79
+		summarizeBy: none
+		sourceColumn: DC_SRC_PRIORITY_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_SRC_PRIORITY_2_MI_LOC
+		dataType: string
+		lineageTag: 239acbbb-39b5-4bb3-a8f9-c857cac6f513
+		summarizeBy: none
+		sourceColumn: DC_SRC_PRIORITY_2_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_SRC_PRIORITY_2
+		dataType: string
+		lineageTag: ddeac885-0200-4ebc-adcb-e6999e76c835
+		summarizeBy: none
+		sourceColumn: DC_SRC_PRIORITY_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_SRC_PRIORITY_3_MI_LOC
+		dataType: string
+		lineageTag: f50e1c72-4b58-4f83-bff1-4e92e6eb3a6f
+		summarizeBy: none
+		sourceColumn: DC_SRC_PRIORITY_3_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC_SRC_PRIORITY_3
+		dataType: string
+		lineageTag: 263e037e-4573-46e0-85f6-f42037a18f27
+		summarizeBy: none
+		sourceColumn: DC_SRC_PRIORITY_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column AR_SRC_PRIORITY_1_MI_LOC
+		dataType: string
+		lineageTag: 305040a9-0a89-466d-af15-6459fafc5361
+		summarizeBy: none
+		sourceColumn: AR_SRC_PRIORITY_1_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column AR_SRC_PRIORITY_1
+		dataType: string
+		lineageTag: a23de2ba-b7c2-4d8b-bf50-f9f76f3b6c66
+		summarizeBy: none
+		sourceColumn: AR_SRC_PRIORITY_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column AR_SRC_PRIORITY_2_MI_LOC
+		dataType: string
+		lineageTag: 90fb146a-21fb-4990-9b31-23c47606ea2c
+		summarizeBy: none
+		sourceColumn: AR_SRC_PRIORITY_2_MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column AR_SRC_PRIORITY_2
+		dataType: string
+		lineageTag: 986fcc78-f995-4c15-b652-a468f518870e
+		summarizeBy: none
+		sourceColumn: AR_SRC_PRIORITY_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column INS_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 02f1a4ce-9d87-45d9-829a-57d334cc7d2b
+		summarizeBy: none
+		sourceColumn: INS_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column INS_PROC_LOG_ID
+		dataType: string
+		lineageTag: a969240f-be20-4a1e-b593-0a3655c55029
+		summarizeBy: none
+		sourceColumn: INS_PROC_LOG_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPD_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7c8bcc25-93b3-41c5-8de7-3e4bbad0a1e0
+		summarizeBy: none
+		sourceColumn: UPD_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPD_PROC_LOG_ID
+		dataType: string
+		lineageTag: 84f9e195-0cec-41a5-9dc7-d62156ce43d1
+		summarizeBy: none
+		sourceColumn: UPD_PROC_LOG_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHKSUM_VAL
+		dataType: string
+		lineageTag: a9a79c60-a3a0-4101-84be-f6f110e3e9af
+		summarizeBy: none
+		sourceColumn: CHKSUM_VAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIM_KEY_CHKSUM_VAL
+		dataType: string
+		lineageTag: e3e379c2-acec-4ac8-8223-8f05eb56c3dd
+		summarizeBy: none
+		sourceColumn: PRIM_KEY_CHKSUM_VAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column DELETE_IND
+		dataType: string
+		lineageTag: f41343ec-39d5-4b7b-9765-7067fe08302a
+		summarizeBy: none
+		sourceColumn: DELETE_IND
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_ONLY
+		dataType: string
+		lineageTag: c01cbdf0-e79e-4116-9ee0-0fb0421f8feb
+		summarizeBy: none
+		sourceColumn: SHOP_ONLY
+
+		annotation SummarizationSetBy = Automatic
+
+	column SHOP_LOCATION
+		dataType: string
+		lineageTag: 5e783fba-97a7-4a8e-88e5-3495fe6809cf
+		summarizeBy: none
+		sourceColumn: SHOP_LOCATION
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALES_OFFICE
+		dataType: string
+		lineageTag: f9e4a661-34aa-499e-a138-3b224ea0fac1
+		summarizeBy: none
+		sourceColumn: SALES_OFFICE
+
+		annotation SummarizationSetBy = Automatic
+
+	partition D_Location = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-65dovdhw5fzu3dq6tjfnqi7nyq.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Location = Source{[Schema="dbo",Item="D_Location"]}[Data]
+				in
+				    dbo_D_Location
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

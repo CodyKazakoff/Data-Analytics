@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Orders-Analysis-debug-JAH"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0422d0c4-dfa1-8c6d-4486-a838097ac7c7"
+  }
+}

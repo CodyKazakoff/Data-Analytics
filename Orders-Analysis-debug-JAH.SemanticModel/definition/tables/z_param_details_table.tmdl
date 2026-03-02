@@ -1,0 +1,94 @@
+table z_param_details_table
+	lineageTag: 6997a166-f9b9-45a5-bc07-8bdc1d50c8b7
+
+	column z_param_details_table
+		lineageTag: 4dcffb7f-0b81-4481-820d-fc4ddc9d8459
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_param_details_table Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_param_details_table Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_param_details_table Fields'
+		isHidden
+		lineageTag: 0b63b142-8537-4975-9578-1684a5eaa82d
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_param_details_table Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_param_details_table Order'
+		isHidden
+		formatString: 0
+		lineageTag: 92c199d6-88d2-4579-bd60-1cd701c64b50
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Show/Hide
+		formatString: 0
+		lineageTag: 1142cee8-6157-4aa2-99de-1bbcee7426f5
+		summarizeBy: sum
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_param_details_table = calculated
+		mode: import
+		source = ```
+				{
+				    ("Parent Name", NAMEOF('D_Customer_BillTo'[Natl Acct Parent Company Name]), 0, 0),
+				    ("Natl Acct No", NAMEOF('D_Customer_BillTo'[Natl Acct No]), 1, 0),
+				    ("CAM", NAMEOF('D_Customer_BillTo'[Natl Acct Cam Name]), 2, 0),
+				    ("Branch", NAMEOF('D_Location'[MI Loc]), 3, 0),
+				    ("Branch Name", NAMEOF('D_Location'[MI Loc  Location Name]), 4, 0), 
+				    ("Customer", NAMEOF(D_Customer_ShipTo[MI Loc  Ship To Customer No  Ship To Customer Name]), 5, 0),
+				    ("Order Control No", NAMEOF('F_Order_Item'[Order Ctl No]), 8, 0),
+				    ("Order Line No", NAMEOF('F_Order_Item'[Order Line No]), 9, 0),
+				    ("Order Type Code", NAMEOF('F_Order_Item'[Order Type Cd]), 10, 0),
+				    ("Status", NAMEOF('F_Order_Item'[Itm Item Status Cd]), 11, 0),
+				    ("Order Source", NAMEOF('F_Order_Item'[Order Source Desc]), 12, 0),
+				    ("Entered By", NAMEOF(F_Order_Item[Entered By Name]), 13, 0),
+				    ("Cust PO No", NAMEOF('F_Order_Item'[Cust Po No]), 14, 0),
+				    ("Enterprise Name", NAMEOF(D_Manufacturer[Enterprise Name]), 15, 0),
+				    ("Enterprise No", NAMEOF(D_Manufacturer[Enterprise No]), 16, 0),
+				    ("Mfr Name", NAMEOF(D_Manufacturer[Mfr Name]), 17, 0),
+				    ("Supplier Location No", NAMEOF('F_Order_Item'[Sup Loc No]), 18, 0),
+				    ("Supplier Location Name", NAMEOF('F_Order_Item'[Sup Loc Name]), 19, 0),
+				    ("Ship Method", NAMEOF(F_Order_Item[Ship Method Desc]), 20, 0),
+				    ("Mfg Part No", NAMEOF('F_Order_Item'[Itm Mfg Part No]), 21, 0),
+				    ("Item No", NAMEOF('F_Order_Item'[Itm Item No]), 22, 0),
+				    ("Order Date", NAMEOF('F_Order_Item'[Order Date]), 23, 0),
+				    ("Expected Date", NAMEOF('F_Order_Item'[Internal Exp Date]), 24, 0),
+				    ("Due Date", NAMEOF('F_Order_Item'[Due Date]), 25, 0),
+				    ("On-Time", NAMEOF('F_Order_Item'[Late Line]), 26, 0),
+				    ("Qty Ordered", NAMEOF('F_Order_Item'[Itm Op Qty Ordered]), 27, 0),
+				    ("Qty Allocated", NAMEOF('F_Order_Item'[Itm Allocated Qty]), 28, 0),
+				    ("Qty Billed", NAMEOF('F_Order_Item'[Itm Op Qty Billed]), 29, 0),
+				    ("Qty Shipped", NAMEOF('F_Order_Item'[Itm Op Qty Shipped]), 30, 0),
+				    ("Order Amount", NAMEOF('F_Order_Item'[Itm Unit Sell Amt Local]), 31, 0),
+				    ("Final Cost", NAMEOF('F_Order_Item'[Itm Final Cost Amt Local]), 32, 0),
+				    ("Unit Sell Price", NAMEOF('F_Order_Item'[Itm Unit Sell Price]), 33, 0),
+				    ("Unit Cost", NAMEOF('F_Order_Item'[Itm Unit Cost]), 34, 0),
+				    ("Condition", NAMEOF('Measure Table'[Calculation Condition]), 35, 1)
+				}
+				
+				
+				
+				
+				
+				```
+
+	annotation PBI_Id = 1a98e6422c2f40828eb99fc64f2c874b
+

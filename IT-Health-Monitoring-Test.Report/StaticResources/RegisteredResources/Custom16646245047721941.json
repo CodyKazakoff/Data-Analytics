@@ -1,0 +1,32 @@
+{
+  "name": "Custom",
+  "textClasses": {
+    "title": {
+      "fontFace": "Arial"
+    },
+    "label": {
+      "fontFace": "Arial"
+    },
+    "callout": {
+      "fontFace": "Arial"
+    },
+    "header": {
+      "fontFace": "Arial"
+    }
+  },
+  "visualStyles": {
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F7F9FA"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

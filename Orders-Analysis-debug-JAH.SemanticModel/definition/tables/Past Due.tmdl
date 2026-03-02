@@ -1,0 +1,36 @@
+table 'Past Due'
+	lineageTag: b5d72648-d706-4fdb-9382-9ed7c0731c4c
+
+	column 'Past Due Bucket'
+		dataType: string
+		lineageTag: cae08f78-0a40-422a-a548-7e9c9282545e
+		summarizeBy: none
+		sourceColumn: Past Due Bucket
+		sortByColumn: Order
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		formatString: 0
+		lineageTag: dcfdc697-e143-4c87-9e26-dfd8af2f59e3
+		summarizeBy: none
+		sourceColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Past Due' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("HcchDoAwDAXQu3zLmuy30GSnwOCWSgQC7i9Z+9ybE12so0ERbcIonrOaU0Zurw0KNXtUqdxWvHJ+cj3vvU5E/A==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Past Due Bucket" = _t, Order = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Past Due Bucket", type text}, {"Order", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

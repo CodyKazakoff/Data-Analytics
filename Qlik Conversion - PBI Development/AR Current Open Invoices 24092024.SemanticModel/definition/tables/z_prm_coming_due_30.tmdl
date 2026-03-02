@@ -1,0 +1,57 @@
+table z_prm_coming_due_30
+	lineageTag: e3165d20-1d7b-4757-8890-4eb139d5c9ca
+
+	column z_prm_coming_due_30
+		lineageTag: bb2ed80f-5341-4a83-ac27-c78a556a289b
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_coming_due_30 Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_coming_due_30 Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_coming_due_30 Fields'
+		isHidden
+		lineageTag: 3a809fc9-db50-4e5f-bd8c-0a0f646dd255
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_coming_due_30 Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_coming_due_30 Order'
+		isHidden
+		formatString: 0
+		lineageTag: 6c4be4c5-c1ce-4a25-a233-9351912675f7
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Value4
+		formatString: 0
+		lineageTag: a47de346-0e2d-4a93-ac3c-c6ef43ed3094
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_coming_due_30 = calculated
+		mode: import
+		source =
+				{
+				    ("Coming Due < 30", NAMEOF('Measure'[Coming Due < 30 USD]), 0,0),
+				    ("Coming Due < 30", NAMEOF('Measure'[Coming Due < 30 BASE]), 1,1)
+				}
+
+	annotation PBI_Id = 4aab39351d5440e1b99a7ac39730f908
+

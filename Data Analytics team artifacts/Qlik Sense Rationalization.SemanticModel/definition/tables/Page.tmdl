@@ -1,0 +1,127 @@
+table Page
+	lineageTag: 6418cea2-2721-4109-b81f-9e4193f0cd7d
+
+	column Id
+		dataType: string
+		lineageTag: 4fbd1cc4-3013-4384-885e-393deca7143d
+		summarizeBy: none
+		sourceColumn: Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrigId
+		dataType: string
+		lineageTag: 034e04c7-3dc9-4e41-bd7f-bc935ced7f49
+		summarizeBy: none
+		sourceColumn: OrigId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: string
+		lineageTag: f21d5d16-e758-48f1-9a13-08a6d9bd3a0d
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: f4a791c7-a08a-4efa-b7ff-241c965f4e80
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column PageWidth
+		dataType: string
+		lineageTag: dde5e86e-58e0-4c00-a6fd-f70d864e1852
+		summarizeBy: none
+		sourceColumn: PageWidth
+
+		annotation SummarizationSetBy = Automatic
+
+	column PageHeight
+		dataType: string
+		lineageTag: 93a113ed-8eeb-4750-a7a2-0fbcb82d9ff5
+		summarizeBy: none
+		sourceColumn: PageHeight
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatePageHeader
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ad563a9b-5e21-47af-9d9c-53a93d3312ab
+		summarizeBy: none
+		sourceColumn: CreatePageHeader
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsPublished
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a9862edd-2f75-4e47-a62d-4903f4d24eac
+		summarizeBy: none
+		sourceColumn: IsPublished
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsApproved
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6b273435-e51a-4c02-b54f-03597c58bd92
+		summarizeBy: none
+		sourceColumn: IsApproved
+
+		annotation SummarizationSetBy = Automatic
+
+	column Filters
+		dataType: string
+		lineageTag: 7dcfd3ee-8c3d-452d-9cb8-ae2ccb065aef
+		summarizeBy: none
+		sourceColumn: Filters
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: c4018832-9c4c-47d5-8297-c1f57058fab8
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppKey
+		dataType: string
+		lineageTag: 06a03f1b-a368-4f8d-9145-b43807fbc1ac
+		summarizeBy: none
+		sourceColumn: AppKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PageKey
+		dataType: string
+		lineageTag: 5d03875f-f1e4-414e-9a26-6c05b85c1726
+		summarizeBy: none
+		sourceColumn: PageKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Page = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex\Page Queries'
+		source = ```
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_page"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Solution_ID", "Solution ID"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Solution ID", type text}, {"Id", type text}, {"OrigId", type text}, {"Name", type text}, {"Description", type text}, {"PageWidth", type text}, {"PageHeight", type text}, {"CreatePageHeader", type logical}, {"IsPublished", type logical}, {"IsApproved", type logical}, {"Filters", type text}})
+				in 
+				    #"Changed Type"
+				```
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

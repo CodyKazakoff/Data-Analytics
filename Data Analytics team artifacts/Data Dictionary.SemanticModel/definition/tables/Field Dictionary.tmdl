@@ -1,0 +1,176 @@
+table 'Field Dictionary'
+	lineageTag: c0f94cfe-1b48-41d3-b16b-66b29ac92da6
+
+	column 'Subject Area'
+		dataType: string
+		lineageTag: ecca4768-28a2-46e1-8d82-5b3139d0b35c
+		summarizeBy: none
+		sourceColumn: Subject Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Technical Domain'
+		dataType: string
+		lineageTag: c4b1658c-d326-4667-9b71-ec523d048309
+		summarizeBy: none
+		sourceColumn: Technical Domain
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BigQuery Project'
+		dataType: string
+		lineageTag: d3691495-40f1-4b90-8fc0-809019b7f346
+		summarizeBy: none
+		sourceColumn: BigQuery Project
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dataset
+		dataType: string
+		lineageTag: 5926ef44-59ab-413a-9595-541c063d7283
+		summarizeBy: none
+		sourceColumn: Dataset
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Logical Table Name'
+		dataType: string
+		lineageTag: ee3587e1-a679-41dd-af1c-368efccd5791
+		summarizeBy: none
+		sourceColumn: Logical Table Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Physical Table Name'
+		dataType: string
+		lineageTag: 56ea6912-b536-4b1c-b045-f987f3d3e759
+		summarizeBy: none
+		sourceColumn: Physical Table Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Logical Field Name'
+		dataType: string
+		lineageTag: eb7ac63c-f278-421e-8596-83f75c34528d
+		summarizeBy: none
+		sourceColumn: Logical Field Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Physical Field Name'
+		dataType: string
+		lineageTag: 58b739b3-5350-4dc0-96da-81ea4d39a02f
+		summarizeBy: none
+		sourceColumn: Physical Field Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Field Description'
+		dataType: string
+		lineageTag: 7cde14c7-c68e-4ae0-988c-3ee5829daf39
+		summarizeBy: none
+		sourceColumn: Field Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Type'
+		dataType: string
+		lineageTag: 2adbd9e5-4a28-4f2c-b0fe-9c9caff294ad
+		summarizeBy: none
+		sourceColumn: Data Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Database'
+		dataType: string
+		lineageTag: 02a65dc9-778e-4448-b5c4-6b22f94ea18b
+		summarizeBy: none
+		sourceColumn: Source Database
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Schema/Dataset'
+		dataType: string
+		lineageTag: 9c9b3098-8cc0-4b6e-909b-b9547faf7674
+		summarizeBy: none
+		sourceColumn: Source Schema/Dataset
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Table'
+		dataType: string
+		lineageTag: 3e47bb85-667f-44e7-96d7-0613d9a55bcb
+		summarizeBy: none
+		sourceColumn: Source Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Source Field'
+		dataType: string
+		lineageTag: 3d3fe80f-b14e-4275-b744-f2befdfc04b6
+		summarizeBy: none
+		sourceColumn: Source Field
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Technical Transformation Logic'
+		dataType: string
+		lineageTag: b55352ba-38db-4e38-a270-ead550033a17
+		summarizeBy: none
+		sourceColumn: Technical Transformation Logic
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Transformation Logic Description'
+		dataType: string
+		lineageTag: 613cc718-e716-44b2-aa58-45aa56096b4a
+		summarizeBy: none
+		sourceColumn: Transformation Logic Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Owner'
+		dataType: string
+		lineageTag: a0b67dfa-6735-4b21-9d0e-0d7352de6eaa
+		summarizeBy: none
+		sourceColumn: Data Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'History Start Date'
+		dataType: string
+		lineageTag: 81370178-f7fe-4bdf-8685-dd2ad53cecb0
+		summarizeBy: none
+		sourceColumn: History Start Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sensitivity
+		dataType: string
+		lineageTag: 1c1c79f2-01d9-46e7-801a-a4d2cc12e102
+		summarizeBy: none
+		sourceColumn: Sensitivity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Notes
+		dataType: string
+		lineageTag: 66adb61a-8a90-41f6-a8da-b65ea323836e
+		summarizeBy: none
+		sourceColumn: Notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Field Dictionary' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\ckazakoff\Genuine Parts Company\MOT - Analytics Documentation - Documents\MOT - Enterprise Analytics\Data Dictionary\Data Dictionary.xlsx"), null, true),
+				    #"Field Dictionary_Sheet" = Source{[Item="Field Dictionary",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Field Dictionary_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Subject Area", type any}, {"Technical Domain", type text}, {"BigQuery Project", type text}, {"Dataset", type text}, {"Logical Table Name", type any}, {"Physical Table Name", type text}, {"Logical Field Name", type any}, {"Physical Field Name", type text}, {"Field Description", type any}, {"Data Type", type text}, {"Source Database", type any}, {"Source Schema/Dataset", type any}, {"Source Table", type any}, {"Source Field", type any}, {"Technical Transformation Logic", type any}, {"Transformation Logic Description", type any}, {"Data Owner", type any}, {"History Start Date", type any}, {"Sensitivity", type any}, {"Notes", type any}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

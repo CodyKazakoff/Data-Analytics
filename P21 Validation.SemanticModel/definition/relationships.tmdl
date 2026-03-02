@@ -1,0 +1,24 @@
+relationship 50bee512-3e71-3421-ec15-e2678c412d19
+	fromColumn: F_ORD_HDR_AGG_P21.ORDER_DATE
+	toColumn: D_Calendar.CALENDAR_DATE
+
+relationship 2f48e98e-36a1-3a0f-b617-b0ecf91d6d6c
+	fromColumn: F_ORD_LN_AGG_P21.ORDER_DATE
+	toColumn: D_Calendar.CALENDAR_DATE
+
+relationship 9e7a939a-c9f1-3222-8179-b8eef6528241
+	fromColumn: F_ORD_HDR_AGG_P21.SHIP_TO_CUST_KEY
+	toColumn: D_CUST_P21.SHIP_TO_CUST_KEY
+
+relationship a72d3489-d1ca-5bb0-9dbf-f8880da9c842
+	fromColumn: F_ORD_LN_AGG_P21.SHIP_TO_CUST_NO
+	toColumn: D_CUST_P21.SHIP_TO_CUSTOMER_NO
+
+relationship f40b3e52-e888-cb4a-4cf3-dd6f71a1d43a
+	fromColumn: F_SHPR_P21.SHIP_TO_CUST_NO
+	toColumn: D_CUST_P21.SHIP_TO_CUSTOMER_NO
+
+relationship 98a8dfdb-c8af-af5a-0f6b-5105925a597b
+	fromColumn: F_SHPR_P21.SALES_POSTED_DATE
+	toColumn: D_Calendar.CALENDAR_DATE
+

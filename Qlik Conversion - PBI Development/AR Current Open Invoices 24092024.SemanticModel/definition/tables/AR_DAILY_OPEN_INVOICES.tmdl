@@ -1,0 +1,387 @@
+table AR_DAILY_OPEN_INVOICES
+	lineageTag: 14753d6c-54bc-4b66-b008-8f5556d8bd62
+
+	column GPC_BU
+		dataType: string
+		lineageTag: cf30eb69-9b76-41e7-91f5-ba474f2f87b4
+		summarizeBy: none
+		sourceColumn: GPC_BU
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC_ITEM
+		dataType: string
+		lineageTag: d54ffbe6-4648-4de2-bb09-f5ee376a3cbb
+		summarizeBy: none
+		sourceColumn: GPC_ITEM
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC_ITEM_LINE
+		dataType: string
+		lineageTag: 8ce44338-39b6-433d-805d-117afd005b61
+		summarizeBy: none
+		sourceColumn: GPC_ITEM_LINE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC_INV_DATE
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 1c078094-d34a-4cf0-8b9b-78919261b1bf
+		summarizeBy: none
+		sourceColumn: GPC_INV_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column GPC_DUE_DATE
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 9dee6bd2-3146-41c5-8019-d22de8e57897
+		summarizeBy: none
+		sourceColumn: GPC_DUE_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column GPC_NAME
+		dataType: string
+		lineageTag: 5eaf6969-ec16-4a2c-a2cb-e4fead9a4ba1
+		summarizeBy: none
+		sourceColumn: GPC_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC_ACCT_NO
+		dataType: string
+		lineageTag: c893b06a-7f56-4c56-be3b-da40eeeaef8a
+		summarizeBy: none
+		sourceColumn: GPC_ACCT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC_PO_NO
+		dataType: string
+		lineageTag: e5a06119-b4bd-4295-b9c9-9b5fb5915c87
+		summarizeBy: none
+		sourceColumn: GPC_PO_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC_CURR
+		dataType: string
+		lineageTag: 2eb98c13-99cb-45f7-ac76-0a4868207599
+		summarizeBy: none
+		sourceColumn: GPC_CURR
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC_INV_TOT_AMT
+		dataType: double
+		lineageTag: a1adff77-069f-4333-b487-39f11a1f3ae4
+		summarizeBy: sum
+		sourceColumn: GPC_INV_TOT_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GPC_OUTSTG_AMT
+		dataType: double
+		lineageTag: 4af4d144-58d3-4c07-a6da-23ce11878d08
+		summarizeBy: sum
+		sourceColumn: GPC_OUTSTG_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GPC_DISC_AMT
+		dataType: double
+		lineageTag: 1dd714dc-e196-49b1-9755-194c4c870e06
+		summarizeBy: sum
+		sourceColumn: GPC_DISC_AMT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GPC_DISC_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5c231cee-4a12-4a4a-a8f7-27887be1a074
+		summarizeBy: none
+		sourceColumn: GPC_DISC_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column GPC_ENTRY_TYPE
+		dataType: string
+		lineageTag: 6463dfdb-5009-43c0-a70c-9bdb44145b5b
+		summarizeBy: none
+		sourceColumn: GPC_ENTRY_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC_REASON
+		dataType: string
+		lineageTag: b89cf6bc-2e13-4db9-8a9b-a42742d4355f
+		summarizeBy: none
+		sourceColumn: GPC_REASON
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC_AMOUNT_1
+		dataType: double
+		lineageTag: b6fdfab1-8bca-4624-9cfc-cc7cd724146c
+		summarizeBy: sum
+		sourceColumn: GPC_AMOUNT_1
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GPC_BASE
+		dataType: double
+		lineageTag: 76786f41-c9a4-4cd6-8ed1-4e44ed944d89
+		summarizeBy: sum
+		sourceColumn: GPC_BASE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GPC_EXCH_RATE
+		dataType: double
+		lineageTag: f0c65d6e-6fc2-4fa8-8129-25cb5dd74604
+		summarizeBy: sum
+		sourceColumn: GPC_EXCH_RATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GPC_ORIG_AMT_USD
+		dataType: double
+		lineageTag: d4772b9a-5af3-44b7-b728-ceb74ac50e11
+		summarizeBy: sum
+		sourceColumn: GPC_ORIG_AMT_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GPC_BAL_AMT_USD
+		dataType: double
+		lineageTag: 181e9bac-d129-4e5c-811b-d625885a0a92
+		summarizeBy: sum
+		sourceColumn: GPC_BAL_AMT_USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CREATION_TMSTMP
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 86dab098-b844-4a75-aff0-c0cb115edecb
+		summarizeBy: none
+		sourceColumn: CREATION_TMSTMP
+
+		annotation SummarizationSetBy = Automatic
+
+	column INS_PROC_LOG_ID
+		dataType: string
+		lineageTag: 13bac016-9ed7-4fad-b596-890d2ab5bcdf
+		summarizeBy: none
+		sourceColumn: INS_PROC_LOG_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column INS_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 212b27fb-74de-4f01-994f-d32faadacc4c
+		summarizeBy: none
+		sourceColumn: INS_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPD_DT
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4a55696a-bc20-4da9-9290-ccfd65341ee0
+		summarizeBy: none
+		sourceColumn: UPD_DT
+
+		annotation SummarizationSetBy = Automatic
+
+	column UPD_PROC_LOG_ID
+		dataType: string
+		lineageTag: cc027d7e-711b-466f-a760-3eaba7bac0a4
+		summarizeBy: none
+		sourceColumn: UPD_PROC_LOG_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column CHKSUM_VAL
+		dataType: string
+		lineageTag: 581b1494-b9c7-451f-afa7-3e001ecd2fab
+		summarizeBy: none
+		sourceColumn: CHKSUM_VAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column PRIM_KEY_CHKSUM_VAL
+		dataType: string
+		lineageTag: 582397d4-ec16-4657-817f-6e48f3e90fe8
+		summarizeBy: none
+		sourceColumn: PRIM_KEY_CHKSUM_VAL
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAST_DUE_FLAG
+		dataType: string
+		lineageTag: cd262fdb-dddb-41b3-8a97-ba269550194f
+		summarizeBy: none
+		sourceColumn: PAST_DUE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column PAST_DUE_DAYS
+		dataType: string
+		lineageTag: 873dae07-9f64-42c2-9087-5ca16320ff5b
+		summarizeBy: none
+		sourceColumn: PAST_DUE_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_CUST_KEY
+		dataType: string
+		lineageTag: 18b9ec34-7dee-40a7-970a-a8c993fab88c
+		summarizeBy: none
+		sourceColumn: BILLING_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC
+		dataType: string
+		lineageTag: 3ba8aa40-9760-4fcb-95e1-b820afc51dc4
+		summarizeBy: none
+		sourceColumn: MI_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column CUSTOMER_ACCOUNT_NO
+		dataType: string
+		lineageTag: dab05a71-8f1f-42b4-b174-3112e9e01eba
+		summarizeBy: none
+		sourceColumn: CUSTOMER_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_CUSTOMER_ACCOUNT_NO
+		dataType: string
+		lineageTag: c17be9ed-c4f2-4630-902c-2106471f4216
+		summarizeBy: none
+		sourceColumn: BILLING_CUSTOMER_ACCOUNT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC_WRONG
+		dataType: string
+		lineageTag: 0dc3b336-2a9b-4839-be0a-997b37c89200
+		summarizeBy: none
+		sourceColumn: MI_LOC_WRONG
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATIONAL_ACCOUNT_KEY
+		dataType: string
+		lineageTag: 3652ad2d-c191-4fe5-8633-3fd630adb0cd
+		summarizeBy: none
+		sourceColumn: NATIONAL_ACCOUNT_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_LOC_LINK
+		dataType: string
+		lineageTag: b365a695-3529-4fd2-a10e-0203141f9dc0
+		summarizeBy: none
+		sourceColumn: MI_LOC_LINK
+
+		annotation SummarizationSetBy = Automatic
+
+	column MI_CORP_LOC
+		dataType: string
+		lineageTag: b985564e-9aea-4b97-95b1-a63bc34a768c
+		summarizeBy: none
+		sourceColumn: MI_CORP_LOC
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILLING_CUSTOMER_NO
+		dataType: string
+		lineageTag: 1ebe6a73-b742-43bd-89df-5855bfcaa129
+		summarizeBy: none
+		sourceColumn: BILLING_CUSTOMER_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column NATL_ACCT_NO
+		dataType: string
+		lineageTag: 77feed89-de23-407a-9e85-d8881274952e
+		summarizeBy: none
+		sourceColumn: NATL_ACCT_NO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'CORP ACCT'
+		dataType: string
+		lineageTag: 1896d328-e4d9-48ed-a8d9-d8a39832e32b
+		summarizeBy: none
+		sourceColumn: CORP ACCT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateDiff
+		dataType: int64
+		formatString: 0
+		lineageTag: a0066c74-3ab7-49fe-bfdb-c74ed4b04081
+		summarizeBy: none
+		sourceColumn: DateDiff
+
+		annotation SummarizationSetBy = User
+
+	partition AR_DAILY_OPEN_INVOICES = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-65dovdhw5fzu3dq6tjfnqi7nyq.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_AR_DAILY_OPEN_INVOICES = Source{[Schema="dbo",Item="AR_DAILY_OPEN_INVOICES"]}[Data],
+				    #"Added Past Due Flag" = Table.AddColumn(dbo_AR_DAILY_OPEN_INVOICES, "PAST_DUE_FLAG", each if Date.From(DateTime.LocalNow()) > [GPC_DUE_DATE] then "Y" else "N"),
+				    #"Added Past Due Days" = Table.AddColumn(#"Added Past Due Flag", "PAST_DUE_DAYS", each if [PAST_DUE_FLAG] = "Y" then
+				    let
+				        // Convert GPC_DUE_DATE to date and calculate the difference
+				        DaysOverdue = Duration.Days(Date.From(DateTime.LocalNow()) - Date.From([GPC_DUE_DATE]))
+				    in
+				        if DaysOverdue <= 30 then "1-30"
+				        else if DaysOverdue <= 60 then "31-60"
+				        else if DaysOverdue <= 90 then "61-90"
+				        else "90+"
+				else "Current"),
+				    #"Added Custom" = Table.AddColumn(#"Added Past Due Days", "CORP ACCT", each if [MI_LOC] = "AL00" then "Y" else "N"),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "DateDiff", each Duration.Days(Date.From(DateTime.LocalNow()) - Date.From([GPC_INV_DATE]))),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom1",{{"DateDiff", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

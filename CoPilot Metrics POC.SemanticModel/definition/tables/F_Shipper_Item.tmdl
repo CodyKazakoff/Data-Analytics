@@ -1,0 +1,111 @@
+table F_Shipper_Item
+	lineageTag: 1ed952e1-a752-4551-ab40-d3a917205b4a
+
+	column SHIP_TO_CUST_KEY
+		dataType: string
+		lineageTag: 810aebe4-9641-4b51-b635-7e54d7e5cd12
+		summarizeBy: none
+		sourceColumn: SHIP_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column BILL_TO_CUST_KEY
+		dataType: string
+		lineageTag: 82b6b3c8-8050-4b64-8a38-566f38a35d00
+		summarizeBy: none
+		sourceColumn: BILL_TO_CUST_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column LOC_KEY
+		dataType: string
+		lineageTag: 7a259e51-aac5-4325-9cc7-99e937332658
+		summarizeBy: none
+		sourceColumn: LOC_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column ORDER_SOURCE_DESC
+		dataType: string
+		lineageTag: fe8d2702-dea1-409e-aacc-0616de5e406f
+		summarizeBy: none
+		sourceColumn: ORDER_SOURCE_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALES_POSTED_DATE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7007ac25-1ecf-4def-a5be-521b30a6383b
+		summarizeBy: none
+		sourceColumn: SALES_POSTED_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+	column SALES_AMOUNT
+		dataType: double
+		lineageTag: 38fa49e0-08b1-4638-a04b-e70a5d0c2c6f
+		summarizeBy: sum
+		sourceColumn: SALES_AMOUNT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ORD_HDR_KEY
+		dataType: string
+		lineageTag: c60375d3-321f-48c6-ae87-0819cc09ad4b
+		summarizeBy: none
+		sourceColumn: ORD_HDR_KEY
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG
+		dataType: string
+		lineageTag: 865d3ad2-bc02-4ba9-8165-452aed37d10d
+		summarizeBy: none
+		sourceColumn: AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG
+		dataType: string
+		lineageTag: 7ad07d4b-d0df-4ec5-9ad9-cdb43efcf701
+		summarizeBy: none
+		sourceColumn: AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column AGENT_CREATED_EDI_QUOTE_FLAG
+		dataType: string
+		lineageTag: 0be57502-bbcd-4fe6-9065-142574200669
+		summarizeBy: none
+		sourceColumn: AGENT_CREATED_EDI_QUOTE_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	partition F_Shipper_Item = m
+		mode: import
+		queryGroup: Facts
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_F_Shipper_Item = Value.NativeQuery(Source, "        
+				    SELECT
+				    ITM.*
+				    FROM F_Shipper_Item AS ITM
+				        INNER JOIN (SELECT DISTINCT LOC_KEY FROM F_ECOS_CoPilot_Agent_Actions_Header) AS CoPilot 
+				             ON ITM.LOC_KEY = CoPilot.LOC_KEY
+				    WHERE 1=1
+				        AND ORIGINAL_SOURCE_SYSTEM <> 'Intercompany Transfers'
+				        AND INCREMENTAL_PARTITION_TMSTMP >= '2025-11-01'
+				        ", null, [EnableFolding = true]),
+				    #"Removed Unused Columns"= Table.SelectColumns(dbo_F_Shipper_Item,{"ORD_HDR_KEY","ORDER_SOURCE_DESC","LOC_KEY","BILL_TO_CUST_KEY","SALES_POSTED_DATE","AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG","AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG","SALES_AMOUNT","SHIP_TO_CUST_KEY","AGENT_CREATED_EDI_QUOTE_FLAG"})
+				in
+				    #"Removed Unused Columns"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

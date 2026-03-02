@@ -1,0 +1,38 @@
+table TEMP_NAICS
+	lineageTag: cf2e678c-f76f-4d2c-841a-d84a4f967d56
+
+	column NAICS6_CD
+		dataType: string
+		lineageTag: 5a0a902f-56ab-48a0-9886-21f9c6e1ef27
+		summarizeBy: none
+		sourceColumn: NAICS6_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Corp Industry'
+		dataType: string
+		lineageTag: b26a2fe1-c00a-4916-a581-71329b760829
+		summarizeBy: none
+		sourceColumn: Corp Industry
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TEMP_NAICS = m
+		mode: import
+		queryGroup: 'Temp tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "NAICS_2022.csv")),
+				    #"NAICS_2022 csv_https://genparts sharepoint com/sites/MOT-AnalyticsDocumentation/Shared Documents/MOT - Enterprise Analytics/Power BI Files/Excel Lookups/" = #"Filtered Rows"{[Name="NAICS_2022.csv",#"Folder Path"="https://genparts.sharepoint.com/sites/MOT-AnalyticsDocumentation/Shared Documents/MOT - Enterprise Analytics/Power BI Files/Excel Lookups/"]}[Content],
+				    #"Imported CSV" = Csv.Document(#"NAICS_2022 csv_https://genparts sharepoint com/sites/MOT-AnalyticsDocumentation/Shared Documents/MOT - Enterprise Analytics/Power BI Files/Excel Lookups/",[Delimiter=",", Columns=19, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Imported CSV", [PromoteAllScalars=true]),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Promoted Headers",{"NAICS6_CD", "MOT_IND_GROUP_CORE_DESC"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"MOT_IND_GROUP_CORE_DESC", "Corp Industry"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,44 @@
+relationship 8afb060e-3e1d-f3b0-af1d-06e33297455d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DataPeriod.Index
+	toColumn: z_prm_test_cases.Index
+
+relationship ae534e42-361f-41b7-bb7c-240071412b4a
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DataPeriod.Index
+	toColumn: z_prm_%_failed.Index
+
+relationship 61a116c3-0945-47fa-7d1f-9e5436cb944b
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DataPeriod.Index
+	toColumn: z_prm_failed_items.Index
+
+relationship 4c122104-61cf-35e5-665e-3da42dd30f98
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DataPeriod.Index
+	toColumn: z_prm_failed_cases.Index
+
+relationship 3822b613-000a-04a5-6bbf-4b8eecf004b2
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DataPeriod.Index
+	toColumn: z_prm_passed_cases.Index
+
+relationship 49a64a68-194a-28be-84fe-e9fbedcae422
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DataPeriod.Index
+	toColumn: z_prm_%_passed.Index
+
+relationship AutoDetected_543687fd-f484-447b-b6f7-3b7b11992d74
+	fromColumn: refresh_log_detail.'Refresh Log Hdr Key'
+	toColumn: refresh_log.'Refresh Log Hdr Key'
+
+relationship 1b475984-7278-f11b-98e9-baf298f97e3a
+	fromColumn: z_prm_detail_level_slicer.'Detail Level Key'
+	toColumn: zDetail_Level_Slicer.'Detail Level Key'
+

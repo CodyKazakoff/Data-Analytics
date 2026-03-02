@@ -1,0 +1,55 @@
+table z_Param_Latest_Order_Quote
+	lineageTag: 021e3198-2867-4ecb-8578-558a8e48d51f
+
+	column Parameter
+		lineageTag: 7d13b969-fa35-415c-956f-2f0fe212c11e
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		lineageTag: fc3184b7-4f6d-4feb-84aa-ae9ceb41bf48
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		formatString: 0
+		lineageTag: 1a13dfaa-c2f2-42c1-abd7-437c576d9995
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Latest_Order_Quote = calculated
+		mode: import
+		source =
+				{
+				    ("Billing Customer No  Billing Customer Name", NAMEOF(D_Customer_BillTo[Billing Customer No  Billing Customer Name]), 0),
+				    ("Corp Acct Status", NAMEOF('D_Customer_BillTo'[Corp Acct Status]), 1),
+				    ("Order Ctl No", NAMEOF('F_Order_Item'[Order Ctl No]), 2),
+				    ("Process Status Desc", NAMEOF('F_Order_Item'[Process Status Desc]), 3),
+				    ("Converted To Order Date", NAMEOF('F_Order_Item'[Converted To Order Date]), 4),
+				    ("Due Date", NAMEOF('F_Order_Item'[Due Date]), 5),
+				    ("Final Cost CYTD", NAMEOF('Measure Table'[Order Final Cost CYTD]), 6),
+				    ("MI Loc  Location Name", NAMEOF('D_Location'[MI Loc  Location Name]), 7),
+				    ("MI Group Loc", NAMEOF(D_Location[MI Group Loc]), 8),
+				    ("MI Division Loc", NAMEOF(D_Location[Division Name]), 9),
+				    ("Territory Full Name", NAMEOF('D_Customer_ShipTo'[Territory Full Name]), 10)
+				}
+
+	annotation PBI_Id = 4663aa19fc2740d68efb6fb7a85011ac
+

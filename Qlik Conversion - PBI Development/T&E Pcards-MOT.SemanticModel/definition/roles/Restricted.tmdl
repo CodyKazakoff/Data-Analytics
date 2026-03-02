@@ -1,0 +1,29 @@
+role Restricted
+	modelPermission: read
+
+	tablePermission D_Employee = ```
+			Var vEmployeeAccessList = SELECTCOLUMNS(    
+			    FILTER('RLS_HR_HIERARCHY',
+			        RLS_HR_HIERARCHY[SUPERVISOR_UPN]=USERPRINCIPALNAME()),        "Security list", RLS_HR_HIERARCHY[EMPLOYEE_ID])
+			        
+			        
+			VAR vEmployeeAccess = D_Employee[EMPLOYEE_ID] in vEmployeeAccessList 
+			Return 
+			
+			vEmployeeAccess
+			```
+
+	tablePermission 'F_T&E PCards 1' = ```
+			Var vEmployeeAccessList = SELECTCOLUMNS(    
+			    FILTER('RLS_HR_HIERARCHY',
+			        RLS_HR_HIERARCHY[SUPERVISOR_UPN]=USERPRINCIPALNAME()),        "Security list", RLS_HR_HIERARCHY[EMPLOYEE_ID])
+			        
+			        
+			VAR vEmployeeAccess = 'F_T&E PCards 1'[EMPLOYEE_ID] in vEmployeeAccessList 
+			Return 
+			
+			vEmployeeAccess
+			```
+
+	annotation PBI_Id = 14dd6184a37b4d8198f66c8a801d5330
+

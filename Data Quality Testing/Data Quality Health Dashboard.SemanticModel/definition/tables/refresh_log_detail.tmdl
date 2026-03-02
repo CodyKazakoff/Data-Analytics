@@ -1,0 +1,67 @@
+table refresh_log_detail
+	lineageTag: cd47db01-c1e8-451c-a4b5-713893c33abe
+
+	column 'Source Table'
+		dataType: string
+		lineageTag: 201415dd-8139-44ca-8e36-6b50e0e63e06
+		summarizeBy: none
+		sourceColumn: Source Table
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Refresh Log Hdr Key'
+		dataType: string
+		lineageTag: 0d006e76-b6e6-4589-a4d7-1825d916ab26
+		summarizeBy: none
+		sourceColumn: Refresh Log Hdr Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Refined View Dependency'
+		dataType: string
+		lineageTag: f4881206-9c90-4526-87a8-f16e3141541e
+		summarizeBy: none
+		sourceColumn: Refined View Dependency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Table Type'
+		dataType: string
+		lineageTag: adfe08a0-5217-4dd0-9a8a-c563a9191499
+		summarizeBy: none
+		sourceColumn: Table Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Refresh'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6683f489-ef3a-4abf-be31-00faf539a9f1
+		summarizeBy: none
+		sourceColumn: Last Refresh
+
+		annotation SummarizationSetBy = Automatic
+
+	partition refresh_log_detail = m
+		mode: import
+		source = ```
+				let
+				    Source = Sql.Database(Lakehouse & ".datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_refresh_log_detail = Value.NativeQuery(Source, "
+				    SELECT 
+				        SOURCE_TABLE
+				        , REFINED_VIEW_DEPENDENCY
+				        , TABLE_TYPE
+				        , LAST_REFRESH --AT TIME ZONE 'UTC' AT TIME ZONE 'Central Standard Time' AS [LAST_REFRESH]
+				        , REFRESH_LOG_HDR_KEY 
+				    FROM refresh_log_detail
+				    ", null, [EnableFolding = true]),
+				    #"Bulk Column Rename" = Table.TransformColumnNames(dbo_refresh_log_detail, each Text.Combine(List.ReplaceMatchingItems(List.Transform(Text.Split(_,"_"), Text.Proper),{{"Id","ID"}, {"Mi", "MI"}, {"Upn", "UPN"}, {"Usd", "USD"}})," "))
+				in
+				    #"Bulk Column Rename"
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

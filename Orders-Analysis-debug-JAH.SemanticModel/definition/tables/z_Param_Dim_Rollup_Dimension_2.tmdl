@@ -1,0 +1,62 @@
+table z_Param_Dim_Rollup_Dimension_2
+	lineageTag: d517195a-93f4-45ca-8c9e-8b8d589ed83e
+
+	column 'zDim - Rollup Dimension 2'
+		lineageTag: 2e4c1250-b299-450d-ac7d-1afb9b788842
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zDim - Rollup Dimension 2 Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zDim - Rollup Dimension 2 Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zDim - Rollup Dimension 2 Fields'
+		lineageTag: eb7716c2-2be7-4a47-a144-66e7fd64df53
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zDim - Rollup Dimension 2 Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zDim - Rollup Dimension 2 Order'
+		formatString: 0
+		lineageTag: 2150ee05-64b6-4a78-b635-123730e20f07
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Dim_Rollup_Dimension_2 = calculated
+		mode: import
+		source =
+				{
+				    ("Business Unit", NAMEOF(D_Location[MI Corp Loc]), 0),
+				    ("Group", NAMEOF(D_Location[MI Group Loc]), 0),
+				    ("Division", NAMEOF(D_Location[Division No & Name]), 1),
+				    ("Branch", NAMEOF(D_Location[MI Loc]), 2),
+				    ("Country", NAMEOF(D_Location[Country]), 3),
+				    ("NatlAcct", NAMEOF(D_Customer_BillTo[Natl Acct Name]), 4),
+				    ("Acct Rep", NAMEOF(D_Customer_ShipTo[Territory Short Name]), 5),
+				    ("Source", NAMEOF(F_Order_Item[Order Source Desc]), 6),
+				    ("Order Size", NAMEOF(F_Order_Item[Itm Order Size Bucket]), 7),
+				    ("MFR", NAMEOF(D_Manufacturer[Mfr Name]), 8),
+				    ("Product Category", NAMEOF(D_Product_Group[Product Category Desc]), 9),
+				    ("PGC1", NAMEOF(D_Product_Group[Product Group Cd1  Product Group Desc1]), 10),
+				    ("PGC2", NAMEOF(D_Product_Group[Product Group Cd2  Product Group Desc2]), 11),
+				    ("Order Source", NAMEOF(F_Order_Item[Order Source Desc]), 12),
+				    ("Industry", NAMEOF(D_Customer_ShipTo[Industry]), 13),
+				    ("CAM", NAMEOF(D_Customer_BillTo[Natl Acct Cam Name]), 14),
+				    ("AVP", NAMEOF(D_Customer_BillTo[Natl Acct Area Vp Name]), 15)
+				
+				}
+
+	annotation PBI_Id = 90861ebcbaf4413a97db7045123df06c
+

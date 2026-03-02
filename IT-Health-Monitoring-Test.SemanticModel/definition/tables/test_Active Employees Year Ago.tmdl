@@ -1,0 +1,82 @@
+table 'test_Active Employees Year Ago'
+	lineageTag: 3ad9b95a-c317-4c11-983f-12a38e51b6dd
+
+	column 'Employee ID'
+		lineageTag: 587a2711-b982-4fcc-8528-d6819ce7fc39
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Employee ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Hired'
+		formatString: General Date
+		lineageTag: 506e9f63-5b9a-44ab-adef-036c1c0372f6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date Hired]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Terminated'
+		formatString: General Date
+		lineageTag: 8d51a363-3f84-4e51-b4ee-68aa87456788
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date Terminated]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'One Year Ago Date'
+		formatString: General Date
+		lineageTag: a1e68cf5-57bd-4220-9cb9-c19004f2e79d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [One Year Ago Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		lineageTag: 10101af4-b1b7-4c71-b7d0-7080938d5d59
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Location]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Employee Name'
+		lineageTag: a15304ac-98e0-4b50-a3fe-d15a67c3be46
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Employee Name]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'test_Active Employees Year Ago' = calculated
+		mode: import
+		source = ```
+				
+				VAR OneYearAgo = EDATE(MAX(_Date_Table[Date]), -12)
+				RETURN
+				SELECTCOLUMNS(
+				    FILTER(
+				        D_Employee,
+				        D_Employee[DATE_HIRED] <= OneYearAgo
+				        && (
+				            D_Employee[DATE_TERMINATED] = DATE(1900,1,1)
+				            || D_Employee[DATE_TERMINATED] > OneYearAgo
+				        )
+				        && CONTAINSSTRING(D_Employee[EMP_DEPT], "DP")
+				    ),
+				    "Employee ID", D_Employee[EMPLOYEE_ID],
+				    "Employee Name", D_Employee[EMP_NAME_CN],
+				    "Date Hired", D_Employee[DATE_HIRED],
+				    "Date Terminated", D_Employee[DATE_TERMINATED],
+				    "One Year Ago Date", OneYearAgo,
+				    "Location", D_Employee[EMP_DEPT]
+				)
+				
+				```
+
+	annotation PBI_Id = 3a80ed3277ab4cf6b01285d29ba13faa
+

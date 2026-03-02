@@ -1,0 +1,130 @@
+table 'Estimate Config'
+	lineageTag: 6d9e8010-c684-42ac-a1e2-c15397e7e269
+
+	column Phase
+		dataType: string
+		lineageTag: be1e7f3b-d3b6-420f-b643-b0b58e4ae2e3
+		summarizeBy: none
+		sourceColumn: Phase
+		sortByColumn: 'Phase Index'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Step
+		dataType: string
+		lineageTag: b2737638-2326-42d6-b3c8-4d1ea1b2d050
+		summarizeBy: none
+		sourceColumn: Step
+		sortByColumn: 'Step Index'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Activity
+		dataType: string
+		lineageTag: 4dbdd193-99de-446e-b39c-22ccd846451b
+		summarizeBy: none
+		sourceColumn: Activity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Per Item Manual Effort (Minutes)'
+		dataType: decimal
+		formatString: #,###.00
+		lineageTag: fce7ede0-f292-4712-ab04-ec93d2e71ab4
+		summarizeBy: none
+		sourceColumn: Per Item Manual Effort (Minutes)
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'Automated Reduction'
+		dataType: decimal
+		lineageTag: cec5d76b-dbbf-477a-ae31-7bb038b55f6b
+		summarizeBy: none
+		sourceColumn: Automated Reduction
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Remainder Per Item Effort'
+		dataType: decimal
+		lineageTag: fa1e5455-81bb-4247-b44b-9442981277bb
+		summarizeBy: none
+		sourceColumn: Remainder Per Item Effort
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Phase Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: 93b40215-8502-4f40-b197-6dbd093617ae
+		summarizeBy: none
+		sourceColumn: Phase Index
+
+		annotation SummarizationSetBy = User
+
+	column 'Step Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: a2eb18b4-1b55-4cb6-bbcd-99b58336914b
+		summarizeBy: none
+		sourceColumn: Step Index
+
+		annotation SummarizationSetBy = User
+
+	column Column9
+		dataType: string
+		lineageTag: 2667dc2a-cf59-4e36-89ac-b475b3d9097d
+		summarizeBy: none
+		sourceColumn: Column9
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column10
+		dataType: string
+		lineageTag: 98035b55-f538-471f-acc9-0c50e56f7871
+		summarizeBy: none
+		sourceColumn: Column10
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column11
+		dataType: string
+		lineageTag: bb35e2cf-155d-42c7-98f7-40c6ec983a8c
+		summarizeBy: none
+		sourceColumn: Column11
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column12
+		dataType: string
+		lineageTag: e4438d88-e6e7-4bf0-99ed-86d5a6d156d1
+		summarizeBy: none
+		sourceColumn: Column12
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Estimate Config' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Non-Vortex Data Sources'
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SupportingFiles & "/Rationalization Steps.xlsx"), null, true),
+				    #"Estimate Config_Sheet" = Source{[Item="Estimate Config",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Estimate Config_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Phase", type text}, {"Step", type text}, {"Activity", type text}, {"Per Item Manual Effort (Minutes)", Currency.Type}, {"Automated Reduction", Currency.Type}, {"Remainder Per Item Effort", Currency.Type}, {"Phase Index", Int64.Type}, {"Step Index", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

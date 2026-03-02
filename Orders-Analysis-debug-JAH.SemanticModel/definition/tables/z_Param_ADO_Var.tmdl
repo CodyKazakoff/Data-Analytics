@@ -1,0 +1,48 @@
+table z_Param_ADO_Var
+	lineageTag: ce38cfe0-d385-4328-ade4-9496522b732d
+
+	column 'zParam - ADO Var'
+		lineageTag: 5d02636b-6c49-4a81-bd2a-803b9a06aa2e
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam - ADO Var Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam - ADO Var Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam - ADO Var Fields'
+		lineageTag: 4c08bfa8-b34a-4e14-b01f-cecd38dea318
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam - ADO Var Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam - ADO Var Order'
+		formatString: 0
+		lineageTag: b6112690-30f7-4129-af16-b0f28ed6e5de
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_ADO_Var = calculated
+		mode: import
+		source =
+				{
+				    ("Var %", NAMEOF('Measure Table'[ADO YTD Var]), 0),
+				    ("Var %", NAMEOF('Measure Table'[ADO MTD Var]), 1),
+				    ("Var %", NAMEOF('Measure Table'[ADO QTD Var]), 2),
+				    ("Var %", NAMEOF('Measure Table'[ADO Rolling 12M Var]), 3)
+				}
+
+	annotation PBI_Id = d4c577de6b024d4581febbbe531f3a0c
+

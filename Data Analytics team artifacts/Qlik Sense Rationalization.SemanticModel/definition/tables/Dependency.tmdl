@@ -1,0 +1,75 @@
+table Dependency
+	lineageTag: b957e44a-5542-4776-b0bc-87e2af46b902
+
+	column Type
+		dataType: string
+		lineageTag: 185a4481-d979-4383-a63a-e989c0fcc08f
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column UserId
+		dataType: string
+		lineageTag: 1f3274a1-1c1e-42b6-945f-70a7770f22ea
+		summarizeBy: none
+		sourceColumn: UserId
+
+		annotation SummarizationSetBy = Automatic
+
+	column LoadStatement
+		dataType: string
+		lineageTag: eb1218ab-41b0-4a66-b0f4-eb48be2ab0e7
+		summarizeBy: none
+		sourceColumn: LoadStatement
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentSolutionId
+		dataType: string
+		lineageTag: 9c5adb2f-7c25-4330-9388-e5e10c6146dd
+		summarizeBy: none
+		sourceColumn: ParentSolutionId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Solution ID'
+		dataType: string
+		lineageTag: a4256229-1a5f-4071-aea1-8909eec72b6d
+		summarizeBy: none
+		sourceColumn: Solution ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Connection String Formatted'
+		dataType: string
+		lineageTag: a663cce9-6e10-4058-9729-5cd52c4c1a4a
+		summarizeBy: none
+		sourceColumn: Connection String Formatted
+
+		annotation SummarizationSetBy = Automatic
+
+	column AppKey
+		dataType: string
+		lineageTag: 16a545a2-0361-4652-8674-3e8b81009579
+		summarizeBy: none
+		sourceColumn: AppKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dependency = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex'
+		source =
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_dependency"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(Navigation,{{"Solution_ID", "Solution ID"}, {"Connection_String_Formatted", "Connection String Formatted"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Solution ID", type text}, {"Type", type text}, {"UserId", type text}, {"LoadStatement", type text}, {"ParentSolutionId", type text}, {"Connection String Formatted", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

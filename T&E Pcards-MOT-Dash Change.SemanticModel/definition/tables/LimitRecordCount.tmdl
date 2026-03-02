@@ -1,0 +1,21 @@
+table LimitRecordCount
+	lineageTag: d531f3a7-b7ab-43a7-9b9b-2e2858d6b8ba
+
+	column LimitRecordCount
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 82446fbe-7e1b-42db-85ae-ff80958eccb8
+		summarizeBy: none
+		sourceColumn: LimitRecordCount
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LimitRecordCount = m
+		mode: import
+		queryGroup: Parameters
+		source = true meta [IsParameterQuery=true, List={true, false}, DefaultValue=true, Type="Logical", IsParameterQueryRequired=true]
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Logical
+

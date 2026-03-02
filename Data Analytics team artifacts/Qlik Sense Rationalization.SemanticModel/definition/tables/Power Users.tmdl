@@ -1,0 +1,42 @@
+table 'Power Users'
+	lineageTag: 287e0ae7-67b1-4592-ba64-eb17012871e9
+
+	column 'User Name'
+		dataType: string
+		lineageTag: 30405950-ae41-4ea2-8a08-0536f40410e0
+		summarizeBy: none
+		sourceColumn: User Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'User Id'
+		dataType: string
+		lineageTag: a1bbc1bd-cbb8-4abf-b0cc-c74006cc90b5
+		summarizeBy: none
+		sourceColumn: User Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column3
+		dataType: string
+		lineageTag: 6e0bcee9-1871-4fa4-9cd0-2f4c028a0575
+		summarizeBy: none
+		sourceColumn: Column3
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Power Users' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(SupportingFiles & "\zQlikPowerUsers.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"User Name", type text}, {"User Id", type text}, {"Column3", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

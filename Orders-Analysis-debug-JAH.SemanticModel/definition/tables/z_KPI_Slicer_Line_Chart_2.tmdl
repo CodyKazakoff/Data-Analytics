@@ -1,0 +1,52 @@
+table z_KPI_Slicer_Line_Chart_2
+	lineageTag: c3e33b8e-8c74-45f2-9de7-3d737c7b534d
+
+	column 'Time Series'
+		dataType: string
+		lineageTag: 6befb02a-6139-469a-92bf-87f5086da1fa
+		summarizeBy: none
+		sourceColumn: Time Series
+		sortByColumn: 'Sort Order'
+
+		changedProperty = SortByColumn
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: e67b2858-eafe-45e6-9260-133822d634a1
+		summarizeBy: none
+		sourceColumn: Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sort Order'
+		dataType: string
+		lineageTag: 1586e5df-63b9-4ed4-9d61-5b037a62e76b
+		summarizeBy: none
+		sourceColumn: Sort Order
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_KPI_Slicer_Line_Chart_2 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WigxxUdJRMgBiY6VYnWglXzDfECwG4geC+UZgDOIH5efkZOalKxgaKfiCNekomSjFxgIA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Time Series" = _t, Index = _t, #"Sort Order" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Time Series", type text}, {"Index", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

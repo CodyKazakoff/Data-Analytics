@@ -1,0 +1,256 @@
+table D_Calendar
+	lineageTag: 09c7d469-4e04-4c82-8fb8-0932b481307f
+
+	column CALENDAR_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3b046406-2ea1-442a-8716-c42fa6df1784
+		summarizeBy: none
+		sourceColumn: CALENDAR_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: c33fc63c-5ef0-463f-a59a-7f42ee536be7
+		summarizeBy: none
+		sourceColumn: YEAR
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTER
+		dataType: string
+		lineageTag: 2655d7af-f9ba-4946-ae64-156f3cab319e
+		summarizeBy: none
+		sourceColumn: QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUARTER_START_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0d55c460-9a1d-4740-9de0-11980c3ea84d
+		summarizeBy: none
+		sourceColumn: QUARTER_START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column QUARTER_END_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 23bd4273-c109-4c7d-9088-3e34869f6840
+		summarizeBy: none
+		sourceColumn: QUARTER_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MONTH_NUMBER
+		dataType: int64
+		formatString: 0
+		lineageTag: 73908677-31e0-423e-a0e9-23657a981343
+		summarizeBy: none
+		sourceColumn: MONTH_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH_YEAR
+		dataType: string
+		lineageTag: ec1bd084-0fa7-42d1-a31d-9ef735d2da9e
+		summarizeBy: none
+		sourceColumn: MONTH_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column DAY_OF_MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ddfa338-607b-4ed9-8517-6ee8c1ba3d2c
+		summarizeBy: none
+		sourceColumn: DAY_OF_MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEK
+		dataType: string
+		lineageTag: 29ba30b9-67d0-4ac1-a2ba-e9e0bdc63142
+		summarizeBy: none
+		sourceColumn: WEEK
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH
+		dataType: string
+		lineageTag: 19cc3181-7a44-445d-b62f-75256812cf0a
+		summarizeBy: none
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH_START_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e0441a6c-ec2c-424b-8f50-f7e40efaa165
+		summarizeBy: none
+		sourceColumn: MONTH_START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MONTH_END_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0294a397-76c3-41ff-aff0-c5b3b6b84871
+		summarizeBy: none
+		sourceColumn: MONTH_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WEEK_NUMBER
+		dataType: int64
+		formatString: 0
+		lineageTag: 627b46d6-0709-47e9-90c7-d74614c00589
+		summarizeBy: none
+		sourceColumn: WEEK_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEK_NUMBER_YEAR
+		dataType: string
+		lineageTag: c4740794-8a36-434a-b9c5-5d6ca2fd5cf1
+		summarizeBy: none
+		sourceColumn: WEEK_NUMBER_YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEK_START_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 44f9d0a9-c3cc-4bcd-8e04-72b10140d876
+		summarizeBy: none
+		sourceColumn: WEEK_START_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WEEK_END_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e1e5ba87-51a7-449a-a20a-adba74967ae1
+		summarizeBy: none
+		sourceColumn: WEEK_END_DATE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WEEK_DAY_NUMBER
+		dataType: int64
+		formatString: 0
+		lineageTag: fcff90da-6ff1-428c-88e5-c21609623a62
+		summarizeBy: none
+		sourceColumn: WEEK_DAY_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+	column WEEK_DAY
+		dataType: string
+		lineageTag: 8617bfb6-934f-48e5-addd-78ae166b7666
+		summarizeBy: none
+		sourceColumn: WEEK_DAY
+
+		annotation SummarizationSetBy = Automatic
+
+	column MTD_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 9b485c42-8c2a-41d1-9b3f-78c25063e1be
+		summarizeBy: none
+		sourceColumn: MTD_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column QTD_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: be11ab5c-78d0-47a3-9809-61e599439b30
+		summarizeBy: none
+		sourceColumn: QTD_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column YTD_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e7142c04-ca53-4269-9e10-a62777030935
+		summarizeBy: none
+		sourceColumn: YTD_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column YEAR_QUARTER
+		dataType: string
+		lineageTag: ead04eff-c24d-4ab5-9819-d0e5f4ce9aa5
+		summarizeBy: none
+		sourceColumn: YEAR_QUARTER
+
+		annotation SummarizationSetBy = Automatic
+
+	column HOLIDAY_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 53744be8-6326-4677-a74d-86c67a329a28
+		summarizeBy: none
+		sourceColumn: HOLIDAY_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column BUSINESS_DAY_FLAG
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 68510362-53e1-4d89-8893-adf6e6442588
+		summarizeBy: none
+		sourceColumn: BUSINESS_DAY_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'YEAR Hierarchy'
+		lineageTag: 150be2b1-24d2-4479-81b6-256e13ee7a5c
+
+		level YEAR
+			lineageTag: b200ef23-9c47-4e94-922d-dada06fdbd20
+			column: YEAR
+
+		level QUARTER
+			lineageTag: 2e755127-cd23-4465-a3c3-9bc0da0e08ca
+			column: QUARTER
+
+		level MONTH
+			lineageTag: d5ab3659-85e9-47a5-b9f6-2d557cb923ec
+			column: MONTH
+
+	partition D_Calendar = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("mtlttngl6lvehlaffy3tzayehy-65dovdhw5fzu3dq6tjfnqi7nyq.datawarehouse.fabric.microsoft.com", "Enterprise_Analytics"),
+				    dbo_D_Calendar = Source{[Schema="dbo",Item="D_Calendar"]}[Data]
+				in
+				    dbo_D_Calendar
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

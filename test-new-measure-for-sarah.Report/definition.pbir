@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json",
+  "version": "4.0",
+  "datasetReference": {
+    "byConnection": {
+      "connectionString": "Data Source=\"powerbi://api.powerbi.com/v1.0/myorg/MOT Finance [Adhoc]\";initial catalog=CERTify-Tax;integrated security=ClaimsToken;semanticmodelid=e945ffdd-e47c-47a5-aa44-ff64bc8dfcba"
+    }
+  }
+}

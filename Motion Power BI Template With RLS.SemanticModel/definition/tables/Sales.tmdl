@@ -1,0 +1,85 @@
+table Sales
+	lineageTag: 109322d9-72d1-4e79-afda-73520413cd37
+
+	column ISR
+		dataType: string
+		lineageTag: 5b0b9854-8acf-481c-bdeb-9dd1f1e07f89
+		summarizeBy: none
+		sourceColumn: ISR
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Adjusted YoYTD GP Performance'
+		dataType: double
+		lineageTag: 1c740676-9c32-4b67-add6-801eeb15a241
+		summarizeBy: sum
+		sourceColumn: Adjusted YoYTD GP Performance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'YoYTD GP Performance'
+		dataType: double
+		lineageTag: 1c91be2f-4683-4e83-99a1-1b360659a316
+		summarizeBy: sum
+		sourceColumn: YoYTD GP Performance
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GP Target'
+		dataType: double
+		lineageTag: ccb7cf73-f178-4d0e-9add-b0d669c85d81
+		summarizeBy: sum
+		sourceColumn: GP Target
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '% of Target'
+		dataType: double
+		lineageTag: bbfe05be-3c81-427e-85c9-999200396928
+		summarizeBy: sum
+		sourceColumn: % of Target
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Customer Segment'
+		dataType: string
+		lineageTag: 5d61bc35-dbb8-4214-9b1c-6515dc03fd5b
+		summarizeBy: none
+		sourceColumn: Customer Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column GPC
+		dataType: int64
+		formatString: 0
+		lineageTag: 18ede187-a480-4f5b-9a8e-52ab5d7b6207
+		summarizeBy: sum
+		sourceColumn: GPC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = m
+		mode: import
+		queryGroup: Facts
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\kpover\OneDrive\Documents\Motion_Sales_RLS_Template_Data.xlsx"), null, true),
+				    Sales_Sheet = Source{[Item="Sales",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sales_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ISR", type text}, {"Adjusted YoYTD GP Performance", type number}, {"YoYTD GP Performance", type number}, {"GP Target", type number}, {"% of Target", type number}, {"Customer Segment", type text}, {"GPC", Int64.Type}}),
+				    #"Uppercased Text" = Table.TransformColumns(#"Changed Type",{{"ISR", Text.Upper, type text}})
+				in
+				    #"Uppercased Text"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

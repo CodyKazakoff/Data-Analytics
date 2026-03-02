@@ -1,0 +1,510 @@
+/// Sum of total Reportable Accidents
+table 'Measure Table'
+	lineageTag: ce2aa14d-6693-4b71-be30-f49cd138f021
+
+	/// Refresh Date for Loss Run Report
+	measure 'Report Refresh Date' = "Report as of: " & Max('zLast Refresh Datetime'[Last Refresh Datetime])
+		displayFolder: Metadata
+		lineageTag: 2360455c-966c-4ea4-af74-a5137572a971
+
+	measure 'Total Failed Items' = ```
+			
+			    COALESCE(
+			        CALCULATE( SUM(data_quality_testing[RESULT]),
+			        data_quality_testing[PASS_FLAG] = FALSE()),
+			        0)
+			```
+		formatString: #,0
+		lineageTag: bc0862f6-a545-4e80-ae78-4ff8e4637270
+
+	measure '# of New Failures' = ```
+			
+			
+			VAR TODAYDATE = MAX('data_quality_testing'[TIMESTAMP])
+			VAR YesterdayPassing =
+			   CALCULATETABLE(
+			       DISTINCT(
+			        SELECTCOLUMNS
+			        ('data_quality_testing', "JOB", 
+			       'data_quality_testing'[TEST_CASE_NAME],
+			       'data_quality_testing'[TEST_TYPE],
+			       'data_quality_testing'[TABLE_NAME]
+			       )
+			    ),
+			       'data_quality_testing'[PASS_FLAG] = TRUE,
+			       'data_quality_testing'[TIMESTAMP] = TODAYDATE - 1
+			   )
+			VAR TodayFailing =
+			   CALCULATETABLE(
+			       DISTINCT(
+			        SELECTCOLUMNS(
+			        'data_quality_testing', "JOB", 
+			        'data_quality_testing'[TEST_CASE_NAME],
+			        'data_quality_testing'[TEST_TYPE],
+			        'data_quality_testing'[TABLE_NAME]
+			       )
+			    ),
+			       'data_quality_testing'[PASS_FLAG] = FALSE,
+			       'data_quality_testing'[TIMESTAMP] = TODAYDATE
+			   )
+			
+			VAR NewFailuresCount =
+			    COUNTROWS(
+			        EXCEPT(
+			            TodayFailing,
+			            YesterdayPassing
+			        )
+			    )
+			RETURN
+			IF (ISBLANK(NewFailuresCount),0,NewFailuresCount)
+			```
+		formatString: 0
+		lineageTag: a20250a7-8b9b-4ff2-8b16-f622a1af2e6e
+
+	measure '% Change in Failed Jobs' = ```
+			
+			VAR FailedToday =
+			   CALCULATE(
+			       COUNTA('data_quality_testing'[RESULT]),
+			       FILTER(
+			           'data_quality_testing',
+			           'data_quality_testing'[PASS_FLAG] = FALSE &&
+			           'data_quality_testing'[TIMESTAMP] = TODAY()
+			       )
+			   )
+			VAR FailedYesterday =
+			   CALCULATE(
+			       COUNTA('data_quality_testing'[RESULT]),
+			       FILTER(
+			           'data_quality_testing',
+			           'data_quality_testing'[PASS_FLAG] = FALSE &&
+			           'data_quality_testing'[TIMESTAMP] = TODAY() - 1
+			       )
+			   )
+			RETURN
+			IF(FailedYesterday = 0, 
+			    IF(FailedToday= 0,0,BLANK()), (FailedToday - FailedYesterday) / FailedYesterday * 100)
+			```
+		formatString: 0
+		lineageTag: 75b241ff-0f6b-4dd2-ae29-1ac9d9de7379
+
+	measure '% 24h Failed Test Cases' = ```
+			
+			    IF(
+			        ISBLANK([24h Total Test Cases]) || [24h Total Test Cases] = 0, 
+			        BLANK(), 
+			        IF(
+			            DIVIDE([24h Total Failed Test Cases], [24h Total Test Cases]) = 0,
+			            BLANK(),
+			            DIVIDE([24h Total Failed Test Cases], [24h Total Test Cases])
+			        )
+			    )
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6df7720d-9d15-45e3-a1c9-d4b68d1bcc93
+
+	measure '% of Jobs Failed' =
+			
+			VAR __MEASURE_VALUE =
+				CALCULATE(
+					COUNTA('data_quality_testing'[RESULT]),
+					'data_quality_testing'[PASS_FLAG] IN { FALSE }
+				)
+			VAR __BASELINE_VALUE = COUNTA('data_quality_testing'[RESULT])
+			RETURN
+				IF(
+					NOT ISBLANK(__MEASURE_VALUE),
+					DIVIDE(__MEASURE_VALUE, __BASELINE_VALUE)
+				)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d3f7e5b2-a5a2-4528-a040-3c51231407d8
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "PercentageDifferenceFrom"
+				}
+
+		changedProperty = FormatString
+
+	measure 'TEST: Today''s Failed Jobs' = ```
+			
+			CALCULATE(  
+			    COUNTA('data_quality_testing'[RESULT]),
+			    FILTER('data_quality_testing', 'data_quality_testing'[PASS_FLAG] = FALSE()
+			    && 'data_quality_testing'[TIMESTAMP] = Today()
+			    )
+			)
+			```
+		formatString: 0
+		lineageTag: f43cedca-3520-4e35-b6b0-d26106004f04
+
+	measure 'Todays New Rows' = ```
+			
+			VAR MaxDate = FORMAT(MAX('data_quality_testing'[TIMESTAMP]), "dd/mm/yyyy")
+			VAR DailyRows = 
+			    CALCULATE(
+			        COUNTROWS('data_quality_testing'),
+			        FILTER(
+			            'data_quality_testing',
+			            FORMAT(DATEVALUE('data_quality_testing'[TIMESTAMP]), "dd/mm/yyyy") = MaxDate
+			        )
+			    )
+			RETURN 
+			    IF(ISBLANK(DailyRows), 0, DailyRows)
+			```
+		formatString: 0
+		lineageTag: c4a1b242-08d7-4730-878e-0933af9ee1bc
+
+	measure TodaysFailedRows = ```
+			
+			VAR MaxDate = FORMAT(MAX('data_quality_testing'[TIMESTAMP]), "dd/mm/yyyy")
+			VAR FailedRows = 
+			    CALCULATE(
+			        COUNTROWS('data_quality_testing'),
+			        FILTER(
+			            'data_quality_testing',
+			            FORMAT(DATEVALUE('data_quality_testing'[TIMESTAMP]), "dd/mm/yyyy") = MaxDate &&
+			            'data_quality_testing'[pass_flag] = FALSE()
+			        )
+			    )
+			RETURN 
+			    IF(ISBLANK(FailedRows), 0, FailedRows)
+			```
+		formatString: 0
+		lineageTag: 4783c586-11a4-4b75-bfce-078242e19295
+
+	measure TotalDupesCheck = ```
+			
+			    CALCULATE(SUM(data_quality_testing[RESULT]),
+			    data_quality_testing[TEST_TYPE] = "DUPES_CHECK"
+			    )
+			```
+		formatString: 0
+		lineageTag: d51b6eb0-3971-48c1-8d5e-4277ee850dcc
+
+	measure 'Total Dupes_Checks Rows' = ```
+			
+			    CALCULATE(COUNTROWS(data_quality_testing),
+			    data_quality_testing[TEST_TYPE] = "DUPES_CHECK"
+			    )
+			```
+		formatString: 0
+		lineageTag: 8d630530-41e7-4423-8a78-0605c9754cde
+
+	measure 'Total Failed Test Cases' = ```
+			
+			    COALESCE(
+			        CALCULATE(COUNTROWS(data_quality_testing), data_quality_testing[PASS_FLAG] = FALSE()),
+			        0
+			    )
+			
+			```
+		formatString: 0
+		lineageTag: cafc0cf3-2c3c-4de3-bc1e-fee0e4724d08
+
+	measure 'Yesterdays New Rows' = ```
+			
+			VAR MaxDate = MAX('data_quality_testing'[TIMESTAMP])
+			VAR MaxDateRows = 
+			    CALCULATE(
+			        COUNTROWS('data_quality_testing'),
+			        'data_quality_testing'[TIMESTAMP] >= MaxDate - 1,
+			        'data_quality_testing'[TIMESTAMP] < MaxDate
+			    )
+			RETURN 
+			    COALESCE(MaxDateRows, 0)
+			
+			```
+		formatString: 0
+		lineageTag: 4a9d7aeb-40b1-4527-8b2a-365123cd8d1e
+
+	measure YesterdaysFailedRows = ```
+			
+			VAR MaxDate = FORMAT(MAX('data_quality_testing'[TIMESTAMP])-1, "dd/mm/yyyy")
+			VAR FailedRows = 
+			    CALCULATE(
+			        COUNTROWS('data_quality_testing'),
+			        FILTER(
+			            'data_quality_testing',
+			            FORMAT(DATEVALUE('data_quality_testing'[TIMESTAMP]), "dd/mm/yyyy") = MaxDate &&
+			            'data_quality_testing'[pass_flag] = FALSE()
+			        )
+			    )
+			RETURN 
+			    IF(ISBLANK(FailedRows), 0, FailedRows)
+			
+			
+			
+			```
+		formatString: 0
+		lineageTag: ece3959c-662a-4fdf-b694-b3394c96c5fb
+
+	measure '% Yesterday Failed Tests' = ```
+			
+			    IF(
+			        ISBLANK([Yesterdays New Rows]) ||[Yesterdays New Rows] = 0, 
+			        0, 
+			        DIVIDE([YesterdaysFailedRows], [Yesterdays New Rows])
+			    )
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 3b70a366-bccc-4b73-94f9-0a3ad4864d27
+
+	measure 'Total Test Cases' =
+			
+			COALESCE(COUNTROWS(data_quality_testing),0)
+		formatString: 0
+		lineageTag: 6c455a9a-4e61-4c0f-b886-596be1089bee
+
+	measure '24h Total Failed Items in Test Cases' = ```
+			
+			VAR MaxDate = MAX('data_quality_testing'[TIMESTAMP])
+			VAR TotalFailedItems = 
+			    CALCULATE(
+			        SUM('data_quality_testing'[RESULT]),
+			        FILTER(
+			            'data_quality_testing',
+			            'data_quality_testing'[PASS_FLAG] = FALSE() &&
+			            data_quality_testing[LATEST_RUN] = TRUE() &&
+			            'data_quality_testing'[TIMESTAMP] >= MaxDate - 1
+			        )
+			    )
+			RETURN 
+			    TotalFailedItems
+			```
+		formatString: #,0
+		lineageTag: 49cfe85e-6965-4dad-873a-f9c825d0d0a9
+
+	measure '24h Total Failed Test Cases' = ```
+			
+			VAR MaxDate = MAX('data_quality_testing'[TIMESTAMP])
+			VAR TotalFailedTestCases = 
+			    CALCULATE(
+			        COUNTROWS('data_quality_testing'),
+			        FILTER(
+			            'data_quality_testing',
+			            'data_quality_testing'[PASS_FLAG] = FALSE() &&
+			            data_quality_testing[LATEST_RUN] = TRUE() &&
+			            'data_quality_testing'[TIMESTAMP] >= MaxDate - 1
+			        )
+			    )
+			RETURN 
+			    TotalFailedTestCases
+			```
+		formatString: 0
+		lineageTag: 87965a72-d5a1-4d25-bd10-e3d683d2f9d1
+
+	measure '24h Total Test Cases' = ```
+			
+			VAR MaxDate = MAX('data_quality_testing'[TIMESTAMP])
+			VAR TotalTestCases = 
+			    CALCULATE(
+			        COUNTROWS('data_quality_testing'),
+			        data_quality_testing[LATEST_RUN] = TRUE() &&
+			        'data_quality_testing'[TIMESTAMP] >= MaxDate - 1
+			    )
+			RETURN 
+			    TotalTestCases
+			```
+		formatString: 0
+		lineageTag: f226d50c-21d6-446d-8799-2decbaba6858
+
+	measure '% Failed Test Cases' = ```
+			
+			    IF(
+			        ISBLANK([Total Test Cases]) || [Total Test Cases] = 0, 
+			        0, 
+			        IF(
+			            DIVIDE([Total Failed Test Cases], [Total Test Cases]) = 0,
+			            0,
+			            DIVIDE([Total Failed Test Cases], [Total Test Cases])
+			        )
+			    )
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 935898f3-6c11-4982-bf67-1d7965592ace
+
+	measure 'Total Passed Test Cases' = ```
+			
+			    COALESCE(
+			        CALCULATE(COUNTROWS(data_quality_testing), data_quality_testing[PASS_FLAG] = TRUE()),
+			        0
+			    )
+			```
+		formatString: 0
+		lineageTag: e5f758e9-18b9-40a7-8a67-145cb8c65a25
+
+	measure '24h Total Passed Test Cases' = ```
+			
+			VAR MaxDate = MAX('data_quality_testing'[TIMESTAMP])
+			VAR TotalPassedTestCases = 
+			    CALCULATE(
+			        COUNTROWS('data_quality_testing'),
+			        FILTER(
+			            'data_quality_testing',
+			            'data_quality_testing'[PASS_FLAG] = TRUE() &&
+			            data_quality_testing[LATEST_RUN] = TRUE() &&
+			            'data_quality_testing'[TIMESTAMP] >= MaxDate - 1
+			        )
+			    )
+			RETURN 
+			    TotalPassedTestCases
+			```
+		formatString: 0
+		lineageTag: 5cfb4501-f0f4-4053-890b-c406012866fa
+
+	measure '% Passed Test Cases' = ```
+			
+			    IF(
+			        ISBLANK([Total Test Cases]) || [Total Test Cases] = 0, 
+			        BLANK(), 
+			        IF(
+			            DIVIDE([Total Passed Test Cases], [Total Test Cases]) = 0,
+			            0,
+			            DIVIDE([Total Passed Test Cases], [Total Test Cases])
+			        )
+			    )
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: ddc39f97-265e-48e2-9d9d-92407134d8de
+
+	measure '% 24h Passed Test Cases' = ```
+			
+			    IF(
+			        ISBLANK([24h Total Test Cases]) || [24h Total Test Cases] = 0, 
+			        BLANK(), 
+			        IF(
+			            DIVIDE([24h Total Passed Test Cases], [24h Total Test Cases]) = 0,
+			            BLANK(),
+			            DIVIDE([24h Total Passed Test Cases], [24h Total Test Cases])
+			        )
+			    )
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2d63208d-3744-405e-bc5b-08d1ce075ddc
+
+	measure IsLast24hSelected =
+			
+			VAR SelectedPeriod = SELECTEDVALUE(DataPeriod[Period], "Historical Data")
+			RETURN
+			    IF(
+			        SelectedPeriod = "Last 24 Hours",
+			        TRUE(),
+			        FALSE()
+			    )
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 52613350-9a3b-46ba-bc4e-a408a636f2a1
+
+	measure 'Total Failed Data Freshness Check Rows' = ```
+			
+			    COALESCE(
+			        CALCULATE( SUM(data_quality_testing[RESULT]),
+			        data_quality_testing[PASS_FLAG] = FALSE(), data_quality_testing[TEST_TYPE] = "DATA_FRESHNESS_CHECK"),
+			        0)
+			```
+		formatString: 0
+		lineageTag: cd71c8b5-798f-4c30-ab33-86893079394e
+
+	measure 'Total Failed Dupes Check Rows' = ```
+			
+			    COALESCE(
+			        CALCULATE( SUM(data_quality_testing[RESULT]),
+			        data_quality_testing[PASS_FLAG] = FALSE(), data_quality_testing[TEST_TYPE] = "DUPES_CHECK"),
+			        0)
+			```
+		formatString: 0
+		lineageTag: 0a5c91a8-d9d4-4f06-8028-fd07d4e8e695
+
+	measure 'Total Failed FK Integrity Check Rows' = ```
+			
+			    COALESCE(
+			        CALCULATE( SUM(data_quality_testing[RESULT]),
+			        data_quality_testing[PASS_FLAG] = FALSE(), data_quality_testing[TEST_TYPE] = "FK_INTEGRITY_CHECK"),
+			        0)
+			```
+		formatString: 0
+		lineageTag: d5ea3456-d33a-44ca-a497-b77c7f1dcb6d
+
+	measure 2DaysPriorFailedRows = ```
+			
+			VAR MaxDate = FORMAT(MAX('data_quality_testing'[TIMESTAMP]), "dd/mm/yyyy")
+			VAR FailedRows = 
+			    CALCULATE(
+			        COUNTROWS('data_quality_testing'),
+			        FILTER(
+			            'data_quality_testing',
+			            FORMAT(DATEVALUE('data_quality_testing'[TIMESTAMP]), "dd/mm/yyyy") = FORMAT(DATEVALUE(MaxDate) - 2, "dd/mm/yyyy") &&
+			            'data_quality_testing'[pass_flag] = FALSE()
+			        )
+			    )
+			RETURN 
+			    IF(ISBLANK(FailedRows), 0, FailedRows)
+			
+			```
+		formatString: 0
+		lineageTag: 7c33ae65-9481-4075-8c27-e0cadc4169e9
+
+	measure 3DaysPriorFailedRows = ```
+			
+			VAR MaxDate = FORMAT(MAX('data_quality_testing'[TIMESTAMP]), "dd/mm/yyyy")
+			VAR FailedRows = 
+			    CALCULATE(
+			        COUNTROWS('data_quality_testing'),
+			        FILTER(
+			            'data_quality_testing',
+			            FORMAT(DATEVALUE('data_quality_testing'[TIMESTAMP]), "dd/mm/yyyy") = FORMAT(DATEVALUE(MaxDate) - 3, "dd/mm/yyyy") &&
+			            'data_quality_testing'[pass_flag] = FALSE()
+			        )
+			    )
+			RETURN 
+			    IF(ISBLANK(FailedRows), 0, FailedRows)
+			```
+		formatString: 0
+		lineageTag: c30ccd09-5343-4d82-9ca2-f31164290aae
+
+	measure 'Todays test % color' = if([% 24h Failed Test Cases] > [% Yesterday Failed Tests], "#FD625E", "#333333")
+		lineageTag: d1415273-14ff-4e96-8d46-fc7d7c5cfc3b
+
+	measure 'Yesterday''s test % color' = if([% 24h Failed Test Cases] > [% Yesterday Failed Tests], "#333333", "#FD625E")
+		lineageTag: 65589408-1905-411a-96f4-0215be56dba9
+
+	measure 'Todays failed test color' = if([TodaysFailedRows] > [YesterdaysFailedRows], "#FD625E", "#333333")
+		lineageTag: 53911564-6c10-4f7e-b72a-7d1fde42f765
+
+	measure 'Yesterdays failed test color' = if([TodaysFailedRows] > [YesterdaysFailedRows], "#333333", "#FD625E""#333333")
+		lineageTag: ec452637-c684-44e9-8a55-ddf553cfc314
+
+	measure 'Workdays Since Refresh' =
+			
+			
+			VAR vGbqRefresh = MAX('refresh_log'[Most Stale Source Table Tmstmp])
+			
+			VAR vFabricRefresh = MAX('refresh_log'[Run Complete Time])
+			
+			-- Want to count the number of WHOLE days have passed. To do this, we're truncating the hours, minutes, and seconds fields
+			VAR vResult = NETWORKDAYS(
+			    DATE(YEAR(vGbqRefresh), MONTH(vGbqRefresh), DAY(vGbqRefresh))
+			    , DATE(YEAR(vFabricRefresh), MONTH(vFabricRefresh), DAY(vFabricRefresh))
+			)
+			RETURN IF(vResult > 30000, 0, vResult) - 1 -- Adjusting by 1 since refreshes are expected to ~1 day behing anyways. Fields which don't have refresh dates will populate -1 which is intended
+			// RETURN vResult
+		formatString: 0
+		displayFolder: Refresh Log Measures
+		lineageTag: 9d9235e3-5c30-4695-9b8e-db6ba5c5454b
+
+	partition 'Measure Table-8188158d-03d4-437e-a691-07154e8833cf' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

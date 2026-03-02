@@ -1,0 +1,176 @@
+/// Sum of total Reportable Accidents
+table 'Measure Table'
+	lineageTag: ce2aa14d-6693-4b71-be30-f49cd138f021
+
+	/// Refresh Date for Loss Run Report
+	measure 'Report as of Date' = "Report as of: " & [Last Refresh Date]
+		displayFolder: _Metadata
+		lineageTag: 2360455c-966c-4ea4-af74-a5137572a971
+
+	measure Agent_linked_revenue =
+			
+			CALCULATE(
+			    SUM(F_Shipper_Item[SALES_AMOUNT]),
+			    F_Shipper_Item[AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG] = "Yes"
+			    || F_Shipper_Item[AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG] = "Yes"
+			    || F_Shipper_Item[AGENT_CREATED_EDI_QUOTE_FLAG] = "Yes"
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: d483a5c9-ad21-4bc1-a8c4-438f60c16db1
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure Agent_orders_count = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(F_Shipper_Item[ORD_HDR_KEY]), 
+			    F_Shipper_Item[AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG] = "Yes"
+			    || F_Shipper_Item[AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG] = "Yes"
+			    || F_Shipper_Item[AGENT_CREATED_EDI_QUOTE_FLAG] = "Yes"
+			)
+			```
+		formatString: 0
+		lineageTag: 3b20c94c-317b-45b7-b76b-7c096ef7f815
+
+	measure Total_orders_count = DISTINCTCOUNT(F_Shipper_Item[ORD_HDR_KEY])
+		formatString: #,0
+		lineageTag: efd13dc5-41a8-4015-a0b3-4d8be76f45ff
+
+	measure Agent_pct_of_total = DIVIDE([Agent_orders_count], [Total_orders_count])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 07aba14f-c986-4793-b81c-2d13b11407d9
+
+	measure Agent_revenue_per_order = DIVIDE([Agent_linked_revenue], [Agent_orders_count])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: e79a6b7e-ea80-4468-8d1f-632a01129423
+
+	measure Total_revenue = SUM(F_Shipper_Item[SALES_AMOUNT])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: ac7d04f0-1b63-4d8b-bc58-0366caa2ae47
+
+	/// How much work is flowing through the agent? A workload indicator, not whether the work was completed successfully
+	measure Total_conversations = COUNTROWS(F_ECOS_CoPilot_Agent_Actions_Header)
+		formatString: #,0
+		lineageTag: 5e9842ee-aca7-4f65-8c7a-5901b1ccb35c
+
+	/// How many conversations were completed?
+	measure Completed_conversations =
+			CALCULATE(
+			    COUNTROWS(F_ECOS_CoPilot_Agent_Actions_Header),
+			    F_ECOS_CoPilot_Agent_Actions_Header[AGENT_COMPLETED_FLAG] = "Yes"
+			    // && agent_conversations_fact[TRUNCATED_EDI_ENTRY_FLAG] <> "Truncated EDI Entry"
+			)
+		formatString: 0
+		lineageTag: fc5994d7-418b-4f63-a08e-c9cbcc10a7cb
+
+	/// How many conversations were completed out of the total? A low rate could be the agent getting stuck, users abandoning the agent, or technical issues preventing completion.
+	measure Completed_conversations_rate = DIVIDE([Completed_conversations], [Total_conversations])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: fb591403-a0cf-40ed-823d-0728963cf5aa
+
+	/// Sum of products added by the agent to each conversation
+	measure Total_products_count = SUM(F_ECOS_CoPilot_Agent_Actions_Header[PRODUCT_TOTAL_ATTEMPTED_Z_CODE_UPDATES_COUNT])
+		lineageTag: f3bdc2d3-a345-4455-9858-159f5f5d52e9
+
+	/// Sum of exact match products on each conversation
+	measure Total_exact_product_matches = SUM(F_ECOS_CoPilot_Agent_Actions_Header[PRODUCT_UPDATED_TO_EXACT_MATCH_COUNT])
+		lineageTag: 4505a719-44bd-4511-87b4-41f828566e0a
+
+	/// What percent of total products were exact matches? High match rates mean less CSR intervention and faster order processing. Low rates could mean the agent needs improved product matching or catalog data gaps.
+	measure Exact_match_rate = DIVIDE([Total_exact_product_matches], [Total_products_count])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 2a132195-1902-4eff-9a0d-2449b1c3c2f6
+
+	/// Median processing time for how long an order is created after the start of the conversation.
+	measure Median_processing_time =
+			MEDIAN(
+			    F_ECOS_CoPilot_Agent_Actions_Header[Total_Processing_Time]
+			)
+		formatString: 0.00
+		lineageTag: f93d227c-4f15-4fe1-adba-c91905cdb51e
+
+	/// Count of conversations that were not marked as completed
+	measure Incomplete_conversations =
+			CALCULATE(
+			    COUNTROWS(F_ECOS_CoPilot_Agent_Actions_Header),
+			    F_ECOS_CoPilot_Agent_Actions_Header[AGENT_COMPLETED_FLAG] = "No"
+			)
+		formatString: 0
+		lineageTag: 609ba8ce-44dc-4207-95e6-e97706db1825
+
+	measure F_ORD_orders_count = DISTINCTCOUNT(F_Order_Header[ORD_HDR_KEY])
+		formatString: #,0
+		lineageTag: 95eeb990-8eee-430b-9e8e-28df1eb2bbd8
+
+	measure F_ORD_orders_with_copilot =
+			CALCULATE(
+			    COUNT(F_Order_Header[MI_LOC]),
+			    F_Order_Header[AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG] = "Yes"
+				|| F_Order_Header[AGENT_CREATED_EDI_QUOTE_FLAG] = "Yes"
+				|| F_Order_Header[AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG] = "Yes"
+			)
+		formatString: 0
+		lineageTag: c8aaec78-08e9-4695-8ac5-b60ac5c2598f
+
+	measure F_ORD_agent_%_of_orders = [F_ORD_orders_with_copilot]/[F_ORD_orders_count]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 17c0f1d4-864c-4a87-8870-dc247d8356ac
+
+	measure F_ORD_EDI_assists =
+			CALCULATE(
+			    COUNT(F_Order_Header[MI_LOC]),
+			    F_Order_Header[AGENT_CREATED_EDI_QUOTE_FLAG] = "Yes"
+			)
+		formatString: 0
+		lineageTag: a71f2e58-81aa-4f9a-86b3-fc9de49d5404
+
+	measure F_ORD_AUTOMATED_EMAIL_assists =
+			CALCULATE(
+			    COUNT(F_Order_Header[MI_LOC]),
+			    F_Order_Header[AGENT_CREATED_AUTOMATED_EMAIL_QUOTE_FLAG] = "Yes"
+			)
+		formatString: 0
+		lineageTag: fc61370c-68e7-4ced-884d-3bd00b175687
+
+	measure F_ORD_SMART_EMAIL_assists =
+			CALCULATE(
+			    COUNT(F_Order_Header[MI_LOC]),
+			    F_Order_Header[AGENT_CREATED_SMART_EMAIL_QUOTE_FLAG] = "Yes"
+			)
+		formatString: 0
+		lineageTag: 5e117e42-b5f3-4a1d-b1e7-155fd16f43c0
+
+	measure 'Last Refresh Date' = ```
+			
+			    YEAR(Max('F_ECOS_CoPilot_Agent_Actions_Header'[CONVERSATION_START_UTC_DTTM])) 
+			    & "-" & FORMAT(MONTH(Max('F_ECOS_CoPilot_Agent_Actions_Header'[CONVERSATION_START_UTC_DTTM])), "00")
+			    & "-" & FORMAT(DAY(Max('F_ECOS_CoPilot_Agent_Actions_Header'[CONVERSATION_START_UTC_DTTM])), "00")
+			```
+		displayFolder: _Metadata
+		lineageTag: c2b88ceb-8d3e-45a4-9985-9ce23c27a693
+
+	measure '# Pilot Branches' =
+			CALCULATE(
+			    DISTINCTCOUNT(F_ECOS_CoPilot_Agent_Actions_Header[LOC_KEY]),
+			    ALL(D_Calendar_Filter),
+			    ALL(D_Calendar_Visual),
+			    ALL(F_ECOS_CoPilot_Agent_Actions_Header),
+			    ALL(F_Order_Header),
+			    ALL(F_Shipper_Item)
+			)
+		formatString: 0
+		lineageTag: bacb8528-1d31-4ff7-97b5-6b2b5ff0a3a3
+
+	partition 'Measure Table-8188158d-03d4-437e-a691-07154e8833cf' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

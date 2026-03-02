@@ -1,0 +1,53 @@
+table 'Script Chunk Tag'
+	lineageTag: 0005c3f7-a8f3-475c-9b39-3d786f43e65d
+
+	column SectionId
+		dataType: string
+		lineageTag: 7b5638b5-b9be-4580-9703-19dc3b5ab55b
+		summarizeBy: none
+		sourceColumn: SectionId
+
+		annotation SummarizationSetBy = Automatic
+
+	column key
+		dataType: string
+		lineageTag: c83cc15d-6900-4ee6-a33e-44ec5cd1dd96
+		summarizeBy: none
+		sourceColumn: key
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: int64
+		formatString: 0
+		lineageTag: cf89cde2-cb48-4c5f-834e-7f22437a7c6d
+		summarizeBy: none
+		sourceColumn: value
+
+		annotation SummarizationSetBy = User
+
+	column ScriptChunkKey
+		dataType: string
+		lineageTag: ea0950d5-e2e1-4894-8e9e-c07b173dca44
+		summarizeBy: none
+		sourceColumn: ScriptChunkKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Script Chunk Tag' = m
+		mode: import
+		queryGroup: 'Rationalization Dashboard\Tables From Vortex\Script Queries'
+		source = ```
+				let
+				    Source = Sql.Database("zod2ys4pcriu7jy5mie3tmbvou-fwrxbboq5w6ufn7ubv4aw4axhu.datawarehouse.fabric.microsoft.com", "Rationalization"),
+				    Navigation = Source{[Schema="dbo",Item="motion_industries_script_chunk_tag"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Navigation,{{"SectionId", type text}, {"key", type text}, {"value", Int64.Type}})
+				
+				in 
+				    #"Changed Type"
+				```
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,23 @@
+{
+  "name": "Custom",
+  "textClasses": {
+    "title": {
+      "fontFace": "Calibri"
+    }
+  },
+  "visualStyles": {
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#F7F9FA"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

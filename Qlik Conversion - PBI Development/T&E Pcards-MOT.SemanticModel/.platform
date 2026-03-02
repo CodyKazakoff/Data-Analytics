@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "T&E Pcards-MOT"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "aa79bfdf-ec41-9ebc-4ee8-f08a543e08ea"
+  }
+}

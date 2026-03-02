@@ -1,0 +1,210 @@
+table _Date_Table
+	lineageTag: da039901-7019-488d-9602-0a9383b9fb0d
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: yyyy-mm-dd
+		lineageTag: e29afcf0-2965-4746-8a1b-f7be0e8811cd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Month_Year
+		lineageTag: f778dadf-6a49-42f3-823b-7ec2a580cb26
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month_Year]
+		sortByColumn: Month_Year_Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Year_Sort
+		formatString: 0
+		lineageTag: 911af0a2-fe50-4a8c-b747-af60ef762402
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month_Year_Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		formatString: 0
+		lineageTag: 57a619d9-11ee-4a82-bdcf-f1f4032b26cb
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: aaef9102-bd59-45ba-82b6-30d6206a54ad
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Name
+		lineageTag: c1b6d63f-b3b0-4875-802d-b6a7aa107a47
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month_Name]
+		sortByColumn: Month_Name_Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month_Name_Sort
+		formatString: 0
+		lineageTag: f8c37ba7-09e2-4dca-97a7-bac4fb170117
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Month_Name_Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter_Year
+		lineageTag: 3db58e8f-6ab0-45a4-92dd-7b00bc1608c5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Quarter_Year]
+		sortByColumn: Quarter_Year_Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter_Year_Sort
+		lineageTag: 7d2e80d7-72e4-4f75-acc1-9f07c50a5c5a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Quarter_Year_Sort]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PI
+		lineageTag: 967d1b76-67fe-47d5-b840-73435f46414e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [PI]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PI_Number
+		lineageTag: 010bf69d-418b-4523-9a74-dee05ab1cc1f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [PI_Number]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year_Text
+		lineageTag: bc385f23-f2b5-4764-8246-9fdb48b1d8ab
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year_Text]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Date_Table = calculated
+		mode: import
+		source = ```
+				
+				VAR StartDate = DATE(2021, 1, 1)
+				VAR EndDate = TODAY()  
+				RETURN
+				ADDCOLUMNS(
+				    CALENDAR(StartDate, EndDate),
+				    "Month", MONTH([Date]),
+				    "Year", YEAR([Date]),
+				    "Year_Text", FORMAT([Date], "YYYY"),
+				    "Month_Year", FORMAT([Date], "MMM-yyyy"),
+				    "Month_Year_Sort", YEAR([Date]) * 100 + MONTH([Date]),
+				    "Month_Name", FORMAT([Date], "MMMM"),
+				    "Month_Name_Sort", MONTH([Date]),
+				    "Quarter_Year", "Q" & FORMAT([Date], "q") & " " & FORMAT(YEAR([Date]), "0000"),
+				    "Quarter_Year_Sort", YEAR([Date]) * 10 + ROUNDDOWN((MONTH([Date])-1)/3, 0),
+				    "PI", 
+				        SWITCH(
+				            TRUE(),
+				            // PI 2
+				            AND(
+				                [Date] >= DATE(2024, 3, 21),
+				                [Date] <= DATE(2024, 6, 12)
+				            ), "PI 2",
+				            // PI 3
+				            AND(
+				                [Date] >= DATE(2024, 6, 20),
+				                [Date] <= DATE(2024, 9, 11)
+				            ), "PI 3",
+				            // PI 4
+				            AND(
+				                [Date] >= DATE(2024, 9, 19),
+				                [Date] <= DATE(2024, 12, 4)
+				            ), "PI 4",
+				            // PI 5
+				            AND(
+				                [Date] >= DATE(2024, 12, 12),
+				                [Date] <= DATE(2025, 2, 26)
+				            ), "PI 5",
+				            // PI 6
+				            AND(
+				                [Date] >= DATE(2025, 3, 6),
+				                [Date] <= DATE(2025, 6, 4)
+				            ), "PI 6",
+				            // PI 7
+				            AND(
+				                [Date] >= DATE(2025, 6, 12),
+				                [Date] <= DATE(2025, 9, 10)
+				            ), "PI 7",
+				            // Default value for dates not in any PI period
+				            BLANK()
+				        ),
+				    "PI_Number", 
+				        SWITCH(
+				            TRUE(),
+				            // PI 2
+				            AND(
+				                [Date] >= DATE(2024, 3, 21),
+				                [Date] <= DATE(2024, 6, 12)
+				            ), "2",
+				            // PI 3
+				            AND(
+				                [Date] >= DATE(2024, 6, 20),
+				                [Date] <= DATE(2024, 9, 11)
+				            ), "3",
+				            // PI 4
+				            AND(
+				                [Date] >= DATE(2024, 9, 19),
+				                [Date] <= DATE(2024, 12, 4)
+				            ), "4",
+				            // PI 5
+				            AND(
+				                [Date] >= DATE(2024, 12, 12),
+				                [Date] <= DATE(2025, 2, 26)
+				            ), "5",
+				            // PI 6
+				            AND(
+				                [Date] >= DATE(2025, 3, 6),
+				                [Date] <= DATE(2025, 6, 4)
+				            ), "6",
+				            // PI 7
+				            AND(
+				                [Date] >= DATE(2025, 6, 12),
+				                [Date] <= DATE(2025, 9, 10)
+				            ), "7",
+				            BLANK()
+				        )
+				)
+				
+				```
+
+	annotation PBI_Id = 511f1e50a2044937980ab67f4e68d51d
+

@@ -1,0 +1,70 @@
+table z_Bar_Chart_Measures_Slicer
+	lineageTag: dc8424ce-fed6-4fe8-9fdc-b07637b09370
+
+	measure 'Show Make Selection' =
+			
+			// Determines what is selected from the parameter
+			VAR vSelectedValue = SELECTEDVALUE ('z_Param_Dim_Rollup_Dimension'[Show/Hide])
+			
+			// The number of rows available with current selections
+			VAR vRowCount =
+			    CALCULATE(
+			        COUNTROWS('z_Param_Dim_Rollup_Dimension'),
+			        ALLSELECTED()
+			    )
+			
+			VAR vResult = (vRowCount < 10 && vSelectedValue = "Show") || (vRowCount >= 10 && vSelectedValue = "Hide")
+			
+			RETURN vResult
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 347b47f5-2fcd-4ae3-beb0-9c2b396c7dc9
+
+		changedProperty = IsHidden
+
+	measure SelectionMessage = "Please make a selection fewer than 10 Dimensions!"
+		lineageTag: c63aafec-f397-414d-8032-a0b5aebcc398
+
+		changedProperty = IsHidden
+
+	measure 'Quote Close Rate' = DIVIDE([Order #], [Order #] + [Quote #])
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: d5a7c94a-5d1d-419c-a394-3fb0bb331d3d
+
+		changedProperty = IsHidden
+
+	column Measure
+		dataType: string
+		lineageTag: 511fdfc4-7409-4b93-be42-a5adb35152ce
+		summarizeBy: none
+		sourceColumn: Measure
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure Index'
+		dataType: int64
+		formatString: 0
+		lineageTag: bc8bad1a-7f3d-43bd-b928-e1293c3fa88d
+		summarizeBy: none
+		sourceColumn: Measure Index
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_Bar_Chart_Measures_Slicer = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W8i9KSS1ScMzNL80rUdJRMlSK1YlWcixL11NwSczMqVQAyxcDZYyUYmMB", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Measure = _t, #"Measure Index" = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Measure", type text}, {"Measure Index", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

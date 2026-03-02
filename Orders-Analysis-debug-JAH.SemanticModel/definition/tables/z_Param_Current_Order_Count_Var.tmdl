@@ -1,0 +1,48 @@
+table z_Param_Current_Order_Count_Var
+	lineageTag: 39c8d5ae-87de-497c-903c-ace24bfe8da7
+
+	column zparam
+		lineageTag: f92c605e-1d88-4c2b-8f62-dc1b04897bb9
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zparam Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zparam Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zparam Fields'
+		lineageTag: 9169fce5-d5fc-4cc6-9fc2-525c16692363
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zparam Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zparam Order'
+		formatString: 0
+		lineageTag: 3048f90b-c188-43ce-b941-c6cfb16c8911
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Current_Order_Count_Var = calculated
+		mode: import
+		source =
+				{
+				    ("Var %", NAMEOF('Measure Table'[Order # YTD Var]), 0),
+				    ("Var %", NAMEOF('Measure Table'[Order # MTD Var]), 1),
+				    ("Var %", NAMEOF('Measure Table'[Order # QTD Var]), 2),
+				    ("Var %", NAMEOF('Measure Table'[Order # Rolling 12M Var]), 3)
+				}
+
+	annotation PBI_Id = 67ff55ae68844a8e9d8f459107e6dbe8
+

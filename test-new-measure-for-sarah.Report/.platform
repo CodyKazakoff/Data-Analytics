@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "test-new-measure-for-sarah"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "f2c0265c-56a4-8008-46f1-51cc20a4ed5c"
+  }
+}

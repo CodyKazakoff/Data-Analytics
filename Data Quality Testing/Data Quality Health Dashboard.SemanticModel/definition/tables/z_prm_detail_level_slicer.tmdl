@@ -1,0 +1,69 @@
+table z_prm_detail_level_slicer
+	lineageTag: 7080e43d-6e98-4e2f-b185-3d7a87432e43
+
+	column z_prm_detail_level_slicer
+		lineageTag: 6b9b29a5-f70e-46e3-b0a0-f99399e0f44d
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'z_prm_detail_level_slicer Order'
+
+		relatedColumnDetails
+			groupByColumn: 'z_prm_detail_level_slicer Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_detail_level_slicer Fields'
+		isHidden
+		lineageTag: 46137402-a069-4382-92c4-9a5f1aa33f00
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'z_prm_detail_level_slicer Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'z_prm_detail_level_slicer Order'
+		isHidden
+		formatString: 0
+		lineageTag: 0106793a-7638-4dee-81e7-7e6ebf772089
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Detail Level Key'
+		formatString: 0
+		lineageTag: c32c3552-c402-411e-ac5a-f1eb07929700
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_prm_detail_level_slicer = calculated
+		mode: import
+		source =
+				{
+				    // HEADER level visuals
+				    ("Status", NAMEOF('refresh_log'[Status]), 1, 1),
+				    ("Fabric Table Name", NAMEOF('refresh_log'[Tablename]), 5, 1),
+				    ("GBQ Table Name", NAMEOF('refresh_log'[Source Table]), 10, 1),
+				    ("Run Complete Time (CST)", NAMEOF('refresh_log'[Run Complete Time]), 30, 1),
+				    ("Stalest Source", NAMEOF('refresh_log'[Most Stale Table]), 40, 1),
+				    ("Last Refresh (CST)", NAMEOF('refresh_log'[Most Stale Source Table Tmstmp]), 50, 1),
+				    ("# Workdays Stale", NAMEOF([Workdays Since Refresh]), 60, 1),
+				    // ITEM level visuals
+				    ("Fabric Table Name", NAMEOF('refresh_log'[Tablename]), 101, 2),
+				    // ("Run Complete Time", NAMEOF('refresh_log'[Run Complete Time]), 115, 2),
+				    ("Upstream Dependency", NAMEOF('refresh_log_detail'[Refined View Dependency]), 120, 2),
+				    ("Last Refresh (CST)", NAMEOF('refresh_log_detail'[Last Refresh]), 130, 2),
+				    ("Table Type", NAMEOF('refresh_log_detail'[Table Type]), 140, 2)
+				    // ("Days Stale", NAMEOF([Workdays Since Refresh]), 150, 2)
+				}
+
+	annotation PBI_Id = c5bb585bdef84bf3a53a1409df0c0142
+

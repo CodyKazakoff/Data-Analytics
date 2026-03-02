@@ -1,0 +1,28 @@
+table 'UserInput_Complexity Priority'
+	lineageTag: 92e43628-6305-4dc7-84d6-5bda0ab38d36
+
+	measure 'Complexity Priority Value' = SELECTEDVALUE('UserInput_Complexity Priority'[Complexity Priority], 0.18)
+		lineageTag: 51a0c496-8093-4375-92d9-66006c15b90d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Complexity Priority'
+		lineageTag: 8a920185-ec10-4f69-8b38-5fff61961301
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'UserInput_Complexity Priority' = calculated
+		mode: import
+		source = GENERATESERIES(0, 1, 0.01)
+
+	annotation PBI_Id = c89410d2fa0d4986bc9418cb9f8ccbfc
+

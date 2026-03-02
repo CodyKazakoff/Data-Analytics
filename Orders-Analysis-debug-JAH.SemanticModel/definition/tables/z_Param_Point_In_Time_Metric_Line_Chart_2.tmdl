@@ -1,0 +1,130 @@
+table z_Param_Point_In_Time_Metric_Line_Chart_2
+	lineageTag: 1a83daab-90a3-4cbc-ad79-eefb2dfb035a
+
+	column 'zParam Time Intelligence Line Chart'
+		lineageTag: 778d79f5-b8e0-405d-a08d-c7255578b9b8
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam Time Intelligence Line Chart Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam Time Intelligence Line Chart Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Time Intelligence Line Chart Fields'
+		lineageTag: 552d1029-22b3-433b-8660-1b65d8f21be6
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam Time Intelligence Line Chart Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Time Intelligence Line Chart Order'
+		formatString: 0
+		lineageTag: 06816e62-f91c-4592-aac9-8c9afb4cf502
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	column 'KPI Selector'
+		formatString: 0
+		lineageTag: 6d674798-9e6a-48fd-ab20-acb2ec553090
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Measure Selector'
+		formatString: 0
+		lineageTag: 896c6397-e522-4f27-8171-d0e05f016432
+		summarizeBy: none
+		sourceColumn: [Value5]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition z_Param_Point_In_Time_Metric_Line_Chart_2 = calculated
+		mode: import
+		source = ```
+				{
+				    //ADO
+				    ("CMTD ADO", NAMEOF('Measure Table'[ADO CMTD]), 0, 1, 1),
+				    ("CQTD ADO", NAMEOF('Measure Table'[ADO CQTD]), 1, 2, 1),
+				    ("CYTD ADO", NAMEOF('Measure Table'[ADO CYTD]), 2, 0, 1),
+				    ("ADO Rolling 12", NAMEOF('Measure Table'[ADO Rolling 12M]), 3, 3, 1),
+				    ("PMTD ADO", NAMEOF('Measure Table'[ADO PMTD]), 4, 1, 1),
+				    ("PQTD ADO", NAMEOF('Measure Table'[ADO PQTD]), 5, 2, 1),
+				    ("PYTD ADO", NAMEOF('Measure Table'[ADO PYTD]), 6, 0, 1),
+				    ("ADO Prior Rolling 12", NAMEOF('Measure Table'[ADO Rolling P12M]), 7, 3, 1),
+				    
+				    //Orders
+				    ("CMTD Total $", NAMEOF('Measure Table'[Total $ CMTD]), 8, 1, 2),
+				    ("CQTD Total $", NAMEOF('Measure Table'[Total $ CQTD]), 9, 2, 2),
+				    ("CYTD Total $", NAMEOF('Measure Table'[Total $ CYTD]), 10, 0, 2),
+				    ("Total $ Rolling 12", NAMEOF('Measure Table'[Total $ Rolling 12M]), 11, 3, 2),
+				    ("PMTD Total $", NAMEOF('Measure Table'[Total $ PMTD]), 12, 1, 2),
+				    ("PQTD Total $", NAMEOF('Measure Table'[Total $ PQTD]), 13, 2, 2),
+				    ("PYTD Total $", NAMEOF('Measure Table'[Total $ PYTD]), 14, 0, 2),
+				    ("Total $ Prior Rolling 12", NAMEOF('Measure Table'[Total $ Rolling P12M]), 15, 3, 2),
+				    
+				    //Final Cost
+				    //("CMTD Costs", NAMEOF('Measure Table'[Final Cost CMTD]), 18, 1, 3),
+				    //("CQTD Costs", NAMEOF('Measure Table'[Final Cost CQTD]), 19, 2, 3),
+				    //("CYTD Costs", NAMEOF('Measure Table'[Final Cost CYTD]), 20, 0, 3),
+				    //("PMTD Costs", NAMEOF('Measure Table'[Final Cost PMTD]), 21, 1, 3),
+				    //("PQTD Costs", NAMEOF('Measure Table'[Final Cost PQTD]), 22, 2, 3),
+				    //("PYTD Costs", NAMEOF('Measure Table'[Final Cost PYTD]), 23, 0, 3),
+				    //("Var", NAMEOF('Measure Table'[Final Cost MTD Variance]), 5, 1, 3),
+				    //("Var", NAMEOF('Measure Table'[Final Cost YTD Variance]), 5, 0, 3),
+				    //("Var", NAMEOF('Measure Table'[Final Cost QTD Variance]), 5, 2, 3),
+				
+				    //Order Count
+				    ("CMTD Total #", NAMEOF('Measure Table'[Total # CMTD]), 27, 1, 4),
+				    ("CQTD Total #", NAMEOF('Measure Table'[Total # CQTD]), 28, 2, 4),
+				    ("CYTD Total #", NAMEOF('Measure Table'[Total # CYTD]), 29, 0, 4),
+				    ("Total # Rolling 12", NAMEOF('Measure Table'[Total # Rolling 12M]), 30, 3, 4),
+				    ("PMTD Total #", NAMEOF('Measure Table'[Total # PMTD]), 31, 1, 4),
+				    ("PQTD Total #", NAMEOF('Measure Table'[Total # PQTD]), 32, 2, 4),
+				    ("PYTD Total #", NAMEOF('Measure Table'[Total # PYTD]), 33, 0, 4),
+				    ("Total # Prior Rolling 12", NAMEOF('Measure Table'[Total # Rolling P12M]), 34, 3, 4),
+				
+				    
+				    //Open Order Amount
+				    ("CMTD Open Order $", NAMEOF('Measure Table'[Open Order $ CMTD]), 36, 1, 5),
+				    ("CQTD Open Order $", NAMEOF('Measure Table'[Open Order $ CQTD]), 37, 2, 5),
+				    ("CYTD Open Order $", NAMEOF('Measure Table'[Open Order $ CYTD]), 38, 0, 5),
+				    ("Open Order $ Rolling 12", NAMEOF('Measure Table'[Open Order $ Rolling 12M]), 38, 3, 5),
+				    //("Order Amount Rolling 12", NAMEOF('Measure Table'[Order Amount Rolling 12]), 39, 3, 5),
+				
+				    //("PMTD Open Order $", NAMEOF('Measure Table'[Open Order Amount PMTD]), 40, 1, 5),
+				    //("PQTD Open Order $", NAMEOF('Measure Table'[Open Order Amount PQTD]), 41, 2, 5),
+				    //("PYTD Open Order $", NAMEOF('Measure Table'[Open Order Amount PYTD]), 42, 0, 5),
+				    ////("Open Order $ Prior Rolling 12", NAMEOF('Measure Table'[Open Order Amount Rolling 12 PY]), 38, 3, 5),
+				
+				    //("Order Count Prior Rolling 12", NAMEOF('Measure Table'[Order Count Rolling 12 PY]), 43, 3, 5),
+				
+				    
+				     //Gross Profit %
+				    ("CMTD GP %", NAMEOF('Measure Table'[Total GP % CMTD]), 45, 1, 6),
+				    ("CQTD GP %", NAMEOF('Measure Table'[Total GP % CQTD]), 46, 2, 6),
+				    ("CYTD GP %", NAMEOF('Measure Table'[Total GP % CYTD]), 47, 0, 6),
+				    ("GP % Rolling 12", NAMEOF('Measure Table'[Total GP % Rolling 12M]), 48, 3, 6),
+				
+				    ("PMTD GP %", NAMEOF('Measure Table'[Total GP % PMTD]), 49, 1, 6),
+				    ("PQTD GP %", NAMEOF('Measure Table'[Total GP % PQTD]), 50, 2, 6),
+				    ("PYTD GP %", NAMEOF('Measure Table'[Total GP % PYTD]), 51, 0, 6),
+				    ("GP % Prior Rolling 12", NAMEOF('Measure Table'[Total GP % Rolling P12M]), 52, 3, 6)
+				
+				
+				}
+				```
+
+	annotation PBI_Id = cb9d3a67c3524b6893ae787076594068
+

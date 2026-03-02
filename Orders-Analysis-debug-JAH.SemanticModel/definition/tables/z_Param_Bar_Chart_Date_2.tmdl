@@ -1,0 +1,50 @@
+table z_Param_Bar_Chart_Date_2
+	lineageTag: d097aa3b-c546-439e-a7c2-7fe1f2362432
+
+	column 'zParam Bar Chart Date2'
+		lineageTag: 138ad762-8788-43e2-a88d-41f0ab71b251
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam Bar Chart Date2 Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam Bar Chart Date2 Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Bar Chart Date2 Fields'
+		lineageTag: 0ac4ea76-4868-403d-b5c9-16aacbbe51fe
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam Bar Chart Date2 Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Bar Chart Date2 Order'
+		formatString: 0
+		lineageTag: c2c42b1d-b713-48b9-b403-eaebdaec69c4
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Bar_Chart_Date_2 = calculated
+		mode: import
+		source = ```
+				{
+				    ("Month", NAMEOF('D_Calendar_Visual'[Month]), 0),
+				    ("Workday of Month", NAMEOF('D_Calendar_Visual'[Workday Of Month]), 1),
+				    ("Week of Year", NAMEOF('D_Calendar_Visual'[Week Number]), 2),
+				    ("Month", NAMEOF('D_Calendar_Visual'[Month]), 3)
+				}
+				
+				```
+
+	annotation PBI_Id = 0f7545eeb22c49cda7da4011083ad5e2
+

@@ -1,0 +1,48 @@
+table z_Param_Current_Order_Amount_Var
+	lineageTag: d94aafb3-5b41-4020-942f-cb257dcdf050
+
+	column 'zParam Ord Amount Variance'
+		lineageTag: 7c8ef844-b305-4484-9db5-cda6f480932d
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'zParam Ord Amount Variance Order'
+
+		relatedColumnDetails
+			groupByColumn: 'zParam Ord Amount Variance Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Ord Amount Variance Fields'
+		lineageTag: 1f2af17c-e2ed-4c95-8baf-7665af69ddb0
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'zParam Ord Amount Variance Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'zParam Ord Amount Variance Order'
+		formatString: 0
+		lineageTag: ada446cf-05df-4665-b262-fcd3861c9655
+		summarizeBy: none
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = User
+
+	partition z_Param_Current_Order_Amount_Var = calculated
+		mode: import
+		source =
+				{
+				    ("Var %", NAMEOF('Measure Table'[Order $ YTD Var]), 0),
+				    ("Var %", NAMEOF('Measure Table'[Order $ MTD Var]), 1),
+				    ("Var %", NAMEOF('Measure Table'[Order $ QTD Var]), 2),
+				    ("Var %", NAMEOF('Measure Table'[Order $ Rolling 12M Var]), 3)
+				}
+
+	annotation PBI_Id = a532eef6234f4d9198d6609f459a4142
+

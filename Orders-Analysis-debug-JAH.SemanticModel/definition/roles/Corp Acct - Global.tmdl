@@ -1,0 +1,9 @@
+role 'Corp Acct - Global'
+	modelPermission: read
+
+	tablePermission RLS_HR_Hierarchy = 'RLS_HR_Hierarchy'[EMPLOYEE_UPN] = USERPRINCIPALNAME()
+
+	tablePermission D_Customer_BillTo = [Corp Acct Flag] == "Y"
+
+	annotation PBI_Id = 3a7730e537ff49bebaacb595cd0d0f86
+
